@@ -1,0 +1,60 @@
+﻿$(document).ready(function(){
+
+    $('.photo').click(function(){
+		document.getElementById('modal_gallery_label').innerHTML = this.children[0].getAttribute('alt');
+		document.getElementById('modal_gallery_desc').innerHTML = getDownloadLink(this.getAttribute('data-id')) + this.getAttribute('data-desc');
+		document.getElementById('modal_gallery_container').innerHTML = this.innerHTML.replace('imghover', '');
+		return true;
+	});
+
+	$('.video').click(function(){
+		var id = this.getAttribute('data-id'), name = this.children[0].innerHTML;
+		document.getElementById('modal_gallery_label').innerHTML = name;
+		document.getElementById('modal_gallery_desc').innerHTML = getDownloadLink(id) + this.getAttribute('data-desc');
+		
+		var video = document.createElement('video');
+		video.setAttribute('id', 'video');
+		video.setAttribute('controls', 'controls');
+		video.setAttribute('width', '100%');
+		video.innerHTML = '<source id="videosource" src="includes/getVideo.php?_=' + id + '" type="video/' + name.split('.').pop() + '" />';
+		
+		document.getElementById('modal_gallery_container').innerHTML = video.outerHTML;
+		
+		bindVideoError();
+
+		return true;
+	});
+
+	$('#select_filter').on('change',function(){
+		var lis = document.querySelectorAll('li.gallery');
+
+		if(this.value === ''){
+			for(var i = 0; i < lis.length; i++) lis[i].style.display = '';
+		}
+		else{
+			for(var i = 0; i < lis.length; i++){
+				var peaks = lis[i].getAttribute('data-peaks').split(',');
+				if(peaks.indexOf(this.value) === -1) lis[i].style.display = 'none';
+				else lis[i].style.display = '';
+			}
+		}
+	});
+
+});
+
+function getDownloadLink(id){
+	return '<button class="btn btn-sm btn-default pull-right" onclick="getFile(' + id + ');">' +
+				'Download&nbsp;<span class="glyphicon glyphicon-download"></span>' +
+           '</button>';
+}
+
+function bindVideoError(){
+	document.querySelector('source').addEventListener('error', function(){
+		var errordiv = document.createElement('div');
+		errordiv.innerHTML = 
+			'<div class="text-center" style="margin:15px 0 28px;">' +
+				'<p>This video format cannot be streamed, but you can still download it below.</p>' +
+			'</div>';
+		this.parentNode.parentNode.replaceChild(errordiv, this.parentNode);
+	}, false);
+}

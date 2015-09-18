@@ -1,0 +1,2 @@
+Made by Neil Simpson
+TODO: write something here, credits to phpmailer and js plugins used
