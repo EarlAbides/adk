@@ -190,6 +190,7 @@
     <Folder Include="css\" />
     <Folder Include="includes\" />
     <Folder Include="dl\" />
+    <Folder Include="sql\" />
     <Folder Include="uploads\" />
   </ItemGroup>
   <ItemGroup>
@@ -253,5 +254,7 @@
     <Content Include="js\jquery-dl.js" />
     <Content Include="js\validator.js" />
     <Content Include="robots.txt" />
+    <Content Include="sql\ADK_PEAK.csv" />
+    <Content Include="sql\create db.sql" />
   </ItemGroup>
 </Project>
