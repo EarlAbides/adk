@@ -262,5 +262,7 @@
     <Content Include="robots.txt" />
     <Content Include="sql\ADK_PEAK.csv" />
     <Content Include="sql\create db.sql" />
+    <Content Include="sql\ERD.mwb" />
+    <Content Include="sql\ERD.pdf" />
   </ItemGroup>
 </Project>
