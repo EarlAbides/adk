@@ -33,17 +33,22 @@
 					
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 						<p>
-							&emsp;The ADK 46ers has developed site for reporting climbs and keeping alive the tradition that Grace Hudowalski
-							established many years ago. She personally corresponded to this author, it meant much to me and kept me driven to
-							complete the high 46. Through your correspondent, you can discuss your hikes, tell of your stories and endeavors
-							and tell us of who you may have met on the hike... we encourage writing in so we can get to know you. Writing to
-							the 46ers and building these relationships set us apart from other Mountain Climbing&nbsp;groups.
+							&emsp;The ADK 46ers have developed site for reporting, recording personal climbs and keeping alive the tradition
+                            that Grace Hudowalski established many years ago. She personally corresponded to this author, it meant much to
+                            me and kept me driven to complete the high 46.  By creating this account, you can log your hikes and climbs, add
+                            information about the hike, and include digital memorabilia. All information posted is can be viewed by the ADK46ers
+                            and we may even select a story or picture for&nbsp;publication!
+						</p>
+                        <p>
+							&emsp;Through your correspondent, you can discuss your hikes, tell of your stories and endeavors and tell us of
+                            who you may have met on the hike... we encourage writing in so we can get to know you. Writing to the ADK 46ers
+                            and building relationships sets us apart from other mountain climbing&nbsp;groups.
 						</p>
 						<p>
 							&emsp;Grace had her rules for reporting climbs, however these spoke to an older, non-digital age. We embrace
-							her legacy by asking that the letters adhere to some&nbsp;guidelines.
-						</p>
-						<p>In order to guarantee a reply, please abide by the following:</p>
+							her legacy by asking that the letters adhere to some&nbsp;guidelines. In order to guarantee a reply, please
+                            abide by the&nbsp;following:
+                        </p>
 					</div>
 					
 				</div>
@@ -57,15 +62,22 @@
 						<h3 class="font-underline">General</h3>
 						
 						<ul>
-							<li>Use full legible sentences and proper grammar. No profanity or abusive language.</li>
+							<li>
+                                Use full legible sentences and proper grammar. Use no profanity nor abusive language.
+                                Please keep the messages reasonable length and stick with reason for the site! Any indication of
+                                misuse or bad conduct and we reserve the right to ban any user at our discretion.
+                            </li>
 							<li>Each person must send their own correspondence. Parents may write for small children.</li>
-							<li>You may include up to two photos. It is not necessary to include sign posts or mountain pictures. Send pictures of yourself.</li>
-							<li>Three ways to record climbs with your correspondent.
-								<ul class="ul">
-									<li>The message board here within the website</li>
-									<li>Personal emails</li>
-								</ul>
-							</li>
+							<li>Please include digital memories photos. It is not necessary to include sign posts or mountain pictures. Send pictures of yourself.</li>
+							<li>
+                                Use the website message board for 46er correspondence, not email. Your personal correspondent will
+                                return a message and you will get an email when it is posted. You can only message with your assigned
+                                correspondent.
+                            </li>
+                            <li>
+                                Any problems with response time, assistance or questions with the website please use the Help button at
+                                the bottom of the page or email to <a href="mailto:adk46ertrailswm@gmail.com">adk46ertrailswm@gmail.com</a>.
+                            </li>
 						</ul>
 					</div>
 					

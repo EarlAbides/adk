@@ -39,12 +39,14 @@
 							&emsp;Your request has been sent to the administrator. You can except to receive an email within
 							two weeks with the name of your correspondent, as well as your password and instructions to log&nbsp;in.<br />
 						</p>
+                        <br />
 						<p>
 							&emsp;Please be sure to check your spam&nbsp;filter.<br /><br />
 						</p>
 						<p>
 							If you do not hear from anyone in two weeks, please contact
-							<a href="mailto:<?php echo $gbl_admin['email'];?>"><?php echo $gbl_admin['email'];?></a>.
+							<a href="mailto:<?php echo $gbl_admin['email'];?>"><?php echo $gbl_admin['email'];?></a>,
+                            which is accessible via the Help Button at bottom of the page.
 						</p>
 						
 					</div>

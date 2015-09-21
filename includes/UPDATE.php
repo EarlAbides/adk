@@ -166,7 +166,7 @@
 	function sql_updateUserPassword($con, $ADK_USER_ID, $ADK_USER_PASSWORD){
 		$sql_query = $con->prepare("UPDATE ADK_USER SET ADK_USER_PASSWORD = ? WHERE ADK_USER_ID = ?;");
 		
-		$sql_query->bind_param('s', $ADK_USER_PASSWORD, $ADK_USER_ID);
+		$sql_query->bind_param('si', $ADK_USER_PASSWORD, $ADK_USER_ID);
 		
 		return $sql_query;
 	}

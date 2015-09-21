@@ -60,7 +60,7 @@
 		$htmlmessage .= $ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO']."<br><br>";
 		$htmlmessage .= "Requested Correspondent:<br>";
 		$htmlmessage .= $ADK_APPLICANT['ADK_APPLICANT_REQ_CORR']."<br><br>";
-		$htmlmessage .= "Click <a href=".$GLOBALS['url']."applicant/".$ADK_APPLICANT['ADK_APPLICANT_ID']."messages?_=".$ADK_USER['ADK_USER_ID'].">here to open this user in the Admin Portal</a>.<br><br>";	
+		$htmlmessage .= "Click <a href=".$GLOBALS['url']."applicant?_=".$ADK_APPLICANT['ADK_APPLICANT_ID'].">here to open this user's profile</a>.<br><br>";	
 		
 		$message = "Username:\r\n";
 		$message .= $ADK_APPLICANT['ADK_APPLICANT_USERNAME']."\r\n\r\n";
@@ -92,8 +92,8 @@
 		$message .= $ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO']."\r\n\r\n";
 		$message .= "Requested Correspondent:\r\n";
 		$message .= $ADK_APPLICANT['ADK_APPLICANT_REQ_CORR']."\r\n\r\n";
-		$message .= "Click below to open this user in the Admin Portal\r\n";
-		$message .= $GLOBALS['url']."applicant/".$ADK_APPLICANT['ADK_APPLICANT_ID']."\r\n\r\n";		
+		$message .= "Click below to open this user's profile.\r\n";
+		$message .= $GLOBALS['url']."applicant?_=".$ADK_APPLICANT['ADK_APPLICANT_ID']."\r\n\r\n";		
 		
 		$toAddr = $GLOBALS['adminEmail'];
 		$subject = 'New Hiker Registration - '.$ADK_APPLICANT['ADK_APPLICANT_NAME'];
