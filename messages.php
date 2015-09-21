@@ -5,8 +5,8 @@
 <?php require_once 'messages.inc.php';?>
 
 <?php include 'includes/head.php';?>
-	<script src="js/message.js"></script>
-	<script src="js/jquery-dl.js"></script>
+	<script src="js/message.min.js"></script>
+	<script src="js/jquery-dl.min.js"></script>
 </head>
 
 <body>

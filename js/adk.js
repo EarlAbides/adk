@@ -16,29 +16,7 @@
         });
     });
     
-    //Apply active class on subnavbar
-    (function(){
-        var page = window.location.href.split('/').pop();
-        $('.navbar-sub li').each(function(){
-            switch(page){
-                case '': case '#':
-                    if(this.getAttribute('data-name') == 'home'){
-                        this.classList.add('active');
-                        this.innerHTML += '<span class="sr-only">(current)</span>';
-                    }
-                    break;
-                case 'signup':
-                    if(this.getAttribute('data-name') == 'signup'){
-                        this.classList.add('active');
-                        this.innerHTML += '<span class="sr-only">(current)</span>';
-                    }
-                    break;
-                //default: alert('adk.js, Neil. Fix it');
-            }
-        });
-    })();
-
-	//Tooltips
+    //Tooltips
 	tooltip();
 
 	//Carousel header images

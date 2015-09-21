@@ -6,8 +6,8 @@
 
 <?php include 'includes/head.php';?>
 	<script src="js/jquery.tablesorter.min.js"></script>
-	<script src="js/hike.js"></script>
-	<script src="js/jquery-dl.js"></script>
+	<script src="js/hike.min.js"></script>
+	<script src="js/jquery-dl.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			$('.date').datepicker({

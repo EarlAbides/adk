@@ -18,8 +18,8 @@
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/validator.js"></script>
-	<script src="js/adk.js"></script>
+	<script src="js/validator.min.js"></script>
+	<script src="js/adk.min.js"></script>
 	
 	<?php
 		if($dh = opendir('img/bg/')){

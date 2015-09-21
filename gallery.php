@@ -5,7 +5,7 @@
 <?php require_once 'gallery.inc.php';?>
 
 <?php include 'includes/head.php';?>
-    <script src="js/gallery.js"></script>
+    <script src="js/gallery.min.js"></script>
 </head>
 
 <body>
