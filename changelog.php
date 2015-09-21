@@ -20,7 +20,7 @@
 	<?php include 'includes/navbar.php';?>
 	<?php include 'includes/logo.php';?>
 	
-	<div class="container">
+	<div class="container-fluid">
 		<?php include 'includes/navbar_sub.php';?>
 		<div class="content-wrapper">
 			
