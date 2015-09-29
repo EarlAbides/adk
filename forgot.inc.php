@@ -15,7 +15,7 @@
 			    return 'Error';
 			
 			$last8hash = substr($_GET['__'], 0, 8);
-			$ADK_USER_ID = intval(substr($_GET['__'], 8, count($_GET['__'])));
+			$ADK_USER_ID = intval(substr($_GET['__'], 8, count($_GET['__']) + 1));
             $validHash = checkValidHash($con, $ADK_USER_ID, $last8hash);
 			if($validHash) $ADK_USER = getUser($con, $ADK_USER_ID);
 			
