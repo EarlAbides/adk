@@ -64,7 +64,7 @@
 						<ul>
 							<li>
                                 Use full legible sentences and proper grammar. Use no profanity nor abusive language.
-                                Please keep the messages reasonable length and stick with reason for the site! Any indication of
+                                Please keep the messages to a reasonable length and on the topic of the hikes! Any indication of
                                 misuse or bad conduct and we reserve the right to ban any user at our discretion.
                             </li>
 							<li>Each person must send their own correspondence. Parents may write for small children.</li>
