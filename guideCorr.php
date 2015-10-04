@@ -62,7 +62,7 @@
 					
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 						
-						<h3 class="font-underline">Basic Tenants</h3>
+						<h3 class="font-underline">Basic Tenets</h3>
 						
 						<p>Everyone will receive personal correspondence and that everyone should write their own letters, especially children.</p>
 						<p>
