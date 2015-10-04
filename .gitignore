@@ -212,10 +212,12 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 
-####
+
+#
 *.phpproj
 *.sln
 .htaccess
 robots.txt
 uploads/
 img/bg/
+includes/PHPMailer/
