@@ -1,2 +1,8 @@
 Made by Neil Simpson
-TODO: write something here, credits to phpmailer and js plugins used
+
+Credits to:
+jQuery
+jQuery Tablesorter
+jQueryUI
+1000hz/bootstrap-validator
+PHPMailer
