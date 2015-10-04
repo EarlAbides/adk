@@ -6,8 +6,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.sln
-*.phpproj
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -212,3 +210,14 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+
+####
+*.phpproj
+*.sln
+.htaccess
+robots.txt
+uploads/
+img/
+dl/
+includes/PHPMailer/
