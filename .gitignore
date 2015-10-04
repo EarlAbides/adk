@@ -217,7 +217,3 @@ ModelManifest.xml
 *.sln
 .htaccess
 robots.txt
-uploads/
-img/
-dl/
-includes/PHPMailer/
