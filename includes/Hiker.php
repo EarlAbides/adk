@@ -39,8 +39,6 @@
 			'ADK_HIKER_STATE' => $ADK_APPLICANT['ADK_APPLICANT_STATE'],
 			'ADK_HIKER_ZIP' => $ADK_APPLICANT['ADK_APPLICANT_ZIP'],
 			'ADK_HIKER_COUNTRY' => $ADK_APPLICANT['ADK_APPLICANT_COUNTRY'],
-			'ADK_HIKER_FIRSTPEAK_ID' => $ADK_APPLICANT['ADK_APPLICANT_FIRSTPEAK_ID'],
-			'ADK_HIKER_FIRSTPEAK_DTE' => $ADK_APPLICANT['ADK_APPLICANT_FIRSTPEAK_DTE'],
 			'ADK_HIKER_PERSONALINFO' => $ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO']
 		);
 		
@@ -97,11 +95,6 @@
 				$ADK_HIKER['ADK_HIKER_ZIP'] = preg_replace('/(\d{5})(\d{4})/i', '-', $ADK_HIKER['ADK_HIKER_ZIP']);
 				$ADK_HIKER['ADK_HIKER_COUNTRY'] = $row['ADK_HIKER_COUNTRY'];
 				$ADK_HIKER['ADK_HIKER_PERSONALINFO'] = $row['ADK_HIKER_PERSONALINFO'];
-				$ADK_HIKER['ADK_HIKER_FIRSTPEAK_ID'] = $row['ADK_HIKER_FIRSTPEAK_ID'];
-                $ADK_HIKER['ADK_HIKER_FIRSTPEAK_NAME'] = $row['ADK_HIKER_FIRSTPEAK_NAME'];
-				$ADK_HIKER['ADK_HIKER_FIRSTPEAK_DTE'] = date("m/d/Y", strtotime($row['ADK_HIKER_FIRSTPEAK_DTE']));
-				$ADK_HIKER['ADK_HIKER_LASTPEAK_ID'] = $row['ADK_HIKER_LASTPEAK_ID'];
-				$ADK_HIKER['ADK_HIKER_LASTPEAK_DTE'] = date("m/d/Y", strtotime($row['ADK_HIKER_LASTPEAK_DTE']));
 				$ADK_HIKER['ADK_HIKER_NUMPEAKS'] = $row['ADK_HIKER_NUMPEAKS'];
                 $i++;
 			}
@@ -112,14 +105,14 @@
 	}
 	
 	function addHiker($con, $ADK_USER_ID){
-		$ADK_CORRESPONDENT_ID = $_POST['id'];
-		$ADK_HIKER_CORR_ID = $_POST['corrid'];
-						
-		$ADK_CORRESPONDENT = getApplicant($con, $ADK_CORRESPONDENT_ID);
-		$ADK_HIKER = makeHikerArrayFromApplicant($ADK_CORRESPONDENT, $ADK_USER_ID, $ADK_HIKER_CORR_ID);
+		$ADK_APPLICANT = getApplicant($con, $_POST['id']);
+		$ADK_HIKER = makeHikerArrayFromApplicant($ADK_APPLICANT, $ADK_USER_ID, $_POST['corrid']);
 		
 		$sql_query = sql_addHiker($con, $ADK_HIKER);
 		$sql_query->execute();
+		$ADK_HIKER['ADK_USER_ID'] = $sql_query->insert_id;
+		
+		return $ADK_HIKER;
 	}
 	
 	function updateHiker($con){

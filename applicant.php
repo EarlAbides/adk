@@ -38,7 +38,7 @@
 						</div>
 						<div class="form-group" style="display:inline;">
 							<div class="col-xs-12 col-sm-5 col-sm-offset-2">
-								<label class="control-label control-label-sm">Requested Staff Corrsepondent</label><br />
+								<label class="control-label control-label-sm">Requested Staff Correspondent</label><br />
 								<span><?php echo $ADK_APPLICANT['ADK_APPLICANT_REQ_CORR'];?></span>
 							</div>
 						</div>
@@ -125,31 +125,6 @@
 						
 					<div class="col-xs-12">
 						<div class="hr hr75"></div>
-					</div>
-						
-					<div class="col-xs-12 col-sm-5">
-						<div class="form-group">
-							<div class="col-xs-12">
-								<label class="control-label control-label-sm">First Peak</label><br />
-								<span><?php echo $ADK_APPLICANT['ADK_APPLICANT_FIRSTPEAK_NAME'];?></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-5">
-						<div class="form-group">
-							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Date of First Peak</label><br />
-								<span><?php echo $ADK_APPLICANT['ADK_APPLICANT_FIRSTPEAK_DTE'];?></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-2">
-						<div class="form-group">
-							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Total Peaks</label><br />
-								<span><?php echo $ADK_APPLICANT['ADK_APPLICANT_NUMPEAKS'];?></span>
-							</div>
-						</div>
 					</div>
 						
 					<div class="col-xs-12">

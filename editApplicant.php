@@ -170,34 +170,6 @@
 							<div class="hr hr75"></div>
 						</div>
 						
-						<div class="col-xs-12 col-sm-6">
-							<div class="form-group">
-								<div class="col-sm-12">
-									<label for="textbox_name" class="control-label control-label-sm">First Peak*</label><br />
-									<select type="text" id="select_firstpeak" name="firstpeakid" class="form-control form-control-sm" placeholder="First Peak" required>
-										<option />
-										<?php
-											foreach($ADK_PEAKS as $ADK_PEAK){
-												if($ADK_PEAK['ADK_PEAK_ID'] ==  $ADK_APPLICANT['ADK_APPLICANT_FIRSTPEAK_ID']) $selected = ' selected="selected"';
-												else $selected = '';
-												echo '<option value="'.$ADK_PEAK['ADK_PEAK_ID'].'"'.$selected.'>'.$ADK_PEAK['ADK_PEAK_NAME'].'</option>';
-											}
-										?>
-									</select>
-									<span class="help-block with-errors"></span>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6">
-							<div class="form-group">
-								<div class="col-sm-12">
-									<label for="textbox_firstpeakdate" class="control-label control-label-sm">Date of First Peak*</label><br />
-									<input type="text" id="textbox_firstpeakdate" name="firstpeakdate" class="form-control form-control-sm date" value="<?php echo $ADK_APPLICANT['ADK_APPLICANT_FIRSTPEAK_DTE'];?>" maxlength="10" placeholder="MM/DD/YYYY" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" required />
-									<span class="help-block with-errors"></span>
-								</div>
-							</div>
-						</div>
-						
 						<div class="col-xs-12">
 							<div class="form-group">
 								<div class="col-xs-12">

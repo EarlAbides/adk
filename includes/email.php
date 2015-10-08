@@ -54,8 +54,6 @@
 		$htmlmessage .= $ADK_APPLICANT['ADK_APPLICANT_ZIP']."<br><br>";
 		$htmlmessage .= "Country:<br>";
 		$htmlmessage .= $ADK_APPLICANT['ADK_APPLICANT_COUNTRY']."<br><br>";
-		$htmlmessage .= "Total Peaks:<br>";
-		$htmlmessage .= $ADK_APPLICANT['ADK_APPLICANT_NUMPEAKS']."<br><br>";
 		$htmlmessage .= "Personal info:<br>";
 		$htmlmessage .= $ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO']."<br><br>";
 		$htmlmessage .= "Requested Correspondent:<br>";
@@ -86,8 +84,6 @@
 		$message .= $ADK_APPLICANT['ADK_APPLICANT_ZIP']."\r\n\r\n";
 		$message .= "Country:\r\n";
 		$message .= $ADK_APPLICANT['ADK_APPLICANT_COUNTRY']."\r\n\r\n";
-		$message .= "Total Peaks:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_NUMPEAKS']."\r\n\r\n";
 		$message .= "Personal info:\r\n";
 		$message .= $ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO']."\r\n\r\n";
 		$message .= "Requested Correspondent:\r\n";
@@ -111,9 +107,6 @@
 		$htmlmessage .= $ADK_HIKER['ADK_USER_USERNAME']."<br>";
 		$htmlmessage .= "Initial Password:<br>";
 		$htmlmessage .= $ADK_USER['ADK_USER_PASSWORD']."<br><br>";
-
-        $htmlmessage .= "First Peak: ".$ADK_HIKER['ADK_HIKER_FIRSTPEAK_NAME']."<br>";
-        $htmlmessage .= "Date: ".$ADK_HIKER['ADK_HIKER_FIRSTPEAK_DTE']."<br><br>";
 		
 		$htmlmessage .= "Click <a href=".$GLOBALS['url']."messages?_=".$ADK_HIKER['ADK_USER_ID'].">here to send the new user a message</a>.<br><br>";	
 	    
@@ -125,9 +118,6 @@
 		$message .= $ADK_HIKER['ADK_USER_USERNAME']."\r\n";
 		$message .= "Initial Password:\r\n";
 		$message .= $ADK_USER['ADK_USER_PASSWORD']."\r\n\r\n";
-
-        $message .= "First Peak: ".$ADK_HIKER['ADK_HIKER_FIRSTPEAK_NAME']."\r\n";
-        $message .= "Date: ".$ADK_HIKER['ADK_HIKER_FIRSTPEAK_DTE']."\r\n\r\n";
 		
 		$message .= "Click below to send the new user a message:\r\n".$GLOBALS['url']."messages?_=".$ADK_HIKER['ADK_USER_ID']."\r\n\r\n";
 		

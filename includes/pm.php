@@ -55,9 +55,6 @@
 		$message .= $ADK_HIKER['ADK_USER_USERNAME'].$GLOBALS['crlf'];
 		$message .= "Initial Password:".$GLOBALS['crlf'];
 		$message .= $ADK_USER['ADK_USER_PASSWORD'].$GLOBALS['dcrlf'].$GLOBALS['dcrlf'];
-
-        $message .= "First Peak: ".$ADK_HIKER['ADK_HIKER_FIRSTPEAK_NAME'].$GLOBALS['dcrlf'];
-        $message .= "Date: ".$ADK_HIKER['ADK_HIKER_FIRSTPEAK_DTE'].$GLOBALS['dcrlf'].$GLOBALS['dcrlf'];
 				
 		$message .= "Click <a href=\"./messages?_=".$ADK_HIKER['ADK_USER_ID']."\">here</a> to send the new user hiker a message.".$GLOBALS['dcrlf'];
 		

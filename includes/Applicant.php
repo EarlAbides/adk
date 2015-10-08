@@ -1,29 +1,46 @@
 <?php
 	
 	function makeApplicantArray(){
-		if(isset($_POST['id'])) $id = $_POST['id'];
+		if(isset($_POST['id'])) $id = intval($_POST['id']);
 		else $id = '';
-		
-		$ADK_APPLICANT = array(
-			'ADK_APPLICANT_ID' => $id,
-			'ADK_APPLICANT_USERNAME' => $_POST['username'],
-			'ADK_APPLICANT_NAME' => $_POST['name'],
-			'ADK_APPLICANT_EMAIL' => $_POST['email'],
-			'ADK_APPLICANT_PHONE' => $_POST['phone'],
-			'ADK_APPLICANT_AGE' => $_POST['age'],
-			'ADK_APPLICANT_SEX' => $_POST['sex'],
-			'ADK_APPLICANT_ADDRESS1' => $_POST['address1'],
-			'ADK_APPLICANT_ADDRESS2' => $_POST['address2'],
-			'ADK_APPLICANT_CITY' => $_POST['city'],
-			'ADK_APPLICANT_STATE' => $_POST['state'],
-			'ADK_APPLICANT_ZIP' => $_POST['zip'],
-			'ADK_APPLICANT_COUNTRY' => $_POST['country'],
-			'ADK_APPLICANT_PERSONALINFO' => $_POST['personalinfo'],
-			'ADK_APPLICANT_FIRSTPEAK_ID' => $_POST['firstpeakid'],
-			'ADK_APPLICANT_FIRSTPEAK_DTE' => $_POST['firstpeakdate'],
-			'ADK_APPLICANT_NUMPEAKS' => $_POST['numpeaks'],
-			'ADK_APPLICANT_REQ_CORR' => $_POST['reqcorr']
-		);
+
+		if(isset($_POST['reqcorr'])){
+			$ADK_APPLICANT = array(
+				'ADK_APPLICANT_ID' => $id,
+				'ADK_APPLICANT_USERNAME' => $_POST['username'],
+				'ADK_APPLICANT_NAME' => $_POST['name'],
+				'ADK_APPLICANT_EMAIL' => $_POST['email'],
+				'ADK_APPLICANT_PHONE' => $_POST['phone'],
+				'ADK_APPLICANT_AGE' => $_POST['age'],
+				'ADK_APPLICANT_SEX' => $_POST['sex'],
+				'ADK_APPLICANT_ADDRESS1' => $_POST['address1'],
+				'ADK_APPLICANT_ADDRESS2' => $_POST['address2'],
+				'ADK_APPLICANT_CITY' => $_POST['city'],
+				'ADK_APPLICANT_STATE' => $_POST['state'],
+				'ADK_APPLICANT_ZIP' => $_POST['zip'],
+				'ADK_APPLICANT_COUNTRY' => $_POST['country'],
+				'ADK_APPLICANT_PERSONALINFO' => $_POST['personalinfo'],
+				'ADK_APPLICANT_REQ_CORR' => $_POST['reqcorr']
+			);
+		}
+		else{
+			$ADK_APPLICANT = array(
+				'ADK_APPLICANT_ID' => $id,
+				'ADK_APPLICANT_USERNAME' => $_POST['username'],
+				'ADK_APPLICANT_NAME' => $_POST['name'],
+				'ADK_APPLICANT_EMAIL' => $_POST['email'],
+				'ADK_APPLICANT_PHONE' => $_POST['phone'],
+				'ADK_APPLICANT_AGE' => $_POST['age'],
+				'ADK_APPLICANT_SEX' => $_POST['sex'],
+				'ADK_APPLICANT_ADDRESS1' => $_POST['address1'],
+				'ADK_APPLICANT_ADDRESS2' => $_POST['address2'],
+				'ADK_APPLICANT_CITY' => $_POST['city'],
+				'ADK_APPLICANT_STATE' => $_POST['state'],
+				'ADK_APPLICANT_ZIP' => $_POST['zip'],
+				'ADK_APPLICANT_COUNTRY' => $_POST['country'],
+				'ADK_APPLICANT_PERSONALINFO' => $_POST['personalinfo']
+			);
+		}
 		
 		return $ADK_APPLICANT;
 	}
@@ -49,7 +66,7 @@
 	
 	function updateApplicant($con){
 		$ADK_APPLICANT = makeApplicantArray();
-				
+		
 		//Check username not exists
 		$exempt = $ADK_APPLICANT['ADK_APPLICANT_USERNAME'];
 		$goodUsername = checkApplicantAndUserName($con, $ADK_APPLICANT['ADK_APPLICANT_USERNAME'], $exempt);
@@ -94,9 +111,6 @@
 				$ADK_APPLICANTS[$i]['ADK_APPLICANT_ZIP'] = preg_replace('/(\d{5})(\d{4})/i', '-', $ADK_APPLICANTS[$i]['ADK_APPLICANT_ZIP']);
 				$ADK_APPLICANTS[$i]['ADK_APPLICANT_COUNTRY'] = $row['ADK_APPLICANT_COUNTRY'];
 				$ADK_APPLICANTS[$i]['ADK_APPLICANT_PERSONALINFO'] = $row['ADK_APPLICANT_PERSONALINFO'];
-				$ADK_APPLICANTS[$i]['ADK_APPLICANT_FIRSTPEAK_ID'] = $row['ADK_APPLICANT_FIRSTPEAK_ID'];
-				$ADK_APPLICANTS[$i]['ADK_APPLICANT_FIRSTPEAK_DTE'] = $row['ADK_APPLICANT_FIRSTPEAK_DTE'];
-				$ADK_APPLICANTS[$i]['ADK_APPLICANT_NUMPEAKS'] = $row['ADK_APPLICANT_NUMPEAKS'];
 				$ADK_APPLICANTS[$i]['ADK_APPLICANT_REQ_CORR'] = $row['ADK_APPLICANT_REQ_CORR'];
 				$i++;
 			}
@@ -130,10 +144,6 @@
 				$ADK_APPLICANT['ADK_APPLICANT_ZIP'] = preg_replace('/(\d{5})(\d{4})/i', '-', $ADK_APPLICANT['ADK_APPLICANT_ZIP']);
 				$ADK_APPLICANT['ADK_APPLICANT_COUNTRY'] = $row['ADK_APPLICANT_COUNTRY'];
 				$ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO'] = $row['ADK_APPLICANT_PERSONALINFO'];
-				$ADK_APPLICANT['ADK_APPLICANT_FIRSTPEAK_ID'] = $row['ADK_APPLICANT_FIRSTPEAK_ID'];
-				$ADK_APPLICANT['ADK_APPLICANT_FIRSTPEAK_NAME'] = $row['ADK_APPLICANT_FIRSTPEAK_NAME'];
-				$ADK_APPLICANT['ADK_APPLICANT_FIRSTPEAK_DTE'] = date("m/d/Y", strtotime($row['ADK_APPLICANT_FIRSTPEAK_DTE']));
-				$ADK_APPLICANT['ADK_APPLICANT_NUMPEAKS'] = $row['ADK_APPLICANT_NUMPEAKS'];
 				$ADK_APPLICANT['ADK_APPLICANT_REQ_CORR'] = $row['ADK_APPLICANT_REQ_CORR'];
 			}
 		}

@@ -25,11 +25,10 @@
 	
 	$ADK_USERGROUP_ID = 3;
 	$ADK_USER = addUser($con, $ADK_USERGROUP_ID, $randomPW);
-	addHiker($con, $ADK_USER['ADK_USER_ID']);
+	$ADK_HIKER = addHiker($con, $ADK_USER['ADK_USER_ID']);
 	deleteApplicant($con);
 	
-    $ADK_HIKER = getHiker($con, $ADK_USER['ADK_USER_ID']);
-	$ADK_CORRESPONDENT = getCorrespondent($con, $ADK_CORR_ID);
+    $ADK_CORRESPONDENT = getCorrespondent($con, $ADK_CORR_ID);
 	
 	//Emails
 	sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT);
