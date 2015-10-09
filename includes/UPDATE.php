@@ -138,6 +138,35 @@
 		
 		return $sql_query;
 	}
+
+	function sql_sendDraft($con, $ADK_MESSAGE){
+		$sql_query = $con->prepare(
+			"UPDATE ADK_MESSAGE
+				SET ADK_MESSAGE_TITLE = ?,
+					ADK_MESSAGE_CONTENT = ?,
+					ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00'),
+					ADK_MESSAGE_READ = 0,
+					ADK_MESSAGE_DRAFT = 0
+			WHERE ADK_MESSAGE_ID = ?;");
+		
+		$sql_query->bind_param('ssi', $ADK_MESSAGE['ADK_MESSAGE_TITLE'], $ADK_MESSAGE['ADK_MESSAGE_CONTENT'], $ADK_MESSAGE['ADK_MESSAGE_ID']);
+		
+		return $sql_query;
+	}
+
+	function sql_updateDraft($con, $ADK_MESSAGE){
+		$sql_query = $con->prepare(
+			"UPDATE ADK_MESSAGE
+				SET ADK_MESSAGE_TITLE = ?,
+					ADK_MESSAGE_CONTENT = ?,
+					ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00'),
+					ADK_MESSAGE_DRAFT = 1
+			WHERE ADK_MESSAGE_ID = ?;");
+		
+		$sql_query->bind_param('ssi', $ADK_MESSAGE['ADK_MESSAGE_TITLE'], $ADK_MESSAGE['ADK_MESSAGE_CONTENT'], $ADK_MESSAGE['ADK_MESSAGE_ID']);
+		
+		return $sql_query;
+	}
 	
 	//User
 	function sql_updateUser($con, $ADK_USER){

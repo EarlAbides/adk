@@ -6,6 +6,7 @@
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
 	require_once 'INSERT.php';
+	require_once 'UPDATE.php';
 	require_once 'Message.php';
 	require_once 'File.php';
 	require_once 'User.php';
@@ -21,8 +22,10 @@
 	$ADK_MESSAGE = addMessage($con);
 	$ADK_MESSAGE = getMessage($con, $ADK_MESSAGE['ADK_MESSAGE_ID']);
 	
-	$ADK_MESSAGE_TO_EMAIL = getUserEmail($con, $_POST['touserid']);
-	sendPMNotifyEmail($ADK_MESSAGE, $ADK_MESSAGE_TO_EMAIL);
+	if(!isset($_POST['draft'])){
+		$ADK_MESSAGE_TO_EMAIL = getUserEmail($con, $_POST['touserid']);
+		sendPMNotifyEmail($ADK_MESSAGE, $ADK_MESSAGE_TO_EMAIL);
+	}
 	
     //$replyFileIDs = explode(',', $_POST['replyfileids']);
     //if(count($replyFileIDs) > 0 && $replyFileIDs[0] != '')

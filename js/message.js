@@ -11,7 +11,7 @@
     }
 
     //Message table links
-    rebind_messagesClick();
+    bind_messagesClick();
 
     //Sort
     $('.messageSort').click(function(){sortMessages(this);});
@@ -47,7 +47,7 @@ function newMessage(){
     document.getElementById('div_messages_main').innerHTML = template_newMessageHTML;
     $('#downloader').downloader({desc: true});
 
-    if(document.getElementById('hidden_usergroupcde').value == 'HIK'){
+    if(document.getElementById('hidden_usergroupcde').value === 'HIK'){
         var toID = document.getElementById('hidden_coruserid').value;
         var toName = document.getElementById('hidden_corusername').value;
         var toUsername = document.getElementById('hidden_coruserusername').value;
@@ -86,8 +86,7 @@ function reply(){
     //        });
     //    }
     //}
-
-
+	
     var replyText = '\r\n\r\n\r\n---------------------\r\n';
     replyText += 'From: ' + fromName + '\r\n';
     replyText += 'To: ' + toName + '\r\n';
@@ -255,33 +254,72 @@ function sortMessages(button){
     }
 
     table_messages.innerHTML = sortedMessages;
-    rebind_messagesClick();
+    bind_messagesClick();
 }
 
 function getFolder(id){
     $.post('includes/ajax_messageGetFolder', {ADK_USER_ID: document.getElementById('hidden_userid').value, id: id},
         function(ret){
             document.getElementById('div_table_messages').innerHTML = ret;
-            rebind_messagesClick();
+            bind_messagesClick();
 
             var buttons = document.querySelectorAll('.messageSort');
             buttons[0].classList.remove('active'); buttons[1].classList.add('active');
             buttons[2].classList.remove('active'); buttons[3].classList.add('active');
 
-            var button_sortFromTo = document.getElementById('button_sortFromTo');
             switch(id){
-                case 0: button_sortFromTo.innerHTML = 'From'; break;
-                case 1: button_sortFromTo.innerHTML = 'To'; break;
+                case 0: document.getElementById('button_sortFromTo').innerHTML = 'From'; break;
+                case 1: case 2: document.getElementById('button_sortFromTo').innerHTML = 'To'; break;
             }
         }
     );
 }
 
-function rebind_messagesClick(){
+function bind_messagesClick(){
     $('a.messagebtn').click(
         function(){
-            message_markRead(this.getAttribute('data-id'), this.children[1].children[0].children[0].children[0]);
-            viewMessage(this.getAttribute('data-id'));
+			if(document.getElementById('h4_folderName').innerHTML === 'Drafts') openDraft(this.getAttribute('data-id'));
+            else{
+				message_markRead(this.getAttribute('data-id'), this.children[1].children[0].children[0].children[0]);
+				viewMessage(this.getAttribute('data-id'));
+			}
+        }
+    );
+}
+
+function openDraft(ADK_MESSAGE_ID){
+    newMessage();
+	$.post('includes/ajax_getMessage', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},
+        function(ret){
+            var ADK_MESSAGE = JSON.parse(ret);
+
+			if(document.getElementById('hidden_usergroupcde').value !== 'HIK') document.getElementById('select_to_username').value = ADK_MESSAGE.ADK_MESSAGE_TO_USER_ID;
+			document.getElementById('textbox_subject').value = ADK_MESSAGE.ADK_MESSAGE_TITLE;
+			document.getElementById('textbox_message').value = ADK_MESSAGE.ADK_MESSAGE_CONTENT;
+            
+            //Attachments
+            var ul_messageattachments = document.getElementById('ul_messageattachments');
+            if(ADK_MESSAGE.ADK_FILES !== ''){
+                var html = '', files = ADK_MESSAGE.ADK_FILES;
+                for(var i = 0; i < files.length; i++){
+                    html += '<li><a class="pointer hoverbtn" data-id="' + files[i].ADK_FILE_ID + '" data-desc="' + files[i].ADK_FILE_DESC + 
+                        '" data-size="' + files[i].ADK_FILE_SIZE + '" onclick="getFile(' + files[i].ADK_FILE_ID + ');">' + 
+                        files[i].ADK_FILE_NAME + '</a></li>';
+                }
+                ul_messageattachments.innerHTML = html;
+            }
+
+			//Mark as draft
+			var hidden_wasDraft = document.createElement('input'), form = document.getElementById('form_newMessage')
+				,hidden_messageid = document.createElement('input');
+			hidden_wasDraft.setAttribute('type', 'hidden');
+			hidden_wasDraft.setAttribute('name', 'wasdraft');
+			hidden_wasDraft.value = 'true';
+			hidden_messageid.setAttribute('type', 'hidden');
+			hidden_messageid.setAttribute('name', 'messageid');
+			hidden_messageid.value = ADK_MESSAGE_ID;
+			form.appendChild(hidden_wasDraft);
+			form.appendChild(hidden_messageid);
         }
     );
 }
@@ -336,4 +374,13 @@ function printView(){
 	html += '<pre style="word-break:break-word;">' + content + '</pre>';
 
 	newWindow.document.write(fontSizeScript + html);
+}
+
+function saveDraft(){
+	var hidden_draft = document.createElement('input'), form = document.getElementById('form_newMessage');
+	hidden_draft.setAttribute('type', 'hidden');
+	hidden_draft.setAttribute('name', 'draft');
+	hidden_draft.value = 'true';
+	form.appendChild(hidden_draft);
+	form.submit();
 }

@@ -2,10 +2,12 @@
 	
 	function makeMessageArray(){
 		$ADK_MESSAGE = array(
+			'ADK_MESSAGE_ID' => isset($_POST['messageid'])? intval($_POST['messageid']): '',
 			'ADK_MESSAGE_FROM_USER_ID' => intval($_POST['id']),
 	        'ADK_MESSAGE_TO_USER_ID' => intval($_POST['touserid']),
 			'ADK_MESSAGE_TITLE' => $_POST['subject'],
-			'ADK_MESSAGE_CONTENT' => $_POST['message']
+			'ADK_MESSAGE_CONTENT' => $_POST['message'],
+			'ADK_MESSAGE_DRAFT' => isset($_POST['draft'])? 1: 0
 	    );
 		
 	    return $ADK_MESSAGE;
@@ -16,6 +18,7 @@
         switch($folderName){
 			case 'Inbox': $sql_query = sql_getMessagesInbox($con, $ADK_USER_ID); break;
 			case 'Sent': $sql_query = sql_getMessagesSent($con, $ADK_USER_ID); break;
+			case 'Drafts': $sql_query = sql_getMessagesDrafts($con, $ADK_USER_ID); break;
 		}
 		if($sql_query->execute()){
             $sql_query->store_result();
@@ -101,11 +104,15 @@
 	
 	function addMessage($con){
 		$ADK_MESSAGE = makeMessageArray();
-				
-	    //Add to database
-		$sql_query = sql_addMessage($con, $ADK_MESSAGE);
+		if($ADK_MESSAGE['ADK_MESSAGE_ID'] !== '') $id = $ADK_MESSAGE['ADK_MESSAGE_ID'];
+		
+	    if(isset($_POST['wasdraft']) && !isset($_POST['draft'])) $sql_query = sql_sendDraft($con, $ADK_MESSAGE);
+		else if(isset($_POST['draft']) && isset($_POST['wasdraft'])) $sql_query = sql_updateDraft($con, $ADK_MESSAGE);
+		else $sql_query = sql_addMessage($con, $ADK_MESSAGE);
 		$sql_query->execute();
 		$ADK_MESSAGE['ADK_MESSAGE_ID'] = $sql_query->insert_id;
+		
+		if(isset($id)) $ADK_MESSAGE['ADK_MESSAGE_ID'] = $id;
 		
 		return $ADK_MESSAGE;
 	}
@@ -140,25 +147,7 @@
 		$sql_query = sql_updateMessageDelete($con, $ADK_MESSAGE_ID, $inboxSent);
 		$sql_query->execute();
 	}
-	
-	//function updateDeleteMessageTrash($con, $ADK_MESSAGE_ID){
-	//    $sql_query = sql_updateDeleteMessageTrash($con, $ADK_MESSAGE_ID);
-	//    $sql_query->execute();
-	//}
-	
-	//function deleteMessages($con, $ADK_MESSAGE_IDS){
-	//    $sql_query = sql_deleteMessage($con);
-	//    $con->query("START TRANSACTION");
-	//    foreach($ADK_MESSAGE_IDS as $ADK_MESSAGE_ID){
-	//        $sql_query->bind_param('i', $ADK_MESSAGE_ID);
-	//        $sql_query->execute();
-	//    }
-	//    $sql_query->close();
-	//    $con->query("COMMIT");
 		
-	//    return true;
-	//}
-	
 	function getTableMessages($ADK_MESSAGES, $folderName){
 		$html = "<h4 id=\"h4_folderName\" style=\"border-bottom:1px solid;\">".$folderName."</h4>
 				<table id=\"table_messages\" class=\"selecttable\"><thead></thead><tbody>";
@@ -171,7 +160,7 @@
 						$icon = '<span class="glyphicon glyphicon-envelope"></span>';
 						$displayUsername = $ADK_MESSAGE['ADK_MESSAGE_FROM_USERNAME'];
 						break;
-					case 'Sent':
+					case 'Sent': case 'Drafts':
 						$icon = '<span class="glyphicon glyphicon-hand-left"></span>';
 						$displayUsername = $ADK_MESSAGE['ADK_MESSAGE_TO_USERNAME'];
 						break;

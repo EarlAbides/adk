@@ -71,6 +71,11 @@
 													Sent<span class="glyphicon glyphicon-export pull-right"></span>
 												</a>
 											</li>
+											<li>
+												<a class="hoverbtn pointer" style="display:block;" onclick="getFolder(2);">
+													Drafts<span class="glyphicon glyphicon-file pull-right"></span>
+												</a>
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -154,6 +159,7 @@
 						<div class="col-xs-12" style="margin:4px 0 2px;">
 							<div class="form-group">
 								<div class="col-xs-12">
+									<button type="button" class="btn btn-sm btn-default" onclick="saveDraft();">Save as Draft</button>
 									<div class="btn-group pull-right">
                                         <button type="button" class="btn btn-sm btn-default" onclick="cancelMessage();">Cancel</button>
 										<button type="reset" class="btn btn-sm btn-default">Clear</button>

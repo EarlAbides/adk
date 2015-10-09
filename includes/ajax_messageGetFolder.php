@@ -14,6 +14,7 @@
 	switch($folderID){
 		case 0: $folderName = 'Inbox'; break;
 		case 1: $folderName = 'Sent'; break;
+		case 2: $folderName = 'Drafts'; break;
 	}
 	
 	$ADK_MESSAGES = getMessages($con, $ADK_USER_ID, $folderName);
