@@ -95,12 +95,14 @@
 		<?php }else{//Is logged in?>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="./messages" style="padding-right:0;">
-							<span id="span_messages" class="glyphicon glyphicon-envelope" title="Messages" data-toggle="tooltip" data-placement="bottom" data-container="body"></span>
-							<span class="hidden-sm hidden-md hidden-lg">&nbsp;Messages</span>
-						</a>
-					</li>
+					<?php if($_SESSION['ADK_USERGROUP_CDE'] !== 'EDT'){?>
+						<li>
+							<a href="./messages" style="padding-right:0;">
+								<span id="span_messages" class="glyphicon glyphicon-envelope" title="Messages" data-toggle="tooltip" data-placement="bottom" data-container="body"></span>
+								<span class="hidden-sm hidden-md hidden-lg">&nbsp;Messages</span>
+							</a>
+						</li>
+					<?php }?>
 					<li class="dropdown">
 						<a href="#" id="a_logindropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;

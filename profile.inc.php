@@ -13,14 +13,12 @@
 	}
 	else header("Location: ./");
 	
-	$ADK_USERGROUP_CDE = $_SESSION['ADK_USERGROUP_CDE'];
-	
 	$con = connect_db();//Connect to db
 	if(mysqli_connect_errno())
 		return 'Error';
 	
 	switch($ADK_USERGROUP_CDE){
-		case 'ADM': $ADK_USER = getUser($con, $ADK_USER_ID); break;
+		case 'ADM': case 'EDT': $ADK_USER = getUser($con, $ADK_USER_ID); break;
 		case 'COR': $ADK_CORRESPONDENT = getCorrespondent($con, $ADK_USER_ID); break;
 		case 'HIK': $ADK_HIKER = getHiker($con, $ADK_USER_ID); break;
 		default: header("Location: ./");

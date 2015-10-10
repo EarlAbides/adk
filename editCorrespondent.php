@@ -89,43 +89,40 @@
 					
 				</form>
 			</div>
-			
-			<div class="content-wrapper">
+
+			<div class="col-xs-12 content content-max">
 				<form method="post" action="includes/corr_reassignhikers.php" data-toggle="validator" role="form" novalidate>
-				
-					<div class="col-xs-12 content content-max">
 					
-						<h4 class="content-header">
-							Reassign <?php echo $ADK_CORRESPONDENT['ADK_USER_USERNAME'];?>'s Hikers
-							<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
-								<span class="glyphicon glyphicon-chevron-down"></span>
-							</a>
-						</h4>
+					<h4 class="content-header">
+						Reassign <?php echo $ADK_CORRESPONDENT['ADK_USER_USERNAME'];?>'s Hikers
+						<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
+							<span class="glyphicon glyphicon-chevron-down"></span>
+						</a>
+					</h4>
 					
-						<div class="container-fluid">
+					<div class="container-fluid">
 						
-							<div class="col-xs-12 form-group">
-								<div class="div_tablewrapper">
-									<?php echo $table_correspondents;?>
-									<span class="help-block with-errors"></span>
-								</div>
-							</div>
-						
-							<div class="col-xs-12">
-								<div class="pull-right">
-									<button type="submit" class="btn btn-sm btn-default">Reassign Hikers</button>
-								</div>
+						<div class="col-xs-12 form-group">
+							<div class="div_tablewrapper">
+								<?php echo $table_correspondents;?>
+								<span class="help-block with-errors"></span>
 							</div>
 						</div>
-					
+						
+						<div class="col-xs-12">
+							<div class="pull-right">
+								<button type="submit" class="btn btn-sm btn-default">Reassign Hikers</button>
+							</div>
+						</div>
 					</div>
-				
+					
 					<input type="hidden" name="id" value="<?php echo $ADK_CORRESPONDENT['ADK_USER_ID'];?>" />
-				
+					
 				</form>
 			</div>
-			
+
 		</div>
+
 		<?php include 'includes/footer.php';?>
 	</div>
 	

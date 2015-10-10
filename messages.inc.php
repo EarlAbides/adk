@@ -26,7 +26,6 @@
 	
 	$table_messages = getTableMessages($ADK_MESSAGES, $folderName);
 		
-	$ADK_USERGROUP_CDE = $_SESSION['ADK_USERGROUP_CDE'];
 	switch($ADK_USERGROUP_CDE){
 		case 'ADM':
 			require_once 'includes/Hiker.php';

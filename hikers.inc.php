@@ -6,7 +6,7 @@
 	require_once 'includes/Hiker.php';
 	
 	$ADK_USER_ID = $_SESSION['ADK_USER_ID'];
-	if($_SESSION['ADK_USERGROUP_CDE'] == 'ADM') $ADK_USER_ID = '%';
+	if($_SESSION['ADK_USERGROUP_CDE'] === 'ADM' || $_SESSION['ADK_USERGROUP_CDE'] === 'EDT') $ADK_USER_ID = '%';
 	
 	$con = connect_db();//Connect to db
 	if(mysqli_connect_errno())

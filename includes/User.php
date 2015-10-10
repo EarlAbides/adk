@@ -75,7 +75,7 @@
 		$sql_query = sql_updateUser($con, $ADK_USER);
 		$sql_query->execute();
 		
-		return $ADK_USER['ADK_USER_ID'];
+		return $ADK_USER;
 	}
 	
 	function updateUserPW($con, $ADK_USER_ID, $ADK_USER_PASSWORD){

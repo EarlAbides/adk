@@ -109,12 +109,12 @@
                     LEFT JOIN ADK_HIKE H ON HF.ADK_HIKE_ID = H.ADK_HIKE_ID
                     LEFT JOIN ADK_MESSAGE_FILE_JCT MF ON F.ADK_FILE_ID = MF.ADK_FILE_ID
                     LEFT JOIN ADK_MESSAGE M ON MF.ADK_MESSAGE_ID = M.ADK_MESSAGE_ID
-                WHERE H.ADK_USER_ID = ?
-                    OR M.ADK_MESSAGE_FROM_USER_ID = ?
+                WHERE H.ADK_USER_ID LIKE ?
+                    OR M.ADK_MESSAGE_FROM_USER_ID LIKE ?
                 ORDER BY ADK_FILE_ID;"
         );
 
-        $sql_query->bind_param('ii', $ADK_USER_ID, $ADK_USER_ID);
+        $sql_query->bind_param('ss', $ADK_USER_ID, $ADK_USER_ID);
 
         return $sql_query;
     }

@@ -1,5 +1,28 @@
 ﻿$(document).ready(function(){
 
+	//User filter
+	var userID = $_GET('_');
+	if(parseInt(userID) && userID > 0) $('#select_ADK_HIKER').val($_GET('_'));
+	$('#select_ADK_HIKER').on('change',function(){
+		window.location = 'gallery?_=' + this.value;
+	});
+
+	//Peak filter
+	$('#select_filter').on('change',function(){
+		var lis = document.querySelectorAll('li.gallery');
+
+		if(this.value === ''){
+			for(var i = 0; i < lis.length; i++) lis[i].style.display = '';
+		}
+		else{
+			for(var i = 0; i < lis.length; i++){
+				var peaks = lis[i].getAttribute('data-peaks').split(',');
+				if(peaks.indexOf(this.value) === -1) lis[i].style.display = 'none';
+				else lis[i].style.display = '';
+			}
+		}
+	});
+
     $('.photo').click(function(){
 		document.getElementById('modal_gallery_label').innerHTML = this.children[0].getAttribute('alt');
 		document.getElementById('modal_gallery_desc').innerHTML = getDownloadLink(this.getAttribute('data-id')) + this.getAttribute('data-desc');
@@ -25,20 +48,7 @@
 		return true;
 	});
 
-	$('#select_filter').on('change',function(){
-		var lis = document.querySelectorAll('li.gallery');
-
-		if(this.value === ''){
-			for(var i = 0; i < lis.length; i++) lis[i].style.display = '';
-		}
-		else{
-			for(var i = 0; i < lis.length; i++){
-				var peaks = lis[i].getAttribute('data-peaks').split(',');
-				if(peaks.indexOf(this.value) === -1) lis[i].style.display = 'none';
-				else lis[i].style.display = '';
-			}
-		}
-	});
+	
 
 });
 

@@ -40,7 +40,7 @@
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
 				
-				<?php switch($ADK_USERGROUP_CDE){case 'ADM';?>
+				<?php switch($ADK_USERGROUP_CDE){case 'ADM': case 'EDT':?>
 				<form method="post" action="includes/user_update.php" data-toggle="validator" role="form" novalidate>
 					
 					<h4 class="content-header">

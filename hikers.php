@@ -23,7 +23,7 @@
 			<div class="col-xs-12 content content-max">
 					
 				<h4 class="content-header">
-					My Hikers
+					Hikers
 					<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
 						<span class="glyphicon glyphicon-chevron-down"></span>
 					</a>

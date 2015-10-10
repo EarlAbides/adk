@@ -1,6 +1,9 @@
 ﻿(function($){
 	$.fn.downloader = function(_options){
 		
+		//Exit on empty
+		if(!this.length) return;
+
 		//Functions
 		$.fn.downloader.makeFileInput = function(){
 			var fileId = $.fn.downloader.getFileIndex();
@@ -141,12 +144,6 @@
 			fileInputs[fileInputs.length - 1].value = '';
 		};
 		$.fn.downloader.showError = function(){alert('File already added');};
-		$.fn.downloader.bytesToSize = function(bytes){
-            var sizes = ['bytes', 'KB', 'MB', 'GB', 'TB'];
-            if(bytes == 0) return '0 bytes';
-            var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-            return Math.round(bytes / Math.pow(1024, i), 2) + sizes[i];
-        };
 
 		//Globals
 		var options = $.extend({
@@ -218,4 +215,11 @@
 				
 		return this;
 	};
-}(jQuery));
+}($));
+
+$.fn.downloader.bytesToSize = function(bytes){
+    var sizes = ['bytes', 'KB', 'MB', 'GB', 'TB'];
+    if(bytes == 0) return '0 bytes';
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + sizes[i];
+};

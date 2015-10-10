@@ -5,7 +5,11 @@
 <?php require_once 'gallery.inc.php';?>
 
 <?php include 'includes/head.php';?>
+    <script src="js/jquery.lazyload.min.js"></script>
     <script src="js/gallery.min.js"></script>
+	<script>
+		$('img.imghover').lazyload({effect: 'fadeIn'});
+	</script>
 </head>
 
 <body>
@@ -20,7 +24,10 @@
                    
                 <div class="container-fluid">
                     <h4 class="content-header">
-					    <?php echo $ADK_USER['ADK_USER_USERNAME'];?>'s Gallery
+					    <?php
+							if(isset($ADK_USER)) echo $ADK_USER['ADK_USER_USERNAME'].'\'s Gallery';
+							else echo 'Gallery';
+						?>
                         <a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode.parentNode);">
 						    <span class="glyphicon glyphicon-chevron-down"></span>
 					    </a>
@@ -30,10 +37,15 @@
 
                     <div class="col-xs-6">
                         <div class="form-group">
-							<div class="col-xs-12">
-								<span><?php echo $ADK_USER['ADK_USER_NAME'];?></span><br />
-                                <span><a href="<?php echo $ADK_USER['ADK_USER_EMAIL'];?>"><?php echo $ADK_USER['ADK_USER_EMAIL'];?></a></span><br />
-							</div>
+							<?php if($ADK_USERGROUP_CDE === 'ADM' || $ADK_USERGROUP_CDE === 'EDT'){?>
+								<label for="select_ADK_HIKER" class="control-label control-label-sm text-right">Filter by user</label>
+								<select id="select_ADK_HIKER" class="form-control form-control-sm">
+									<option value="">Show All</option>
+									<option disabled="disabled" role="separator" >-------------------------</option>
+									<?php foreach($ADK_HIKERS as $ADK_HIKER) echo '<option value="'.$ADK_HIKER['ADK_USER_ID'].'">'.$ADK_HIKER['ADK_USER_USERNAME'].' - '.$ADK_HIKER['ADK_USER_NAME'].'</option>';?>
+								</select>
+							<?php }else echo $ADK_USER['ADK_USER_NAME'].'</span><br />';?>
+							<?php if(isset($ADK_USER)) echo '<span><a href="'.$ADK_USER['ADK_USER_EMAIL'].'">'.$ADK_USER['ADK_USER_EMAIL'].'</a></span><br />';?>
 						</div>
                     </div>
 
