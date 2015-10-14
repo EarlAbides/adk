@@ -78,7 +78,7 @@
 							<li>We look forward to hearing about your next climb.</li>
 						</ul>
 						<p>People in the mountains are on a first name basis. There is no Doctor, Mrs., Mr. or misses, etc.</p>
-						<p>Do not give out trail information. No matter how knowledgeable and wanton to help a correspondent may be, please refrain. This puts the 46ers in a liability situation.</p>
+						<p>Do not give out trail information. No matter how knowledgeable and wanting to to help a correspondent may be, please refrain. This puts the 46ers in a liability situation.</p>
 					</div>
 					
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1">
