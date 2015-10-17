@@ -5,9 +5,7 @@
 	require_once 'INSERT.php';
 	require_once 'Changelog.php';
 	
-	$con = connect_db();//Connect to db
-		if(mysqli_connect_errno())
-			return 'Error';
+	$con = connect_db();
 	
 	addChange($con);
 	

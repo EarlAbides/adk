@@ -11,9 +11,7 @@
 	require_once 'email.php';
 	require_once 'pm.php';
 	
-	$con = connect_db();//Connect to db
-		if(mysqli_connect_errno())
-			return 'Error';
+	$con = connect_db();
 	
 	$ADK_APPLICANT = addApplicant($con);
 	

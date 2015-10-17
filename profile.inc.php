@@ -13,9 +13,7 @@
 	}
 	else header("Location: ./");
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-		return 'Error';
+	$con = connect_db();
 	
 	switch($ADK_USERGROUP_CDE){
 		case 'ADM': case 'EDT': $ADK_USER = getUser($con, $ADK_USER_ID); break;

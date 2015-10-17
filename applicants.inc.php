@@ -5,9 +5,7 @@
 	require_once 'includes/SELECT.php';
 	require_once 'includes/Applicant.php';
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-		return 'Error';
+	$con = connect_db();
 	
 	$ADK_CORRESPONDENTS = getApplicants($con);
 	

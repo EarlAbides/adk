@@ -14,9 +14,7 @@
 	else header("Location: ./");
 	
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-		return 'Error';
+	$con = connect_db();
 	
 	$ADK_APPLICANT = getApplicant($con, $ADK_APPLICANT_ID);
 	if($ADK_APPLICANT == '') header("Location: ./");

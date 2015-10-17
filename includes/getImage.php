@@ -7,9 +7,7 @@
 	
 	$ADK_FILE_ID = $_GET['_'];
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-		return 'Error';
+	$con = connect_db();
 	
 	$ADK_FILE = getFile($con, $ADK_FILE_ID, true);
 	

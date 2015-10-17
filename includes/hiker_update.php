@@ -8,9 +8,7 @@
 	require_once 'Hiker.php';
 	require_once 'User.php';
 	
-	$con = connect_db();//Connect to db
-		if(mysqli_connect_errno())
-			return 'Error';
+	$con = connect_db();
 	
 	$ADK_USERGROUP_ID = 3;
 	updateUser($con, $ADK_USERGROUP_ID);

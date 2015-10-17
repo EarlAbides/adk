@@ -14,9 +14,7 @@
 	$ADK_TO_USER_ID = '';
 	if(isset($_GET['_'])) $ADK_TO_USER_ID = $_GET['_'];
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-		return 'Error';
+	$con = connect_db();
 	
 	$folderName = 'Inbox';
 	

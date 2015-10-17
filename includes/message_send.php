@@ -15,9 +15,7 @@
 	if(validateFiles($errMess)) $files = getPOSTFiles();
 	else header('Location: ../messages?_'.$_POST['touserid'].'=&e='.$errMess);
 	
-	$con = connect_db();//Connect to db
-		if(mysqli_connect_errno())
-			return 'Error';
+	$con = connect_db();
 	
 	$ADK_MESSAGE = addMessage($con);
 	$ADK_MESSAGE = getMessage($con, $ADK_MESSAGE['ADK_MESSAGE_ID']);

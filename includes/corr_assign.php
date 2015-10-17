@@ -19,9 +19,7 @@
 	$randomPW = randomPW(8);
 	$ADK_CORR_ID = $_POST['corrid'];
 	
-	$con = connect_db();//Connect to db
-		if(mysqli_connect_errno())
-			return 'Error';
+	$con = connect_db();
 	
 	$ADK_USERGROUP_ID = 3;
 	$ADK_USER = addUser($con, $ADK_USERGROUP_ID, $randomPW);

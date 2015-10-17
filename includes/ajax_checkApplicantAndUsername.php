@@ -5,9 +5,7 @@
 	require_once 'SELECT.php';
 	require_once 'User.php';
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-	    return 'Error';
+	$con = connect_db();
 	
 	$goodUsername = checkApplicantAndUserName($con, $_POST['username'], '');
 	

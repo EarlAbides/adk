@@ -8,9 +8,7 @@
 	$ADK_USER_ID = $_SESSION['ADK_USER_ID'];
 	if($_SESSION['ADK_USERGROUP_CDE'] === 'ADM' || $_SESSION['ADK_USERGROUP_CDE'] === 'EDT') $ADK_USER_ID = '%';
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-	    return 'Error';
+	$con = connect_db();
 	
 	$ADK_HIKERS = getHikers($con, $ADK_USER_ID);
 	

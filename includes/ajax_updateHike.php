@@ -13,9 +13,7 @@
 	if(validateFiles($errMess)) $files = getPOSTFiles();
 	else{http_response_code(404);exit;}
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-	    return 'Error';
+	$con = connect_db();
 	
 	$ADK_HIKE = updateHike($con);
 	updateHikesPeaks($con, $ADK_HIKE);

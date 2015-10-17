@@ -17,9 +17,7 @@
 		$page = $_POST['page'];
 		if($page === 'index' || $page === 'login') $page = '';
 		
-		$con = connect_db();//Connect to db
-		if(mysqli_connect_errno())
-			return 'Error';
+		$con = connect_db();
 	
 		$sql_query = sql_login_check($con, $ADK_USER_USERNAME, $ADK_USER_PASSWORD);
 		if($sql_query->execute()){

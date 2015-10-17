@@ -48,9 +48,7 @@
 	function addApplicant($con){
 		$ADK_APPLICANT = makeApplicantArray();
 				
-		$con = connect_db();//Connect to db
-		if(mysqli_connect_errno())
-			return 'Error';
+		$con = connect_db();
 		
 		//Check username not exists
 		$goodUsername = checkApplicantAndUserName($con, $ADK_APPLICANT['ADK_APPLICANT_USERNAME'], '');

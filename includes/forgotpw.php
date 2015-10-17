@@ -8,9 +8,7 @@
 	require_once 'User.php';
 	require_once 'email.php';
 	
-	$con = connect_db();//Connect to db
-	    if(mysqli_connect_errno())
-	        return 'Error';
+	$con = connect_db();
 	
 	$ADK_USER_USERNAME = $_POST['username'];
 	$ADK_USER_EMAIL = $_POST['email'];

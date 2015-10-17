@@ -5,9 +5,7 @@
 	require_once 'SELECT.php';
 	require_once 'User.php';
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-	    return 'Error';
+	$con = connect_db();
 	
 	$ADK_USER_ID = intval($_POST['id']);
 	$ADK_USER_PASSWORD = md5($_POST['oldpassword']);

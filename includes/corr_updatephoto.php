@@ -12,9 +12,7 @@
 	if(validateImageFile($errMess, $name)) $file = getPOSTFile($name);
 	else header('Location: ../profile?e='.$errMess);
 	
-	$con = connect_db();//Connect to db
-		if(mysqli_connect_errno())
-			return 'Error';
+	$con = connect_db();
 	
 	$ADK_USER_ID = intval($_POST['id']);
 	

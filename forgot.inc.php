@@ -10,9 +10,7 @@
 	
 	if(isset($_GET['__'])){//Reset password
 		if(($_GET['__'] !== '') && (strlen($_GET['__']) > 8)){
-			$con = connect_db();//Connect to db
-			if(mysqli_connect_errno())
-			    return 'Error';
+			$con = connect_db();
 			
 			$last8hash = substr($_GET['__'], 0, 8);
 			$ADK_USER_ID = intval(substr($_GET['__'], 8, count($_GET['__']) + 1));

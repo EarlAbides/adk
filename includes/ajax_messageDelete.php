@@ -5,9 +5,7 @@
 	require_once 'UPDATE.php';
 	require_once 'Message.php';
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-	    return 'Error';
+	$con = connect_db();
 	
 	$ADK_MESSAGE_ID = intval($_POST['id']);
 	$inboxSent = $_POST['tofrom'];

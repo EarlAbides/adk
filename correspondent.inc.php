@@ -12,9 +12,7 @@
 	}
 	else header("Location: ./");
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-		return 'Error';
+	$con = connect_db();
 	
 	$ADK_CORRESPONDENT = getCorrespondent($con, $ADK_CORR_ID);
 	if($ADK_CORRESPONDENT == '') header("Location: ./");

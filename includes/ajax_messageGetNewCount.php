@@ -5,9 +5,7 @@
 	require_once 'SELECT.php';
 	require_once 'Message.php';
 	
-	$con = connect_db();//Connect to db
-	if(mysqli_connect_errno())
-	    return 'Error';
+	$con = connect_db();
 	
 	echo getNewMessageCount($con, intval($_GET['_']));
 	

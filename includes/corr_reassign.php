@@ -12,9 +12,7 @@
 	$ADK_USER_ID = intval($_POST['id']);
 	$ADK_CORR_ID = intval($_POST['corrid']);
 	
-	$con = connect_db();//Connect to db
-		if(mysqli_connect_errno())
-			return 'Error';
+	$con = connect_db();
 	
 	updateHikersCorr($con, $ADK_USER_ID, $ADK_CORR_ID);
 
