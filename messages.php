@@ -178,7 +178,7 @@
 					<input type="hidden" name="id" value="<?php echo $ADK_USER_ID;?>" />
 					<input type="hidden" id="hidden_replyfileids" name="replyfileids" />
 					<?php
-						if(isset($ADK_TO_USER)){
+						if(isset($ADK_TO_USER) && $ADK_TO_USER !== ''){
 							$toID = $ADK_TO_USER['ADK_USER_ID']; $toUsername = $ADK_TO_USER['ADK_USER_USERNAME'];
 							$toName = $ADK_TO_USER['ADK_USER_NAME']; $toEmail = $ADK_TO_USER['ADK_USER_EMAIL'];
 						}

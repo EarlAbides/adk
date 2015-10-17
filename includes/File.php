@@ -152,7 +152,7 @@
 		}
 		else die('There was an error running the query ['.$con->error.']');
 
-        if($returnContent){
+        if($returnContent && $ADK_FILE !== ''){
             $file = '../uploads/'.$ADK_FILE['ADK_FILE_SAVENAME'][0].'/'.$ADK_FILE['ADK_FILE_SAVENAME'][1].'/'.$ADK_FILE['ADK_FILE_SAVENAME'];
             $fp = fopen($file, 'r');
             $ADK_FILE['ADK_FILE_CONTENT'] = fread($fp, $ADK_FILE['ADK_FILE_SIZE']);
