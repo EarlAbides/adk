@@ -12,10 +12,12 @@
 	$ADK_FILE = getFile($con, $ADK_FILE_ID, false);
 	
 	$con->close();
-	
-    $filePath = '../uploads/'.$ADK_FILE['ADK_FILE_SAVENAME'][0].'/'.$ADK_FILE['ADK_FILE_SAVENAME'][1].'/'.$ADK_FILE['ADK_FILE_SAVENAME'];
-    $stream = new VideoStream($filePath);
-    $stream->start();
+
+	if($ADK_FILE !== ''){
+		$filePath = '../uploads/'.$ADK_FILE['ADK_FILE_SAVENAME'][0].'/'.$ADK_FILE['ADK_FILE_SAVENAME'][1].'/'.$ADK_FILE['ADK_FILE_SAVENAME'];
+		$stream = new VideoStream($filePath);
+		$stream->start();
+	}
 
     class VideoStream{
         
