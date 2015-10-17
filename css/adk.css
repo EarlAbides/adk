@@ -41,7 +41,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endC
 @media(max-width:400px){
     body > .container-fluid{padding:0;}
 }
-
+.tooltip-inner{max-width:initial;}
 
 /*Site*/
 #home_intro, #home_about{overflow:hidden;}
