@@ -89,17 +89,20 @@
 	}
 	
 	function getNewMessageCount($con, $ADK_USER_ID){
-        $newMessageCount = 0;
-		$sql_query = sql_getNewMessageCount($con, $ADK_USER_ID);
-		if($sql_query->execute()){
-            $sql_query->store_result();
-            $sql_query->bind_result($result);
-            $sql_query->fetch();
-            $newMessageCount = $result;
-		}
-		else die('There was an error running the query ['.$con->error.']');
+        if(isset($ADK_USER_ID) && $ADK_USER_ID !== '' && $ADK_USER_ID !== 0){
+			$newMessageCount = 0;
+			$sql_query = sql_getNewMessageCount($con, $ADK_USER_ID);
+			if($sql_query->execute()){
+				$sql_query->store_result();
+				$sql_query->bind_result($result);
+				$sql_query->fetch();
+				$newMessageCount = $result;
+			}
+			else die('There was an error running the query ['.$con->error.']');
 		
-		return $newMessageCount;
+			return $newMessageCount;
+		}
+		return 0;
 	}
 	
 	function addMessage($con){
