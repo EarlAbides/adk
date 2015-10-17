@@ -91,7 +91,7 @@
 
             </div>
             
-            <div class="col-xs-12 content content-max" style="margin-bottom:15px;">
+            <div class="col-xs-12 col-sm-5 content content-max" style="margin-bottom:15px;">
                    
                 <div class="container-fluid">
                     <h4 class="content-header">
@@ -117,7 +117,7 @@
 
 			</div>
 
-            <div class="col-xs-12 content content-max">
+            <div class="col-xs-12 col-sm-5 pull-right content content-max">
                    
                 <div class="container-fluid">
                     <h4 class="content-header">
