@@ -111,9 +111,13 @@
 									<?php if($ADK_USERGROUP_CDE == 'ADM' || $ADK_USERGROUP_CDE == 'COR'){?>
 										<label for="select_to_username" class="control-label control-label-sm">To</label><br />
 										<select id="select_to_username" name="to_username" class="form-control form-control-sm" required>
-											<?php foreach($ADK_HIKERS as $ADK_HIKER){
-												echo '<option value="'.$ADK_HIKER['ADK_USER_ID'].'">'.$ADK_HIKER['ADK_USER_NAME'].' ('.$ADK_HIKER['ADK_USER_USERNAME'].')</option>';
-											}?>
+											<?php
+												if($ADK_HIKERS !== ''){
+													foreach($ADK_HIKERS as $ADK_HIKER){
+														echo '<option value="'.$ADK_HIKER['ADK_USER_ID'].'">'.$ADK_HIKER['ADK_USER_NAME'].' ('.$ADK_HIKER['ADK_USER_USERNAME'].')</option>';
+													}
+												}
+											?>
 										</select>
 										<span class="help-block with-errors"></span>
 									<?php } elseif($ADK_USERGROUP_CDE == 'HIK'){?>
