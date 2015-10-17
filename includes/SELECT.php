@@ -309,7 +309,7 @@
 	}
 	
 	function sql_getNewMessageCount($con, $ADK_USER_ID){
-		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_MESSAGE WHERE ADK_MESSAGE_TO_USER_ID = ? AND ADK_MESSAGE_READ = 0 AND A.ADK_MESSAGE_DRAFT = 0;");
+		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_MESSAGE WHERE ADK_MESSAGE_TO_USER_ID = ? AND ADK_MESSAGE_READ = 0 AND ADK_MESSAGE_DRAFT = 0;");
 
         $sql_query->bind_param('i', $ADK_USER_ID);
 

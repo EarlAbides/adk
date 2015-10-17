@@ -9,7 +9,7 @@
 	if(mysqli_connect_errno())
 	    return 'Error';
 	
-	echo getNewMessageCount($con, $_GET['_']);
+	echo getNewMessageCount($con, intval($_GET['_']));
 	
 	$con->close();
 	
