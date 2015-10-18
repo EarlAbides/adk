@@ -6,13 +6,15 @@
 
 <?php include 'includes/head.php';?>
 	<script src="js/jquery.tablesorter.min.js"></script>
-	<script src="js/hike.min.js"></script>
+	<script src="js/hike.js"></script>
 	<script src="js/jquery-dl.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			$('.date').datepicker({
-				changeMonth: true,
-				changeYear: true
+				changeMonth: true
+				,changeYear: true
+				,maxDate: '+2d'
+				,yearRange: '-100:+0'
 			});
 			$('#downloader').downloader({desc: true});
 			$('.selecttable').tablesorter();

@@ -7,8 +7,10 @@
 	<script>
 		$(document).ready(function(){
 			$('.date').datepicker({
-				changeMonth: true,
-				changeYear: true
+				changeMonth: true
+				,changeYear: true
+				,maxDate: '+2d'
+				,yearRange: '-100:+0'
 			});
 			
 			$('#textbox_reqcorr').autocomplete({

@@ -54,18 +54,18 @@
 			for($j = 0; $j < count($_FILES['file'.$i]['tmp_name']); $j++){
 				if($_FILES['file'.$i]['size'][$j] !== 0){
 					$ext = pathinfo($_FILES['file'.$i]['name'][$j], PATHINFO_EXTENSION);
-					$fileTypes = array('pdf', 'doc', 'docx', 'txt', 'csv', 'jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff',
-                                        'mpg', 'mpeg', 'avi', 'mov', 'webm', 'mkv', 'flv', 'ogg', 'oggv', 'wmv', 'mp4');
+					$fileTypes = array('pdf', 'doc', 'docx', 'txt', 'csv', 'jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff', 'bmp'
+                                        ,'mpg', 'mpeg', 'avi', 'mov', 'webm', 'mkv', 'flv', 'ogg', 'oggv', 'wmv', 'mp4');
 
-					//File size
-					if($_FILES['file'.$i]['size'][$j] > 15728640){//15Mb
-						$errMess .= 's';
-						$valid = false;
-					}
-					
 					//File type
 					if(!in_array($ext, $fileTypes)){
 						$errMess .= 't';
+						$valid = false;
+					}
+
+					//PHP error
+					if($_FILES['file'.$i]['error'][$j] !== 0){
+						$errMess .= 'f';
 						$valid = false;
 					}
 					
@@ -75,7 +75,7 @@
 		}
 		
 		//Total file size
-		if($totalFileSize >= 20971500){//20Mb
+		if($totalFileSize >= 104856500){//100Mb (-1000 bytes)
 			$errMess .= 'm';
 			$valid = false;
 		}
@@ -87,10 +87,10 @@
 		$valid = true;
 		if($_FILES[$name]['size'] !== 0){
 			$ext = pathinfo($_FILES[$name]['name'], PATHINFO_EXTENSION);
-			$fileTypes = array('jpg', 'jpeg', 'bmp', 'png');
+			$fileTypes = array('jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff', 'bmp');
 					
 			//File size
-			if($_FILES[$name]['size'] > 15728640){//15Mb
+			if($_FILES[$name]['size'] > 104856500){//100Mb (-1000 bytes)
 				$errMess .= 's';
 				$valid = false;
 			}

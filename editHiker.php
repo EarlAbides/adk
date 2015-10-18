@@ -6,12 +6,7 @@
 
 <?php include 'includes/head.php';?>
 	<script>
-		$(document).ready(function(){
-			$('.date').datepicker({
-				changeMonth: true,
-				changeYear: true
-			});
-			
+		$(document).ready(function(){			
 			$('#select_country').change(function(){
 				var label_select_state = document.getElementById('label_select_state');
 				var select_state = document.getElementById('select_state');
