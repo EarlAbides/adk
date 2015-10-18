@@ -31,7 +31,7 @@
 					
 				<div class="container-fluid">
 					<div class="col-xs-12">
-						<div class="div_tablewrapper">
+						<div id="div_hikertable" class="div_tablewrapper">
 							<?php echo $table_hikers;?>
 						</div>
 					</div>
