@@ -47,7 +47,8 @@ function showHide_content(span, div){
 function getXhr(){
     var xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
-    else xhr = new ActiveXObject("Microsoft.XMLHTTP");//Old IE
+    else xhr = new ActiveXObject("Microsoft.XMLHTTP");//IE
+	xhr.timeout = 1200000;
     return xhr;
 }
 

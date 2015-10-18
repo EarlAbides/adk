@@ -79,8 +79,9 @@ position:absolute;
 bottom:0;
 opacity:1;
 }
-img.imghover{opacity:0.9;}
+img.imghover{opacity:0.9;border:1px solid transparent;}
 img.imghover:hover{opacity:1;}
+a img.imghover:active, img.imghover:hover{border:1px solid #000000;}
 .pointer{cursor:pointer;}
 .hoverbtn{opacity:0.8;cursor:pointer;}
 .hoverbtn:hover{opacity:1;}
