@@ -185,6 +185,7 @@ font-size:12px;
 #div_peaks_container span:not(:last-child):after{content:", ";}
 .redhover{cursor:pointer;}
 .redhover:hover{color:#B10000 !important;text-decoration:line-through;}
+.has-error .redhover, .has-error th{color:#B10000;}
 
 /*Tables*/
 .div_tablewrapper{
@@ -197,9 +198,7 @@ padding:5px 8px 5px 4px;
 max-height:300px;
 overflow-y:auto;
 }
-.selecttable{
-width:100%;
-}
+.selecttable{width:100%;}
 .selecttable span{padding:0 0 0 2px;}
 .selecttable th{
 font-weight:bold;
@@ -214,6 +213,9 @@ font-size:0.9em;
 .selecttable tr th:first-child, .selecttable tr td:first-child{padding-left:4px;}
 .selecttable tr th:last-child, .selecttable tr td:last-child{padding-right:4px;}
 .rowselector .glyphicon{display:block;font-size:0.75em;}
+@media(max-width:450px){
+	.selecttable .rowselector, .selecttable .rowselector:active, .selecttable .rowselector:hover{font-size:1.7em;}
+}
 
 
 /*Messages*/
