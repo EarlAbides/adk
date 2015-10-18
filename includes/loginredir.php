@@ -8,9 +8,11 @@
 
 	if(isset($GLOBALS['page'])){
 		switch($GLOBALS['page']){
-			case 'applicant': case 'applicants': case 'changelog': case 'correspondent':
+			case 'applicant': case 'applicants': case 'correspondent':
 			case 'correspondents': case 'editApplicant': case 'editCorrespondent':
 				if($ADK_USERGROUP_CDE !== 'ADM') header('Location: ./'); break;
+			case 'changelog':
+				if($ADK_USERGROUP_CDE == 'HIK') header('Location: ./'); break;
 			case 'editHiker': case 'guideCorr': case 'hiker': case 'hikers':
 				if($ADK_USERGROUP_CDE === 'HIK') header('Location: ./'); break;
 			case 'guideHiker': case 'hikerportal':

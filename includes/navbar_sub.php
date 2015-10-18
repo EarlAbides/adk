@@ -45,6 +45,8 @@
 					<li<?php if(isset($hikers)) echo $hikers;?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($correspondents)) echo $correspondents;?>><a href="./correspondents">Correspondents</a></li>
 					<li<?php if(isset($gallery)) echo $gallery;?>><a href="./gallery">Gallery</a></li>
+				<?php }?>
+				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'ADM' || $_SESSION['ADK_USERGROUP_CDE'] === 'COR'))){?>
 					<li<?php if(isset($changelog)) echo $changelog;?>><a href="./changelog">Change log</a></li>
 				<?php }?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'HIK'))){?>
