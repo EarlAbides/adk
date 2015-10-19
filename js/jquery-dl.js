@@ -45,7 +45,7 @@
 					
 					var td1 = document.createElement('td');
                     td1.appendChild(span_fileName);
-                    td1.setAttribute('title', 'Size: ' + $.fn.downloader.bytesToSize(fileInputs[i].files[j].size) + '  Type: ' + fileInputs[i].files[j].type + '\nClick to Remove');
+                    td1.setAttribute('title', 'Size: ' + $.fn.downloader.bytesToSize(fileInputs[i].files[j].size) + '\nType: ' + fileInputs[i].files[j].type + '\n\nClick to Remove');
 					td1.setAttribute('data-toggle', 'tooltip');
 					td1.setAttribute('data-container', 'body');
 					var tr = document.createElement('tr');
@@ -71,7 +71,7 @@
             if(table_fileList.children[1].children.length === 0) $('#table_fileList th').css('visibility', 'hidden');
             else $('#table_fileList th').css('visibility', '');
 
-			tooltip();
+			tooltip();			
 		};
 		$.fn.downloader.getNewFileInput = function(){return $('.fileInput').last()[0];};
 		$.fn.downloader.getFileIndex = function(){return 'file' + document.getElementById('hidden_fileIndex').value;};
@@ -97,7 +97,11 @@
 			var hidden_fileIndex = document.getElementById('hidden_fileIndex');
 			$.fn.downloader.updateFileList();
 			$.fn.downloader.rebind();
+
 			tooltip();
+			var fs = $.fn.downloader.validateTotalFileSize(), fl = $.fn.downloader.validateTotalFileLimit();
+			if(fs && fl) document.getElementById('span_fileerror').innerHTML = '';
+			if(typeof enableDisable_addHike == 'function') enableDisable_addHike();
 		};
 		$.fn.downloader.removeAll = function(){
 			$('input[id^="file"]').remove();
@@ -105,7 +109,11 @@
 			document.getElementById('div_inputFileWrapper').appendChild($.fn.downloader.makeFileInput());
 			$.fn.downloader.updateFileList();
 			$.fn.downloader.rebind();
+
 			tooltip();
+			var fs = $.fn.downloader.validateTotalFileSize(), fl = $.fn.downloader.validateTotalFileLimit();
+			if(fs && fl) document.getElementById('span_fileerror').innerHTML = '';
+			if(typeof enableDisable_addHike == 'function') enableDisable_addHike();
 		};
 		$.fn.downloader.filesAdded = function(){
 			if($.fn.downloader.preExists()){
@@ -117,8 +125,10 @@
 				$.fn.downloader.updateFileList();
 				$.fn.downloader.rebind();
 			}
-			$.fn.downloader.validateTotalFileSize();
-			$.fn.downloader.validateTotalFileLimit();
+			
+			var fs = $.fn.downloader.validateTotalFileSize(), fl = $.fn.downloader.validateTotalFileLimit();
+			if(fs && fl) document.getElementById('span_fileerror').innerHTML = '';
+			if(typeof enableDisable_addHike == 'function') enableDisable_addHike();
 		};
 		$.fn.downloader.preExists = function(){
 			function getNewFileNames(){
@@ -167,7 +177,9 @@
 
 					$('form, .fileInput').off('change');
 				});
+				return false;
 			}
+			return true;
 		};
 		$.fn.downloader.validateTotalFileLimit = function(){
 			var total = 0;
@@ -192,7 +204,9 @@
 
 					$('form, .fileInput').off('change');
 				});
+				return false;
 			}
+			return true;
 		};
 		$.fn.downloader.removeLastAdd = function(){
 			var fileInputs = document.getElementsByClassName('fileInput');

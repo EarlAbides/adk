@@ -221,22 +221,28 @@
 	//	&& $feedback.addClass(this.options.feedback.success)
 	//	&& $group.addClass('has-success')
 
-	if(!document.getElementsByClassName('jqdl-attachments').length){
-		var $group = $el.closest('.form-group')
-		var $block = $group.find('.help-block.with-errors')
-		var $feedback = $group.find('.form-control-feedback')
-
-		$block.html($block.data('bs.validator.originalContent'))
-		$group.removeClass('has-error')
-
-		$feedback.length
-			&& $feedback.removeClass(this.options.feedback.error)
-			&& $feedback.addClass(this.options.feedback.success)
-			&& $group.addClass('has-success')
-	}
+	if(!document.getElementsByClassName('jqdl-attachments').length) x();
 	else{
 		if($el[0].parentNode.parentNode.id = 'downloader'){
 			var $group = $el.closest('.form-group')
+			if(!$group[0].classList.contains('has_error')){
+				var $block = $group.find('.help-block.with-errors')
+				var $feedback = $group.find('.form-control-feedback')
+
+				$block.html($block.data('bs.validator.originalContent'))
+				$group.removeClass('has-error')
+
+				$feedback.length
+					&& $feedback.removeClass(this.options.feedback.error)
+					&& $feedback.addClass(this.options.feedback.success)
+					&& $group.addClass('has-success')
+			}
+		}
+		else x();
+	}
+
+	function x(){
+		var $group = $el.closest('.form-group')
 			var $block = $group.find('.help-block.with-errors')
 			var $feedback = $group.find('.form-control-feedback')
 
@@ -247,7 +253,6 @@
 				&& $feedback.removeClass(this.options.feedback.error)
 				&& $feedback.addClass(this.options.feedback.success)
 				&& $group.addClass('has-success')
-		}
 	}
   }
 

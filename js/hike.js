@@ -23,8 +23,7 @@
         $('html, body').animate({scrollTop: $(span_maxminAddUpdateHike).offset().top}, 600);
     }
 
-	$('')
-	button_addUpdateHike
+	$('#form_addUpdateHike').on('change', enableDisable_addHike);
 });
 
 //Hike
@@ -256,6 +255,22 @@ function convertFormat(a){
         }
         a.innerHTML = '(ft)';
     }
+}
+
+function enableDisable_addHike(){
+	function disable(disable){if(disable){button.disabled = true; button.classList.add('disabled');}else{button.disabled = false; button.classList.remove('disabled');}}
+	var button = document.getElementById('button_addUpdateHike');
+	disable(false);
+	
+	if(document.getElementById('span_fileerror').innerHTML !== ''){
+		document.getElementsByClassName('jqdl-attachments')[0].classList.add('has-error');
+		disable(true);
+		return;
+	}
+	if($(this).find('.has-error').length > 0){disable(true); return;}
+
+	if((document.getElementById('select_remainingpeaks').value === '' && document.getElementById('div_peaks_container').innerHTML === '')
+		&& document.getElementById('textbox_hikedate').innerHTML === ''){disable(true); return;}
 }
 
 //Peak

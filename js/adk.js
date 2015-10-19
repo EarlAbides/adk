@@ -31,7 +31,7 @@
 
 });
 
-function tooltip(){$('[data-toggle="tooltip"]').tooltip();}
+function tooltip(){$('div.tooltip').remove();$('[data-toggle="tooltip"]').tooltip();}
 
 function showHide_content(span, div){
     if(div.classList.contains('content-max')){
