@@ -190,7 +190,7 @@
 			<div class="col-xs-12">
 				<div class="container-fluid content content-max" style="margin-bottom:15px;">
 				
-					<h4 class="content-header">
+					<h4 id="div_myhikes" class="content-header">
 						My Hikes
 						<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
 							<span class="glyphicon glyphicon-chevron-down"></span>
@@ -219,7 +219,9 @@
 							</h4>
 							
 							<div class="col-sm-12 text-right">
-								<a class="pointer" onclick="editHike();" style="margin-right:5%;">Edit</a>
+								<a class="pointer" onclick="editHike();">Edit</a>
+								<b>&nbsp;|&nbsp;</b>
+								<a href="#" onclick="if(confirm('Are you sure you want to delete this hike?')) deleteHike();" style="margin-right:5%;">Delete</a>
 							</div>
 								
 							<div class="col-xs-12 col-sm-4">
@@ -342,7 +344,7 @@
 							
 							<!-- Hidden -->
 							<div style="display:none;">
-								<input type="hidden" name="id" value="<?php echo $ADK_HIKER['ADK_USER_ID'];?>" />
+								<input type="hidden" id="hikerId"name="id" value="<?php echo $ADK_HIKER['ADK_USER_ID'];?>" />
 								<input type="hidden" id="hidden_peakids" name="peakids" />
 								<input type="hidden" id="hidden_hikeid" name="hikeid" />
 								<input type="hidden" id="hidden_prefileids" name="prefileids" />

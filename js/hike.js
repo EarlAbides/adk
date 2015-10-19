@@ -105,7 +105,25 @@ function editHike(){
 
 
     //Scroll
-    $('html, body').animate({scrollTop: $(span_maxminAddUpdateHike).offset().top}, 600);
+    $('html, body').animate({scrollTo: $(span_maxminAddUpdateHike).offset().top}, 600);
+}
+
+function deleteHike(){
+	cancelHike();
+	var td = document.getElementsByClassName('viewing')[0];
+	$.post('includes/ajax_deleteHike.php'
+		,{
+			userid: document.getElementById('hikerId').value
+			,hikeid: getHikeInfo(td).ADK_HIKE_ID
+		}
+		,function(ret){
+            document.getElementById('div_table_hikes').innerHTML = ret;
+            document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
+            var a_maxmin_hike_data = document.getElementById('a_maxmin_hike_data');
+            if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1)
+                a_maxmin_hike_data.click();
+		}
+	);
 }
 
 function cancelHike(){

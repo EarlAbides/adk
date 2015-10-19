@@ -121,6 +121,20 @@
 		return true;
 	}
 	
+	function deleteHike($con, $ADK_HIKE_ID){
+		deleteHikeFileJcts($con, $ADK_HIKE_ID);
+		deleteHikePeakJcts($con, $ADK_HIKE_ID);
+		$sql_query = sql_deleteHike($con, $ADK_HIKE_ID);
+		if($sql_query->execute()){}
+		else die('There was an error running the query ['.$con->error.']');
+	}
+
+	function deleteHikePeakJcts($con, $ADK_HIKE_ID){
+		$sql_query = sql_deleteHikePeakJcts($con, $ADK_HIKE_ID);
+		if($sql_query->execute()){}
+		else die('There was an error running the query ['.$con->error.']');
+	}
+
 	function deleteHikeFileJcts($con, $ADK_HIKE_ID){
 		$sql_query = sql_deleteHikeFileJcts($con, $ADK_HIKE_ID);
 		if($sql_query->execute()){}
@@ -157,9 +171,7 @@
 		$ADK_HIKE = makeHikesPeaksArray($ADK_HIKE);
 		
 		//Delete existing junctions
-		$sql_query = sql_deleteHikesPeaks($con, $ADK_HIKE['ADK_HIKE_ID']);
-		if($sql_query->execute()){}
-		else die('There was an error running the query ['.$con->error.']');
+		deleteHikePeakJcts($con, $ADK_HIKE['ADK_HIKE_ID']);
 		
 		return addHikesPeaks($con, $ADK_HIKE);
 	}
