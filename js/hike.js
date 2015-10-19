@@ -220,6 +220,8 @@ function viewHike(td){
 
 	tooltip();
     $('.selecttable').trigger('update');
+
+	$('html, body').animate({scrollTop: $("#div_hike_data").offset().top}, 600);
 }
 
 function getPeakIds(){
