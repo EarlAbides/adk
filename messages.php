@@ -149,7 +149,7 @@
 						</div>
 						
 						<div class="col-xs-12">
-							<div class="form-group">
+							<div class="jqdl-attachments form-group">
 								<div class="col-xs-12">
 									<label class="control-label control-label-sm">Attachments</label>
 									<div class="scroll scroll100">

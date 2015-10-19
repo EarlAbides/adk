@@ -1,6 +1,7 @@
 ﻿//Modifications:
 //EDIT-1 - $.get -> $.post, added option to add id below
 //Edit-2 - For my own error message selection
+//Edit-3 - Hack bs for jqdl errors in clearErrors func
 
 /* ========================================================================
  * Bootstrap (plugin): validator.js v0.8.1
@@ -208,17 +209,46 @@
   }
 
   Validator.prototype.clearErrors = function ($el) {
-    var $group = $el.closest('.form-group')
-    var $block = $group.find('.help-block.with-errors')
-    var $feedback = $group.find('.form-control-feedback')
+	//var $group = $el.closest('.form-group')
+	//var $block = $group.find('.help-block.with-errors')
+	//var $feedback = $group.find('.form-control-feedback')
 
-    $block.html($block.data('bs.validator.originalContent'))
-    $group.removeClass('has-error')
+	//$block.html($block.data('bs.validator.originalContent'))
+	//$group.removeClass('has-error')
 
-    $feedback.length
-      && $feedback.removeClass(this.options.feedback.error)
-      && $feedback.addClass(this.options.feedback.success)
-      && $group.addClass('has-success')
+	//$feedback.length
+	//	&& $feedback.removeClass(this.options.feedback.error)
+	//	&& $feedback.addClass(this.options.feedback.success)
+	//	&& $group.addClass('has-success')
+
+	if(!document.getElementsByClassName('jqdl-attachments').length){
+		var $group = $el.closest('.form-group')
+		var $block = $group.find('.help-block.with-errors')
+		var $feedback = $group.find('.form-control-feedback')
+
+		$block.html($block.data('bs.validator.originalContent'))
+		$group.removeClass('has-error')
+
+		$feedback.length
+			&& $feedback.removeClass(this.options.feedback.error)
+			&& $feedback.addClass(this.options.feedback.success)
+			&& $group.addClass('has-success')
+	}
+	else{
+		if($el[0].parentNode.parentNode.id = 'downloader'){
+			var $group = $el.closest('.form-group')
+			var $block = $group.find('.help-block.with-errors')
+			var $feedback = $group.find('.form-control-feedback')
+
+			$block.html($block.data('bs.validator.originalContent'))
+			$group.removeClass('has-error')
+
+			$feedback.length
+				&& $feedback.removeClass(this.options.feedback.error)
+				&& $feedback.addClass(this.options.feedback.success)
+				&& $group.addClass('has-success')
+		}
+	}
   }
 
   Validator.prototype.hasErrors = function () {

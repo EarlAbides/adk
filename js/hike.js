@@ -22,6 +22,9 @@
         //Scroll
         $('html, body').animate({scrollTop: $(span_maxminAddUpdateHike).offset().top}, 600);
     }
+
+	$('')
+	button_addUpdateHike
 });
 
 //Hike

@@ -92,13 +92,12 @@
 			}
 			
             var fileInputId = $(span).data('inputid');
-			//if(button.dataset) var fileInputId = button.dataset.inputid;
-			//else var fileInputId = button.getAttribute('data-inputid'); //IE10
 			$('#' + fileInputId).remove();
 			renameFileInputs();
 			var hidden_fileIndex = document.getElementById('hidden_fileIndex');
 			$.fn.downloader.updateFileList();
 			$.fn.downloader.rebind();
+			tooltip();
 		};
 		$.fn.downloader.removeAll = function(){
 			$('input[id^="file"]').remove();
@@ -106,6 +105,7 @@
 			document.getElementById('div_inputFileWrapper').appendChild($.fn.downloader.makeFileInput());
 			$.fn.downloader.updateFileList();
 			$.fn.downloader.rebind();
+			tooltip();
 		};
 		$.fn.downloader.filesAdded = function(){
 			if($.fn.downloader.preExists()){
@@ -117,6 +117,8 @@
 				$.fn.downloader.updateFileList();
 				$.fn.downloader.rebind();
 			}
+			$.fn.downloader.validateTotalFileSize();
+			$.fn.downloader.validateTotalFileLimit();
 		};
 		$.fn.downloader.preExists = function(){
 			function getNewFileNames(){
@@ -138,6 +140,59 @@
 			}
 			
 			return false;
+		};
+		$.fn.downloader.validateTotalFileSize = function(){
+			var total = 0;
+			$('.fileInput').each(function(){
+				for(var i = 0; i < this.files.length; i++) total += this.files[i].size;
+			});
+
+			if(total >= 104856500){
+				$('.jqdl-attachments').each(function(){
+					this.classList.add('has-error');
+					this.classList.add('has_error');
+
+					var a = document.createElement('a');
+					a.innerHTML = '&#8226;';
+					var bullet = a.innerHTML;
+
+					var span_fileerror = document.getElementById('span_fileerror');
+					if(span_fileerror.innerHTML == '') span_fileerror.innerHTML = '<ul class=\"list-unstyled\"><li>' + bullet + 'Max file size exceeded</li></ul>';
+					else span_fileerror.children[0].innerHTML += '<li>' + bullet + 'Max file size exceeded</li>';
+					
+					$('#downloader button, #downloader .redhover').one('click', function(){
+						span_fileerror.innerHTML = '';
+						$('.jqdl-attachments').each(function(){this.classList.remove('has-error');});
+					});
+
+					$('form, .fileInput').off('change');
+				});
+			}
+		};
+		$.fn.downloader.validateTotalFileLimit = function(){
+			var total = 0;
+			$('.fileInput').each(function(){total += this.files.length;});
+			if(total > 10){
+				$('.jqdl-attachments').each(function(){
+					this.classList.add('has-error');
+					this.classList.add('has_error');
+
+					var a = document.createElement('a');
+					a.innerHTML = '&#8226;';
+					var bullet = a.innerHTML;
+
+					var span_fileerror = document.getElementById('span_fileerror');
+					if(span_fileerror.innerHTML == '') span_fileerror.innerHTML = '<ul class=\"list-unstyled\"><li>' + bullet + 'Max file limit exceeded</li></ul>';
+					else span_fileerror.children[0].innerHTML += '<li>' + bullet + 'Max file limit exceeded</li>';
+					
+					$('#downloader button, #downloader .redhover').one('click', function(){
+						span_fileerror.innerHTML = '';
+						$('.jqdl-attachments').each(function(){this.classList.remove('has-error');});
+					});
+
+					$('form, .fileInput').off('change');
+				});
+			}
 		};
 		$.fn.downloader.removeLastAdd = function(){
 			var fileInputs = document.getElementsByClassName('fileInput');
@@ -170,7 +225,7 @@
 		div_btnGroup.style.width = '100%';
 		
 		var div_listWrapper = document.createElement('div');
-		div_listWrapper.className = 'scroll300';
+		div_listWrapper.className = 'scroll scroll300';
         div_listWrapper.style['margin-top'] = '4px';
 		
 		var div_inputFileWrapper = document.createElement('div');
@@ -200,11 +255,16 @@
 		button_removeAll.innerHTML = options.clearText;
 		button_removeAll.className = options.classes.button;
 		$(button_removeAll).on('click', function(){$.fn.downloader.removeAll();});
+
+		var span_fileerror = document.createElement ('span');
+		span_fileerror.setAttribute('id', 'span_fileerror');
+		span_fileerror.className = 'help-block with-errors';
 		
 		//Dom changes
         _container.appendChild(hidden_fileIndex);
         _container.appendChild(div_btnGroup);
 		_container.appendChild(div_listWrapper);
+		_container.appendChild(span_fileerror);
 		_container.appendChild(div_inputFileWrapper);
 		div_btnGroup.appendChild(button_addFile);
 		div_btnGroup.appendChild(button_removeAll);
