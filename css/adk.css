@@ -43,7 +43,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endC
 }
 div.tooltip{white-space:pre;}
 .tooltip-inner{max-width:100%;}
-.disabled{cursor:default;}
+.disabled{cursor:default !important;}
 
 /*Site*/
 #home_intro, #home_about{overflow:hidden;}

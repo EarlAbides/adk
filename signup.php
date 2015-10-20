@@ -200,11 +200,26 @@
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
+
+							<div class="col-xs-12">
+								<div class="hr hr75"></div>
+							</div>
+
+							<div class="col-xs-12 text-center" style="margin-top:45px;">
+								<p class="font-italic">
+									The ADK 46ers organization and the administrators of this web site can not tender trail advice.
+									All correspondents are knowledgeable of the liabilities associated with erroneous or false advice
+									that may cause injury or death. Acknowledgement and understanding of this statement by the applicant
+									is&nbsp;mandatory.
+								</p>
+								<label class="pull-right" style="margin-right:5%;">Click here to agree&nbsp;<input type="checkbox" required></input>
+							</div>
+
 							<div class="form-group">
 								<div class="col-xs-12">
 									<br />
 									<span class="reqNote pull-left">* required</span>
-									<button type="submit" class="btn btn-sm btn-default pull-right">Sign Up</button>
+									<button type="submit" class="btn btn-default pull-right" style="margin-right:5%;">Sign Up</button>
 									<br /><br />
 								</div>
 							</div>
