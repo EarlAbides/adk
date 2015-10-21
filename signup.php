@@ -205,12 +205,12 @@
 								<div class="hr hr75"></div>
 							</div>
 
-							<div class="col-xs-12 text-center" style="margin-top:45px;">
+							<div class="col-xs-12" style="margin-top:45px;">
 								<p class="font-italic">
-									The ADK 46ers organization and the administrators of this web site can not tender trail advice.
-									All correspondents are knowledgeable of the liabilities associated with erroneous or false advice
-									that may cause injury or death. Acknowledgement and understanding of this statement by the applicant
-									is&nbsp;mandatory.
+									I acknowledge that my Adirondack 46er Correspondent does not speak for the Adirondack 46ers Club and
+									that the club is not responsible accuracy, content, completeness, legality, or reliability of the
+									information contained or relayed on this website.  Further the club is not responsible for any injury
+									relating to information received and acted upon within the correspondent process.
 								</p>
 								<label class="pull-right" style="margin-right:5%;">Click here to agree&nbsp;<input type="checkbox" required></input>
 							</div>
