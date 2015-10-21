@@ -13,7 +13,7 @@
 			$con = connect_db();
 			
 			$last8hash = substr($_GET['__'], 0, 8);
-			$ADK_USER_ID = intval(substr($_GET['__'], 8, count($_GET['__']) + 1));
+			$ADK_USER_ID = intval(substr($_GET['__'], 8));
             $validHash = checkValidHash($con, $ADK_USER_ID, $last8hash);
 			if($validHash) $ADK_USER = getUser($con, $ADK_USER_ID);
 			
