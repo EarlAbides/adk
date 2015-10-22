@@ -14,7 +14,13 @@
 	else{http_response_code(404);exit;}
 	
 	$con = connect_db();
-	
+
+	if(hasClimbed($con, intval($_POST['id']), explode(',', $_POST['peakids']), $_POST['hikeid'])){
+		$con->close();
+		http_response_code(412);
+		exit;
+	}
+
 	$ADK_HIKE = updateHike($con);
 	updateHikesPeaks($con, $ADK_HIKE);
 	
@@ -28,13 +34,13 @@
 		addHikeFileJcts($con, $ADK_HIKE['ADK_HIKE_ID'], $fileIDs);
 	}
 	
-	$ADK_HIKES = getHikes($con, $ADK_HIKE['ADK_USER_ID']);
+	$ADK_HIKES = getHikes($con, intval($_POST['id']));
 	$ADK_HIKES = getHikesPeaks($con, $ADK_HIKES);
 	_46erCompletionEmail($con, $_POST['id'], $ADK_HIKES);
 	
 	$con->close();
 	
-	echo getTableHikes($ADK_HIKES);
 	http_response_code(200);
-	
+	echo getTableHikes($ADK_HIKES);
+
 ?>

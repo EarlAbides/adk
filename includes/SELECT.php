@@ -168,6 +168,23 @@
 
         return $sql_query;
 	}
+
+	function sql_checkHasClimbed($con, $ADK_USER_ID, $ADK_PEAK_IDS, $ADK_HIKE_ID){
+		$sql_query = $con->prepare(
+			"SELECT COUNT(*) FROM ADK_HIKE_PEAK_JCT
+			WHERE ADK_PEAK_ID IN(?)
+				AND ADK_HIKE_ID IN(SELECT ADK_HIKE_ID FROM ADK_HIKE WHERE ADK_USER_ID = ?)
+				AND ADK_HIKE_ID NOT IN(?);"
+        );
+		
+		for($i = 0; $i < count($ADK_PEAK_IDS); $i++) $ADK_PEAK_IDS[$i] = "'".$ADK_PEAK_IDS[$i]."'";
+		$ADK_PEAK_IDS = implode(',', $ADK_PEAK_IDS);
+		$ADK_HIKE_ID = isset($ADK_HIKE_ID)? $ADK_HIKE_ID: '';
+
+        $sql_query->bind_param('sis', $ADK_PEAK_IDS, $ADK_USER_ID, $ADK_HIKE_ID);
+		
+        return $sql_query;
+	}
 	
 	//Hiker
 	function sql_getHikers($con, $ADK_HIKER_CORR_ID){

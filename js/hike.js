@@ -34,26 +34,26 @@ function addUpdateHike(form){
     if(ADK_PEAK_IDS.length == 0) return false;
     document.getElementById('hidden_peakids').value = ADK_PEAK_IDS.join(',');
 
-    var xhr = getXhr();
-    var formData = new FormData(form);
-    if(document.getElementById('h4span_addUpdateHike').innerHTML == 'Add Hike') xhr.open("POST", "includes/ajax_addHike.php", true);
-    else xhr.open("POST", "includes/ajax_updateHike.php", true);
-
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4 && xhr.status == 200){
-            var html = xhr.responseText;
+    var url = document.getElementById('h4span_addUpdateHike').innerHTML === 'Add Hike'? 'includes/ajax_addHike.php': 'includes/ajax_updateHike.php';
+	$.ajax({
+		url: url
+		,data: new FormData(form)
+		,processData: false
+		,contentType: false
+		,enctype: 'multipart/form-data'
+		,type: 'POST'
+		,success: function(ret){
 			$('#div_modal_loading').modal('hide');
-            document.getElementById('div_table_hikes').innerHTML = html;
-            document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
-            cancelHike();
-            var a_maxmin_hike_data = document.getElementById('a_maxmin_hike_data');
-            if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1)
-                a_maxmin_hike_data.click();
-        }
-    }
-    
-	$('#div_modal_loading').modal('show');
-    xhr.send(formData);
+			document.getElementById('div_table_hikes').innerHTML = ret;
+			document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
+			cancelHike();
+			var a_maxmin_hike_data = document.getElementById('a_maxmin_hike_data');
+			if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1) a_maxmin_hike_data.click();
+		}
+		,fail: function(ret){
+			console.log(ret);
+		}
+	});
 }
 
 function editHike(){

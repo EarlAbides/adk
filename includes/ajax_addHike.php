@@ -12,6 +12,12 @@
     else{http_response_code(404);exit;}
 	
     $con = connect_db();
+
+	if(hasClimbed($con, intval($_POST['id']), explode(',', $_POST['peakids']), null)){
+		$con->close();
+		http_response_code(412);
+		exit;
+	}
 	
     $ADK_HIKE = addHike($con);
     addHikesPeaks($con, $ADK_HIKE);

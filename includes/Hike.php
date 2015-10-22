@@ -239,4 +239,18 @@
 		}
 	}
 
+	function hasClimbed($con, $ADK_USER_ID, $ADK_PEAK_IDS, $ADK_HIKE_ID){
+		$COUNT = 0;
+		$ADK_PEAK_IDS[0] = '2';
+		$sql_query = sql_checkHasClimbed($con, $ADK_USER_ID, $ADK_PEAK_IDS, $ADK_HIKE_ID);
+		if($sql_query->execute()){
+            $sql_query->store_result();
+            $sql_query->bind_result($result);
+            $sql_query->fetch();
+            $COUNT = $result;
+		}
+		else die('There was an error running the query ['.$con->error.']');
+		
+		return $COUNT > 0;
+	}
 ?>
