@@ -32,7 +32,9 @@
     }
 
 	function getTitle($photo){
-		$title = $photo->name."\n".$photo->peaks."\n".$photo->username;
+		$title = $photo->name;
+		if($photo->peaks != '') $title .= "\n".$photo->peaks;
+		if($photo->username != '') $title .= "\n".$photo->username;
 		$title = str_replace(',', ', ', $title);
 
 		return $title;
