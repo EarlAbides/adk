@@ -80,12 +80,12 @@
                     <?php if(!isset($photos) || count($photos) === 0){ ?>
                         <div class="col-xs-12 text-center font-italic">No photos</div>
                     <?php }else{ ?><ul class="row gallery-photo"><?php for($i = 0; $i < count($photos); $i++){?>
-                        <li class="gallery col-xs-6 col-sm-4 col-md-3 col-lg-2" data-peaks="<?php echo $photos[$i]->peaks;?>">
-                            <a href="#" class="photo" data-toggle="modal" data-target="#modal_gallery" data-id="<?php echo $photos[$i]->id;?>" data-desc="<?php echo $photos[$i]->desc;?>">
-                                <img src="includes/getImage.php?_=<?php echo $photos[$i]->id;?>" class="img-responsive imghover" alt="<?php echo $photos[$i]->name;?>" title="<?php echo $photos[$i]->name;?>" data-toggle="tooltip" data-container="body" data-placement="bottom" />
-                            </a>
-                        </li>
-                    <?php }?></ul><?php }?>
+					<li class="gallery col-xs-6 col-sm-4 col-md-3 col-lg-2" data-peaks="<?php echo $photos[$i]->peaks;?>">
+						<a href="#" class="photo" data-toggle="modal" data-target="#modal_gallery" data-id="<?php echo $photos[$i]->id;?>" data-desc="<?php echo $photos[$i]->desc;?>" data-un="<?php echo $photos[$i]->username;?>" data-peaks="<?php echo str_replace(',', ', ', $photos[$i]->peaks);?>">
+							<img src="includes/getImage.php?_=<?php echo $photos[$i]->id;?>" class="img-responsive imghover" alt="<?php echo $photos[$i]->name;?>" title="<?php echo getTitle($photos[$i]);?>" data-toggle="tooltip" data-container="body" data-placement="bottom" />
+						</a>
+					</li>
+					<?php }?></ul><?php }?>
 
                 </div>
 
@@ -106,12 +106,12 @@
                     <?php if(!isset($videos) || count($videos) === 0){ ?>
                         <div class="col-xs-12 text-center font-italic">No videos</div>
                     <?php }else{?><ul class="row gallery-video"><?php for($i = 0; $i < count($videos); $i++){?>
-                        <li class="gallery" data-peaks="<?php echo $videos[$i]->peaks;?>">
-                            <a href="#" class="video" data-toggle="modal" data-target="#modal_gallery" data-id="<?php echo $videos[$i]->id;?>" data-desc="<?php echo $videos[$i]->desc;?>">
-                                <span title="<?php echo $videos[$i]->desc;?>" data-toggle="tooltip" data-container="body" data-placement="right"><?php echo $videos[$i]->name;?></span>
-                            </a>
-                        </li>
-                    <?php }?></ul><?php }?>
+					<li class="gallery" data-peaks="<?php echo $videos[$i]->peaks;?>">
+						<a href="#" class="video" data-toggle="modal" data-target="#modal_gallery" data-id="<?php echo $videos[$i]->id;?>" data-desc="<?php echo $videos[$i]->desc;?>" data-un="<?php echo $videos[$i]->username;?>" data-peaks="<?php echo str_replace(',', ', ', $videos[$i]->peaks);?>">
+							<span title="<?php echo getTitle($videos[$i]);?>" data-toggle="tooltip" data-container="body" data-placement="right"><?php echo $videos[$i]->name;?></span>
+						</a>
+					</li>
+					<?php }?></ul><?php }?>
                     
                 </div>
 
@@ -134,7 +134,7 @@
                     <?php }else{?><ul class="row gallery-files"><?php for($i = 0; $i < count($docsFiles); $i++){?>
                         <li class="gallery" data-peaks="<?php echo $docsFiles[$i]->peaks;?>">
                             <a href="#" onclick="getFile(<?php echo $docsFiles[$i]->id;?>);">
-                                <span title="<?php echo $docsFiles[$i]->desc;?>" data-toggle="tooltip" data-container="body" data-placement="right"><?php echo $docsFiles[$i]->name;?></span>
+                                <span title="<?php echo getTitle($docsFiles[$i]);?>" data-toggle="tooltip" data-container="body" data-placement="right"><?php echo $docsFiles[$i]->name;?></span>
                             </a>
                         </li>
                     <?php }?></ul><?php }?>

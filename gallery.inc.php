@@ -31,6 +31,10 @@
         $docsFiles = $ADK_FILE_GALLERY->getDocsAndFiles();
     }
 
-	
-	
+	function getTitle($photo){
+		$title = $photo->name."\n".$photo->peaks."\n".$photo->username;
+		$title = str_replace(',', ', ', $title);
+
+		return $title;
+	}
 ?>

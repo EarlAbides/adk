@@ -24,16 +24,24 @@
 	});
 
     $('.photo').click(function(){
+		var desc = getDownloadLink(this.getAttribute('data-id')) +
+			'<strong>' + this.getAttribute('data-un') + '</strong><br />' + this.getAttribute('data-peaks') +
+			'<div class="hr"></div>' + this.getAttribute('data-desc');
 		document.getElementById('modal_gallery_label').innerHTML = this.children[0].getAttribute('alt');
-		document.getElementById('modal_gallery_desc').innerHTML = getDownloadLink(this.getAttribute('data-id')) + this.getAttribute('data-desc');
+		document.getElementById('modal_gallery_desc').innerHTML = desc;
 		document.getElementById('modal_gallery_container').innerHTML = this.innerHTML.replace('imghover', '');
+
 		return true;
 	});
 
 	$('.video').click(function(){
-		var id = this.getAttribute('data-id'), name = this.children[0].innerHTML;
+		var id = this.getAttribute('data-id'), name = this.children[0].innerHTML
+			,desc = getDownloadLink(this.getAttribute('data-id')) +
+				'<strong>' + this.getAttribute('data-un') + '</strong><br />' + this.getAttribute('data-peaks') +
+				'<div class="hr"></div>' + this.getAttribute('data-desc');
+
 		document.getElementById('modal_gallery_label').innerHTML = name;
-		document.getElementById('modal_gallery_desc').innerHTML = getDownloadLink(id) + this.getAttribute('data-desc');
+		document.getElementById('modal_gallery_desc').innerHTML = desc;
 		
 		var video = document.createElement('video');
 		video.setAttribute('id', 'video');

@@ -15,7 +15,7 @@
 
 	if(hasClimbed($con, intval($_POST['id']), explode(',', $_POST['peakids']), null)){
 		$con->close();
-		http_response_code(412);
+		http_response_code(210);
 		exit;
 	}
 	

@@ -16,6 +16,7 @@
 				$ADK_FILES[$i]['ADK_FILE_SIZE'] = $row['ADK_FILE_SIZE'];
 				$ADK_FILES[$i]['ADK_FILE_TYPE'] = $row['ADK_FILE_TYPE'];
                 $ADK_FILES[$i]['ADK_FILE_PEAKS'] = $row['ADK_FILE_PEAKS'];
+				$ADK_FILES[$i]['ADK_USER_USERNAME'] = $row['ADK_USER_USERNAME'];
 				$i++;
 			}
 		}
@@ -70,6 +71,7 @@
             $this->size = $ADK_FILE['ADK_FILE_SIZE'];
             $this->type = $ADK_FILE['ADK_FILE_TYPE'];
             $this->peaks = $ADK_FILE['ADK_FILE_PEAKS'];
+			$this->username = $ADK_FILE['ADK_USER_USERNAME'];
         }
 
         public $id;
@@ -79,6 +81,7 @@
         public $size;
         public $type;
         public $peaks;
+        public $username;
     }
 
 ?>
