@@ -61,7 +61,7 @@
 						
 						<div class="pull-right" style="margin-right:3%;">
 							<a href="#" onclick="alert('Do we want this feature, and if so, do we want only admins to have it, or correspondents as well?');">Delete</a>
-							<!-- <a href="#" onclick="if(confirm('Are you sure you want to delete this hiker?')) document.getElementById('button_submit_delete').click();">Delete</a> -->
+							<!-- <a href="#" onclick="if(confirm('Are you sure you want to delete this hiker?')) $('#button_submit_delete').click();">Delete</a> -->
 						</div>
 						
 						<div class="col-xs-12">

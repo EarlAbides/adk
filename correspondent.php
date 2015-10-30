@@ -34,7 +34,7 @@
 				
 					<div class="pull-right" style="margin-right:3%;">
 						<a href="editCorrespondent.php?_=<?php echo $ADK_CORRESPONDENT['ADK_USER_ID'];?>">Edit</a> <b>|</b> 
-						<a href="#" onclick="alert('Do you want this feature?');//if(confirm('Are you sure you want to delete this correspondent?')) document.getElementById('button_submit_delete').click();">Delete</a>
+						<a href="#" onclick="alert('Do you want this feature?');//if(confirm('Are you sure you want to delete this correspondent?')) $('#button_submit_delete').click();">Delete</a>
 					</div>
 					
 					<div class="col-xs-12 col-sm-6">
