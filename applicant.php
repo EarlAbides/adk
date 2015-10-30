@@ -26,7 +26,7 @@
 					
 					<div class="pull-right" style="margin-right:3%;">
 						<a href="editApplicant.php?_=<?php echo $ADK_APPLICANT['ADK_APPLICANT_ID'];?>">Edit</a> <b>|</b> 
-						<a href="#" onclick="if(confirm('Are you sure you want to delete this applicant?')) document.getElementById('button_submit_delete').click();">Delete</a>
+						<a href="#" onclick="if(confirm('Are you sure you want to delete this applicant?')) $('#button_submit_delete').click();">Delete</a>
 					</div>
 					
 					<div class="col-xs-12">

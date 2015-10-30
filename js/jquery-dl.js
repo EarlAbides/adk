@@ -80,7 +80,7 @@
 			hidden_fileIndex.value = parseInt(hidden_fileIndex.value) + 1;
 		};
 		$.fn.downloader.rebind = function(){$('.fileInput').unbind().on('change', function(){$.fn.downloader.filesAdded();});};
-		$.fn.downloader.addFile = function(){$.fn.downloader.getNewFileInput().click();};
+		$.fn.downloader.addFile = function(){$($.fn.downloader.getNewFileInput()).click();};
 		$.fn.downloader.removeFile = function(span){
 			function renameFileInputs(){
 				var fileInputs = document.getElementsByClassName('fileInput');

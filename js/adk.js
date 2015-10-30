@@ -54,7 +54,7 @@ function getXhr(){
 
 function getFile(id){
     document.getElementById('hidden_fileid').value = id;
-    document.getElementById('button_download').click();
+    $('#button_download').click();
 }
 
 function $_GET(name) {
