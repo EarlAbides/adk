@@ -1,6 +1,6 @@
 <?php
 	
-	function addFiles($con, $files){
+	function addFiles($con, $files){		
 		$null = null;
 		$fileIDs = array();
 		$fileIndex = 0;
@@ -26,7 +26,7 @@
             $sql_query->bind_param('sssis', $ADK_FILE['ADK_FILE_NAME'], $ADK_FILE['ADK_FILE_SAVENAME'], $ADK_FILE['ADK_FILE_DESC'], 
                         $ADK_FILE['ADK_FILE_SIZE'], $ADK_FILE['ADK_FILE_TYPE']);
             fclose($fp);
-			$sql_query->execute(); $qwq = $sql_query->insert_id;
+			$sql_query->execute();
 			$fileIDs[$fileIndex] = $sql_query->insert_id;
             
             //Move to /uploads/... and rename
@@ -47,7 +47,7 @@
         rename($file, $path.'/'.$ADK_FILE_SAVENAME);
     }
 	
-	function validateFiles(&$errMess){
+	function validateFiles(&$errMess){		
 		$valid = true;
 		$totalFileSize = 0;
 		for($i = 0; $i < count($_FILES); $i++){

@@ -34,6 +34,7 @@ function addUpdateHike(form){
     if(ADK_PEAK_IDS.length == 0) return false;
     document.getElementById('hidden_peakids').value = ADK_PEAK_IDS.join(',');
 
+	
     var url = document.getElementById('h4span_addUpdateHike').innerHTML === 'Add Hike'? 'includes/ajax_addHike.php': 'includes/ajax_updateHike.php';
 	$.ajax({
 		url: url
@@ -42,6 +43,7 @@ function addUpdateHike(form){
 		,contentType: false
 		,enctype: 'multipart/form-data'
 		,type: 'POST'
+		,beforeSend: function(){$('#div_modal_loading').modal('show');}
 		,success: function(ret){
 			$('#div_modal_loading').modal('hide');
 			document.getElementById('div_table_hikes').innerHTML = ret;
@@ -51,6 +53,7 @@ function addUpdateHike(form){
 			if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1) a_maxmin_hike_data.click();
 		}
 		,fail: function(ret){
+			$('#div_modal_loading').modal('hide');
 			console.log(ret);
 		}
 	});
