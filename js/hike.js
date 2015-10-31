@@ -1,6 +1,6 @@
 ﻿$(document).ready(function(){
     $('#span_addPeak').click(function(){enable_disable_addPeak()});
-    $('#textbox_hikedate, #select_remainingpeaks').change(function(){enable_disable_addPeak()});
+    $('#textbox_hikedate, #select_remainingpeaks').keyup(function(){enable_disable_addPeak()});
 
     var hidden_ADK_MESSAGE_JSON = document.getElementById('hidden_ADK_MESSAGE_JSON');
     if(hidden_ADK_MESSAGE_JSON){
@@ -43,7 +43,7 @@ function addUpdateHike(form){
 		,contentType: false
 		,enctype: 'multipart/form-data'
 		,type: 'POST'
-		,beforeSend: function(){$('#div_modal_loading').modal('show');}
+		//,beforeSend: function(){$('#div_modal_loading').modal('show');}
 		,success: function(ret){
 			$('#div_modal_loading').modal('hide');
 			document.getElementById('div_table_hikes').innerHTML = ret;
@@ -57,6 +57,8 @@ function addUpdateHike(form){
 			console.log(ret);
 		}
 	});
+
+	$('#div_modal_loading').modal('show');
 }
 
 function editHike(){
