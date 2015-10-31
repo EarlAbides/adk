@@ -1,6 +1,6 @@
 <?php
 	
-	function addFiles($con, $files){		
+	function addFiles($con, $files){
 		$null = null;
 		$fileIDs = array();
 		$fileIndex = 0;
@@ -30,21 +30,55 @@
 			$fileIDs[$fileIndex] = $sql_query->insert_id;
             
             //Move to /uploads/... and rename
-            moveFileToProtected($file, $ADK_FILE_SAVENAME);
+            $src = moveFileToProtected($file, $ADK_FILE_SAVENAME);
+
+			//Make thumbnail
+			$formatOk = $ADK_FILE['ADK_FILE_TYPE'] === 'jpg' || $ADK_FILE['ADK_FILE_TYPE'] === 'jpeg' ||
+						$ADK_FILE['ADK_FILE_TYPE'] === 'png' || $ADK_FILE['ADK_FILE_TYPE'] === 'gif';
+			if($formatOk){
+				$path = '../uploads/thumb/'.$ADK_FILE_SAVENAME[0].'/'.$ADK_FILE_SAVENAME[1];
+				if(!is_dir($path)) mkdir($path, 0777, true);
+				
+				makeThumbnail($src, $path.'/'.$ADK_FILE_SAVENAME, 160);
+			}
 			
 			$fileIndex++;
 		}
 		
 		$con->commit();
         $con->autocommit(true);
-		
+
 		return $fileIDs;
+	}
+
+	function makeThumbnail($src, $dest, $desired_width){
+		ini_set('memory_limit', '128M');
+		
+		/* read the source image */
+		$source_image = imagecreatefromjpeg($src);
+		$width = imagesx($source_image);
+		$height = imagesy($source_image);
+		
+		/* find the "desired height" of this thumbnail, relative to the desired width  */
+		$desired_height = floor($height * ($desired_width / $width));
+		
+		/* create a new, "virtual" image */
+		$virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+		
+		/* copy source image at a resized size */
+		imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
+		
+		/* create the physical thumbnail image to its destination */
+		imagejpeg($virtual_image, $dest);
 	}
 
     function moveFileToProtected($file, $ADK_FILE_SAVENAME){
         $path = '../uploads/'.$ADK_FILE_SAVENAME[0].'/'.$ADK_FILE_SAVENAME[1];
         if(!is_dir($path)) mkdir($path, 0777, true);
-        rename($file, $path.'/'.$ADK_FILE_SAVENAME);
+		$path = $path.'/'.$ADK_FILE_SAVENAME;
+        rename($file, $path);
+
+		return $path;
     }
 	
 	function validateFiles(&$errMess){		
@@ -117,7 +151,7 @@
 						$files[$numFiles] = $target;
 						$numFiles++;
 					}
-					else{}//Error
+					else{echo 'Error getting files';}//Error
 				}
 				
 			}
@@ -130,12 +164,12 @@
 		$file = '';
 		$target = '../uploads/'.basename($_FILES[$name]['name']);
 		if(move_uploaded_file($_FILES[$name]['tmp_name'], $target)) $file = $target;
-		else{}//Error
+		else{echo 'Error getting file';}//Error
 		
 		return $file;
 	}
 	
-	function getFile($con, $ADK_FILE_ID, $returnContent){
+	function getFile($con, $ADK_FILE_ID, $returnContent, $getThumb){
         $ADK_FILE = '';
 		$sql_query = sql_getFile($con, $ADK_FILE_ID);
 		if($sql_query->execute()){
@@ -152,13 +186,15 @@
 		}
 		else die('There was an error running the query ['.$con->error.']');
 
-        if($returnContent && $ADK_FILE != ''){
-            $file = '../uploads/'.$ADK_FILE['ADK_FILE_SAVENAME'][0].'/'.$ADK_FILE['ADK_FILE_SAVENAME'][1].'/'.$ADK_FILE['ADK_FILE_SAVENAME'];
-            $fp = fopen($file, 'r');
-            $ADK_FILE['ADK_FILE_CONTENT'] = fread($fp, $ADK_FILE['ADK_FILE_SIZE']);
-            fclose($fp);
-        }
-		
+		if($returnContent && $ADK_FILE != ''){
+			if($getThumb) $file = '../uploads/thumb/'.$ADK_FILE['ADK_FILE_SAVENAME'][0].'/'.$ADK_FILE['ADK_FILE_SAVENAME'][1].'/'.$ADK_FILE['ADK_FILE_SAVENAME'];
+			else $file = '../uploads/'.$ADK_FILE['ADK_FILE_SAVENAME'][0].'/'.$ADK_FILE['ADK_FILE_SAVENAME'][1].'/'.$ADK_FILE['ADK_FILE_SAVENAME'];
+			$fp = fopen($file, 'r');
+			if($getThumb) $ADK_FILE['ADK_FILE_SIZE'] = filesize($file);
+			$ADK_FILE['ADK_FILE_CONTENT'] = fread($fp, $ADK_FILE['ADK_FILE_SIZE']);
+			fclose($fp);
+		}
+
 		return $ADK_FILE;
 	}
 	

@@ -112,7 +112,7 @@
 				LEFT JOIN ADK_USER U ON H.ADK_USER_ID = U.ADK_USER_ID
             WHERE H.ADK_USER_ID LIKE ?
                 OR M.ADK_MESSAGE_FROM_USER_ID LIKE ?
-            ORDER BY ADK_FILE_ID;"
+            ORDER BY ADK_FILE_ID DESC;"
         );
 
         $sql_query->bind_param('ss', $ADK_USER_ID, $ADK_USER_ID);

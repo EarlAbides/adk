@@ -8,7 +8,16 @@
     <script src="js/jquery.lazyload.min.js"></script>
     <script src="js/gallery.min.js"></script>
 	<script>
-		$('img.imghover').lazyload({effect: 'fadeIn'});
+		$(function(){
+		    $('img.lazy').show().lazyload({
+				container: $('#div_photos')
+				,effect: 'fadeIn'
+				,threshold: 10
+			});
+		});
+		$(window).load(function(){
+			$('html,body').trigger('scroll');
+		});
 	</script>
 </head>
 
@@ -77,15 +86,17 @@
 
                     <br />
 
-                    <?php if(!isset($photos) || count($photos) === 0){ ?>
-                        <div class="col-xs-12 text-center font-italic">No photos</div>
-                    <?php }else{ ?><ul class="row gallery-photo"><?php for($i = 0; $i < count($photos); $i++){?>
-					<li class="gallery col-xs-6 col-sm-4 col-md-3 col-lg-2" data-peaks="<?php echo $photos[$i]->peaks;?>">
-						<a href="#" class="photo" data-toggle="modal" data-target="#modal_gallery" data-id="<?php echo $photos[$i]->id;?>" data-desc="<?php echo $photos[$i]->desc;?>" data-un="<?php echo $photos[$i]->username;?>" data-peaks="<?php echo str_replace(',', ', ', $photos[$i]->peaks);?>">
-							<img src="includes/getImage.php?_=<?php echo $photos[$i]->id;?>" class="img-responsive imghover" alt="<?php echo $photos[$i]->name;?>" title="<?php echo getTitle($photos[$i]);?>" data-toggle="tooltip" data-container="body" data-placement="bottom" />
-						</a>
-					</li>
-					<?php }?></ul><?php }?>
+					<div id="div_photos" class="scroll" style="max-height:750px;">
+						<?php if(!isset($photos) || count($photos) === 0){ ?>
+							<div class="col-xs-12 text-center font-italic">No photos</div>
+						<?php }else{ ?><ul class="row gallery-photo"><?php for($i = 0; $i < count($photos); $i++){?>
+						<li class="gallery col-xs-6 col-sm-4 col-md-3 col-lg-2" data-peaks="<?php echo $photos[$i]->peaks;?>">
+							<a href="#" class="photo" data-toggle="modal" data-target="#modal_gallery" data-id="<?php echo $photos[$i]->id;?>" data-desc="<?php echo $photos[$i]->desc;?>" data-un="<?php echo $photos[$i]->username;?>" data-peaks="<?php echo str_replace(',', ', ', $photos[$i]->peaks);?>">
+								<img src="img/loading.gif" data-original="includes/getImage.php?_=<?php echo $photos[$i]->id;?>&t=t" class="img-responsive imghover lazy" alt="<?php echo $photos[$i]->name;?>" title="<?php echo getTitle($photos[$i]);?>" data-toggle="tooltip" data-container="body" data-placement="bottom" />
+							</a>
+						</li>
+						<?php }?></ul><?php }?>
+					</div>
 
                 </div>
 

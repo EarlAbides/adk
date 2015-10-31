@@ -9,6 +9,7 @@
 	require_once 'Hike.php';
 	require_once 'File.php';
 	require_once 'email.php';
+	var_dump($_FILES);
 	
 	if(validateFiles($errMess)) $files = getPOSTFiles();
 	else{http_response_code(404);exit;}

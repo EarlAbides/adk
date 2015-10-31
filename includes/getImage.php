@@ -6,10 +6,11 @@
 	require_once 'File.php';
 	
 	$ADK_FILE_ID = $_GET['_'];
+	$getThumb = isset($_GET['t']);
 	
 	$con = connect_db();
 	
-	$ADK_FILE = getFile($con, $ADK_FILE_ID, true);
+	$ADK_FILE = getFile($con, $ADK_FILE_ID, true, $getThumb);
 	
 	$con->close();
 

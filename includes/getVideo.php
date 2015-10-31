@@ -9,7 +9,7 @@
 	
 	$con = connect_db();
 	
-	$ADK_FILE = getFile($con, $ADK_FILE_ID, false);
+	$ADK_FILE = getFile($con, $ADK_FILE_ID, false, false);
 	
 	$con->close();
 

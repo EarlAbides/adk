@@ -29,7 +29,12 @@
 			'<div class="hr"></div>' + this.getAttribute('data-desc');
 		document.getElementById('modal_gallery_label').innerHTML = this.children[0].getAttribute('alt');
 		document.getElementById('modal_gallery_desc').innerHTML = desc;
-		document.getElementById('modal_gallery_container').innerHTML = this.innerHTML.replace('imghover', '');
+		var img = this.children[0].cloneNode();
+		img.setAttribute('data-original', img.src.replace('&t=t', ''));
+		img.src = 'img/loading.gif';
+		img.classList.remove('imghover');
+		$('#modal_gallery_container').html('').append(img);
+		$(img).attr('src', $(img).data('original'));
 
 		return true;
 	});
