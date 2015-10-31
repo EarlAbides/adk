@@ -61,6 +61,8 @@
 				<div class="container-fluid">
 					
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+
+						<h4 class="text-center"><a href="http://ppl.ug/cx87VzXrA_8/" target="_blank">ADK 46er Walk Softly Brochure</a></h4>
 						
 						<h3 class="font-underline">Basic Tenets</h3>
 						
