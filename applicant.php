@@ -135,6 +135,19 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="col-xs-12">
+						<div class="hr hr75"></div>
+					</div>
+
+					<div class="col-xs-12">
+						<div class="form-group">
+							<div class="col-xs-12">
+								<label class="control-label control-label-sm">Peaks</label><br />
+								<span class="lgtext"><?php echo $ADK_APPLICANT['ADK_APPLICANT_PEAKLIST'];?></span>
+							</div>
+						</div>
+					</div>
 						
 				</div>
 			</div>

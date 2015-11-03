@@ -43,7 +43,6 @@ function addUpdateHike(form){
 		,contentType: false
 		,enctype: 'multipart/form-data'
 		,type: 'POST'
-		//,beforeSend: function(){$('#div_modal_loading').modal('show');}
 		,success: function(ret){
 			$('#div_modal_loading').modal('hide');
 			document.getElementById('div_table_hikes').innerHTML = ret;
@@ -124,9 +123,8 @@ function deleteHike(){
 		,function(ret){
             document.getElementById('div_table_hikes').innerHTML = ret;
             document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
-            var a_maxmin_hike_data = document.getElementById('a_maxmin_hike_data');
-            if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1)
-                $(a_maxmin_hike_data).click();
+            document.getElementById('div_hike_data').parentNode.className.replace('max', 'min');
+			enableDisableSelectOptions(getUsedPeakIDs());
 		}
 	);
 }
@@ -154,7 +152,7 @@ function cancelHike(){
 function getHikeInfo(td){
     var ADK_HIKE_ID = td.children[0].value;
     var ADK_HIKE_NOTES = td.children[2].value;
-    var ADK_HIKE_DTE = td.children[3].value;
+    var ADK_HIKE_DTE = td.children[3].value !== 'N/A'? td.children[3].value: '';
     var ADK_PEAKS = [];
     var ADK_FILES = [];
 

@@ -31,7 +31,7 @@
 						<div class="form-group<?php if(isset($haserror)) echo $haserror;?>">
 							<div class="col-xs-12">
 								<label for="textbox_password" class="control-label control-label-sm">Password</label><br />
-								<input type="password" id="textbox_password" name="password" class="form-control form-control-sm" maxlength="40" placeholder="Username" required />
+								<input type="password" id="textbox_password" name="password" class="form-control form-control-sm" maxlength="40" placeholder="Password" required />
 								<span class="help-block with-errors"></span>
 							</div>
 						</div>

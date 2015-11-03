@@ -15,6 +15,8 @@
 	
 	$ADK_APPLICANT = addApplicant($con);
 	
+	$ADK_APPLICANT['ADK_APPLICANT_PEAKLIST'] = getApplicantPeakList($con, explode(',', $ADK_APPLICANT['ADK_APPLICANT_PEAKIDS']));
+
 	//Email
 	sendNewApplicantEmail($ADK_APPLICANT);
 	

@@ -6,14 +6,15 @@
 			"INSERT INTO ADK_APPLICANT(ADK_APPLICANT_USERNAME, ADK_APPLICANT_NAME, ADK_APPLICANT_EMAIL, ADK_APPLICANT_PHONE,
 				ADK_APPLICANT_AGE, ADK_APPLICANT_SEX, ADK_APPLICANT_ADDRESS1, ADK_APPLICANT_ADDRESS2,
 				ADK_APPLICANT_CITY, ADK_APPLICANT_STATE, ADK_APPLICANT_ZIP, ADK_APPLICANT_COUNTRY, ADK_APPLICANT_PERSONALINFO, 
-				ADK_APPLICANT_REQ_CORR)
-			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+				ADK_APPLICANT_REQ_CORR, ADK_APPLICANT_PEAKIDS)
+			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 		
-		$sql_query->bind_param('ssssssssssssss', $ADK_APPLICANT['ADK_APPLICANT_USERNAME'], $ADK_APPLICANT['ADK_APPLICANT_NAME'],
+		$sql_query->bind_param('sssssssssssssss', $ADK_APPLICANT['ADK_APPLICANT_USERNAME'], $ADK_APPLICANT['ADK_APPLICANT_NAME'],
 					$ADK_APPLICANT['ADK_APPLICANT_EMAIL'], $ADK_APPLICANT['ADK_APPLICANT_PHONE'], $ADK_APPLICANT['ADK_APPLICANT_AGE'],
 					$ADK_APPLICANT['ADK_APPLICANT_SEX'], $ADK_APPLICANT['ADK_APPLICANT_ADDRESS1'], $ADK_APPLICANT['ADK_APPLICANT_ADDRESS2'],
 					$ADK_APPLICANT['ADK_APPLICANT_CITY'], $ADK_APPLICANT['ADK_APPLICANT_STATE'], $ADK_APPLICANT['ADK_APPLICANT_ZIP'],
-					$ADK_APPLICANT['ADK_APPLICANT_COUNTRY'], $ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO'], $ADK_APPLICANT['ADK_APPLICANT_REQ_CORR']);
+					$ADK_APPLICANT['ADK_APPLICANT_COUNTRY'], $ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO'], $ADK_APPLICANT['ADK_APPLICANT_REQ_CORR'],
+					$ADK_APPLICANT['ADK_APPLICANT_PEAKIDS']);
 		
 		return $sql_query;
 	}
@@ -49,19 +50,23 @@
 	
 	//Hike
 	function sql_addHike($con, $ADK_HIKE){
+		$null = null;
 		$sql_query = $con->prepare("INSERT INTO ADK_HIKE(ADK_USER_ID, ADK_HIKE_NOTES, ADK_HIKE_DTE) VALUES(?,?,?);");
 		
-		$month = substr($ADK_HIKE['ADK_HIKE_DTE'], 0, 2);
-		$day = substr($ADK_HIKE['ADK_HIKE_DTE'], 3, 2);
-		$year = substr($ADK_HIKE['ADK_HIKE_DTE'], 6, 4);
-		$ADK_HIKE['ADK_HIKE_DTE'] = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year));
-		
+		if(!isset($ADK_HIKE['ADK_HIKE_NOTES']) || !$ADK_HIKE['ADK_HIKE_NOTES'] != '') $ADK_HIKE['ADK_HIKE_NOTES'] = $null;
+		if(isset($ADK_HIKE['ADK_HIKE_DTE']) && $ADK_HIKE['ADK_HIKE_DTE'] != ''){
+			$month = substr($ADK_HIKE['ADK_HIKE_DTE'], 0, 2);
+			$day = substr($ADK_HIKE['ADK_HIKE_DTE'], 3, 2);
+			$year = substr($ADK_HIKE['ADK_HIKE_DTE'], 6, 4);
+			$ADK_HIKE['ADK_HIKE_DTE'] = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year));
+		}
+		else $ADK_HIKE['ADK_HIKE_DTE'] = $null;
 		
 		$sql_query->bind_param('iss', $ADK_HIKE['ADK_USER_ID'], $ADK_HIKE['ADK_HIKE_NOTES'], $ADK_HIKE['ADK_HIKE_DTE']);
 		
 		return $sql_query;
 	}
-	function sql_addHikesPeaks($con, $ADK_HIKE){
+	function sql_addHikesPeaks($con){
 		$sql_query = $con->prepare("INSERT INTO ADK_HIKE_PEAK_JCT(ADK_HIKE_ID, ADK_PEAK_ID) VALUES(?,?);");
 		return $sql_query;
 	}

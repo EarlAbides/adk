@@ -39,6 +39,14 @@
             $('#textbox_username').keyup(function(){
                 $('.username-error').remove();
             });
+
+			$('#form_signup').on('submit', function(){
+				var peakids = [];
+				$('input.peaks:checked').each(function(){
+					peakids.push(this.getAttribute('data-id'));
+				});
+				document.getElementById('peakids').value = peakids.join(',');
+			});
 		});
 	</script>
 </head>
@@ -51,7 +59,7 @@
 		<?php include 'includes/navbar_sub.php';?>
 		<div class="content-wrapper">
 			
-			<form method="post" action="includes/applicant_add.php" data-toggle="validator" role="form" novalidate>
+			<form id="form_signup" method="post" action="includes/applicant_add.php" data-toggle="validator" role="form" novalidate>
 				
 				<div class="col-xs-12 content content-max">
 					
@@ -188,7 +196,7 @@
 							</div>
 						</div>
 						
-						<div class="col-xs-12">
+						<div class="col-xs-12" style="margin-top:18px;">
 							<div class="hr hr75"></div>
 						</div>
 						
@@ -201,7 +209,32 @@
 								</div>
 							</div>
 
-							<div class="col-xs-12">
+							<div class="col-xs-12" style="margin-top:18px;">
+								<div class="hr hr75"></div>
+							</div>
+
+							<div class="col-xs-12 col-sm-4" style="margin:0;">
+								<label class="control-label control-label-sm">List any peaks you've climbed</label><br />
+								<ul class="peaklist">
+									<?php for($i = 0; $i < 16; $i++) echo makeCheckbox($ADK_PEAKS[$i]);?>
+								</ul>
+							</div>
+
+							<div class="col-xs-12 col-sm-4" style="margin:0;">
+								<div class="hidden-xs">&emsp;</div>
+								<ul class="peaklist">
+									<?php for($i = 16; $i < 31; $i++) echo makeCheckbox($ADK_PEAKS[$i]);?>
+								</ul>
+							</div>
+
+							<div class="col-xs-12 col-sm-4" style="margin:0;">
+								<div class="hidden-xs">&emsp;</div>
+								<ul class="peaklist">
+									<?php for($i = 31; $i < 46; $i++) echo makeCheckbox($ADK_PEAKS[$i]);?>
+								</ul>
+							</div>
+
+							<div class="col-xs-12" style="margin-top:18px;">
 								<div class="hr hr75"></div>
 							</div>
 
@@ -227,6 +260,8 @@
 						
 					</div>
 				</div>
+
+				<input type="hidden" id="peakids" name="peakids" />
 				
 			</form>
 			

@@ -41,7 +41,7 @@
 						</p>
                         <br />
 						<p>
-							&emsp;Please be sure to check your spam&nbsp;filter.<br /><br />
+							Please be sure to check your spam&nbsp;filter.<br /><br />
 						</p>
 						<p>
 							If you do not hear from anyone in two weeks, please contact

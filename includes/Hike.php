@@ -38,7 +38,7 @@
 			foreach($result as $row){
 				$ADK_HIKES[$i]['ADK_HIKE_ID'] = intval($row['ADK_HIKE_ID']);
 				$ADK_HIKES[$i]['ADK_HIKE_NOTES'] = $row['ADK_HIKE_NOTES'];
-				$ADK_HIKES[$i]['ADK_HIKE_DTE'] = date("m/d/Y", strtotime($row['ADK_HIKE_DTE']));
+				$ADK_HIKES[$i]['ADK_HIKE_DTE'] = $row['ADK_HIKE_DTE'] === null? 'N/A':date("m/d/Y", strtotime($row['ADK_HIKE_DTE']));
 				$ADK_HIKES[$i]['ADK_HIKE_NUMPEAKS'] = $row['ADK_HIKE_NUMPEAKS'];
 
                 $ADK_HIKES[$i]['ADK_FILES'] = '';
@@ -107,6 +107,15 @@
 		
 		return $ADK_HIKE;
 	}
+
+	function addInitialHikes($con, $ADK_USER_ID, $ADK_PEAK_ID){
+		$ADK_HIKE = array('ADK_USER_ID' => $ADK_USER_ID);
+		$sql_query = sql_addHike($con, $ADK_HIKE);
+		$sql_query->execute();
+		$ADK_HIKE['ADK_HIKE_ID'] = $sql_query->insert_id;
+		
+		return $ADK_HIKE;
+	}
 	
 	function addHikeFileJcts($con, $ADK_HIKE_ID, $fileIDs){
 		$sql_query = sql_addHikeFileJcts($con);
@@ -154,8 +163,7 @@
 	function addHikesPeaks($con, $ADK_HIKE){
 		$ADK_HIKE = makeHikesPeaksArray($ADK_HIKE);
 						
-	    //Add to database
-		$sql_query = sql_addHikesPeaks($con, $ADK_HIKE);
+	    $sql_query = sql_addHikesPeaks($con);
 		$con->autocommit(FALSE);
 		foreach($ADK_HIKE['ADK_PEAKS'] as $ADK_PEAK){
 			$sql_query->bind_param('ii', $ADK_PEAK['ADK_HIKE_ID'], $ADK_PEAK['ADK_PEAK_ID']);
@@ -164,6 +172,13 @@
 		$sql_query->close();
 		$con->commit();
 		
+		return true;
+	}
+
+	function addInitialHikesPeaks($con, $ADK_HIKE_ID, $ADK_PEAK_ID){
+		$sql_query = sql_addHikesPeaks($con);
+		$sql_query->bind_param('ii', $ADK_HIKE_ID, $ADK_PEAK_ID);
+		$sql_query->execute();
 		return true;
 	}
 	
@@ -253,4 +268,5 @@
 		
 		return $COUNT > 0;
 	}
+	
 ?>

@@ -20,7 +20,8 @@
 				'ADK_APPLICANT_ZIP' => $_POST['zip'],
 				'ADK_APPLICANT_COUNTRY' => $_POST['country'],
 				'ADK_APPLICANT_PERSONALINFO' => $_POST['personalinfo'],
-				'ADK_APPLICANT_REQ_CORR' => $_POST['reqcorr']
+				'ADK_APPLICANT_REQ_CORR' => $_POST['reqcorr'],
+				'ADK_APPLICANT_PEAKIDS' => $_POST['peakids']
 			);
 		}
 		else{
@@ -77,9 +78,8 @@
 		return $ADK_APPLICANT['ADK_APPLICANT_ID'];
 	}
 	
-	function deleteApplicant($con){
-		$ADK_APPLICANT = $_POST['id'];
-		$sql_query = sql_deleteApplicant($con, $ADK_APPLICANT);
+	function deleteApplicant($con, $ADK_APPLICANT_ID){
+		$sql_query = sql_deleteApplicant($con, $ADK_APPLICANT_ID);
 		if($sql_query->execute()){}
 		else die('There was an error running the query ['.$con->error.']');
 	}
@@ -143,13 +143,32 @@
 				$ADK_APPLICANT['ADK_APPLICANT_COUNTRY'] = $row['ADK_APPLICANT_COUNTRY'];
 				$ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO'] = $row['ADK_APPLICANT_PERSONALINFO'];
 				$ADK_APPLICANT['ADK_APPLICANT_REQ_CORR'] = $row['ADK_APPLICANT_REQ_CORR'];
+				$ADK_APPLICANT['ADK_APPLICANT_PEAKIDS'] = $row['ADK_APPLICANT_PEAKIDS'];
 			}
 		}
-		else die('There was an error running the query ['.$con->error.']');		
+		else die('There was an error running the query ['.$con->error.']');
+
+		$ADK_APPLICANT['ADK_APPLICANT_PEAKLIST'] = getApplicantPeakList($con, explode(',', $ADK_APPLICANT['ADK_APPLICANT_PEAKIDS']));
 		
 		return $ADK_APPLICANT;
 	}
 	
+	function getApplicantPeakList($con, $ADK_APPLICANT_PEAKIDS){
+		for($i = 0; $i < count($ADK_APPLICANT_PEAKIDS); $i++) $ADK_APPLICANT_PEAKIDS[$i] = intval($ADK_APPLICANT_PEAKIDS[$i]);
+		
+		$ADK_APPLICANT_PEAKLIST = '';
+		$sql_query = sql_getApplicantPeakList($con, $ADK_APPLICANT_PEAKIDS);
+		if($sql_query->execute()){
+            $sql_query->store_result();
+			$sql_query->bind_result($result);
+			$sql_query->fetch();
+			$ADK_APPLICANT_PEAKLIST = $result;
+		}
+		else die('There was an error running the query ['.$con->error.']');
+
+		return trim($ADK_APPLICANT_PEAKLIST);
+	}
+
 	function getTableApplicants($ADK_APPLICANTS){
 		$html = "<table class=\"selecttable\">
 					<thead>

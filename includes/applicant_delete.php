@@ -7,7 +7,7 @@
 	
 	$con = connect_db();
 	
-	deleteApplicant($con);
+	deleteApplicant($con, $_POST['id']);
 		
 	$con->close();
 	
