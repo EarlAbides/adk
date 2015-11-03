@@ -130,6 +130,8 @@ position:relative;
 width:100%;
 }
 .reqNote{font-style:italic;font-size:0.7em;}
+.peaklist{list-style:none;margin:0;}
+.peaklist label{font-weight:normal;}
 
 #div_hikertable{max-height:600px;}
 

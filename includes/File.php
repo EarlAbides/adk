@@ -7,29 +7,18 @@
 		$con->autocommit(false);
 		
 		foreach($files as $file){
-			$fp = fopen($file, 'r');
-			$fileSize = filesize($file);
-            $ADK_FILE_SAVENAME = sha1(openssl_random_pseudo_bytes(40));
+			$ADK_FILE_SAVENAME = sha1(openssl_random_pseudo_bytes(40));
 			$ADK_FILE_DESC = 'Correspondent Profile Photo';
 			if(isset($_POST['file_'.$fileIndex.'_desc'])) $ADK_FILE_DESC = $_POST['file_'.$fileIndex.'_desc'];
-			
 			$ADK_FILE = array(
-				'ADK_FILE_NAME' => addslashes(basename($file))
+				'ADK_FILE_NAME' => $file['name']
                 ,'ADK_FILE_SAVENAME' => $ADK_FILE_SAVENAME
 				,'ADK_FILE_DESC' => $ADK_FILE_DESC
-				,'ADK_FILE_SIZE' => $fileSize
-				,'ADK_FILE_TYPE' => pathinfo($file, PATHINFO_EXTENSION)
+				,'ADK_FILE_SIZE' => $file['size']
+				,'ADK_FILE_TYPE' => pathinfo($file['name'], PATHINFO_EXTENSION)
 			);
-			
-			//Add file info
-			$sql_query = sql_addFile($con);
-            $sql_query->bind_param('sssis', $ADK_FILE['ADK_FILE_NAME'], $ADK_FILE['ADK_FILE_SAVENAME'], $ADK_FILE['ADK_FILE_DESC'], 
-                        $ADK_FILE['ADK_FILE_SIZE'], $ADK_FILE['ADK_FILE_TYPE']);
-            fclose($fp);
-			$sql_query->execute();
-			$fileIDs[$fileIndex] = $sql_query->insert_id;
-            
-            //Move to /uploads/... and rename
+
+			//Move to /uploads/...
             $src = moveFileToProtected($file, $ADK_FILE_SAVENAME);
 
 			//Make thumbnail
@@ -42,6 +31,13 @@
 				makeThumbnail($src, $path.'/'.$ADK_FILE_SAVENAME, 160);
 			}
 			
+			//Add file info
+			$sql_query = sql_addFile($con);
+            $sql_query->bind_param('sssis', $ADK_FILE['ADK_FILE_NAME'], $ADK_FILE['ADK_FILE_SAVENAME'], $ADK_FILE['ADK_FILE_DESC'], 
+                        $ADK_FILE['ADK_FILE_SIZE'], $ADK_FILE['ADK_FILE_TYPE']);
+            $sql_query->execute();
+			$fileIDs[$fileIndex] = $sql_query->insert_id;
+            
 			$fileIndex++;
 		}
 		
@@ -73,10 +69,10 @@
 	}
 
     function moveFileToProtected($file, $ADK_FILE_SAVENAME){
-        $path = '../uploads/'.$ADK_FILE_SAVENAME[0].'/'.$ADK_FILE_SAVENAME[1];
-        if(!is_dir($path)) mkdir($path, 0777, true);
+		$path = '../uploads/'.$ADK_FILE_SAVENAME[0].'/'.$ADK_FILE_SAVENAME[1];
+		if(!is_dir($path)) mkdir($path, 0777, true);
 		$path = $path.'/'.$ADK_FILE_SAVENAME;
-        rename($file, $path);
+		if(!move_uploaded_file($file['tmp_name'], $path)) echo 'Error getting files';
 
 		return $path;
     }
@@ -146,12 +142,10 @@
 		for($i = 0; $i < count($_FILES); $i++){
 			for($j = 0; $j < count($_FILES['file'.$i]['tmp_name']); $j++){
 				if($_FILES['file'.$i]['size'][$j] !== 0){
-					$target = '../uploads/'.basename($_FILES['file'.$i]['name'][$j]);
-                    if(move_uploaded_file($_FILES['file'.$i]['tmp_name'][$j], $target)){
-						$files[$numFiles] = $target;
-						$numFiles++;
-					}
-					else{echo 'Error getting files';}//Error
+					$files[$numFiles]['name'] = basename($_FILES['file'.$i]['name'][$j]);
+					$files[$numFiles]['tmp_name'] = $_FILES['file'.$i]['tmp_name'][$j];
+					$files[$numFiles]['size'] = $_FILES['file'.$i]['size'][$j];
+					$numFiles++;
 				}
 				
 			}
@@ -162,9 +156,11 @@
 	
 	function getPOSTFile($name){
 		$file = '';
-		$target = '../uploads/'.basename($_FILES[$name]['name']);
-		if(move_uploaded_file($_FILES[$name]['tmp_name'], $target)) $file = $target;
-		else{echo 'Error getting file';}//Error
+		if($_FILES[$name]['size'] > 0){
+			$file['name'] = basename($_FILES[$name]['name']);
+			$file['tmp_name'] = $_FILES[$name]['tmp_name'];
+			$file['size'] = $_FILES[$name]['size'];
+		}
 		
 		return $file;
 	}
