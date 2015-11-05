@@ -216,7 +216,7 @@
 
 	//Hiker
 	function sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT){
-		$htmlmessage = "Your account had been created and you have been assigned a correspondent!<br><br>";
+		$htmlmessage = "Your account has been created and you have been assigned a correspondent!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
 		$htmlmessage .= $ADK_USER['ADK_USER_USERNAME']."<br><br>";
@@ -231,7 +231,7 @@
 
 		$htmlmessage .= "Click <a href=".$GLOBALS['url'].">here to visit the site and log in</a>.<br><br>";
 		
-		$message = "Your account had been created and you have been assigned a correspondent!\r\n\r\n";
+		$message = "Your account has been created and you have been assigned a correspondent!\r\n\r\n";
 		
 		$message .= "Username:\r\n";
 		$message .= $ADK_USER['ADK_USER_USERNAME']."\r\n\r\n";

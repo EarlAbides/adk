@@ -36,7 +36,7 @@
 					
 					<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 						<p>
-							&emsp;Your request has been sent to the administrator. You can accept to receive an email within
+							&emsp;Your request has been sent to the administrator. You can expect to receive an email within
 							two weeks with the name of your correspondent, as well as your password and instructions to log&nbsp;in.<br />
 						</p>
                         <br />
