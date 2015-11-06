@@ -4,5 +4,6 @@ Credits to:
 jQuery
 jQuery Tablesorter
 jQueryUI
+jquery.lazyload
 1000hz/bootstrap-validator
 PHPMailer

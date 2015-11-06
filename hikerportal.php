@@ -156,12 +156,6 @@
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Email</label><br />
-								<span><a href="mailto:<?php echo $ADK_CORRESPONDENT['ADK_USER_EMAIL'];?>"><?php echo $ADK_CORRESPONDENT['ADK_USER_EMAIL'];?></a></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Personal Info</label><br />
 								<div class="scroll scroll100" style="word-break:break-word;">
 									<span><?php echo $ADK_CORRESPONDENT['ADK_CORR_PERSONALINFO'];?></span>
