@@ -133,7 +133,7 @@
 			
 			<div class="col-xs-12">
 				<div class="container-fluid content content-max" style="margin-bottom:15px;">
-				
+					
 					<h4 class="content-header">
 						My Staff Correspondent
 						<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
@@ -309,7 +309,7 @@
 									<div class="col-xs-12">
 										<div class="form-group">
 											<label for="textbox_notes" class="control-label control-label-sm">Notes</label><br />
-											<textarea id="textbox_notes" name="notes" class="form-control form-control-sm" style="min-height:100px;" placeholder="Notes, messages" maxlength="4096"></textarea>
+											<textarea id="textbox_notes" name="notes" class="form-control form-control-sm" style="min-height:100px;" placeholder="Notes, messages" maxlength="16384"></textarea>
 											<span class="help-block with-errors"></span>
 										</div>
 									</div>

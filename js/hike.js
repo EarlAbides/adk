@@ -43,6 +43,7 @@ function addUpdateHike(form){
 		,contentType: false
 		,enctype: 'multipart/form-data'
 		,type: 'POST'
+		,timeout: 120000
 		,success: function(ret){
 			$('#div_modal_loading').modal('hide');
 			document.getElementById('div_table_hikes').innerHTML = ret;

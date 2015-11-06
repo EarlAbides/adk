@@ -142,7 +142,7 @@
 						<div class="col-xs-12" style="margin:2px 0 6px;">
 							<div class="form-group">
 								<div class="col-xs-12">
-									<textarea id="textbox_message" name="message" class="form-control form-control-sm" style="min-height:100px;" maxlength="5000" placeholder="Message"></textarea>
+									<textarea id="textbox_message" name="message" class="form-control form-control-sm" style="min-height:100px;" maxlength="16384" placeholder="Message"></textarea>
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
