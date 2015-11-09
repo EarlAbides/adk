@@ -79,35 +79,26 @@
 	
 	function validateFiles(&$errMess){		
 		$valid = true;
-		$totalFileSize = 0;
 		for($i = 0; $i < count($_FILES); $i++){
 			for($j = 0; $j < count($_FILES['file'.$i]['tmp_name']); $j++){
 				if($_FILES['file'.$i]['size'][$j] !== 0){
 					$ext = pathinfo($_FILES['file'.$i]['name'][$j], PATHINFO_EXTENSION);
 					$fileTypes = array('pdf', 'doc', 'docx', 'txt', 'csv', 'jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff', 'bmp'
                                         ,'mpg', 'mpeg', 'avi', 'mov', 'webm', 'mkv', 'flv', 'ogg', 'oggv', 'wmv', 'mp4');
-
+					
 					//File type
 					if(!in_array($ext, $fileTypes)){
 						$errMess .= 't';
 						$valid = false;
 					}
-
+					
 					//PHP error
 					if($_FILES['file'.$i]['error'][$j] !== 0){
 						$errMess .= 'f';
 						$valid = false;
 					}
-					
-					$totalFileSize += $_FILES['file'.$i]['size'][$j];
 				}
 			}
-		}
-		
-		//Total file size
-		if($totalFileSize >= 104856500){//100Mb (-1000 bytes)
-			$errMess .= 'm';
-			$valid = false;
 		}
 		
 		return $valid;
@@ -118,19 +109,18 @@
 		if($_FILES[$name]['size'] !== 0){
 			$ext = pathinfo($_FILES[$name]['name'], PATHINFO_EXTENSION);
 			$fileTypes = array('jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff', 'bmp');
-					
-			//File size
-			if($_FILES[$name]['size'] > 104856500){//100Mb (-1000 bytes)
-				$errMess .= 's';
-				$valid = false;
-			}
-					
+			
 			//File type
 			if(!in_array($ext, $fileTypes)){
 				$errMess .= 't';
 				$valid = false;
 			}
-					
+			
+			//PHP error
+			if($_FILES['file'.$i]['error'][$j] !== 0){
+				$errMess .= 'f';
+				$valid = false;
+			}
 		}
 		
 		return $valid;
