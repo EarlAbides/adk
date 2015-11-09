@@ -11,7 +11,11 @@
 	require_once 'email.php';
 	
 	if(validateFiles($errMess)) $files = getPOSTFiles();
-	else{http_response_code(404);exit;}
+	else{
+		http_response_code(409);
+		echo errMess;
+		exit;
+	}
 	
 	$con = connect_db();
 
