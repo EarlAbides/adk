@@ -15,6 +15,7 @@
             case 'messages': $messages = $class; break;
             case 'profile': $profile = $class; break;
 			case 'gallery': $gallery = $class; break;
+			case 'lnt': $lnt = $class; break;
 		}
 	}
 ?>
@@ -39,23 +40,26 @@
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'COR'))){?>
 					<li<?php if(isset($hikers)) echo $hikers;?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($guideCorr)) echo $guideCorr;?>><a href="./guideCorr">Correspondent Guidelines</a></li>
+					<li<?php if(isset($lnt)) echo $lnt;?>><a href="./lnt">Leave No Trace</a></li>
+					<li<?php if(isset($changelog)) echo $changelog;?>><a href="./changelog">Change log</a></li>
 				<?php }?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'ADM'))){?>
 					<li<?php if(isset($applicants)) echo $applicants;?>><a href="./applicants">Applicants</a></li>
 					<li<?php if(isset($hikers)) echo $hikers;?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($correspondents)) echo $correspondents;?>><a href="./correspondents">Correspondents</a></li>
 					<li<?php if(isset($gallery)) echo $gallery;?>><a href="./gallery">Gallery</a></li>
-				<?php }?>
-				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'ADM' || $_SESSION['ADK_USERGROUP_CDE'] === 'COR'))){?>
 					<li<?php if(isset($changelog)) echo $changelog;?>><a href="./changelog">Change log</a></li>
+					<li<?php if(isset($lnt)) echo $lnt;?>><a href="./lnt">Leave No Trace</a></li>
 				<?php }?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'HIK'))){?>
 					<li<?php if(isset($hikerportal)) echo $hikerportal;?>><a href="./hikerportal">Hiker Portal</a></li>
 					<li<?php if(isset($guideHiker)) echo $guideHiker;?>><a href="./guideHiker">Hiker Guidelines</a></li>
+					<li<?php if(isset($lnt)) echo $lnt;?>><a href="./lnt">Leave No Trace</a></li>
 				<?php }?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'EDT'))){?>
 					<li<?php if(isset($hikers)) echo $hikers;?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($gallery)) echo $gallery;?>><a href="./gallery">Gallery</a></li>
+					<li<?php if(isset($lnt)) echo $lnt;?>><a href="./lnt">Leave No Trace</a></li>
 				<?php }?>
 			</ul>
             <ul class="nav navbar-nav navbar-right">
