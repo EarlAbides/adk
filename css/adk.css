@@ -45,6 +45,7 @@ div.tooltip{white-space:pre;}
 .tooltip-inner{max-width:100%;}
 .disabled{cursor:default !important;}
 
+
 /*Site*/
 #home_intro, #home_about{overflow:hidden;}
 #home_intro{height:100%;}

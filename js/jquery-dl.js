@@ -13,7 +13,7 @@
 			newFileInput.setAttribute('name', fileId + '[]');
 			newFileInput.setAttribute('multiple', 'multiple');
 			newFileInput.classList.add('fileInput');
-			newFileInput.style.display = 'none';
+			newFileInput.style.cssText = 'display:block;position:absolute;top:0;left:-9999px;';
 			
 			$.fn.downloader.fileIndex_increment();
 			return newFileInput;
@@ -80,7 +80,9 @@
 			hidden_fileIndex.value = parseInt(hidden_fileIndex.value) + 1;
 		};
 		$.fn.downloader.rebind = function(){$('.fileInput').unbind().on('change', function(){$.fn.downloader.filesAdded();});};
-		$.fn.downloader.addFile = function(){$($.fn.downloader.getNewFileInput()).click();};
+		$.fn.downloader.addFile = function(){
+			$($.fn.downloader.getNewFileInput()).click();
+		};
 		$.fn.downloader.removeFile = function(span){
 			function renameFileInputs(){
 				var fileInputs = document.getElementsByClassName('fileInput');
@@ -244,7 +246,7 @@
 		
 		var div_inputFileWrapper = document.createElement('div');
 		div_inputFileWrapper.setAttribute('id', 'div_inputFileWrapper');
-		div_inputFileWrapper.style.display = 'none';
+		div_inputFileWrapper.style.cssText = 'position:relative;overflow:hidden;width:0;';
 		
 		var table_fileList = document.createElement('table');
 		table_fileList.setAttribute('id', 'table_fileList');
