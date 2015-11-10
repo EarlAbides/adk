@@ -15,7 +15,7 @@
                 ,'ADK_FILE_SAVENAME' => $ADK_FILE_SAVENAME
 				,'ADK_FILE_DESC' => $ADK_FILE_DESC
 				,'ADK_FILE_SIZE' => $file['size']
-				,'ADK_FILE_TYPE' => pathinfo($file['name'], PATHINFO_EXTENSION)
+				,'ADK_FILE_TYPE' => strtolower(pathinfo($file['name'], PATHINFO_EXTENSION))
 			);
 
 			//Move to /uploads/...
@@ -28,7 +28,7 @@
 				$path = '../uploads/thumb/'.$ADK_FILE_SAVENAME[0].'/'.$ADK_FILE_SAVENAME[1];
 				if(!is_dir($path)) mkdir($path, 0777, true);
 				
-				makeThumbnail($src, $path.'/'.$ADK_FILE_SAVENAME, 160);
+				makeThumbnail($src, $path.'/'.$ADK_FILE_SAVENAME, 160, $ADK_FILE['ADK_FILE_TYPE']);
 			}
 			
 			//Add file info
@@ -47,11 +47,19 @@
 		return $fileIDs;
 	}
 
-	function makeThumbnail($src, $dest, $desired_width){
+	function makeThumbnail($src, $dest, $desired_width, $ext){
+		$ext = strtolower($ext);
 		ini_set('memory_limit', '128M');
 		
 		/* read the source image */
-		$source_image = imagecreatefromjpeg($src);
+		switch($ext){
+			case 'jpg': case 'jpeg': $source_image = imagecreatefromjpeg($src); break;
+			case 'png': $source_image = imagecreatefrompng($src); break;
+			case 'gif': $source_image = imagecreatefromgif($src); break;
+			default:
+				if(!copy($src, $dest)) echo "failed to copy $file...\n";
+				else return;
+		}
 		$width = imagesx($source_image);
 		$height = imagesy($source_image);
 		
@@ -65,16 +73,20 @@
 		imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
 		
 		/* create the physical thumbnail image to its destination */
-		imagejpeg($virtual_image, $dest);
+		switch($ext){
+			case 'jpg': case 'jpeg': imagejpeg($virtual_image, $dest); break;
+			case 'png': imagepng($virtual_image, $dest); break;
+			case 'gif': imagegif($virtual_image, $dest); break;
+		}
 	}
 
     function moveFileToProtected($file, $ADK_FILE_SAVENAME){
 		$path = '../uploads/'.$ADK_FILE_SAVENAME[0].'/'.$ADK_FILE_SAVENAME[1];
 		if(!is_dir($path)) mkdir($path, 0777, true);
-		$path = $path.'/'.$ADK_FILE_SAVENAME;
-		if(!move_uploaded_file($file['tmp_name'], $path)) echo 'Error getting files';
+		$src = $path.'/'.$ADK_FILE_SAVENAME;
+		if(!move_uploaded_file($file['tmp_name'], $src)) echo 'Error getting files';
 
-		return $path;
+		return $src;
     }
 	
 	function validateFiles(&$errMess){		

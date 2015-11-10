@@ -54,6 +54,7 @@ function addUpdateHike(form){
 		}
 		,fail: function(ret){
 			$('#div_modal_loading').modal('hide');
+			document.getElementById('div_table_hikes').innerHTML = ret;
 			console.log(ret);
 		}
 	});

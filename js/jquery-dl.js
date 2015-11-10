@@ -157,7 +157,7 @@
 				for(var i = 0; i < this.files.length; i++) total += this.files[i].size;
 			});
 
-			if(total >= 104856500){
+			if(total >= 98000000){
 				$('.jqdl-attachments').each(function(){
 					this.classList.add('has-error');
 					this.classList.add('has_error');
