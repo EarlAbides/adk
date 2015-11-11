@@ -6,4 +6,5 @@ jQuery Tablesorter
 jQueryUI
 jquery.lazyload
 1000hz/bootstrap-validator
+wysihtml
 PHPMailer

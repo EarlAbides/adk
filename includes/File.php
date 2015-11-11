@@ -112,7 +112,7 @@
 				}
 			}
 		}
-		
+		error_log('FILES:'.var_export($_FILES, true));
 		return $valid;
 	}
 	
