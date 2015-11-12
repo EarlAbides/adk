@@ -1,0 +1,21 @@
+﻿#wysihtml-toolbar a, #wysihtml-toolbar a:hover, #wysihtml-toolbar a:visited, #wysihtml-toolbar a:active{color:inherit;text-decoration:none;}
+#wysihtml-toolbar{margin-bottom:2px;}
+#wysihtml-toolbar a, #wysihtml-toolbar span{width:16px;display:inline-block;}
+#wysihtml-toolbar .wysihtml5-command-active{color:#57A1BF;}
+#wysihtml-toolbar a:hover{color:#75BBD8;}
+#wysihtml-toolbar a.red{background-color:#B10000;}
+#wysihtml-toolbar a.red.wysihtml5-command-active{background-color:#CC2626;}
+#wysihtml-toolbar a.red:hover{background-color:#C84848;}
+.wysiwyg-color-red{color:#B10000;}
+#wysihtml-toolbar a.green{background-color:#018913;}
+#wysihtml-toolbar a.green.wysihtml5-command-active{background-color:#26A837;}
+#wysihtml-toolbar a.green:hover{background-color:#00FF21;}
+.wysiwyg-color-green{color:#018913;}
+#wysihtml-toolbar a.blue{background-color:#0026FF;}
+#wysihtml-toolbar a.blue.wysihtml5-command-active{background-color:#3D55dC;}
+#wysihtml-toolbar a.blue:hover{background-color:#3251FF;}
+.wysiwyg-color-blue{color:#0026FF;}
+#wysihtml-toolbar a.red.wysihtml5-command-active, #wysihtml-toolbar a.green.wysihtml5-command-active, #wysihtml-toolbar a.blue.wysihtml5-command-active{border:1px solid #000000;}
+.wysiwyg-text-align-left{text-align:left;}
+.wysiwyg-text-align-center{text-align:center;}
+.wysiwyg-text-align-right{text-align:right;}
