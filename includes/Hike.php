@@ -213,7 +213,7 @@
 							<td>
 								<input type=\"hidden\" name=\"hikeid\" value=\"".$ADK_HIKE['ADK_HIKE_ID']."\" />
 								<input type=\"hidden\" name=\"numpeaks\" value=\"".$ADK_HIKE['ADK_HIKE_NUMPEAKS']."\" />
-								<input type=\"hidden\" name=\"notes\" value=\"".$ADK_HIKE['ADK_HIKE_NOTES']."\" />
+								<div name=\"notes\" style=\"display:none;\">".$ADK_HIKE['ADK_HIKE_NOTES']."</div>
 								<input type=\"hidden\" name=\"date\" value=\"".$ADK_HIKE['ADK_HIKE_DTE']."\" />
 								<div style=\"display:none;\">";
 				foreach($ADK_HIKE['ADK_PEAKS'] as $ADK_PEAK){

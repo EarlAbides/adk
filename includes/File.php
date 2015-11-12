@@ -17,6 +17,7 @@
 				,'ADK_FILE_SIZE' => $file['size']
 				,'ADK_FILE_TYPE' => strtolower(pathinfo($file['name'], PATHINFO_EXTENSION))
 			);
+			$ADK_FILE['ADK_FILE_NAME'] = str_replace(pathinfo($file['name'], PATHINFO_EXTENSION), $ADK_FILE['ADK_FILE_TYPE'], $ADK_FILE['ADK_FILE_NAME']);
 
 			//Move to /uploads/...
             $src = moveFileToProtected($file, $ADK_FILE_SAVENAME);
@@ -94,7 +95,7 @@
 		for($i = 0; $i < count($_FILES); $i++){
 			for($j = 0; $j < count($_FILES['file'.$i]['tmp_name']); $j++){
 				if($_FILES['file'.$i]['size'][$j] !== 0){
-					$ext = pathinfo($_FILES['file'.$i]['name'][$j], PATHINFO_EXTENSION);
+					$ext = strtolower(pathinfo($_FILES['file'.$i]['name'][$j], PATHINFO_EXTENSION));
 					$fileTypes = array('pdf', 'doc', 'docx', 'txt', 'csv', 'jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff', 'bmp'
                                         ,'mpg', 'mpeg', 'avi', 'mov', 'webm', 'mkv', 'flv', 'ogg', 'oggv', 'wmv', 'mp4');
 					
@@ -106,20 +107,20 @@
 					
 					//PHP error
 					if($_FILES['file'.$i]['error'][$j] !== 0){
-						$errMess .= 'f';
+						$errMess .= 'p'.$_FILES['file'.$i]['error'][$j];
 						$valid = false;
 					}
 				}
 			}
 		}
-		error_log('FILES:'.var_export($_FILES, true));
+
 		return $valid;
 	}
 	
 	function validateImageFile(&$errMess, $name){
 		$valid = true;
 		if($_FILES[$name]['size'] !== 0){
-			$ext = pathinfo($_FILES[$name]['name'], PATHINFO_EXTENSION);
+			$ext = strtolower(pathinfo($_FILES[$name]['name'], PATHINFO_EXTENSION));
 			$fileTypes = array('jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff', 'bmp');
 			
 			//File type
@@ -130,7 +131,7 @@
 			
 			//PHP error
 			if($_FILES['file'.$i]['error'][$j] !== 0){
-				$errMess .= 'f';
+				$errMess .= 'p'.$_FILES['file'.$i]['error'][$j];
 				$valid = false;
 			}
 		}

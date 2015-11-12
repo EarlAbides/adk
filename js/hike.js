@@ -52,10 +52,16 @@ function addUpdateHike(form){
 			var a_maxmin_hike_data = document.getElementById('a_maxmin_hike_data');
 			if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1) $(a_maxmin_hike_data).click();
 		}
-		,fail: function(ret){
+		,error: function(ret){
+			var errMess = '';
+			if(ret.responseText.indexOf('t') !== -1) errMess += 'Invalid file type\r\n';
+			if(ret.responseText.indexOf('p') !== -1){
+				if(ret.responseText.indexOf('1') !== -1 || ret.responseText.indexOf('2') !== -1) errMess += 'Max file size exceeded\r\n';
+				else errMess += 'Error uploading file\r\n';
+			}
+			alert(errMess);
+			console.log(errMess);
 			$('#div_modal_loading').modal('hide');
-			document.getElementById('div_table_hikes').innerHTML = ret;
-			console.log(ret);
 		}
 	});
 
@@ -105,7 +111,9 @@ function editHike(){
     document.getElementById('textbox_hikedate').value = ADK_HIKE.ADK_HIKE_DTE;
 
     //Notes
-    document.getElementById('textbox_notes').value = ADK_HIKE.ADK_HIKE_NOTES;
+	var wysiIframeBody = getWysiIframeBody();
+	if(wysiIframeBody) wysiIframeBody.innerHTML = ADK_HIKE.ADK_HIKE_NOTES;
+    else document.getElementById('textbox_notes').value = ADK_HIKE.ADK_HIKE_NOTES;
 
     //Attachments
 
@@ -123,9 +131,10 @@ function deleteHike(){
 			,hikeid: getHikeInfo(td).ADK_HIKE_ID
 		}
 		,function(ret){
+			var cont = document.getElementById('div_hike_data').parentNode;
+            cont.className = cont.className.replace('max', 'min');
             document.getElementById('div_table_hikes').innerHTML = ret;
             document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
-            document.getElementById('div_hike_data').parentNode.className.replace('max', 'min');
 			enableDisableSelectOptions(getUsedPeakIDs());
 		}
 	);
@@ -145,15 +154,18 @@ function cancelHike(){
     enableDisableSelectOptions(usedPeakIDs);
     document.getElementById('textbox_hikedate').value = '';
     document.getElementById('textbox_notes').value = '';
+	var wysiIframeBody = getWysiIframeBody();
+	if(wysiIframeBody) wysiIframeBody.innerHTML = '';
     document.getElementById('div_peaks_container').innerHTML = '';
     document.getElementById('ul_hikeattachments').innerHTML = '';
     $.fn.downloader.removeAll();
-    document.getElementById('hidden_hikeid').value
+
+	$('.wysihtml5-command-active').each(function(){$(this).click();});
 }
 
 function getHikeInfo(td){
     var ADK_HIKE_ID = td.children[0].value;
-    var ADK_HIKE_NOTES = td.children[2].value;
+    var ADK_HIKE_NOTES = td.children[2].innerHTML;
     var ADK_HIKE_DTE = td.children[3].value !== 'N/A'? td.children[3].value: '';
     var ADK_PEAKS = [];
     var ADK_FILES = [];

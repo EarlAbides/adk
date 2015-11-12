@@ -62,6 +62,8 @@ function newMessage(){
         document.getElementById('hidden_touserid').value = document.getElementById('select_to_username').children[0].value;
         $(select_to_username).change(function(){document.getElementById('hidden_touserid').value = this.value;});
     }
+
+	initEditor();
 }
 
 function reply(){
@@ -87,10 +89,10 @@ function reply(){
     //    }
     //}
 	
-    var replyText = '\r\n\r\n\r\n---------------------\r\n';
-    replyText += 'From: ' + fromName + '\r\n';
-    replyText += 'To: ' + toName + '\r\n';
-    replyText += 'Date: ' + dte + '\r\n\r\n';
+    var replyText = '<br /><br /><br />---------------------<br />';
+    replyText += 'From: ' + fromName + '<br />';
+    replyText += 'To: ' + toName + '<br />';
+    replyText += 'Date: ' + dte + '<br /><br />';
     replyText += message;
 
     var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
@@ -120,9 +122,11 @@ function reply(){
     //}
     
     document.getElementById('hidden_touserid').value = toID;
+
+	initEditor();
 }
 
-function cancelMessage(){document.getElementById('div_messages_main').innerHTML = '';}
+function cancelMessage(){document.getElementById('div_messages_main').innerHTML = '';editor.destroy();}
 
 function message_markRead(ADK_MESSAGE_ID, span){
     if(document.getElementById('h4_folderName').innerHTML == 'Inbox'){
@@ -383,4 +387,13 @@ function saveDraft(){
 	hidden_draft.value = 'true';
 	form.appendChild(hidden_draft);
 	form.submit();
+}
+
+var editor;
+function initEditor(){
+	editor = new wysihtml5.Editor('textbox_message', {
+		toolbar: 'wysihtml-toolbar'
+		,parserRules: wysihtml5ParserRules
+		,stylesheets: 'css/wysihtml.css'
+	});
 }

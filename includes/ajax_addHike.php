@@ -11,7 +11,7 @@
     if(validateFiles($errMess)) $files = getPOSTFiles();
     else{
 		http_response_code(409);
-		echo errMess;
+		echo $errMess;
 		exit;
 	}
 	
