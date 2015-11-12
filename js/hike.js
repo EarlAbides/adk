@@ -136,8 +136,19 @@ function deleteHike(){
             document.getElementById('div_table_hikes').innerHTML = ret;
             document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
 			enableDisableSelectOptions(getUsedPeakIDs());
+			document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
 		}
-	);
+	).error(function(ret){
+		var errMess = '';
+		if(ret.responseText.indexOf('t') !== -1) errMess += 'Invalid file type\r\n';
+		if(ret.responseText.indexOf('p') !== -1){
+			if(ret.responseText.indexOf('1') !== -1 || ret.responseText.indexOf('2') !== -1) errMess += 'Max file size exceeded\r\n';
+			else errMess += 'Error uploading file\r\n';
+		}
+		alert(errMess);
+		console.log(errMess);
+		$('#div_modal_loading').modal('hide');	
+	});
 }
 
 function cancelHike(){
