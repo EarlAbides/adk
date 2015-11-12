@@ -5,7 +5,9 @@
 <?php require_once 'hikerportal.inc.php';?>
 
 <?php include 'includes/head.php';?>
+	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/jquery.tablesorter.min.js"></script>
+	<script src="js/wysihtml.js"></script>
 	<script src="js/hike.min.js"></script>
 	<script src="js/jquery-dl.min.js"></script>
 	<script>
@@ -18,6 +20,11 @@
 			});
 			$('#downloader').downloader({desc: true});
 			$('.selecttable').tablesorter();
+			var editor = new wysihtml5.Editor('textbox_notes', {
+				toolbar: 'wysihtml-toolbar'
+				,parserRules: wysihtml5ParserRules
+				,stylesheets: 'css/wysihtml.css'
+			});
 		});
 	</script>
 </head>
@@ -309,6 +316,7 @@
 									<div class="col-xs-12">
 										<div class="form-group">
 											<label for="textbox_notes" class="control-label control-label-sm">Notes</label><br />
+											<?php include 'includes/wysihtml-toolbar.php';?>
 											<textarea id="textbox_notes" name="notes" class="form-control form-control-sm" style="min-height:100px;" placeholder="Notes, messages" maxlength="16384"></textarea>
 											<span class="help-block with-errors"></span>
 										</div>
