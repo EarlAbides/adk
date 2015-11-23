@@ -116,8 +116,10 @@ function editHike(){
     else document.getElementById('textbox_notes').value = ADK_HIKE.ADK_HIKE_NOTES;
 
     //Attachments
-
-
+	
+	
+	enableDisable_addHike();
+	
     //Scroll
     $('html, body').animate({scrollTo: $(span_maxminAddUpdateHike).offset().top}, 600);
 }
