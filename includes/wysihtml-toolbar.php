@@ -28,7 +28,7 @@
 		<span class="glyphicon glyphicon-list" title="Bullet List" data-toggle="tooltip"></span>
 	</a>
 	<a data-wysihtml5-command="insertOrderedList">
-		<span class="glyphicon glyphicon-sort-by-order" title="Bullet List" data-toggle="tooltip"></span>
+		<span class="glyphicon glyphicon-sort-by-order" title="Ordered List" data-toggle="tooltip"></span>
 	</a>
 
 	&nbsp;
