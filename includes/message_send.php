@@ -11,14 +11,16 @@
 	require_once 'File.php';
 	require_once 'User.php';
 	require_once 'email.php';
-		
+	
+	if(!isset($_SESSION['ADK_USER_ID'])) exit;
+	
 	if(validateFiles($errMess)) $files = getPOSTFiles();
 	else header('Location: ../messages?_'.$_POST['touserid'].'=&e='.$errMess);
 	
 	$con = connect_db();
 	
 	$ADK_MESSAGE = addMessage($con);
-	$ADK_MESSAGE = getMessage($con, $ADK_MESSAGE['ADK_MESSAGE_ID']);
+	$ADK_MESSAGE = getMessage($con, $ADK_MESSAGE['ADK_MESSAGE_ID'], intval($_SESSION['ADK_USER_ID']));
 	
 	if(!isset($_POST['draft'])){
 		$ADK_MESSAGE_TO_EMAIL = getUserEmail($con, $_POST['touserid']);

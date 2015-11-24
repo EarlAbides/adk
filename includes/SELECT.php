@@ -249,7 +249,7 @@
 	}
 	
 	//Message
-	function sql_getMessage($con, $ADK_MESSAGE_ID){
+	function sql_getMessage($con, $ADK_MESSAGE_ID, $ADK_USER_ID){
 		$sql_query = $con->prepare(
             "SELECT A.ADK_MESSAGE_ID, A.ADK_MESSAGE_FROM_USER_ID, A.ADK_MESSAGE_TO_USER_ID,
 				A.ADK_MESSAGE_TITLE, A.ADK_MESSAGE_CONTENT, A.ADK_MESSAGE_DTE, A.ADK_MESSAGE_READ,
@@ -259,10 +259,11 @@
 				(SELECT ADK_USER_NAME FROM ADK_USER B WHERE B.ADK_USER_ID = A.ADK_MESSAGE_TO_USER_ID) AS ADK_MESSAGE_TO_NAME,
 				(SELECT CASE WHEN (SELECT COUNT(*) FROM ADK_HIKER C WHERE A.ADK_MESSAGE_FROM_USER_ID = C.ADK_USER_ID) > 0 THEN 1 ELSE 0 END) AS isFromHiker
 			FROM ADK_MESSAGE A
-			WHERE A.ADK_MESSAGE_ID = ?;"
+			WHERE A.ADK_MESSAGE_ID = ?
+				AND (A.ADK_MESSAGE_FROM_USER_ID = ? OR A.ADK_MESSAGE_TO_USER_ID = ?);"
         );
 
-        $sql_query->bind_param('i', $ADK_MESSAGE_ID);
+        $sql_query->bind_param('iii', $ADK_MESSAGE_ID, $ADK_USER_ID, $ADK_USER_ID);
 
         return $sql_query;
 	}

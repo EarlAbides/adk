@@ -44,9 +44,9 @@
 		return $ADK_MESSAGES;
 	}
 	
-	function getMessage($con, $ADK_MESSAGE_ID){
+	function getMessage($con, $ADK_MESSAGE_ID, $ADK_USER_ID){
         $ADK_MESSAGE = '';
-		$sql_query = sql_getMessage($con, $ADK_MESSAGE_ID);
+		$sql_query = sql_getMessage($con, $ADK_MESSAGE_ID, $ADK_USER_ID);
 		if($sql_query->execute()){
             $sql_query->store_result();
             $result = sql_get_assoc($sql_query);
