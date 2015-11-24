@@ -1,10 +1,11 @@
 <?php
 	
 	//Imports
+	require_once 'session.php';
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
 	require_once 'Message.php';
-	
+
 	if(!isset($_SESSION['ADK_USER_ID'])){echo 0; exit;}
 	
 	$con = connect_db();
