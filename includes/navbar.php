@@ -32,15 +32,15 @@
 	
 		echo "<script>
 				$(document).ready(function(){
-							$.get('includes/ajax_messageGetNewCount.php?_=".$_SESSION['ADK_USER_ID']."',
-								function(ret){
-									if(parseInt(ret) > 0){
-										var html = '<span class=\"badge newmessages\">' + ret + '</span>';
-										document.getElementById('span_messages').innerHTML = html;
-									}
-								});
-						});
-					</script>";
+						$.get('includes/ajax_messageGetNewCount.php',
+							function(ret){
+								if(parseInt(ret) > 0){
+									var html = '<span class=\"badge newmessages\">' + ret + '</span>';
+									document.getElementById('span_messages').innerHTML = html;
+								}
+							});
+					});
+				</script>";
 	}
 	
 ?>
