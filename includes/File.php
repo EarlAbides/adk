@@ -90,7 +90,7 @@
 		return $src;
     }
 	
-	function validateFiles(&$errMess){		
+	function validateFiles(&$errMess){
 		$valid = true;
 		for($i = 0; $i < count($_FILES); $i++){
 			for($j = 0; $j < count($_FILES['file'.$i]['tmp_name']); $j++){
@@ -130,8 +130,8 @@
 			}
 			
 			//PHP error
-			if($_FILES['file'.$i]['error'][$j] !== 0){
-				$errMess .= 'p'.$_FILES['file'.$i]['error'][$j];
+			if($_FILES['corrphoto']['error'] !== 0){
+				$errMess .= 'p'.$_FILES['corrphoto']['error'];
 				$valid = false;
 			}
 		}
