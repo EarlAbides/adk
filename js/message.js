@@ -299,7 +299,10 @@ function openDraft(ADK_MESSAGE_ID){
 
 			if(document.getElementById('hidden_usergroupcde').value !== 'HIK') document.getElementById('select_to_username').value = ADK_MESSAGE.ADK_MESSAGE_TO_USER_ID;
 			document.getElementById('textbox_subject').value = ADK_MESSAGE.ADK_MESSAGE_TITLE;
-			document.getElementById('textbox_message').value = ADK_MESSAGE.ADK_MESSAGE_CONTENT;
+			
+			var wysiIframeBody = getWysiIframeBody();
+			if(wysiIframeBody) wysiIframeBody.innerHTML = ADK_MESSAGE.ADK_MESSAGE_CONTENT;
+			else document.getElementById('textbox_message').value = ADK_MESSAGE.ADK_MESSAGE_CONTENT;
             
             //Attachments
             var ul_messageattachments = document.getElementById('ul_messageattachments');
