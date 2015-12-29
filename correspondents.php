@@ -8,7 +8,7 @@
 	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$('.selecttable').DataTable({pageLength: 15, lengthChange: false});
+			$('.selecttable').DataTable({pageLength: 15, order: [1, 'asc'], lengthChange: false, columnDefs: [{targets: 0, searchable: false, sortable: false}]});
 		});
 	</script>
 </head>
