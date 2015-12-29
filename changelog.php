@@ -4,12 +4,10 @@
 <?php require_once 'changelog.inc.php';?>
 
 <?php include 'includes/head.php';?>
-	<script src="js/jquery.tablesorter.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			$('.checkbox_done').click(function(){a(this.value, this.checked);});
 			$('#table_changelog tr').click(function(){d(this);});
-			$('.selecttable').tablesorter({cssChildRow: 'row-details'});
 		});
 		function a(b,c){c=(c?1:0);$.post('includes/ajax_updateChangeDone.php',{ADK_CHANGE_ID:b,ADK_CHANGE_DONE:c});}
 		function d(e){var f=e.nextElementSibling,s=e.children[0].children[0];if(f.style.display=='none'){f.style.display='';s.className=s.className.replace('right','down');}else{f.style.display='none';s.className=s.className.replace('down','right');}}

@@ -193,13 +193,13 @@
 	
 	function getTableHikes($ADK_HIKES){
 		$peakIDs = '';
-		$html = "<table id=\"table_hikes\" class=\"selecttable\">
+		$html = "<table id=\"table_hikes\" class=\"selecttable dt\">
 					<thead>
 						<tr>
 							<th style=\"width:5%;\"></th>
-							<th class=\"pointer\" style=\"width:72%;\">Peaks</th>
-							<th class=\"pointer\" style=\"width:15%;\">Date</th>
-							<th class=\"pointer\" style=\"width:8%;\">#&nbsp;Peaks</th>
+							<th style=\"width:72%;\">Peaks</th>
+							<th style=\"width:15%;\">Date</th>
+							<th style=\"width:8%;\">#&nbsp;Peaks</th>
 						</tr>
 					</thead>
 					<tbody>";

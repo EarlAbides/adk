@@ -4,10 +4,11 @@
 <?php require_once 'hikers.inc.php';?>
 
 <?php include 'includes/head.php';?>
-	<script src="js/jquery.tablesorter.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$('.selecttable').tablesorter();
+			$('.selecttable').DataTable({pageLength: 15, lengthChange: false});
 		});
 	</script>
 </head>

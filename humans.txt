@@ -3,6 +3,7 @@ Made by Neil Simpson
 Credits to:
 jQuery
 jQuery Tablesorter
+jQuery DataTables
 jQueryUI
 jquery.lazyload
 1000hz/bootstrap-validator

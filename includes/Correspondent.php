@@ -123,11 +123,10 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th class=\"pointer\">Name</th>
-							<th class=\"pointer\">Username</th>
-							<th class=\"pointer\">Email</th>
-							<th class=\"pointer\">#&nbsp;Hikers</th>
-							<th></th>
+							<th>Name</th>
+							<th>Username</th>
+							<th>Email</th>
+							<th>#&nbsp;Hikers</th>
 						</tr>
 					</thead>
 					<tbody>";

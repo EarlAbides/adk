@@ -5,10 +5,11 @@
 <?php require_once 'correspondent.inc.php';?>
 
 <?php include 'includes/head.php';?>
-	<script src="js/jquery.tablesorter.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$('.selecttable').tablesorter();
+			$('.selecttable').DataTable({pageLength: 15, lengthChange: false});
 		});
 	</script>
 </head>
@@ -88,7 +89,7 @@
 				
 				<div class="container-fluid">
 					<div class="col-xs-12">
-						<div class="div_tablewrapper">
+						<div class="div_tablewrapper tablewrapper500">
 							<?php echo $table_hikers;?>
 						</div>
 					</div>

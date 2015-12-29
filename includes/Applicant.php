@@ -174,11 +174,11 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th class=\"pointer\">Name</th>
-							<th class=\"pointer\">Username</th>
-							<th class=\"pointer\">Email</th>
-							<th class=\"pointer\">Phone</th>
-							<th class=\"pointer\">State</th>
+							<th>Name</th>
+							<th>Username</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>State</th>
 						</tr>
 					</thead>
 					<tbody>";		

@@ -143,11 +143,11 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th class=\"pointer\">Name</th>
-							<th class=\"pointer\">Username</th>
-							<th class=\"pointer\">Email</th>
-							<th class=\"pointer\">Staff Correspondent</th>
-							<th class=\"pointer\">#&nbsp;Peaks</th>
+							<th>Name</th>
+							<th>Username</th>
+							<th>Email</th>
+							<th>Staff Correspondent</th>
+							<th>#&nbsp;Peaks</th>
 						</tr>
 					</thead>
 					<tbody>";

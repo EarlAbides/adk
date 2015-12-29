@@ -6,6 +6,8 @@
 
 <?php include 'includes/head.php';?>
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script src="js/jquery.tablesorter.min.js"></script>
 	<script src="js/wysihtml.js"></script>
 	<script src="js/hike.min.js"></script>
@@ -19,6 +21,7 @@
 				,yearRange: '-100:+0'
 			});
 			$('#downloader').downloader({desc: true});
+			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
 			$('.selecttable').tablesorter();
 			var editor = new wysihtml5.Editor('textbox_notes', {
 				toolbar: 'wysihtml-toolbar'
@@ -204,7 +207,7 @@
 								<label class="control-label control-label-sm">Total Peaks:&nbsp;</label>
 								<span id="span_totalpeaks"><?php echo $ADK_HIKER['ADK_HIKER_NUMPEAKS'];?></span>
 							</div>
-							<div id="div_table_hikes" class="div_tablewrapper">
+							<div id="div_table_hikes" class="div_tablewrapper tablewrapper500">
 								<?php echo $table_hikes;?>
 							</div>
 						</div>

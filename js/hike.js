@@ -51,6 +51,7 @@ function addUpdateHike(form){
 			cancelHike();
 			var a_maxmin_hike_data = document.getElementById('a_maxmin_hike_data');
 			if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1) $(a_maxmin_hike_data).click();
+			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
 		}
 		,error: function(ret){
 			var errMess = '';
@@ -139,6 +140,7 @@ function deleteHike(){
             document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
 			enableDisableSelectOptions(getUsedPeakIDs());
 			document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
+			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
 		}
 	).error(function(ret){
 		var errMess = '';
@@ -269,7 +271,7 @@ function viewHike(td){
         $('#a_maxmin_hike_data').click();
 
 	tooltip();
-    $('.selecttable').trigger('update');
+    //$('.selecttable').trigger('update');
 
 	$('html, body').animate({scrollTop: $("#div_hike_data").offset().top}, 600);
 }
