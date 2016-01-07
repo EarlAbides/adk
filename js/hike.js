@@ -169,6 +169,7 @@ function cancelHike(){
     enableDisableSelectOptions(usedPeakIDs);
     document.getElementById('textbox_hikedate').value = '';
     document.getElementById('textbox_notes').value = '';
+	document.getElementById('hidden_prefileids').value = '';
 	var wysiIframeBody = getWysiIframeBody();
 	if(wysiIframeBody) wysiIframeBody.innerHTML = '';
     document.getElementById('div_peaks_container').innerHTML = '';
