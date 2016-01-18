@@ -61,18 +61,18 @@
 			<div class="collapse navbar-collapse" id="navbar">
 				<form id="form_nav_login" action="includes/login.php" method="post" class="form-inline" data-toggle="validator" role="form" novalidate>
 					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown<?php if(isset($open)) echo $open;?>">
+						<li class="dropdown<?php if(isset($open)) echo $open; ?>">
 							<a href="#" id="a_logindropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li>
-									<div class="form-group<?php if(isset($haserror)) echo $haserror;?>">
+									<div class="form-group<?php if(isset($haserror)) echo $haserror; ?>">
 										<div class="col-xs-12" style="padding:0 12px;">
 											<label for="input_username" class="control-label control-label-sm" style="margin:0;">Username</label><br />
 											<input type="text" id="input_username" name="username" class="form-control input-sm" required />
 											<span class="help-block with-errors"></span>
 										</div>
 									</div>
-									<div class="form-group<?php if(isset($haserror)) echo $haserror;?>">
+									<div class="form-group<?php if(isset($haserror)) echo $haserror; ?>">
 										<div class="col-xs-12" style="padding:0 12px;">
 											<label for="input_password" class="control-label control-label-sm" style="margin:0;">Password</label><br />
 											<input type="password" id="input_password" name="password" class="form-control input-sm" required />
@@ -84,7 +84,7 @@
 									<div style="display:inline;padding:0 4px;">
 										<a href="./forgot" style="font-size:0.8em;display:inline;position:absolute;bottom:4px;">Forgot password?</a>
 									</div>
-									<input type="hidden" name="page" value="<?php if(isset($page)) echo $page;?>" />
+									<input type="hidden" name="page" value="<?php if(isset($page)) echo $page; ?>" />
 									<button type="submit" class="btn btn-sm btn-default pull-right" style="margin:4px 4px 0 0;">Log in</button>
 								</li>
 							</ul>
@@ -106,7 +106,7 @@
 					<li class="dropdown">
 						<a href="#" id="a_logindropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
-							<?php echo $_SESSION['ADK_USER_USERNAME'];?>&nbsp;<span class="caret"></span>
+							<?php echo $_SESSION['ADK_USER_USERNAME']; ?>&nbsp;<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
 							<li>

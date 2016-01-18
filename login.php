@@ -1,5 +1,5 @@
 <?php require_once 'includes/session.php'; ?>
-<?php $page = explode("/", $_SERVER['REQUEST_URI']); $page = array_pop($page);?>
+<?php $page = explode("/", $_SERVER['REQUEST_URI']); $page = array_pop($page); ?>
 
 <?php include 'includes/head.php'; ?>
 </head>
@@ -20,7 +20,7 @@
 					
 					<form id="form_login" action="includes/login.php" method="post" class="form-inline" data-toggle="validator" data-disable="false" role="form" novalidate>
 						
-						<div class="form-group<?php if(isset($haserror)) echo $haserror;?>">
+						<div class="form-group<?php if(isset($haserror)) echo $haserror; ?>">
 							<div class="col-xs-12">
 								<label for="textbox_username" class="control-label control-label-sm">Username</label><br />
 								<input type="text" id="textbox_username" name="username" class="form-control form-control-sm" maxlength="40" placeholder="Username" required />
@@ -28,7 +28,7 @@
 							</div>
 						</div>
 						
-						<div class="form-group<?php if(isset($haserror)) echo $haserror;?>">
+						<div class="form-group<?php if(isset($haserror)) echo $haserror; ?>">
 							<div class="col-xs-12">
 								<label for="textbox_password" class="control-label control-label-sm">Password</label><br />
 								<input type="password" id="textbox_password" name="password" class="form-control form-control-sm" maxlength="40" placeholder="Password" required />
@@ -49,7 +49,7 @@
 							</div>
 						</div>
 						
-						<input type="hidden" name="page" value="<?php echo $page;?>" />
+						<input type="hidden" name="page" value="<?php echo $page; ?>" />
 							
 					</form>
 					

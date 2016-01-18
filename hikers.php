@@ -1,4 +1,4 @@
-<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
+<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/loginredir.php'; ?>
 <?php require_once 'hikers.inc.php'; ?>
@@ -33,7 +33,7 @@
 				<div class="container-fluid">
 					<div class="col-xs-12">
 						<div id="div_hikertable" class="div_tablewrapper">
-							<?php echo $table_hikers;?>
+							<?php echo $table_hikers; ?>
 						</div>
 					</div>
 				</div>

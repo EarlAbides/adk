@@ -1,4 +1,4 @@
-<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
+<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/loginredir.php'; ?>
 <?php require_once 'changelog.inc.php'; ?>
@@ -68,7 +68,7 @@
 				<div class="container-fluid">
 					<div class="col-xs-12">
 						<div class="div_tablewrapper">
-							<?php echo $table_changelog;?>
+							<?php echo $table_changelog; ?>
 						</div>
 					</div>
 				</div>

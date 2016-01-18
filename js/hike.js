@@ -331,6 +331,33 @@ function modal_hike(){
 	document.getElementById('modal_dike_notes').innerHTML = ADK_HIKE.ADK_HIKE_NOTES;
 }
 
+function printView(){
+	var ADK_USER = {
+			ADK_USER_NAME: document.getElementById('hidden_ADK_HIKER_NAME').value
+			,ADK_USER_USERNAME: document.getElementById('hidden_ADK_HIKER_USERNAME').value
+		}
+		,ADK_HIKE = getHikeInfo(document.querySelector('td.viewing'));
+
+	var newWindow = window.open();
+
+	var fontSizeScript = "<script>function a(d){var b=document.body.style.fontSize? parseInt(document.body.style.fontSize.replace(/\D/g,'')):100;if(b>=50&&b<=150){if(d)b+=10;else b-=10;}if(b<50)b=50;if(b>150)b=150;document.body.style.fontSize=b+'%';}</script>";
+
+	var html = '<h3 style="margin-bottom:8px;text-align:center;">The Adirondack Forty-Sixers';
+	html += '<div class="noprint" style="font-size:16px;float:right;"><a href="#" style="text-decoration:none;" onclick="a(0)" title="Zoom out">-</a>&nbsp;|&nbsp;<a href="#" style="text-decoration:none;" onclick="a(1)" title="Zoom in">+</a><br /></div>';
+	html += '</h3>';
+
+	html += '<img src="img/letterhead.png" style="height:70px;float:right;margin-right:10%;" onload="window.print()" />';
+
+	html += '';
+	html += '<span>' + ADK_USER.ADK_USER_NAME + ' (' + ADK_USER.ADK_USER_USERNAME + ')</span><br /><br />';
+	html += '<span>Date: ' + ADK_HIKE.ADK_HIKE_DTE + '</span><br />';
+	html += '<span>' + ADK_HIKE.ADK_PEAKS.map(function(x){return x.ADK_PEAK_NAME}).join(', ') + '</span><br />';
+	html += '----------------------------------------<br /><br />';
+	html += '<pre style="word-break:break-word;">' + ADK_HIKE.ADK_HIKE_NOTES + '</pre>';
+
+	newWindow.document.write(fontSizeScript + html);
+}
+
 //Peak
 function addPeak(select){
     if(!select) select = document.getElementById('select_remainingpeaks');

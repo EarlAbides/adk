@@ -1,7 +1,7 @@
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/variables.php'; ?>
 <?php require_once 'signup.inc.php'; ?>
-<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
+<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
 
 <?php include 'includes/head.php'; ?>
 	<script>
@@ -75,7 +75,7 @@
                         <?php if(isset($_GET['u'])){?>
                             <div class="username-error col-xs-12 has-error">
 							    <div class="form-group" style="display:inline;">
-                                    <span class="help-block with-errors">&#8226;Username '<?php echo $_GET['u'];?>' already in use</span>
+                                    <span class="help-block with-errors">&#8226;Username '<?php echo $_GET['u']; ?>' already in use</span>
                                 </div>
 							</div>
                         <?php }?>
@@ -169,7 +169,7 @@
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="select_country" class="control-label control-label-sm">Country*</label><br />
-									<?php echo select_country('United States');?>
+									<?php echo select_country('United States'); ?>
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -183,7 +183,7 @@
 							<div class="form-group">
 								<div class="col-xs-6 col-sm-3">
 									<label id="label_select_state" for="select_state" class="control-label control-label-sm">State*</label><br />
-									<?php echo select_state('NY');?>
+									<?php echo select_state('NY'); ?>
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -216,21 +216,21 @@
 							<div class="col-xs-12 col-sm-4" style="margin:0;">
 								<label class="control-label control-label-sm">List any peaks you've climbed</label><br />
 								<ul class="peaklist">
-									<?php for($i = 0; $i < 16; $i++) echo makeCheckbox($ADK_PEAKS[$i]);?>
+									<?php for($i = 0; $i < 16; $i++) echo makeCheckbox($ADK_PEAKS[$i]); ?>
 								</ul>
 							</div>
 
 							<div class="col-xs-12 col-sm-4" style="margin:0;">
 								<div class="hidden-xs">&emsp;</div>
 								<ul class="peaklist">
-									<?php for($i = 16; $i < 31; $i++) echo makeCheckbox($ADK_PEAKS[$i]);?>
+									<?php for($i = 16; $i < 31; $i++) echo makeCheckbox($ADK_PEAKS[$i]); ?>
 								</ul>
 							</div>
 
 							<div class="col-xs-12 col-sm-4" style="margin:0;">
 								<div class="hidden-xs">&emsp;</div>
 								<ul class="peaklist">
-									<?php for($i = 31; $i < 46; $i++) echo makeCheckbox($ADK_PEAKS[$i]);?>
+									<?php for($i = 31; $i < 46; $i++) echo makeCheckbox($ADK_PEAKS[$i]); ?>
 								</ul>
 							</div>
 
@@ -271,13 +271,13 @@
 	
 	<div style="display:none;">
 		<template id="template_state_us">
-			<?php echo select_state('NY');?>
+			<?php echo select_state('NY'); ?>
 		</template>
 		<template id="template_state_ca">
-			<?php echo select_state_ca('ON');?>
+			<?php echo select_state_ca('ON'); ?>
 		</template>
 		<template id="template_stateregion">
-			<?php echo textbox_stateregion('');?>
+			<?php echo textbox_stateregion(''); ?>
 		</template>
 	</div>
 	

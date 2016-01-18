@@ -139,6 +139,8 @@ width:100%;
 .modal-header{background-color:#CECECE;border-top-left-radius:6px;border-top-right-radius:6px;}
 #span_modal_hike_date, #span_modal_viewMessage_dte{font-size:1.2em;margin-left:20px;}
 
+@media print{.noprint, .noprint *{display:none !important;}}
+
 /*Gallery*/
 ul.gallery-photo{margin:0;padding:0;}
 ul.gallery-photo li{list-style:none;margin-bottom:25px;}

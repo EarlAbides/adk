@@ -1,4 +1,4 @@
-<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
+<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/loginredir.php'; ?>
 <?php require_once 'includes/variables.php'; ?>
@@ -34,7 +34,7 @@
 						<div class="div_tablewrapper" style="max-height:inherit;overflow-y:inherit">
 							<div id="div_table_messages">
 								<div id="div_table_messages">
-									<?php echo $table_messages;?>
+									<?php echo $table_messages; ?>
 								</div>
 							</div>
 							<div style="position:relative;bottom:0;">
@@ -85,8 +85,8 @@
 						</div>
 					</div>
 					
-					<input type="hidden" id="hidden_userid" value="<?php echo $ADK_USER_ID;?>" />
-					<input type="hidden" id="hidden_usergroupcde" value="<?php echo $ADK_USERGROUP_CDE;?>" />
+					<input type="hidden" id="hidden_userid" value="<?php echo $ADK_USER_ID; ?>" />
+					<input type="hidden" id="hidden_usergroupcde" value="<?php echo $ADK_USERGROUP_CDE; ?>" />
 					<?php if($ADK_TO_USER_ID !== '') echo '<input type="hidden" id="hidden_newMessage" />'; ?>
 					<div id="div_messages_main" class="col-xs-12 col-md-9"></div>
 					
@@ -180,9 +180,8 @@
 				
 				</div>
 								
-				<!-- Hidden -->
 				<div style="display:none;">
-					<input type="hidden" name="id" value="<?php echo $ADK_USER_ID;?>" />
+					<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
 					<input type="hidden" id="hidden_replyfileids" name="replyfileids" />
 					<?php
 						if(isset($ADK_TO_USER) && $ADK_TO_USER !== ''){

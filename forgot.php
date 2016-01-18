@@ -19,7 +19,7 @@
 					<form id="form_forgotpw" method="post" action="includes/user_updatepw.php" data-toggle="validator" role="form" novalidate>
 						
 						<h4 class="content-header">
-							Reset Password - <?php echo $ADK_USER['ADK_USER_USERNAME'];?>
+							Reset Password - <?php echo $ADK_USER['ADK_USER_USERNAME']; ?>
 							<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
 								<span class="glyphicon glyphicon-chevron-down"></span>
 							</a>
@@ -62,7 +62,7 @@
 								</div>
 							
 								<div class="col-xs-12">
-									<p><?php echo $errMess;?></p>
+									<p><?php echo $errMess; ?></p>
 								</div>
 							</div>
 						
@@ -70,7 +70,7 @@
 						
 						<!-- Hidden -->
 						<div style="display:none;">
-							<input type="hidden" name="id" value="<?php echo $ADK_USER_ID;?>" />
+							<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
 						</div>
 					
 					</form>
@@ -110,7 +110,7 @@
 								</div>
 							
 								<div class="col-xs-12">
-									<p><?php echo $errMess;?></p>
+									<p><?php echo $errMess; ?></p>
 								</div>
 							</div>
 						

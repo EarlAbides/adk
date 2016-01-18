@@ -35,4 +35,4 @@
 		$rand_key = array_rand($files, 1);
 		$bg_name = $files[$rand_key];
 	?>
-	<style>#div_logo{background-image:url(img/bg/<?php echo $bg_name;?>);}</style>
+	<style>#div_logo{background-image:url(img/bg/<?php echo $bg_name; ?>);}</style>

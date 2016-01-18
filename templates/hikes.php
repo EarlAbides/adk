@@ -15,10 +15,10 @@
 			<div class="col-xs-12">
 				<div class="pull-right">
 					<label class="control-label control-label-sm">Total Peaks:&nbsp;</label>
-					<span id="span_totalpeaks"><?php echo $ADK_HIKER['ADK_HIKER_NUMPEAKS'];?></span>
+					<span id="span_totalpeaks"><?php echo $ADK_HIKER['ADK_HIKER_NUMPEAKS']; ?></span>
 				</div>
 				<div id="div_table_hikes" class="div_tablewrapper tablewrapper500">
-					<?php echo $table_hikes;?>
+					<?php echo $table_hikes; ?>
 				</div>
 			</div>
 		</div>
@@ -80,7 +80,10 @@
 						<h4 class="content-header">
 							Notes
 							<a class="pointer hoverbtn" onclick="modal_hike();" data-toggle="modal" data-target="#div_modal_hike">
-								<span class="glyphicon glyphicon-fullscreen" title="Fullscreen" data-toggle="tooltip" data-placement="left" data-container="body"></span>
+								<span class="glyphicon glyphicon-fullscreen" title="Fullscreen" data-toggle="tooltip" data-placement="bottom" data-container="body"></span>
+							</a>
+							<a class="pointer hoverbtn" style="margin-right:25px;" onclick="printView();">
+								<span class="glyphicon glyphicon-print" title="Print" data-toggle="tooltip" data-placement="bottom" data-container="body"></span>
 							</a>
 						</h4>
 						<span id="span_hikenotes" class="lgtext"></span>
@@ -92,3 +95,6 @@
 					
 	</div>
 </div>
+
+<input type="hidden" id="hidden_ADK_HIKER_NAME" value="<?php echo $ADK_HIKER['ADK_USER_NAME']; ?>" />
+<input type="hidden" id="hidden_ADK_HIKER_USERNAME" value="<?php echo $ADK_HIKER['ADK_USER_USERNAME']; ?>" />

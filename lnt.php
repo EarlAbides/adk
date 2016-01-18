@@ -1,5 +1,5 @@
 <?php require_once 'includes/session.php'; ?>
-<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
+<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
 <?php include 'includes/variables_site.php'; ?>
 
 <?php include 'includes/head.php'; ?>

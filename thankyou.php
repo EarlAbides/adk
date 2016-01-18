@@ -1,5 +1,5 @@
 <?php require_once 'includes/session.php'; ?>
-<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
+<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
 <?php include 'includes/variables_site.php'; ?>
 
 <?php include 'includes/head.php'; ?>
@@ -45,7 +45,7 @@
 						</p>
 						<p>
 							If you do not hear from anyone in two weeks, please contact
-							<a href="mailto:<?php echo $gbl_admin['email'];?>"><?php echo $gbl_admin['email'];?></a>,
+							<a href="mailto:<?php echo $gbl_admin['email']; ?>"><?php echo $gbl_admin['email']; ?></a>,
                             which is accessible via the Help Button at bottom of the page.
 						</p>
 						

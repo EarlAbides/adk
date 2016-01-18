@@ -1,4 +1,4 @@
-<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
+<?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/loginredir.php'; ?>
 <?php require_once 'includes/variables.php'; ?>
@@ -63,7 +63,7 @@
 						<div class="form-group">
 							<div class="col-xs-12" style="display:inline;">
 								<label class="control-label control-label-sm">Username</label><br />
-								<span><?php echo $ADK_HIKER['ADK_USER_USERNAME'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_USER_USERNAME']; ?></span>
 							</div>
 						</div>
 					</div>
@@ -76,31 +76,31 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Name</label><br />
-								<span><?php echo $ADK_HIKER['ADK_USER_NAME'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_USER_NAME']; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Email</label><br />
-								<span><a href="mailto:<?php echo $ADK_HIKER['ADK_USER_EMAIL'];?>"><?php echo $ADK_HIKER['ADK_USER_EMAIL'];?></a></span>
+								<span><a href="mailto:<?php echo $ADK_HIKER['ADK_USER_EMAIL']; ?>"><?php echo $ADK_HIKER['ADK_USER_EMAIL']; ?></a></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-6">
 								<label class="control-label control-label-sm">Phone</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_PHONE'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_HIKER_PHONE']; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">Age</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_AGE'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_HIKER_AGE']; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">Sex</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_SEX'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_HIKER_SEX']; ?></span>
 							</div>
 						</div>
 					</div>
@@ -110,39 +110,39 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Address, line 1</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS1'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS1']; ?></span>
 							</div>
 						</div>
 						<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){?>
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Address<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){?>, line 1<?php }?></label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS2'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS2']; ?></span>
 							</div>
 						</div>
 						<?php }?>
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-6">
 								<label class="control-label control-label-sm">City</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_CITY'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_HIKER_CITY']; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">State</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_STATE'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_HIKER_STATE']; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">Zip</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_ZIP'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_HIKER_ZIP']; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Country</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_COUNTRY'];?></span>
+								<span><?php echo $ADK_HIKER['ADK_HIKER_COUNTRY']; ?></span>
 							</div>
 						</div>
 					</div>
@@ -155,7 +155,7 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Personal info</label><br />
-								<span class="lgtext"><?php echo $ADK_HIKER['ADK_HIKER_PERSONALINFO'];?></span>
+								<span class="lgtext"><?php echo $ADK_HIKER['ADK_HIKER_PERSONALINFO']; ?></span>
 							</div>
 						</div>
 					</div>
@@ -167,10 +167,10 @@
 					<div class="col-xs-12" style="margin-top:10px;">
 						<div class="form-group">
 							<div class="col-xs-6">
-								<a href="./messages?_=<?php echo $ADK_HIKER['ADK_USER_ID'];?>" class="btn btn-sm btn-default">Send Message</a>
+								<a href="./messages?_=<?php echo $ADK_HIKER['ADK_USER_ID']; ?>" class="btn btn-sm btn-default">Send Message</a>
 							</div>
                             <div class="col-xs-6 text-right">
-								<a href="./gallery?_=<?php echo $ADK_HIKER['ADK_USER_ID'];?>">View Gallery</a>
+								<a href="./gallery?_=<?php echo $ADK_HIKER['ADK_USER_ID']; ?>">View Gallery</a>
 							</div>
 						</div>
 					</div>
@@ -254,7 +254,7 @@
 							
 								<!-- Hidden -->
 								<div style="display:none;">
-									<input type="hidden" id="hikerId" name="id" value="<?php echo $ADK_HIKER['ADK_USER_ID'];?>" />
+									<input type="hidden" id="hikerId" name="id" value="<?php echo $ADK_HIKER['ADK_USER_ID']; ?>" />
 									<input type="hidden" id="hidden_peakids" name="peakids" />
 									<input type="hidden" id="hidden_hikeid" name="hikeid" />
 									<input type="hidden" id="hidden_prefileids" name="prefileids" />
@@ -280,7 +280,7 @@
 			<input type="hidden" id="hidden_fileid" name="id" />
 			<input type="submit" id="button_download" />
 		</form>
-		<?php if(isset($ADK_MESSAGE)) echo "<input type=\"hidden\" id=\"hidden_ADK_MESSAGE_JSON\" value=\"".$ADK_MESSAGE."\" />";?>
+		<?php if(isset($ADK_MESSAGE)) echo "<input type=\"hidden\" id=\"hidden_ADK_MESSAGE_JSON\" value=\"".$ADK_MESSAGE."\" />"; ?>
 	</div>
 
 	<?php include 'templates/modal/hikenotes.html'; ?>
