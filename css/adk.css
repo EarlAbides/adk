@@ -233,7 +233,7 @@ table.dataTable thead .sorting_desc{background-image:url("../img/sort_desc.png")
 .dataTables_paginate{text-align:right;}
 .pagination{margin:4px 0 0;}
 .div_tablewrapper .row{margin:0;}
-.pagination>li>a, .pagination>li>span{background-color:#e0e0e0;}
+.pagination>li>a, .pagination>li>span{background-color:#e0e0e0;font-size:0.8em;padding:6px 8px;}
 .pagination>li.disabled>a, .pagination>li.disabled>span{background-color:#ccc;}
 .pagination>li>a,.pagination>li>span,.pagination>li>a:active,.pagination>li>span:active,.pagination>li>a:hover,.pagination>li>span:hover{color:#333;}
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{border-color:#cccccc;background-color:#b6b4b4;}
