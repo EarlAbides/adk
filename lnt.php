@@ -1,4 +1,4 @@
-<?php require_once 'includes/session.php';?>
+<?php require_once 'includes/session.php'; ?>
 <?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
 <?php include 'includes/variables_site.php'; ?>
 
@@ -6,11 +6,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php';?>
-	<?php include 'includes/logo.php';?>
+	<?php include 'includes/navbar.php'; ?>
+	<?php include 'includes/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php';?>
+		<?php include 'includes/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 content content-max">
@@ -33,7 +33,7 @@
 			</div>
 			
 		</div>
-		<?php include 'includes/footer.php';?>
+		<?php include 'includes/footer.php'; ?>
 	</div>
 	
 </body>

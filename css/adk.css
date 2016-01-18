@@ -136,13 +136,15 @@ width:100%;
 
 #div_hikertable{max-height:600px;}
 
+.modal-header{background-color:#CECECE;border-top-left-radius:6px;border-top-right-radius:6px;}
+#modal_hike_date{font-size:1.2em;margin-left:20px;}
+
 /*Gallery*/
 ul.gallery-photo{margin:0;padding:0;}
 ul.gallery-photo li{list-style:none;margin-bottom:25px;}
 #modal_gallery_desc, #modal_gallery_dl{margin-top:15px;padding:7px 15px;background-color:#CECECE;}
 #modal_gallery_desc button{margin:-2px -10px 0 4px;}
-#modal_gallery_desc{min-height: 35px;word-break:break-all;}
-#modal_gallery .modal-header{background-color:#CECECE;border-top-left-radius:6px;border-top-right-radius:6px;}
+#modal_gallery_desc{min-height: 35px;word-break:break-all;-ms-word-break:break-all;}
 #modal_gallery .modal-content{background-color:#ECE7CD;}
 #modal_gallery_videoerror{text-align:center;font-style:italic;margin:20px 0;width:100%;}
 div.scroll{overflow:auto;}

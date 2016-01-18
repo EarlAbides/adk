@@ -1,16 +1,16 @@
 <?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
-<?php require_once 'includes/session.php';?>
-<?php require_once 'includes/loginredir.php';?>
-<?php require_once 'includes/variables.php';?>
-<?php require_once 'hikerportal.inc.php';?>
+<?php require_once 'includes/session.php'; ?>
+<?php require_once 'includes/loginredir.php'; ?>
+<?php require_once 'includes/variables.php'; ?>
+<?php require_once 'hikerportal.inc.php'; ?>
 
-<?php include 'includes/head.php';?>
+<?php include 'includes/head.php'; ?>
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script src="js/jquery.tablesorter.min.js"></script>
 	<script src="js/wysihtml.js"></script>
-	<script src="js/hike.min.js"></script>
+	<script src="js/hike.js"></script>
 	<script src="js/jquery-dl.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -33,11 +33,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php';?>
-	<?php include 'includes/logo.php';?>
+	<?php include 'includes/navbar.php'; ?>
+	<?php include 'includes/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php';?>
+		<?php include 'includes/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12">
@@ -191,90 +191,7 @@
 				</div>
 			</div>
 			
-			<div class="col-xs-12">
-				<div class="container-fluid content content-max" style="margin-bottom:15px;">
-				
-					<h4 id="div_myhikes" class="content-header">
-						My Hikes
-						<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
-							<span class="glyphicon glyphicon-chevron-down"></span>
-						</a>
-					</h4>
-					
-					<div class="container-fluid" style="margin-bottom:-5px;">
-						<div class="col-xs-12">
-							<div class="pull-right">
-								<label class="control-label control-label-sm">Total Peaks:&nbsp;</label>
-								<span id="span_totalpeaks"><?php echo $ADK_HIKER['ADK_HIKER_NUMPEAKS'];?></span>
-							</div>
-							<div id="div_table_hikes" class="div_tablewrapper tablewrapper500">
-								<?php echo $table_hikes;?>
-							</div>
-						</div>
-					</div>
-					
-					<div class="container-fluid content-min">
-						<div id="div_hike_data" style="margin-top:40px;">
-							
-							<h4 class="content-header" style="width:94%;">&nbsp;
-								<a id="a_maxmin_hike_data" class="hoverbtn pointer" onclick="showHide_content(this.children[0], this.parentNode.parentNode.parentNode);">
-									<span class="glyphicon glyphicon-chevron-up"></span>
-								</a>
-							</h4>
-							
-							<div class="col-sm-12 text-right">
-								<a class="pointer" onclick="editHike();">Edit</a>
-								<b>&nbsp;|&nbsp;</b>
-								<a href="#" onclick="if(confirm('Are you sure you want to delete this hike?')) deleteHike();" style="margin-right:5%;">Delete</a>
-							</div>
-								
-							<div class="col-xs-12 col-sm-4">
-								<div class="div_tablewrapper">
-									<h4 class="content-header">Peaks</h4>
-									<table id="table_hikespeaks" class="selecttable">
-										<thead>
-											<tr>
-												<th class="pointer" style="width:66%;">Name</th>
-												<th class="pointer" style="width:34%;">Height <small><a id="a_heightFormat" class="pointer hoverbtn" onclick="convertFormat(this);">(ft)</a></small></th>
-											</tr>
-										</thead>
-										<tbody></tbody>
-									</table>
-								</div>
-							</div>
-							
-							<div class="col-xs-12 col-sm-8">
-								<div class="hidden-sm hidden-md hidden-lg" style="display:block;">&emsp;</div>
-								<div class="div_tablewrapper">
-									<h4 class="content-header">Attachments</h4>
-									<table id="table_hikeattachments" class="selecttable">
-										<thead>
-											<tr>
-												<th style="width:4%;"></th>
-												<th class="pointer" style="width:25%;">Name</th>
-												<th class="pointer" style="width:44%;">Description</th>
-												<th class="pointer" style="width:15%;">Type</th>
-												<th class="pointer" style="width:12%;">Size</th>
-											</tr>
-										</thead>
-										<tbody></tbody>
-									</table>
-								</div>
-							</div>
-														
-							<div class="col-xs-12">
-								<div style="display:block;">&emsp;</div>
-								<div class="div_tablewrapper">
-									<h4 class="content-header">Notes</h4>
-									<span id="span_hikenotes" class="lgtext"></span>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-					
-				</div>
-			</div>
+			<?php include 'templates/hikes.php'; ?>
 
             <div class="col-xs-12">
 				<div class="container-fluid content content-max" style="margin-bottom:15px;">
@@ -319,7 +236,7 @@
 									<div class="col-xs-12">
 										<div class="form-group">
 											<label for="textbox_notes" class="control-label control-label-sm">Notes</label><br />
-											<?php include 'includes/wysihtml-toolbar.php';?>
+											<?php include 'includes/wysihtml-toolbar.php'; ?>
 											<textarea id="textbox_notes" name="notes" class="form-control form-control-sm" style="min-height:100px;" placeholder="Notes, messages" maxlength="16384"></textarea>
 											<span class="help-block with-errors"></span>
 										</div>
@@ -362,7 +279,7 @@
 			</div>
 			
 		</div>
-		<?php include 'includes/footer.php';?>
+		<?php include 'includes/footer.php'; ?>
 	</div>
 
     <div style="display:none;">
@@ -372,16 +289,8 @@
 		</form>
 	</div>
 
-    <div id="div_modal_loading" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="h4_modal_loading">
-		<div class="modal-dialog modal-sm" role="loading">
-			<div class="modal-content" style="background-color:transparent;border:0;">
-				<div class="modal-body">
-					<br /><br /><br /><br /><br /><br />
-					<img src="img/loading.gif" class="img-responsive" />
-				</div>
-			</div>
-		</div>
-	</div>
+    <?php include 'templates/modal/hikenotes.html'; ?>
+    <?php include 'templates/modal/loading.html'; ?>
 	
 </body>
 </html>

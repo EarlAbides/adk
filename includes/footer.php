@@ -1,4 +1,4 @@
-<?php require_once 'variables_site.php';?>
+<?php require_once 'variables_site.php'; ?>
 
 <nav id="navbar-footer" class="navbar navbar-default navbar-sub">
 	<div class="container-fluid">

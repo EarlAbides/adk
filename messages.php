@@ -1,10 +1,10 @@
 <?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
-<?php require_once 'includes/session.php';?>
-<?php require_once 'includes/loginredir.php';?>
-<?php require_once 'includes/variables.php';?>
-<?php require_once 'messages.inc.php';?>
+<?php require_once 'includes/session.php'; ?>
+<?php require_once 'includes/loginredir.php'; ?>
+<?php require_once 'includes/variables.php'; ?>
+<?php require_once 'messages.inc.php'; ?>
 
-<?php include 'includes/head.php';?>
+<?php include 'includes/head.php'; ?>
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/wysihtml.js"></script>
 	<script src="js/message.min.js"></script>
@@ -12,11 +12,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php';?>
-	<?php include 'includes/logo.php';?>
+	<?php include 'includes/navbar.php'; ?>
+	<?php include 'includes/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php';?>
+		<?php include 'includes/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
@@ -87,7 +87,7 @@
 					
 					<input type="hidden" id="hidden_userid" value="<?php echo $ADK_USER_ID;?>" />
 					<input type="hidden" id="hidden_usergroupcde" value="<?php echo $ADK_USERGROUP_CDE;?>" />
-					<?php if($ADK_TO_USER_ID !== '') echo '<input type="hidden" id="hidden_newMessage" />';?>
+					<?php if($ADK_TO_USER_ID !== '') echo '<input type="hidden" id="hidden_newMessage" />'; ?>
 					<div id="div_messages_main" class="col-xs-12 col-md-9"></div>
 					
 				</div>
@@ -95,7 +95,7 @@
 			</div>
 			
 		</div>
-		<?php include 'includes/footer.php';?>
+		<?php include 'includes/footer.php'; ?>
 	</div>
 	
 	<div style="display:none;">
@@ -144,7 +144,7 @@
 						<div class="col-xs-12" style="margin:2px 0 6px;">
 							<div class="form-group">
 								<div class="col-xs-12">
-									<?php include 'includes/wysihtml-toolbar.php';?>
+									<?php include 'includes/wysihtml-toolbar.php'; ?>
 									<textarea id="textbox_message" name="message" class="form-control form-control-sm" style="min-height:100px;" maxlength="16384" placeholder="Message"></textarea>
 									<span class="help-block with-errors"></span>
 								</div>
@@ -271,7 +271,7 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<div class="col-xs-12">
-								<?php if($ADK_USERGROUP_CDE == 'COR') echo '<a id="a_loghike" class="btn btn-sm btn-default">Log Hike</a>';?>
+								<?php if($ADK_USERGROUP_CDE == 'COR') echo '<a id="a_loghike" class="btn btn-sm btn-default">Log Hike</a>'; ?>
 								<button type="button" id="button_reply" class="btn btn-sm btn-default pull-right" onclick="reply();">Reply</button>
 							</div>
 						</div>

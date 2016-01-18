@@ -1,10 +1,10 @@
 <?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
-<?php require_once 'includes/session.php';?>
-<?php require_once 'includes/loginredir.php';?>
-<?php include 'includes/variables_site.php';?>
-<?php require_once 'gallery.inc.php';?>
+<?php require_once 'includes/session.php'; ?>
+<?php require_once 'includes/loginredir.php'; ?>
+<?php include 'includes/variables_site.php'; ?>
+<?php require_once 'gallery.inc.php'; ?>
 
-<?php include 'includes/head.php';?>
+<?php include 'includes/head.php'; ?>
     <script src="js/jquery.lazyload.min.js"></script>
     <script src="js/gallery.min.js"></script>
 	<script>
@@ -22,11 +22,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php';?>
-	<?php include 'includes/logo.php';?>
+	<?php include 'includes/navbar.php'; ?>
+	<?php include 'includes/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php';?>
+		<?php include 'includes/navbar_sub.php'; ?>
 		<div class="content-wrapper">
             
             <div class="col-xs-12 content content-max" style="margin-bottom:15px;">
@@ -51,10 +51,10 @@
 								<select id="select_ADK_HIKER" class="form-control form-control-sm">
 									<option value="">Show All</option>
 									<option disabled="disabled" role="separator" >-------------------------</option>
-									<?php foreach($ADK_HIKERS as $ADK_HIKER) echo '<option value="'.$ADK_HIKER['ADK_USER_ID'].'">'.$ADK_HIKER['ADK_USER_USERNAME'].' - '.$ADK_HIKER['ADK_USER_NAME'].'</option>';?>
+									<?php foreach($ADK_HIKERS as $ADK_HIKER) echo '<option value="'.$ADK_HIKER['ADK_USER_ID'].'">'.$ADK_HIKER['ADK_USER_USERNAME'].' - '.$ADK_HIKER['ADK_USER_NAME'].'</option>'; ?>
 								</select>
-							<?php }else echo $ADK_USER['ADK_USER_NAME'].'</span><br />';?>
-							<?php if(isset($ADK_USER)) echo '<span><a href="'.$ADK_USER['ADK_USER_EMAIL'].'">'.$ADK_USER['ADK_USER_EMAIL'].'</a></span><br />';?>
+							<?php }else echo $ADK_USER['ADK_USER_NAME'].'</span><br />'; ?>
+							<?php if(isset($ADK_USER)) echo '<span><a href="'.$ADK_USER['ADK_USER_EMAIL'].'">'.$ADK_USER['ADK_USER_EMAIL'].'</a></span><br />'; ?>
 						</div>
                     </div>
 
@@ -64,7 +64,7 @@
 						    <select id="select_filter" class="form-control form-control-sm">
                                 <option value="">Show All</option>
                                 <option disabled="disabled" role="separator" >-------------------------</option>
-                                <?php foreach($ADK_PEAKS as $ADK_PEAK) echo '<option value="'.$ADK_PEAK['ADK_PEAK_NAME'].'">'.$ADK_PEAK['ADK_PEAK_NAME'].'</option>';?>
+                                <?php foreach($ADK_PEAKS as $ADK_PEAK) echo '<option value="'.$ADK_PEAK['ADK_PEAK_NAME'].'">'.$ADK_PEAK['ADK_PEAK_NAME'].'</option>'; ?>
                             </select>
 						    <span class="help-block with-errors"></span>
                         </div>
@@ -155,7 +155,7 @@
 			</div>
 
 		</div>
-		<?php include 'includes/footer.php';?>
+		<?php include 'includes/footer.php'; ?>
 	</div>
 
     <div style="display:none;">

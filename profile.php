@@ -1,10 +1,10 @@
 <?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
-<?php require_once 'includes/session.php';?>
-<?php require_once 'includes/loginredir.php';?>
-<?php require_once 'includes/variables.php';?>
-<?php require_once 'profile.inc.php';?>
+<?php require_once 'includes/session.php'; ?>
+<?php require_once 'includes/loginredir.php'; ?>
+<?php require_once 'includes/variables.php'; ?>
+<?php require_once 'profile.inc.php'; ?>
 
-<?php include 'includes/head.php';?>
+<?php include 'includes/head.php'; ?>
 	<?php if($ADK_USERGROUP_CDE === 'HIK'){?>
 	<script>
 		$(document).ready(function(){
@@ -31,11 +31,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php';?>
-	<?php include 'includes/logo.php';?>
+	<?php include 'includes/navbar.php'; ?>
+	<?php include 'includes/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php';?>
+		<?php include 'includes/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
@@ -231,8 +231,8 @@
 									<label for="select_sex" class="control-label control-label-sm">Sex</label><br />
 									<select id="select_sex" name=sex class="form-control form-control-sm" placeholder="Sex">
 										<option />
-										<option value="M"<?php if($ADK_HIKER['ADK_HIKER_SEX'] == 'M') echo ' selected="selected"';?>>M</option>
-										<option value="F"<?php if($ADK_HIKER['ADK_HIKER_SEX'] == 'F') echo ' selected="selected"';?>>F</option>
+										<option value="M"<?php if($ADK_HIKER['ADK_HIKER_SEX'] == 'M') echo ' selected="selected"'; ?>>M</option>
+										<option value="F"<?php if($ADK_HIKER['ADK_HIKER_SEX'] == 'F') echo ' selected="selected"'; ?>>F</option>
 									</select>
 									<span class="help-block with-errors"></span>
 								</div>
@@ -399,7 +399,7 @@
 			</div>
 			
 		</div>
-		<?php include 'includes/footer.php';?>
+		<?php include 'includes/footer.php'; ?>
 	</div>
 	
 </body>

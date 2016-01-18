@@ -1,10 +1,10 @@
 <?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp);?>
-<?php require_once 'includes/session.php';?>
-<?php require_once 'includes/loginredir.php';?>
-<?php require_once 'includes/variables.php';?>
-<?php require_once 'applicant.inc.php';?>
+<?php require_once 'includes/session.php'; ?>
+<?php require_once 'includes/loginredir.php'; ?>
+<?php require_once 'includes/variables.php'; ?>
+<?php require_once 'applicant.inc.php'; ?>
 
-<?php include 'includes/head.php';?>
+<?php include 'includes/head.php'; ?>
 	<script>
 		$(document).ready(function(){
 			$('#select_country').change(function(){
@@ -29,11 +29,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php';?>
-	<?php include 'includes/logo.php';?>
+	<?php include 'includes/navbar.php'; ?>
+	<?php include 'includes/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php';?>
+		<?php include 'includes/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<form method="post" action="includes/applicant_update.php" data-toggle="validator" role="form" novalidate>
@@ -101,8 +101,8 @@
 									<label for="select_sex" class="control-label control-label-sm">Sex</label><br />
 									<select id="select_sex" name=sex class="form-control form-control-sm" placeholder="Sex">
 										<option />
-										<option value="M"<?php if($ADK_APPLICANT['ADK_APPLICANT_SEX'] == 'M') echo ' selected="selected"';?>>M</option>
-										<option value="F"<?php if($ADK_APPLICANT['ADK_APPLICANT_SEX'] == 'F') echo ' selected="selected"';?>>F</option>
+										<option value="M"<?php if($ADK_APPLICANT['ADK_APPLICANT_SEX'] == 'M') echo ' selected="selected"'; ?>>M</option>
+										<option value="F"<?php if($ADK_APPLICANT['ADK_APPLICANT_SEX'] == 'F') echo ' selected="selected"'; ?>>F</option>
 									</select>
 									<span class="help-block with-errors"></span>
 								</div>
@@ -192,7 +192,7 @@
 			</form>
 			
 		</div>
-		<?php include 'includes/footer.php';?>
+		<?php include 'includes/footer.php'; ?>
 	</div>
 	
 	<div style="display:none;">
