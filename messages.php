@@ -278,24 +278,8 @@
 					</div>
 					
 				</fieldset>
-				
-				<div id="div_modal_viewMessage" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="h4_modal_viewMessage">
-					<div class="modal-dialog modal-lg" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 id="h4_modal_viewMessage" class="modal-title"></h4>
-							</div>
-							<div class="modal-body">
-								<span id="span_modal_viewMessage_dte" class="pull-right"></span>
-								<span id="span_modal_viewMessage_message" class="lgtext"></span>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
+
+				<?php include 'templates/modal/message.html'; ?>
 				
 			</div>
 			

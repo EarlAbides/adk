@@ -326,8 +326,8 @@ function enableDisable_addHike(){
 
 function modal_hike(){
 	var ADK_HIKE = getHikeInfo(document.querySelector('td.viewing'));
-	document.getElementById('modal_hike_label').innerHTML = ADK_HIKE.ADK_PEAKS.map(function(x){return x.ADK_PEAK_NAME}).join(', ');
-	document.getElementById('modal_hike_date').innerHTML = ADK_HIKE.ADK_HIKE_DTE;
+	document.getElementById('h4_modal_hike_label').innerHTML = ADK_HIKE.ADK_PEAKS.map(function(x){return x.ADK_PEAK_NAME}).join(', ');
+	document.getElementById('span_modal_hike_date').innerHTML = ADK_HIKE.ADK_HIKE_DTE;
 	document.getElementById('modal_dike_notes').innerHTML = ADK_HIKE.ADK_HIKE_NOTES;
 }
 

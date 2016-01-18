@@ -137,7 +137,7 @@ width:100%;
 #div_hikertable{max-height:600px;}
 
 .modal-header{background-color:#CECECE;border-top-left-radius:6px;border-top-right-radius:6px;}
-#modal_hike_date{font-size:1.2em;margin-left:20px;}
+#span_modal_hike_date, #span_modal_viewMessage_dte{font-size:1.2em;margin-left:20px;}
 
 /*Gallery*/
 ul.gallery-photo{margin:0;padding:0;}

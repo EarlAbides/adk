@@ -79,7 +79,7 @@
 					<div class="div_tablewrapper">
 						<h4 class="content-header">
 							Notes
-							<a class="pointer hoverbtn" onclick="modal_hike();" data-toggle="modal" data-target="#modal_hike">
+							<a class="pointer hoverbtn" onclick="modal_hike();" data-toggle="modal" data-target="#div_modal_hike">
 								<span class="glyphicon glyphicon-fullscreen" title="Fullscreen" data-toggle="tooltip" data-placement="left" data-container="body"></span>
 							</a>
 						</h4>
