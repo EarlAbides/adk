@@ -24,6 +24,11 @@
     }
 
 	$('#form_addUpdateHike').on('change', enableDisable_addHike);
+
+	if(parseInt(window.location.hash.replace('#', ''))){
+		var ADK_HIKE_ID = window.location.hash.replace('#', '');
+		$('input[name="hikeid"][value="' + ADK_HIKE_ID + '"]').parent().children().last().click();
+	}
 });
 
 //Hike

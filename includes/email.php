@@ -116,7 +116,7 @@
 		$htmlmessage .= "Peaks:<br>";
 		$htmlmessage .= $ADK_HIKER['ADK_HIKER_PEAKLIST']."<br><br>";
 		
-		$htmlmessage .= "Click <a href=".$GLOBALS['url']."messages?_=".$ADK_HIKER['ADK_USER_ID'].">here to send the new user a message</a>.<br><br>";	
+		$htmlmessage .= "Click <a href=".$GLOBALS['url']."messages?_=".$ADK_HIKER['ADK_USER_ID'].">here to send the new user a message</a>.<br><br>";
 	    
 		$message = "Your have been assigned a new hiker!\r\n\r\n";
 		
@@ -213,6 +213,29 @@
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
     }
+
+	function sendCorrHikeAddUpdateEmail($ADK_HIKER, $ADK_CORRESPONDENT, $ADK_HIKE, $isUpdate){
+	    $headerTxt = $isUpdate? 'One of your hikers has updated a hike log!': 'One of your hikers has added a hike log!';
+		
+		$htmlmessage = $headerTxt."<br><br>";
+		
+	    $htmlmessage .= $ADK_HIKER['ADK_USER_NAME']." (".$ADK_HIKER['ADK_USER_USERNAME'].")<br>";
+	    $htmlmessage .= $ADK_HIKE['peakNames']."<br><br>";
+		
+	    $htmlmessage .= "Click <a href=".$GLOBALS['url']."hiker?_=".$ADK_HIKER['ADK_USER_ID']."#".$ADK_HIKE['ADK_HIKE_ID'].">here to see it</a>.<br><br>";
+	    
+	    $message = $headerTxt."\r\n\r\n";
+		
+	    $message .= $ADK_HIKER['ADK_USER_NAME']." (".$ADK_HIKER['ADK_USER_USERNAME'].")\r\n";
+	    $message .= $ADK_HIKE['peakNames']."\r\n\r\n";
+		
+	    $message .= "Click below to see it:\r\n".$GLOBALS['url']."hiker?_=".$ADK_HIKER['ADK_USER_ID']."#".$ADK_HIKE['ADK_HIKE_ID']."\r\n\r\n";
+		
+	    $toAddr = $ADK_CORRESPONDENT['ADK_USER_EMAIL'];
+	    $subject = 'New Hiker - '.$ADK_HIKER['ADK_USER_USERNAME'];
+		
+	    PHPMailer($toAddr, $subject, $htmlmessage, $message);
+	}
 
 	//Hiker
 	function sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT){

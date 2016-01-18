@@ -2,37 +2,37 @@
 	
 	//Applicant
 	function sendNewApplicantPM($con, $ADK_APPLICANT){
-		$message = "Username:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_USERNAME']."\r\n\r\n";
-		$message .= "Name:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_NAME']."\r\n\r\n";
-		$message .= "Email:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_EMAIL']."\r\n\r\n";
+		$message = "Username:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_USERNAME']."<br><br>";
+		$message .= "Name:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_NAME']."<br><br>";
+		$message .= "Email:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_EMAIL']."<br><br>";
 		$message .= "Phone:r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_PHONE']."\r\n\r\n";
-		$message .= "Age:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_AGE']."\r\n\r\n";
-		$message .= "Sex:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_SEX']."\r\n\r\n";
-		$message .= "Address 1:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_ADDRESS1']."\r\n\r\n";
-		$message .= "Address 2:\r\n";;
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_ADDRESS2']."\r\n\r\n";
-		$message .= "City:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_CITY']."\r\n\r\n";
-		$message .= "State:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_STATE']."\r\n\r\n";
-		$message .= "Zip:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_ZIP']."\r\n\r\n";
-		$message .= "Country:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_COUNTRY']."\r\n\r\n";
-		$message .= "Personal info:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO']."\r\n\r\n";
-		$message .= "Requested Correspondent:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_REQ_CORR']."\r\n\r\n";
-		$message .= "Peaks:\r\n";
-		$message .= $ADK_APPLICANT['ADK_APPLICANT_PEAKLIST']."\r\n\r\n";
-		$message .= "Click <a href=\"./applicant?_=".$ADK_APPLICANT['ADK_APPLICANT_ID']."\">here</a> to view."."\r\n\r\n";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_PHONE']."<br><br>";
+		$message .= "Age:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_AGE']."<br><br>";
+		$message .= "Sex:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_SEX']."<br><br>";
+		$message .= "Address 1:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_ADDRESS1']."<br><br>";
+		$message .= "Address 2:<br>";;
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_ADDRESS2']."<br><br>";
+		$message .= "City:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_CITY']."<br><br>";
+		$message .= "State:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_STATE']."<br><br>";
+		$message .= "Zip:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_ZIP']."<br><br>";
+		$message .= "Country:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_COUNTRY']."<br><br>";
+		$message .= "Personal info:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_PERSONALINFO']."<br><br>";
+		$message .= "Requested Correspondent:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_REQ_CORR']."<br><br>";
+		$message .= "Peaks:<br>";
+		$message .= $ADK_APPLICANT['ADK_APPLICANT_PEAKLIST']."<br><br>";
+		$message .= "Click <a href=\"./applicant?_=".$ADK_APPLICANT['ADK_APPLICANT_ID']."\">here</a> to view."."<br><br>";
 		
 		$ADK_MESSAGE = array(
 			'ADK_MESSAGE_FROM_USER_ID' => 1
@@ -49,21 +49,21 @@
 	
 	//Correspondent
 	function sendCorrNewHikerPM($con, $ADK_CORRESPONDENT_ID, $ADK_USER, $ADK_HIKER){
-		$message = "Your have been assigned a new hiker!"."\r\n\r\n";
+		$message = "Your have been assigned a new hiker!"."<br><br>";
 		
-		$message .= "Name:\r\n";
-		$message .= $ADK_HIKER['ADK_USER_NAME']."\r\n";
-		$message .= "Username:\r\n";
-		$message .= $ADK_HIKER['ADK_USER_USERNAME']."\r\n";
-		$message .= "Initial Password:\r\n";
-		$message .= $ADK_USER['ADK_USER_PASSWORD']."\r\n\r\n"."\r\n\r\n";
+		$message .= "Name:<br>";
+		$message .= $ADK_HIKER['ADK_USER_NAME']."<br>";
+		$message .= "Username:<br>";
+		$message .= $ADK_HIKER['ADK_USER_USERNAME']."<br>";
+		$message .= "Initial Password:<br>";
+		$message .= $ADK_USER['ADK_USER_PASSWORD']."<br><br>"."<br><br>";
 
-		$message .= "Personal info:\r\n";
-		$message .= $ADK_HIKER['ADK_HIKER_PERSONALINFO']."\r\n\r\n";
-		$message .= "Peaks:\r\n";
-		$message .= $ADK_HIKER['ADK_HIKER_PEAKLIST']."\r\n\r\n"."\r\n\r\n";
+		$message .= "Personal info:<br>";
+		$message .= $ADK_HIKER['ADK_HIKER_PERSONALINFO']."<br><br>";
+		$message .= "Peaks:<br>";
+		$message .= $ADK_HIKER['ADK_HIKER_PEAKLIST']."<br><br>"."<br><br>";
 				
-		$message .= "Click <a href=\"./messages?_=".$ADK_HIKER['ADK_USER_ID']."\">here</a> to send the new user hiker a message."."\r\n\r\n";
+		$message .= "Click <a href=\"./messages?_=".$ADK_HIKER['ADK_USER_ID']."\">here</a> to send the new user hiker a message."."<br><br>";
 		
 		$ADK_MESSAGE = array(
 			'ADK_MESSAGE_FROM_USER_ID' => 1
@@ -79,16 +79,16 @@
 	}
 	
     function sendNewCorrPM($con, $ADK_USER, $randomPW){
-		$message = "Username:\r\n";
-		$message .= $ADK_USER['ADK_USER_USERNAME']."\r\n\r\n";
-		$message .= "Name:\r\n";
-		$message .= $ADK_USER['ADK_USER_NAME']."\r\n\r\n";
-		$message .= "Email:\r\n";
-		$message .= $ADK_USER['ADK_USER_EMAIL']."\r\n\r\n";
-		$message .= "Initial Password:\r\n";
-		$message .= $randomPW."\r\n\r\n";
+		$message = "Username:<br>";
+		$message .= $ADK_USER['ADK_USER_USERNAME']."<br><br>";
+		$message .= "Name:<br>";
+		$message .= $ADK_USER['ADK_USER_NAME']."<br><br>";
+		$message .= "Email:<br>";
+		$message .= $ADK_USER['ADK_USER_EMAIL']."<br><br>";
+		$message .= "Initial Password:<br>";
+		$message .= $randomPW."<br><br>";
 
-		$message .= "Click <a href=\"./correspondent?_=".$ADK_USER['ADK_USER_ID']."\">here</a> to view."."\r\n\r\n";
+		$message .= "Click <a href=\"./correspondent?_=".$ADK_USER['ADK_USER_ID']."\">here</a> to view."."<br><br>";
 		
 		$ADK_MESSAGE = array(
 			'ADK_MESSAGE_FROM_USER_ID' => 1
@@ -96,6 +96,39 @@
 	        ,'ADK_MESSAGE_RESPOND_ID' => ''
 	        ,'ADK_MESSAGE_ORIG_ID' => ''
 			,'ADK_MESSAGE_TITLE' => 'New Correspondent - '.$ADK_USER['ADK_USER_USERNAME']
+			,'ADK_MESSAGE_CONTENT' => $message
+			,'ADK_MESSAGE_DRAFT' => 0
+	    );
+		
+		addSysMessage($con, $ADK_MESSAGE);
+	}
+
+	function sendCorrHikeAddUpdatePM($con, $ADK_HIKER, $ADK_CORRESPONDENT, $ADK_HIKE, $isUpdate){
+		$headerTxt = '';
+		$title = '';
+
+		if($isUpdate){
+			$headerTxt = "One of your hikers has updated a hike log!<br><br>";
+			$title = "Hike log updated - ".$ADK_HIKER['ADK_USER_USERNAME'];
+		}
+		else{
+			$headerTxt = "One of your hikers has added a hike log!<br><br>";
+			$title = "Hike log added - ".$ADK_HIKER['ADK_USER_USERNAME'];
+		}
+
+		$message = $headerTxt;
+		
+		$message .= $ADK_HIKER['ADK_USER_NAME']." (".$ADK_HIKER['ADK_USER_USERNAME'].")<br>";
+	    $message .= $ADK_HIKE['peakNames']."<br><br>";
+
+		$message .= "Click <a href=\"".$GLOBALS['url']."hiker?_=".$ADK_HIKER['ADK_USER_ID']."#".$ADK_HIKE['ADK_HIKE_ID']."\">here to see it</a>.<br><br>";
+		
+		$ADK_MESSAGE = array(
+			'ADK_MESSAGE_FROM_USER_ID' => 1
+	        ,'ADK_MESSAGE_TO_USER_ID' => $ADK_CORRESPONDENT['ADK_USER_ID']
+	        ,'ADK_MESSAGE_RESPOND_ID' => ''
+	        ,'ADK_MESSAGE_ORIG_ID' => ''
+			,'ADK_MESSAGE_TITLE' => $title
 			,'ADK_MESSAGE_CONTENT' => $message
 			,'ADK_MESSAGE_DRAFT' => 0
 	    );

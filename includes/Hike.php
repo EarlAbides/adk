@@ -164,13 +164,14 @@
 		$ADK_HIKE = makeHikesPeaksArray($ADK_HIKE);
 						
 	    $sql_query = sql_addHikesPeaks($con);
-		$con->autocommit(FALSE);
+		$con->autocommit(false);
 		foreach($ADK_HIKE['ADK_PEAKS'] as $ADK_PEAK){
 			$sql_query->bind_param('ii', $ADK_PEAK['ADK_HIKE_ID'], $ADK_PEAK['ADK_PEAK_ID']);
 			$sql_query->execute();
 		}
 		$sql_query->close();
 		$con->commit();
+		$con->autocommit(true);
 		
 		return true;
 	}
@@ -269,4 +270,18 @@
 		return $COUNT > 0;
 	}
 	
+	function getPeakNames($con, $ADK_PEAK_IDS){
+		$peakNames = '';
+		$sql_query = sql_getPeakNames($con, $ADK_PEAK_IDS);
+		if($sql_query->execute()){
+            $sql_query->store_result();
+            $sql_query->bind_result($result);
+            $sql_query->fetch();
+            $peakNames = $result;
+		}
+		else die('There was an error running the query ['.$con->error.']');
+		
+		return $peakNames;
+	}
+
 ?>

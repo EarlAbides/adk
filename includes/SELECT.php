@@ -363,6 +363,11 @@
 
         return $sql_query;
 	}
+
+	function sql_getPeakNames($con, $ADK_PEAK_IDS){
+		$sql_query = $con->prepare("SELECT GROUP_CONCAT(ADK_PEAK_NAME SEPARATOR ', ') FROM ADK_PEAK WHERE ADK_PEAK_ID IN($ADK_PEAK_IDS);");
+		return $sql_query;
+	}
 	
 	//User
 	function sql_getUser($con, $ADK_USER_ID){
