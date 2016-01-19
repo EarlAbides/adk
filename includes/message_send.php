@@ -9,6 +9,7 @@
 	require_once 'UPDATE.php';
 	require_once 'Message.php';
 	require_once 'File.php';
+	require_once 'Hiker.php';
 	require_once 'User.php';
 	require_once 'email.php';
 	
@@ -35,6 +36,8 @@
 		$fileIDs = addFiles($con, $files);
 		addMessageFileJcts($con, $ADK_MESSAGE['ADK_MESSAGE_ID'], $fileIDs);
 	}
+
+	if($_SESSION['ADK_USERGROUP_CDE'] === 'HIK') updateLastActive($con, intval($_SESSION['ADK_USER_ID']));
 	
 	$con->close();
 	

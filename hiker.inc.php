@@ -9,11 +9,11 @@
 	require_once 'includes/Peak.php';
 	
 	if(isset($_GET['_'])){
-		$ADK_USER_ID = $_GET['_'];
+		$ADK_USER_ID = intval($_GET['_']);
 		if($ADK_USER_ID == '') header("Location: ./");
 	}
 	else header("Location: ./");
-		
+	
 	$con = connect_db();
 	
 	$ADK_HIKER = getHiker($con, $ADK_USER_ID);

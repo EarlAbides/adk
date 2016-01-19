@@ -61,9 +61,13 @@
 					
 					<div class="col-xs-12">
 						<div class="form-group">
-							<div class="col-xs-12" style="display:inline;">
+							<div class="col-xs-12 col-sm-6" style="display:inline;">
 								<label class="control-label control-label-sm">Username</label><br />
 								<span><?php echo $ADK_HIKER['ADK_USER_USERNAME']; ?></span>
+							</div>
+							<div class="col-xs-12 col-sm-6 text-right" style="display:inline;">
+								<label class="control-label control-label-sm">Last Active</label><br />
+								<span class="font-italic"><?php echo strpos(date("n/j/y g:ma", strtotime($ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE'])), '1/1/70') === 0? '--': date("n/j/y g:ia", strtotime($ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE'])); ?></span>
 							</div>
 						</div>
 					</div>

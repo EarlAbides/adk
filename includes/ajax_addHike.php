@@ -43,11 +43,12 @@
     $ADK_HIKES = getHikes($con, $ADK_HIKE['ADK_USER_ID']);
     $ADK_HIKES = getHikesPeaks($con, $ADK_HIKES);
 
-	if($_POST['id'] == $_SESSION['ADK_USER_ID']){//notify corr
+	if($_SESSION['ADK_USERGROUP_CDE'] === 'HIK'){//notify corr
 		$ADK_HIKER = getHiker($con, intval($_POST['id']));
 		$ADK_CORRESPONDENT = getCorrespondent($con, $ADK_HIKER['ADK_HIKER_CORR_ID']);
 		$ADK_HIKE['peakNames'] = getPeakNames($con, $_POST['peakids']);
 
+		updateLastActive($con, intval($_POST['id']));
 		sendCorrHikeAddUpdateEmail($ADK_HIKER, $ADK_CORRESPONDENT, $ADK_HIKE, false);
 		sendCorrHikeAddUpdatePM($con, $ADK_HIKER, $ADK_CORRESPONDENT, $ADK_HIKE, false);
 	}

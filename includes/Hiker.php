@@ -61,6 +61,7 @@
 				$ADK_HIKERS[$i]['ADK_USER_NAME'] = $row['ADK_USER_NAME'];
 				$ADK_HIKERS[$i]['ADK_USER_EMAIL'] = $row['ADK_USER_EMAIL'];
 				$ADK_HIKERS[$i]['ADK_HIKER_NUMPEAKS'] = $row['ADK_HIKER_NUMPEAKS'];
+				$ADK_HIKERS[$i]['ADK_HIKER_LASTACTIVE_DTE'] = $row['ADK_HIKER_LASTACTIVE_DTE'];
 				$i++;
 			}
 		}
@@ -76,7 +77,6 @@
             $sql_query->store_result();
             $result = sql_get_assoc($sql_query);
 
-            $i = 0;
             foreach($result as $row){
 				$ADK_HIKER['ADK_USER_ID'] = $row['ADK_USER_ID'];
 				$ADK_HIKER['ADK_HIKER_CORR_ID'] = $row['ADK_HIKER_CORR_ID'];
@@ -96,7 +96,7 @@
 				$ADK_HIKER['ADK_HIKER_COUNTRY'] = $row['ADK_HIKER_COUNTRY'];
 				$ADK_HIKER['ADK_HIKER_PERSONALINFO'] = $row['ADK_HIKER_PERSONALINFO'];
 				$ADK_HIKER['ADK_HIKER_NUMPEAKS'] = $row['ADK_HIKER_NUMPEAKS'];
-                $i++;
+				$ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE'] = $row['ADK_HIKER_LASTACTIVE_DTE'];
 			}
 		}
 		else die('There was an error running the query ['.$con->error.']');
@@ -138,6 +138,11 @@
 		$sql_query->execute();
 	}
 	
+	function updateLastActive($con, $ADK_USER_ID){
+		$sql_query = sql_updateLastActive($con, $ADK_USER_ID);
+		$sql_query->execute();
+	}
+
 	function getTableHikers($ADK_HIKERS){
 		$html = "<table class=\"selecttable\">
 					<thead>
@@ -147,6 +152,7 @@
 							<th>Username</th>
 							<th>Email</th>
 							<th>Staff Correspondent</th>
+							<th>Last Active</th>
 							<th>#&nbsp;Peaks</th>
 						</tr>
 					</thead>
@@ -157,6 +163,8 @@
 		}	
 		else{
 			foreach($ADK_HIKERS as $ADK_HIKER){
+				$ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE'] = date("m/d/Y", strtotime($ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE']));
+				if(strpos(date("n/j/y", strtotime($ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE'])), '1/1/70') === 0) $ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE'] = '--';
 				$html .= "<tr>
 							<td>
 								<a href=\"./hiker?_=".$ADK_HIKER['ADK_USER_ID']."\" class=\"hoverbtn rowselector\">
@@ -167,6 +175,7 @@
 							<td>".$ADK_HIKER['ADK_USER_USERNAME']."</td>
 							<td>".$ADK_HIKER['ADK_USER_EMAIL']."</td>
 							<td>".$ADK_HIKER['ADK_HIKER_CORR_NAME']."</td>
+							<td>".$ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE']."</td>
 							<td>".$ADK_HIKER['ADK_HIKER_NUMPEAKS']."</td>
 						</tr>";
 			}

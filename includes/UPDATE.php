@@ -112,6 +112,14 @@
 		
 		return $sql_query;
 	}
+
+	function sql_updateLastActive($con, $ADK_USER_ID){
+		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_LASTACTIVE_DTE = SUBTIME(NOW(),'0 05:00:00.00') WHERE ADK_USER_ID = ?;");
+		
+		$sql_query->bind_param('i', $ADK_USER_ID);
+		
+		return $sql_query;
+	}
 	
 	//Message
 	function sql_updateDeleteMessageTrash($con, $ADK_MESSAGE_ID){
