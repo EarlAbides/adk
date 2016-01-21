@@ -29,14 +29,14 @@
 	switch($ADK_USERGROUP_CDE){
 		case 'ADM':
 			require_once 'includes/Template.php';
-			$ADK_MSG_TMPLS = new Templates($con);
-			$ADK_MSG_TMPLS->get($_SESSION['ADK_USER_ID']);
+			$ADK_MSG_TMPLS = new Templates();
+			$ADK_MSG_TMPLS->get($con, $_SESSION['ADK_USER_ID']);
 			$ADK_HIKERS = getHikers($con);
 			break;
 		case 'COR':
 			require_once 'includes/Template.php';
-			$ADK_MSG_TMPLS = new Templates($con);
-			$ADK_MSG_TMPLS->get($_SESSION['ADK_USER_ID']);
+			$ADK_MSG_TMPLS = new Templates();
+			$ADK_MSG_TMPLS->get($con, $_SESSION['ADK_USER_ID']);
 			$ADK_HIKERS = getHikers($con, $ADK_USER_ID);
 			break;
 		case 'HIK':

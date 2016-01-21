@@ -4,7 +4,7 @@
 		
 		public $public, $private;
 		
-		public function Templates($con){
+		public function Templates(){
 			$this->public = [];
 			$this->private = [];
 		}		
@@ -16,7 +16,7 @@
 			    $result = sql_get_assoc($sql_query);
 				
 				foreach($result as $row){
-					$template = new Template(null);
+					$template = new Template();
 			        $template->id = intval($row['ADK_MSG_TMPL_ID']);
 			        $template->userid = intval($row['ADK_USER_ID']);
 			        $template->name = $row['ADK_MSG_TMPL_NAME'];
