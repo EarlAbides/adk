@@ -21,6 +21,25 @@
         document.getElementById('hidden_touserid').value = this.value;
     });
 
+	//template dd click
+	$('.template').on('click', function(){
+		$.get('includes/templateGet.php?_=' + $(this).data('id'))
+		.done(function(ret){
+			var template = JSON.parse(ret);
+			if(typeof editor !== 'undefined') editor.destroy();
+			var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
+			document.getElementById('div_messages_main').innerHTML = template_newMessageHTML;
+			$('#downloader').downloader({desc: true});
+			document.getElementById('textbox_subject').value = template.name;
+			document.getElementById('textbox_message').value = template.content;
+			initEditor();
+		})
+		.fail(function(ret){
+			alert('Error getting folder');
+		});
+		$('#templates_dropdown').parent().removeClass('open');
+	});
+
 });
 
 function populateNewMessage(){
@@ -43,7 +62,8 @@ function populateNewMessage(){
 }
 
 function newMessage(){
-    var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
+	if(typeof editor !== 'undefined') editor.destroy();
+	var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
     document.getElementById('div_messages_main').innerHTML = template_newMessageHTML;
     $('#downloader').downloader({desc: true});
 
@@ -67,7 +87,7 @@ function newMessage(){
 }
 
 function reply(){
-    var fromID = document.getElementById('hidden_viewfromid').value;
+	var fromID = document.getElementById('hidden_viewfromid').value;
     var fromName = document.getElementById('span_messagefromusername').innerHTML;
     var toID = document.getElementById('hidden_viewfromid').value;
     var toName = document.getElementById('span_messagetousername').innerHTML;
@@ -95,7 +115,7 @@ function reply(){
     replyText += 'Date: ' + dte + '<br /><br />';
     replyText += message;
 
-    var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
+	var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
     document.getElementById('div_messages_main').innerHTML = template_newMessageHTML;
     $('#downloader').downloader({desc: true});
     
@@ -142,7 +162,8 @@ function message_markRead(ADK_MESSAGE_ID, span){
 }
 
 function viewMessage(ADK_MESSAGE_ID){
-    var div_messages_main = document.getElementById('div_messages_main');
+    if(typeof editor !== 'undefined') editor.destroy();
+	var div_messages_main = document.getElementById('div_messages_main');
     $.post('includes/ajax_getMessage', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},
         function(ret){
             div_messages_main.innerHTML = '';
@@ -275,6 +296,8 @@ function getFolder(id){
                 case 0: document.getElementById('button_sortFromTo').innerHTML = 'From'; break;
                 case 1: case 2: document.getElementById('button_sortFromTo').innerHTML = 'To'; break;
             }
+
+			$('.folder').removeClass('active').eq(id).addClass('active');
         }
     );
 }
@@ -390,6 +413,25 @@ function saveDraft(){
 	hidden_draft.value = 'true';
 	form.appendChild(hidden_draft);
 	form.submit();
+}
+
+function saveTemplate(){
+	if(editor.composer.element.innerHTML !== '' && editor.composer.element.innerHTML !== 'Message' && document.getElementById('textbox_subject').value !== ''){
+		if($.fn.downloader.getFileIndex().indexOf('0') > -1){
+			$.post('includes/templateSave.php', {
+				ADK_MSG_TMPL_NAME: document.getElementById('textbox_subject').value
+				,ADK_MSG_TMPL_CONTENT: editor.composer.element.innerHTML
+			})
+			.done(function(){
+				document.getElementById('textbox_subject').value = '';
+				$(editor.composer.element).empty();
+
+			})
+			.fail(function(){
+				alert('Error saving template');
+			});
+		}
+	}
 }
 
 var editor;

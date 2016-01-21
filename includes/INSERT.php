@@ -96,10 +96,19 @@
 		$sql_query = $con->prepare(
 			"INSERT INTO ADK_MESSAGE(ADK_MESSAGE_FROM_USER_ID, ADK_MESSAGE_TO_USER_ID, ADK_MESSAGE_TITLE, 
 				ADK_MESSAGE_CONTENT, ADK_MESSAGE_DTE, ADK_MESSAGE_DRAFT)
-			VALUES(?,?,?,?, SUBTIME(NOW(),'0 12:00:00.00'), ?);");
+			VALUES(?,?,?,?, SUBTIME(NOW(),'0 12:00:00.00'), ?);"
+		);
 		
 		$sql_query->bind_param('iissi', $ADK_MESSAGE['ADK_MESSAGE_FROM_USER_ID'], $ADK_MESSAGE['ADK_MESSAGE_TO_USER_ID'],
 					$ADK_MESSAGE['ADK_MESSAGE_TITLE'], $ADK_MESSAGE['ADK_MESSAGE_CONTENT'], $ADK_MESSAGE['ADK_MESSAGE_DRAFT']);
+		
+		return $sql_query;
+	}
+
+	function sql_addTemplate($con, $ADK_MSG_TMPL){
+		$sql_query = $con->prepare("INSERT INTO ADK_MSG_TMPL(ADK_USER_ID, ADK_MSG_TMPL_NAME, ADK_MSG_TMPL_CONTENT) VALUES(?,?,?);");
+		
+		$sql_query->bind_param('iss', $ADK_MSG_TMPL->userid, $ADK_MSG_TMPL->name, $ADK_MSG_TMPL->content);
 		
 		return $sql_query;
 	}

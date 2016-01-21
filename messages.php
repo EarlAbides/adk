@@ -7,7 +7,7 @@
 <?php include 'includes/head.php'; ?>
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/wysihtml.js"></script>
-	<script src="js/message.min.js"></script>
+	<script src="js/message.js"></script>
 	<script src="js/jquery-dl.min.js"></script>
 </head>
 
@@ -32,53 +32,27 @@
 				
 					<div class="col-xs-12 col-md-3" style="padding:0;">
 						<div class="div_tablewrapper" style="max-height:inherit;overflow-y:inherit">
+							
+							<?php include 'templates/messagesMenu.php'; ?>
+							
 							<div id="div_table_messages">
-								<div id="div_table_messages">
-									<?php echo $table_messages; ?>
-								</div>
+								<?php echo $table_messages; ?>
 							</div>
 							<div style="position:relative;bottom:0;">
 								<div class="hr"></div>
 								<div class="container-fluid" style="padding:0;">
-									<div class="col-xs-6" style="padding:0 2px;">
-										<div class="container-fluid" style="padding:0;">
-											<div class="col-xs-12 text-center" style="padding:0;">
-												<div class="btn-group">
-													<button id="button_sortFromTo" class="btn btn-xs btn-default messageSort" data-sort="by">From</button>
-													<button class="btn btn-xs btn-default messageSort active" data-sort="by">Date</button>
-												</div>
-											</div>
-											<div class="col-xs-12 text-center" style="padding:0;">
-												<div class="btn-group">
-													<button class="btn btn-xs btn-default messageSort" data-sort="dir">Up</button>
-													<button class="btn btn-xs btn-default messageSort active" data-sort="dir">Down</button>
-												</div>
-											</div>
+									<div class="col-xs-5">
+										<div class="btn-group">
+											<button id="button_sortFromTo" class="btn btn-xs btn-default messageSort" data-sort="by">From</button>
+											<button class="btn btn-xs btn-default messageSort active" data-sort="by">Date</button>
 										</div>
 									</div>
-									<div class="col-xs-6" style="padding:0;">
-										<ul class="ul" style="padding-left:4%;margin-bottom:0;">
-											<li>
-												<a class="hoverbtn pointer" style="display:block;" onclick="newMessage();">
-													New<span class="glyphicon glyphicon-plus pull-right"></span>
-												</a>
-											</li>
-											<li>
-												<a class="hoverbtn pointer" style="display:block;" onclick="getFolder(0);">
-													Inbox<span class="glyphicon glyphicon-inbox pull-right"></span>
-												</a>
-											</li>
-											<li>
-												<a class="hoverbtn pointer" style="display:block;" onclick="getFolder(1);">
-													Sent<span class="glyphicon glyphicon-export pull-right"></span>
-												</a>
-											</li>
-											<li>
-												<a class="hoverbtn pointer" style="display:block;" onclick="getFolder(2);">
-													Drafts<span class="glyphicon glyphicon-file pull-right"></span>
-												</a>
-											</li>
-										</ul>
+									<div class="col-xs-2 text-center" style="font-size:0.8em;">Sort</div>
+									<div class="col-xs-5 text-right">
+										<div class="btn-group">
+											<button class="btn btn-xs btn-default messageSort" data-sort="dir">Up</button>
+											<button class="btn btn-xs btn-default messageSort active" data-sort="dir">Down</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -166,11 +140,14 @@
 						<div class="col-xs-12" style="margin:4px 0 2px;">
 							<div class="form-group">
 								<div class="col-xs-12">
-									<button type="button" class="btn btn-sm btn-default" onclick="saveDraft();">Save as Draft</button>
+									<div class="btn-group">
+										<button type="button" class="btn btn-sm btn-default" onclick="saveDraft();"><span class="glyphicon glyphicon-file"></span>&nbsp;Save as Draft</button>
+										<?php if($_SESSION['ADK_USERGROUP_CDE'] === 'COR' || $_SESSION['ADK_USERGROUP_CDE'] === 'ADM') echo '<button type="button" class="btn btn-sm btn-default" onclick="saveTemplate();"><span class="glyphicon glyphicon-tags" style="top:2px;left:-2px;"></span>&nbsp;Save as Template</button>'; ?>
+									</div>
 									<div class="btn-group pull-right">
                                         <button type="button" class="btn btn-sm btn-default" onclick="cancelMessage();">Cancel</button>
 										<button type="reset" class="btn btn-sm btn-default">Clear</button>
-										<button type="submit" class="btn btn-sm btn-default">Send</button>
+										<button type="submit" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-envelope" style="left:-2px;"></span>&nbsp;Send</button>
 									</div>
 								</div>
 							</div>

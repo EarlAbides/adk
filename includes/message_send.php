@@ -19,7 +19,7 @@
 	else header('Location: ../messages?_'.$_POST['touserid'].'=&e='.$errMess);
 	
 	$con = connect_db();
-	
+
 	$ADK_MESSAGE = addMessage($con);
 	$ADK_MESSAGE = getMessage($con, $ADK_MESSAGE['ADK_MESSAGE_ID'], intval($_SESSION['ADK_USER_ID']));
 	
@@ -41,12 +41,6 @@
 	
 	$con->close();
 	
-	//Redirect
-	switch($_SESSION['ADK_USERGROUP_CDE']){
-		case 'ADM': header('Location: ../messages'); break;
-		case 'COR': header('Location: ../hiker?_='.$ADK_MESSAGE['ADK_MESSAGE_TO_USER_ID']); break;
-		case 'HIK': header('Location: ../hikerportal'); break;
-	}
-	
+	header('Location: ../messages');	
 	
 ?>

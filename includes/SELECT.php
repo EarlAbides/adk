@@ -341,6 +341,29 @@
 
         return $sql_query;
 	}
+
+	function sql_getTemplates($con, $ADK_USER_ID){
+		$sql_query = $con->prepare(
+            "SELECT ADK_MSG_TMPL_ID, ADK_USER_ID, ADK_MSG_TMPL_NAME FROM ADK_MSG_TMPL
+			WHERE ADK_USER_ID = ? OR ADK_USER_ID IS NULL;"
+        );
+		
+        $sql_query->bind_param('i', $ADK_USER_ID);
+
+        return $sql_query;
+	}
+
+	function sql_getTemplate($con, $ADK_MSG_TMPL_ID){
+		$sql_query = $con->prepare(
+            "SELECT ADK_USER_ID, ADK_MSG_TMPL_NAME, ADK_MSG_TMPL_CONTENT, ADK_MSG_TMPL_DTE
+			FROM ADK_MSG_TMPL
+			WHERE ADK_MSG_TMPL_ID = ?;"
+        );
+		
+        $sql_query->bind_param('i', $ADK_MSG_TMPL_ID);
+
+        return $sql_query;
+	}
 	
 	//Peak
 	function sql_getPeaks($con){
