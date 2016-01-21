@@ -9,15 +9,19 @@
 	
 	$con = connect_db();
 
-	$template = new Template($con);
-	$template->userid = $_SESSION['ADK_USER_ID'];
-	$template->name = $_POST['ADK_MSG_TMPL_NAME'];
-	$template->content = $_POST['ADK_MSG_TMPL_CONTENT'];
-	$template->save();	
+	$ADK_MSG_TMPL = new Template();
+	$ADK_MSG_TMPL->populate();
+	
+	if(!$ADK_MSG_TMPL->isValid(){
+		$con->close();
+		header('Location: ../messages?e='.$this->err);
+		exit;
+	}
+	
+	$ADK_MSG_TMPL->save($con);
 	
 	$con->close();
-
+	
 	http_response_code(200);
-	exit;
-		
+	
 ?>

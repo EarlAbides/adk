@@ -2,17 +2,15 @@
 	
     class Templates{
 		
-		private $con;
 		public $public, $private;
 		
 		public function Templates($con){
-			$this->con = $con;
 			$this->public = [];
 			$this->private = [];
 		}		
-
-		public function get($ADK_USER_ID){
-			$sql_query = sql_getTemplates($this->con, $ADK_USER_ID);
+		
+		public function get($con, $ADK_USER_ID){
+			$sql_query = sql_getTemplates($con, $ADK_USER_ID);
 			if($sql_query->execute()){
 			    $sql_query->store_result();
 			    $result = sql_get_assoc($sql_query);
@@ -26,30 +24,44 @@
 					if($template->userid === $ADK_USER_ID) array_push($this->private, $template);
 					else array_push($this->public, $template);
 			    }
-
+				
 			}
-			else die('There was an error running the query ['.$this->con->error.']');	
+			else die('There was an error running the query ['.$con->error.']');	
 		}
-
+		
 	}
-
+	
 	class Template{
 		
-		private $con;
+		public $err;
 		public $id, $userid, $name, $content, $datetime;
-
-		public function Template($con){
-			$this->con = $con;
+		
+		public function Template(){
+			
 		}
-
-		public function save(){
-			$sql_query = sql_addTemplate($this->con, $this);
+		
+		public function isValid(){
+			if(!isNumeric($this->userid)) $this->err .= 'u';
+			if(strlen($this->name) === 0 || strlen($this->name) > 45) $this->err .= 'n';
+			//TODO: content length?
+			
+			if(strlen($this->err) > 0) return false;
+			$this->clean();
+			return true;
+		}
+		private function clean(){
+			$this->content = str_replace('<iframe', '</iframe', $this->content);
+			$this->content = str_replace('<script', '</script', $this->content);
+		}
+		
+		public function save($con){
+			$sql_query = sql_addTemplate($con, $this);
 			$sql_query->execute();
 			$this->id = $sql_query->insert_id;
 		}
-
-		public function get(){
-			$sql_query = sql_getTemplate($this->con, $this->id);
+		
+		public function get($con){
+			$sql_query = sql_getTemplate($con, $this->id);
 			if($sql_query->execute()){
 			    $sql_query->store_result();
 			    $result = sql_get_assoc($sql_query);
@@ -62,9 +74,15 @@
 			    }
 
 			}
-			else die('There was an error running the query ['.$this->con->error.']');	
+			else die('There was an error running the query ['.$con->error.']');	
 		}
-
+		
+		public function populate(){
+			$ADK_MSG_TMPL->userid = $_SESSION['ADK_USER_ID'];
+			$ADK_MSG_TMPL->name = $_POST['ADK_MSG_TMPL_NAME'];
+			$ADK_MSG_TMPL->content = $_POST['ADK_MSG_TMPL_CONTENT'];
+		}
+		
 	}
 
 ?>
