@@ -6,7 +6,7 @@
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
 	require_once 'DELETE.php';
-	require_once 'Template.php';
+	require_once 'classes/Template.php';
 
 	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){
 		http_response_code(400);

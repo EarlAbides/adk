@@ -6,7 +6,7 @@
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
 	require_once 'INSERT.php';
-	require_once 'Template.php';
+	require_once 'classes/Template.php';
 	
 	$con = connect_db();
 

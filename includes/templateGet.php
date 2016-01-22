@@ -4,7 +4,7 @@
 	require_once 'session.php';
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
-	require_once 'Template.php';
+	require_once 'classes/Template.php';
 	
 	if(!isset($_GET['_']) || !is_numeric($_GET['_'])){
 		http_response_code(400);
