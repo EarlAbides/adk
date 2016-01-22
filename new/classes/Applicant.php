@@ -94,14 +94,14 @@
 			if(strlen($this->info) === 0) $this->err .= 'i';
 			
 			if(strlen($this->err) > 0) return false;
-			$this->clean();
 			return true;
 		}
-		private function clean(){
+
+		public function sanitize(){
 			$this->info = str_replace('<iframe', '</iframe', $this->info);
 			$this->info = str_replace('<script', '</script', $this->info);
 		}
-				
+		
 		public function save($con){
 			$sql_query = sql_addApplicant($con, $this);
 			$sql_query->execute();

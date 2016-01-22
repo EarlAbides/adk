@@ -7,7 +7,7 @@
 <?php include 'includes/head.php'; ?>
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/wysihtml.js"></script>
-	<script src="js/message.js"></script>
+	<script src="js/message.min.js"></script>
 	<script src="js/jquery-dl.min.js"></script>
 </head>
 
@@ -142,7 +142,26 @@
 								<div class="col-xs-12">
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-default" onclick="saveDraft();"><span class="glyphicon glyphicon-file"></span>&nbsp;Save as Draft</button>
-										<?php if($_SESSION['ADK_USERGROUP_CDE'] === 'COR' || $_SESSION['ADK_USERGROUP_CDE'] === 'ADM') echo '<button type="button" class="btn btn-sm btn-default" onclick="saveTemplate();"><span class="glyphicon glyphicon-tags" style="top:2px;left:-2px;"></span>&nbsp;Save as Template</button>'; ?>
+									</div>
+									<div class="btn-group">	
+										<?php if($_SESSION['ADK_USERGROUP_CDE'] === 'COR' || $_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){?>
+											<button id="savetemplates_dropdown" type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+												<span class="glyphicon glyphicon-tags" style="top:2px;left:-2px;"></span>&nbsp;Save as Template
+											</button>
+											<ul class="dropdown-menu" aria-labelledby="savetemplates_dropdown">
+												<li>
+													<a class="pointer saveTemplate saveTemplate-public" data-folder="public">
+														<span class="glyphicon glyphicon-tags" style="top:2px;left:-8px;"></span>Save as Public
+													</a>
+												</li>
+												<li>
+													<a class="pointer saveTemplate saveTemplate-private" data-folder="private">
+														<span class="glyphicon glyphicon-tag" style="top:2px;left:-10px;"></span>Save as Private
+													</a>
+												</li>
+											</ul>
+											<button type="button" id="button_deleteTemplate" class="btn btn-sm btn-default" style="display:none;"><span class="glyphicon glyphicon-trash"></span>&nbsp;Delete Template</button>
+										<?php }?>
 									</div>
 									<div class="btn-group pull-right">
                                         <button type="button" class="btn btn-sm btn-default" onclick="cancelMessage();">Cancel</button>

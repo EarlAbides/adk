@@ -280,6 +280,8 @@ line-height:1;
 -moz-osx-font-smoothing:grayscale;
 }
 
+#ul_templates{overflow-y:auto;max-height:450px;}
+
 /*jQuery UI Autocomplete*/
 ul.ui-autocomplete{
 font-size:12px;

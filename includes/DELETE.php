@@ -84,4 +84,13 @@
         return $refs;
     }
 
+	//Message
+	function sql_deleteTemplate($con, $ADK_MSG_TMPL_ID){
+		$sql_query = $con->prepare("DELETE FROM ADK_MSG_TMPL WHERE ADK_MSG_TMPL_ID = ?;");
+
+        $sql_query->bind_param('i', $ADK_MSG_TMPL_ID);
+
+        return $sql_query;
+	}
+
 ?>

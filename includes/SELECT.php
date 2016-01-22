@@ -345,7 +345,8 @@
 	function sql_getTemplates($con, $ADK_USER_ID){
 		$sql_query = $con->prepare(
             "SELECT ADK_MSG_TMPL_ID, ADK_USER_ID, ADK_MSG_TMPL_NAME FROM ADK_MSG_TMPL
-			WHERE ADK_USER_ID = ? OR ADK_USER_ID IS NULL;"
+			WHERE ADK_USER_ID = ? OR ADK_USER_ID IS NULL
+			ORDER BY ADK_MSG_TMPL_ID DESC, ADK_MSG_TMPL_NAME;"
         );
 		
         $sql_query->bind_param('i', $ADK_USER_ID);

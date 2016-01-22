@@ -22,22 +22,25 @@
     });
 
 	//template dd click
-	$('.template').on('click', function(){
-		$.get('includes/templateGet.php?_=' + $(this).data('id'))
+	bindTemplates();
+	$(document).on('click', '.saveTemplate', function(){
+		saveTemplate(this.className.indexOf('private') > -1);
+	});
+
+	//template delete
+	$(document).on('click', '#button_deleteTemplate', function(){
+		$.post('includes/templateDelete.php', {id: $(this).data('id')})
 		.done(function(ret){
-			var template = JSON.parse(ret);
-			if(typeof editor !== 'undefined') editor.destroy();
-			var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
-			document.getElementById('div_messages_main').innerHTML = template_newMessageHTML;
-			$('#downloader').downloader({desc: true});
-			document.getElementById('textbox_subject').value = template.name;
-			document.getElementById('textbox_message').value = template.content;
-			initEditor();
+			var ADK_MSG_TMPLS = JSON.parse(ret);
+			populateTemplateList(ADK_MSG_TMPLS);
+			bindTemplates();
+			document.getElementById('textbox_subject').value = '';
+			$(editor.composer.element).empty();
+			document.getElementById('button_deleteTemplate').style.display = 'none';
 		})
 		.fail(function(ret){
-			alert('Error getting folder');
+			alert('There was an erro deleting the template: ' + ret);
 		});
-		$('#templates_dropdown').parent().removeClass('open');
 	});
 
 });
@@ -415,23 +418,74 @@ function saveDraft(){
 	form.submit();
 }
 
-function saveTemplate(){
+function saveTemplate(isPrivate){
 	if(editor.composer.element.innerHTML !== '' && editor.composer.element.innerHTML !== 'Message' && document.getElementById('textbox_subject').value !== ''){
 		if($.fn.downloader.getFileIndex().indexOf('0') > -1){
 			$.post('includes/templateSave.php', {
 				ADK_MSG_TMPL_NAME: document.getElementById('textbox_subject').value
 				,ADK_MSG_TMPL_CONTENT: editor.composer.element.innerHTML
+				,isPrivate: isPrivate
 			})
-			.done(function(){
+			.done(function(ret){
+				var ADK_MSG_TMPLS = JSON.parse(ret);
+				populateTemplateList(ADK_MSG_TMPLS);
+				bindTemplates();
 				document.getElementById('textbox_subject').value = '';
 				$(editor.composer.element).empty();
-
+				document.getElementById('button_deleteTemplate').style.display = 'none';
 			})
-			.fail(function(){
-				alert('Error saving template');
+			.fail(function(ret){
+				alert('Error saving template: ' + ret);
 			});
 		}
 	}
+}
+
+function showTemplate(template){
+	if(typeof editor !== 'undefined') editor.destroy();
+	var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
+	document.getElementById('div_messages_main').innerHTML = template_newMessageHTML;
+	$('#downloader').downloader({desc: true});
+	document.getElementById('textbox_subject').value = template.name;
+	document.getElementById('textbox_message').value = template.content;
+	var button_deleteTemplate = document.getElementById('button_deleteTemplate');
+	button_deleteTemplate.style.display = 'inline-block';
+	button_deleteTemplate.setAttribute('data-id', template.id);
+	initEditor();
+}
+
+function bindTemplates(){
+	$('.template').on('click', function(){
+		$.get('includes/templateGet.php?_=' + $(this).data('id'))
+		.done(function(ret){
+			showTemplate(JSON.parse(ret));
+		})
+		.fail(function(ret){
+			alert('Error getting folder: ' + ret);
+		});
+		$('#templates_dropdown').parent().removeClass('open');
+	});
+}
+
+function populateTemplateList(ADK_MSG_TMPLS){
+	$('#ul_templates li').each(function(){
+		if(this.children.length){
+			if(this.children[0].className.indexOf('template') !== -1) this.parentNode.removeChild(this);
+		}
+	});
+
+	var $last = $('.templates-bar-public');
+	ADK_MSG_TMPLS.public.forEach(function(ADK_MSG_TMPL){
+		var $li = $('<li><a class="pointer template" data-id="' + ADK_MSG_TMPL.id + '">' + ADK_MSG_TMPL.name + '</a></li>');
+		$last.after($li);
+		$last = $li;
+	});
+	$last = $('.templates-bar-private');
+	ADK_MSG_TMPLS.private.forEach(function(ADK_MSG_TMPL){
+		var $li = $('<li><a class="pointer template" data-id="' + ADK_MSG_TMPL.id + '">' + ADK_MSG_TMPL.name + '</a></li>');
+		$last.after($li);
+		$last = $li;
+	});
 }
 
 var editor;

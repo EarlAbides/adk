@@ -41,15 +41,16 @@
 		}
 		
 		public function isValid(){
-			if(!isNumeric($this->userid)) $this->err .= 'u';
+			if(!is_numeric($this->userid)) $this->err .= 'u';
 			if(strlen($this->name) === 0 || strlen($this->name) > 45) $this->err .= 'n';
 			//TODO: content length?
 			
 			if(strlen($this->err) > 0) return false;
-			$this->clean();
+			$this->sanitize();
 			return true;
 		}
-		private function clean(){
+
+		public function sanitize(){
 			$this->content = str_replace('<iframe', '</iframe', $this->content);
 			$this->content = str_replace('<script', '</script', $this->content);
 		}
@@ -76,11 +77,16 @@
 			}
 			else die('There was an error running the query ['.$con->error.']');	
 		}
+
+		public function delete($con){
+			$sql_query = sql_deleteTemplate($con, $this->id);
+			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
+		}
 		
 		public function populate(){
-			$ADK_MSG_TMPL->userid = $_SESSION['ADK_USER_ID'];
-			$ADK_MSG_TMPL->name = $_POST['ADK_MSG_TMPL_NAME'];
-			$ADK_MSG_TMPL->content = $_POST['ADK_MSG_TMPL_CONTENT'];
+			$this->userid = $_SESSION['ADK_USER_ID'];
+			$this->name = $_POST['ADK_MSG_TMPL_NAME'];
+			$this->content = $_POST['ADK_MSG_TMPL_CONTENT'];
 		}
 		
 	}

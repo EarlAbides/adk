@@ -13,9 +13,9 @@
 
 	$con = connect_db();
 	
-	$ADK_MSG_TMPL = new Template($con);
-	$ADK_MSG_TMPL->id = $_GET['_'];
-	$ADK_MSG_TMPL->get();
+	$ADK_MSG_TMPL = new Template();
+	$ADK_MSG_TMPL->id = intval($_GET['_']);
+	$ADK_MSG_TMPL->get($con, $_SESSION['ADK_USER_ID']);
 	
 	$con->close();
 
@@ -26,6 +26,5 @@
 	
 	echo json_encode($ADK_MSG_TMPL);
 	http_response_code(200);
-	exit;
 	
 ?>
