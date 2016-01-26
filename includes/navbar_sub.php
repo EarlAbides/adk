@@ -16,6 +16,7 @@
             case 'profile': $profile = $class; break;
 			case 'gallery': $gallery = $class; break;
 			case 'lnt': $lnt = $class; break;
+			case 'news': $news = $class; break;
 		}
 	}
 ?>
@@ -34,6 +35,7 @@
 		<div id="navbar_sub" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li<?php if(isset($home)) echo $home; ?>><a href="./">Home</a></li>
+				<li<?php if(isset($news)) echo $news; ?>><a href="./news">News</a></li>
 				<?php if(!isset($_SESSION['ADK_USER_ID'])){?>
 					<li<?php if(isset($signup)) echo $signup; ?>><a href="./signup">Sign Up</a></li>
 				<?php }?>
