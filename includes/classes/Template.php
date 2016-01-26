@@ -41,7 +41,8 @@
 		}
 		
 		public function isValid(){
-			if(!is_numeric($this->userid)) $this->err .= 'u';
+			if(isset($this->id)){if(!is_numeric($this->id)) $this->err .= 'i';}
+			if(isset($this->userid)){if(!is_numeric($this->userid)) $this->err .= 'u';}
 			if(strlen($this->name) === 0 || strlen($this->name) > 45) $this->err .= 'n';
 			//TODO: content length?
 			
@@ -78,17 +79,41 @@
 			else die('There was an error running the query ['.$con->error.']');	
 		}
 
+		public function update($con){
+			$sql_query = sql_updateTemplate($con, $this);
+			$sql_query->execute();
+		}
+
 		public function delete($con){
 			$sql_query = sql_deleteTemplate($con, $this->id);
 			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 		}
 		
-		public function populate(){
+		public function populateFromSave(){
 			$this->userid = $_SESSION['ADK_USER_ID'];
 			$this->name = $_POST['ADK_MSG_TMPL_NAME'];
 			$this->content = $_POST['ADK_MSG_TMPL_CONTENT'];
 		}
+
+		public function populateFromUpdate(){
+			$this->id = $_POST['ADK_MSG_TMPL_ID'];
+			$this->name = $_POST['ADK_MSG_TMPL_NAME'];
+			$this->content = $_POST['ADK_MSG_TMPL_CONTENT'];
+		}
 		
+		public function renderMessageLi(){
+			$html = '<li><a>';
+			$html .= '	<span class="pointer hoverbtn template template-edit" data-id="'.$this->id.'" title="Open" data-toggle="tooltip" data-container="body">';
+			$html .= '		<span class="glyphicon glyphicon-pencil"></span>';
+			$html .= '	</span>';
+			$html .= '	<span class="pointer hoverbtn template template-paste" data-id="'.$this->id.'" title="Paste into Message" data-toggle="tooltip" data-container="body">';
+			$html .= '		<span class="glyphicon glyphicon-paste"></span>';
+			$html .= '	</span>';
+			$html .= '	<span>'.$this->name.'</span>';
+			$html .= '</a></li>';
+			echo $html;
+		}
+
 	}
 
 ?>

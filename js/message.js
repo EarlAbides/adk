@@ -27,21 +27,50 @@
 		saveTemplate(this.className.indexOf('private') > -1);
 	});
 
+	//template update
+	$(document).on('click', '#button_updateTemplate', function(){
+		if(editor.composer.element.innerHTML !== '' && editor.composer.element.innerHTML !== 'Message' && document.getElementById('textbox_subject').value !== ''){
+			if($.fn.downloader.getFileIndex().indexOf('0') > -1){
+				var ADK_MSG_TMPL_ID = $(this).data('id')
+				$.post('includes/templateUpdate.php', {
+					ADK_MSG_TMPL_ID: ADK_MSG_TMPL_ID
+					,ADK_MSG_TMPL_NAME: document.getElementById('textbox_subject').value
+					,ADK_MSG_TMPL_CONTENT: editor.composer.element.innerHTML
+				})
+				.done(function(ret){
+					var ADK_MSG_TMPLS = JSON.parse(ret);
+					populateTemplateList(ADK_MSG_TMPLS);
+					bindTemplates();
+					cancelMessage();
+					if(lsTest()) localStorage.removeItem('msg' + ADK_MSG_TMPL_ID);
+				})
+				.fail(function(ret){
+					alert('There was an error updating the template: ' + ret);
+				});
+			}
+		}
+	});
+
 	//template delete
 	$(document).on('click', '#button_deleteTemplate', function(){
 		$.post('includes/templateDelete.php', {id: $(this).data('id')})
 		.done(function(ret){
-			var ADK_MSG_TMPLS = JSON.parse(ret);
-			populateTemplateList(ADK_MSG_TMPLS);
-			bindTemplates();
-			document.getElementById('textbox_subject').value = '';
-			$(editor.composer.element).empty();
-			document.getElementById('button_deleteTemplate').style.display = 'none';
+			refreshTemplateList(ret);
 		})
 		.fail(function(ret){
-			alert('There was an erro deleting the template: ' + ret);
+			alert('There was an error deleting the template: ' + ret);
 		});
 	});
+
+	function refreshTemplateList(ret){
+		var ADK_MSG_TMPLS = JSON.parse(ret);
+		populateTemplateList(ADK_MSG_TMPLS);
+		bindTemplates();
+		document.getElementById('textbox_subject').value = '';
+		$(editor.composer.element).empty();
+		document.getElementById('button_updateTemplate').style.display = 'none';
+		document.getElementById('button_deleteTemplate').style.display = 'none';
+	}
 
 });
 
@@ -65,7 +94,7 @@ function populateNewMessage(){
 }
 
 function newMessage(){
-	if(typeof editor !== 'undefined') editor.destroy();
+	destroyEditor();
 	var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
     document.getElementById('div_messages_main').innerHTML = template_newMessageHTML;
     $('#downloader').downloader({desc: true});
@@ -149,7 +178,7 @@ function reply(){
 	initEditor();
 }
 
-function cancelMessage(){document.getElementById('div_messages_main').innerHTML = '';editor.destroy();}
+function cancelMessage(){document.getElementById('div_messages_main').innerHTML = '';destroyEditor();}
 
 function message_markRead(ADK_MESSAGE_ID, span){
     if(document.getElementById('h4_folderName').innerHTML == 'Inbox'){
@@ -442,50 +471,98 @@ function saveTemplate(isPrivate){
 }
 
 function showTemplate(template){
-	if(typeof editor !== 'undefined') editor.destroy();
+	destroyEditor();
 	var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
 	document.getElementById('div_messages_main').innerHTML = template_newMessageHTML;
 	$('#downloader').downloader({desc: true});
 	document.getElementById('textbox_subject').value = template.name;
 	document.getElementById('textbox_message').value = template.content;
-	var button_deleteTemplate = document.getElementById('button_deleteTemplate');
-	button_deleteTemplate.style.display = 'inline-block';
-	button_deleteTemplate.setAttribute('data-id', template.id);
+	$('#button_updateTemplate, #button_deleteTemplate').each(function(){
+		this.style.display = 'inline-block';
+		this.setAttribute('data-id', template.id);
+	});
 	initEditor();
 }
 
+function pasteTemplate(template){
+	var textbox_subject = document.getElementById('textbox_subject');
+	if(!textbox_subject){
+		newMessage();
+		textbox_subject = document.getElementById('textbox_subject');
+	}
+	if(textbox_subject.value === '') textbox_subject.value = template.name;
+	var element = editor.composer.element;
+	if(element.innerHTML === 'Message') element.innerHTML = '';
+	element.innerHTML += template.content;
+}
+
 function bindTemplates(){
-	$('.template').on('click', function(){
-		$.get('includes/templateGet.php?_=' + $(this).data('id'))
+	$('.template-edit').on('click', function(){
+		var template = getTemplate($(this).data('id'), showTemplate);
+	});
+	$('.template-paste').on('click', function(){
+		var template = getTemplate($(this).data('id'), function(template){
+			pasteTemplate(template);
+		});
+	});
+}
+
+function getTemplate(id, callback){
+	$('#templates_dropdown').parent().removeClass('open');
+	var hasLs = lsTest();
+	if(hasLs && localStorage.getItem('msg' + id)) callback(JSON.parse(localStorage.getItem('msg' + id)));
+	else{
+		$.get('includes/templateGet.php?_=' + id)
 		.done(function(ret){
-			showTemplate(JSON.parse(ret));
+			var template = JSON.parse(ret);
+			if(hasLs) localStorage.setItem('msg' + template.id, ret);
+			callback(template);
 		})
 		.fail(function(ret){
 			alert('Error getting folder: ' + ret);
 		});
-		$('#templates_dropdown').parent().removeClass('open');
-	});
+	}
 }
 
 function populateTemplateList(ADK_MSG_TMPLS){
+	function makeLi(template){
+		var $li = $('<li>'), $a = $('<a>');
+		var $open = $('<span class="pointer hoverbtn template template-edit" data-id="' + template.id + '" title="Open" data-toggle="tooltip" data-container="body">');
+		var $openIcon = $('<span class="glyphicon glyphicon-pencil"></span>');
+		var $paste = $('<span class="pointer hoverbtn template template-paste" data-id="' + template.id + '" title="Paste into Message" data-toggle="tooltip" data-container="body">');
+		var $pasteIcon = $('<span class="glyphicon glyphicon-paste"></span>');
+		var $name = $('<span>' + template.name + '</span>');
+		$open.append($openIcon);
+		$paste.append($pasteIcon);
+		$a.append($open, $paste, $name);
+		$li.append($a);
+		return $li;
+	}
+
 	$('#ul_templates li').each(function(){
-		if(this.children.length){
-			if(this.children[0].className.indexOf('template') !== -1) this.parentNode.removeChild(this);
+		if(this.children.length && this.children[0].children.length){
+			if(this.children[0].children[0].className.indexOf('template') !== -1) this.parentNode.removeChild(this);
 		}
 	});
 
-	var $last = $('.templates-bar-public');
+	var $last = $('.dropdown-header-public');
 	ADK_MSG_TMPLS.public.forEach(function(ADK_MSG_TMPL){
-		var $li = $('<li><a class="pointer template" data-id="' + ADK_MSG_TMPL.id + '">' + ADK_MSG_TMPL.name + '</a></li>');
+		var $li = makeLi(ADK_MSG_TMPL);
 		$last.after($li);
 		$last = $li;
 	});
-	$last = $('.templates-bar-private');
+	$last = $('.dropdown-header-private');
 	ADK_MSG_TMPLS.private.forEach(function(ADK_MSG_TMPL){
-		var $li = $('<li><a class="pointer template" data-id="' + ADK_MSG_TMPL.id + '">' + ADK_MSG_TMPL.name + '</a></li>');
+		var $li = makeLi(ADK_MSG_TMPL);
 		$last.after($li);
 		$last = $li;
 	});
+}
+
+function destroyEditor(){
+	if(typeof editor !== 'undefined'){
+		try{editor.destroy();} catch(e){}
+	}
 }
 
 var editor;

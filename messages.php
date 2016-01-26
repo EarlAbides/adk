@@ -160,10 +160,12 @@
 													</a>
 												</li>
 											</ul>
+											<button type="button" id="button_updateTemplate" class="btn btn-sm btn-default" style="display:none;"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Update Template</button>
 											<button type="button" id="button_deleteTemplate" class="btn btn-sm btn-default" style="display:none;"><span class="glyphicon glyphicon-trash"></span>&nbsp;Delete Template</button>
 										<?php }?>
 									</div>
 									<div class="btn-group pull-right">
+										<div class="hidden-md hidden-lg"><br /></div>
                                         <button type="button" class="btn btn-sm btn-default" onclick="cancelMessage();">Cancel</button>
 										<button type="reset" class="btn btn-sm btn-default">Clear</button>
 										<button type="submit" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-envelope" style="left:-2px;"></span>&nbsp;Send</button>

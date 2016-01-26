@@ -165,13 +165,28 @@
 	function sql_updateDraft($con, $ADK_MESSAGE){
 		$sql_query = $con->prepare(
 			"UPDATE ADK_MESSAGE
-				SET ADK_MESSAGE_TITLE = ?,
-					ADK_MESSAGE_CONTENT = ?,
-					ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00'),
-					ADK_MESSAGE_DRAFT = 1
-			WHERE ADK_MESSAGE_ID = ?;");
+				SET ADK_MESSAGE_TITLE = ?
+					,ADK_MESSAGE_CONTENT = ?
+					,ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00')
+					,ADK_MESSAGE_DRAFT = 1
+			WHERE ADK_MESSAGE_ID = ?;"
+		);
 		
 		$sql_query->bind_param('ssi', $ADK_MESSAGE['ADK_MESSAGE_TITLE'], $ADK_MESSAGE['ADK_MESSAGE_CONTENT'], $ADK_MESSAGE['ADK_MESSAGE_ID']);
+		
+		return $sql_query;
+	}
+
+	function sql_updateTemplate($con, $ADK_MSG_TMPL){
+		$sql_query = $con->prepare(
+			"UPDATE ADK_MSG_TMPL
+				SET ADK_MSG_TMPL_NAME = ?
+					,ADK_MSG_TMPL_CONTENT = ?
+					,ADK_MSG_TMPL_DTE = SUBTIME(NOW(),'0 12:00:00.00')
+			WHERE ADK_MSG_TMPL_ID = ?;"
+		);
+		
+		$sql_query->bind_param('ssi', $ADK_MSG_TMPL->name, $ADK_MSG_TMPL->content, $ADK_MSG_TMPL->id);
 		
 		return $sql_query;
 	}

@@ -4,21 +4,11 @@
 	</a>
 	<ul id="ul_templates" class="dropdown-menu" aria-labelledby="templates_dropdown">
 		
-		<li><a class="noselect dropdown-header">Public Templates</a></li>
-		<li role="separator" class="divider templates-bar-public"></li>
-		<?php
-			foreach($ADK_MSG_TMPLS->public as $template){
-				echo '<li><a class="pointer template" data-id="'.$template->id.'">'.$template->name.'</a></li>';
-			}
-		?>
+		<li class="dropdown-header-public"><a class="noselect dropdown-header">Public Templates</a></li>
+		<?php foreach($ADK_MSG_TMPLS->public as $template) $template->renderMessageLi(); ?>
 
-		<li><a class="noselect dropdown-header" style="padding-top:12px;">Private Templates</a></li>
-		<li role="separator" class="divider templates-bar-private"></li>
-		<?php
-			foreach($ADK_MSG_TMPLS->private as $template){
-				echo '<li><a class="pointer template" data-id="'.$template->id.'">'.$template->name.'</a></li>';
-			}
-		?>
+		<li class="dropdown-header-private"><a class="noselect dropdown-header">Private Templates</a></li>
+		<?php foreach($ADK_MSG_TMPLS->private as $template) $template->renderMessageLi(); ?>
 
 	</ul>
 </div>
