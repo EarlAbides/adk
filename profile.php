@@ -319,6 +319,29 @@
 					</form>
 				</div>
 				
+				<div class="container-fluid">
+					<div class="col-xs-12 col-sm-6">
+						<form method="post" action="includes/hikerPhoto.php" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
+							<div class="div_tablewrapper" style="padding:5px;">
+								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive imghover" alt="Photo" title="Photo" />
+							</div>
+							<br />
+							<div class="form-group">
+								<div class="col-xs-6">
+									<label for="file_corrphoto" class="control-label control-label-sm">Upload Profile Photo</label><br />
+									<input type="file" id="file_photo" name="photo" required />
+									<span class="help-block with-errors"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-6">
+									<button type="submit" class="btn btn-sm btn-default pull-right">Upload</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				
 				<div style="display:none;">
 					<template id="template_state_us">
 						<?php

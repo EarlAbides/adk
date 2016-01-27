@@ -1,33 +1,35 @@
 <?php
 	
-	class Applicants{
+	class Hikers{
 		
-		public $applicants;
+		public $hikers;
 		
-		public function Applicants(){
-			$this->applicants = [];
+		public function Hikers(){
+			$this->hikers = [];
 		}
 		
 		public function get($con){
-			$sql_query = sql_getApplicants($con);
+			$sql_query = sql_getHikers($con);
 			if($sql_query->execute()){
 				$sql_query->store_result();
 				$result = sql_get_assoc($sql_query);
 
 				foreach($result as $row){
-					$ADK_APPLICANT = new Applicant();
-					$ADK_APPLICANT->id = $row['ADK_APPLICANT_ID'];
-					$ADK_APPLICANT->username = $row['ADK_APPLICANT_USERNAME'];
-					$ADK_APPLICANT->name = $row['ADK_APPLICANT_NAME'];
-					$ADK_APPLICANT->email = $row['ADK_APPLICANT_EMAIL'];
-					$ADK_APPLICANT->phone = $row['ADK_APPLICANT_PHONE'];
-					$ADK_APPLICANT->state = $row['ADK_APPLICANT_STATE'];
-					array_push($this->applicants, $ADK_APPLICANT);
+					$ADK_HIKER = new Hiker();
+					$ADK_HIKER->id = $row['ADK_USER_ID'];
+					$ADK_HIKER->corrid = $row['ADK_HIKER_CORR_ID'];
+					$ADK_HIKER->name = $row['ADK_HIKER_CORR_NAME'];
+					$ADK_HIKER->username = $row['ADK_USER_USERNAME'];
+					$ADK_HIKER->name = $row['ADK_USER_NAME'];
+					$ADK_HIKER->email = $row['ADK_USER_EMAIL'];
+					$ADK_HIKER->numpeaks = $row['ADK_HIKER_NUMPEAKS'];
+					$ADK_HIKER->lastactive = $row['ADK_HIKER_LASTACTIVE_DTE'];
+					array_push($this->hikers, $ADK_HIKER);
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');
 			
-			function sql_getApplicants($con){
+			function sql_getApplicants($con){///resume converting file here////////////////////////////////////////////////////////////
 				$sql_query = $con->prepare("SELECT ADK_APPLICANT_ID, ADK_APPLICANT_USERNAME, ADK_APPLICANT_NAME, ADK_APPLICANT_EMAIL, ADK_APPLICANT_PHONE, ADK_APPLICANT_STATE FROM ADK_APPLICANT;");
 				return $sql_query;
 			}
