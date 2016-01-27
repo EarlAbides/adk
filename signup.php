@@ -72,13 +72,13 @@
 					
 					<div class="container-fluid">
                         
-                        <?php if(isset($_GET['u'])){?>
+                        <?php if(isset($_GET['u'])){ ?>
                             <div class="username-error col-xs-12 has-error">
 							    <div class="form-group" style="display:inline;">
                                     <span class="help-block with-errors">&#8226;Username '<?php echo $_GET['u']; ?>' already in use</span>
                                 </div>
 							</div>
-                        <?php }?>
+                        <?php } ?>
 						
 						<div class="col-xs-12">
 							<div class="form-group" style="display:inline;">

@@ -32,13 +32,13 @@
 					</a>
 				</h4>
 							
-				<?php if($_SESSION['ADK_USERGROUP_CDE'] !== 'EDT'){?>
+				<?php if($_SESSION['ADK_USERGROUP_CDE'] !== 'EDT'){ ?>
 					<div class="col-sm-12 text-right">
 						<a class="pointer" onclick="editHike();">Edit</a>
 						<b>&nbsp;|&nbsp;</b>
 						<a href="#" onclick="if(confirm('Are you sure you want to delete this hike?')) deleteHike();" style="margin-right:5%;">Delete</a>
 					</div>
-				<?php }?>
+				<?php } ?>
 								
 				<div class="col-xs-12 col-sm-4">
 					<div class="div_tablewrapper">

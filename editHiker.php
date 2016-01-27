@@ -25,7 +25,7 @@
 				}
 			});
 			
-			<?php if($_SESSION['ADK_USERGROUP_CDE'] == 'ADM'){?>
+			<?php if($_SESSION['ADK_USERGROUP_CDE'] == 'ADM'){ ?>
 			(function(){
 				var t = document.getElementById('table_assignCorr').children[1];
 				for(var i = 0; i < t.children.length; i++){
@@ -33,7 +33,7 @@
 						$(t.children[i]).find('input').prop('disabled', true);
 				}
 			})();
-			<?php }?>
+			<?php } ?>
 		});
 	</script>
 </head>
@@ -203,7 +203,7 @@
 			</form>
 		</div>
 		
-		<?php if($_SESSION['ADK_USERGROUP_CDE'] == 'ADM'){?>
+		<?php if($_SESSION['ADK_USERGROUP_CDE'] == 'ADM'){ ?>
 		<div class="content-wrapper">
 			<form method="post" action="includes/corr_reassign.php" data-toggle="validator" role="form" novalidate>
 				
@@ -238,7 +238,7 @@
 				
 			</form>
 		</div>
-		<?php }?>
+		<?php } ?>
 		
 		<?php include 'includes/footer.php'; ?>
 	</div>

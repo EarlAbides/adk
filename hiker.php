@@ -53,10 +53,10 @@
 					<div class="pull-right" style="margin-right:3%;">
 						<?php if($_SESSION['ADK_USERGROUP_CDE'] !== 'EDT')
 							echo '<a href="editHiker.php?_='.$ADK_HIKER['ADK_USER_ID'].'">Edit</a>';
-                        if($_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){?>
+                        if($_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){ ?>
                             <b>&nbsp;|&nbsp;</b>
 						    <a href="#" onclick="if(confirm('Are you sure you want to delete this hiker?')) $('#button_submit_delete').click();">Delete</a>
-                        <?php }?>
+                        <?php } ?>
 					</div>
 					
 					<div class="col-xs-12">
@@ -117,14 +117,14 @@
 								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS1']; ?></span>
 							</div>
 						</div>
-						<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){?>
+						<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){ ?>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Address<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){?>, line 1<?php }?></label><br />
+								<label class="control-label control-label-sm">Address<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){ ?>, line 1<?php } ?></label><br />
 								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS2']; ?></span>
 							</div>
 						</div>
-						<?php }?>
+						<?php } ?>
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-6">
 								<label class="control-label control-label-sm">City</label><br />
@@ -184,7 +184,7 @@
 			
 			<?php include 'templates/hikes.php'; ?>
 			
-			<?php if($_SESSION['ADK_USERGROUP_CDE'] !== 'EDT'){?>
+			<?php if($_SESSION['ADK_USERGROUP_CDE'] !== 'EDT'){ ?>
 				<div class="col-xs-12">
 					<div class="container-fluid content content-max" style="margin-bottom:15px;">
 				
@@ -269,7 +269,7 @@
 				
 					</div>
 				</div>
-			<?php }?>
+			<?php } ?>
 			
 		</div>
 		<?php include 'includes/footer.php'; ?>

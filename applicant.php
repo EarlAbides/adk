@@ -89,14 +89,14 @@
 								<span><?php echo $ADK_APPLICANT['ADK_APPLICANT_ADDRESS1']; ?></span>
 							</div>
 						</div>
-						<?php if($ADK_APPLICANT['ADK_APPLICANT_ADDRESS2'] !== ''){?>
+						<?php if($ADK_APPLICANT['ADK_APPLICANT_ADDRESS2'] !== ''){ ?>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Address<?php if($ADK_APPLICANT['ADK_APPLICANT_ADDRESS2'] !== ''){?>, line 2<?php }?></label><br />
+								<label class="control-label control-label-sm">Address<?php if($ADK_APPLICANT['ADK_APPLICANT_ADDRESS2'] !== ''){ ?>, line 2<?php } ?></label><br />
 								<span><?php echo $ADK_APPLICANT['ADK_APPLICANT_ADDRESS2']; ?></span>
 							</div>
 						</div>
-						<?php }?>
+						<?php } ?>
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-6">
 								<label class="control-label control-label-sm">City</label><br />

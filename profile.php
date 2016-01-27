@@ -5,7 +5,7 @@
 <?php require_once 'profile.inc.php'; ?>
 
 <?php include 'includes/head.php'; ?>
-	<?php if($ADK_USERGROUP_CDE === 'HIK'){?>
+	<?php if($ADK_USERGROUP_CDE === 'HIK'){ ?>
 	<script>
 		$(document).ready(function(){
 			$('#select_country').change(function(){
@@ -27,7 +27,7 @@
 			});
 		});
 	</script>
-	<?php }?>
+	<?php } ?>
 </head>
 
 <body>
@@ -340,7 +340,7 @@
 					</template>
 				</div>
 				
-				<?php break;}?>
+				<?php break;} ?>
 			</div>
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">

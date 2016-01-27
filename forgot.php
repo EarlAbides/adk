@@ -15,7 +15,7 @@
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
 				
-				<?php if($validHash){?>
+				<?php if($validHash){ ?>
 					<form id="form_forgotpw" method="post" action="includes/user_updatepw.php" data-toggle="validator" role="form" novalidate>
 						
 						<h4 class="content-header">
@@ -74,7 +74,7 @@
 						</div>
 					
 					</form>
-				<?php }else{?>
+				<?php }else{ ?>
 					<form id="form_forgotpw" method="post" action="includes/forgotpw.php" data-toggle="validator" role="form" novalidate>
 					
 						<h4 class="content-header">
@@ -129,7 +129,7 @@
 						</div>
 					
 					</form>
-				<?php }?>
+				<?php } ?>
 				
 			</div>
 			

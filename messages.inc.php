@@ -25,7 +25,8 @@
 	$ADK_MESSAGES = getMessages($con, $ADK_USER_ID, $folderName);
 	
 	$table_messages = getTableMessages($ADK_MESSAGES, $folderName);
-		
+	
+	$disableMsgs = false;
 	switch($ADK_USERGROUP_CDE){
 		case 'ADM':
 			require_once 'includes/classes/Template.php';
@@ -43,6 +44,7 @@
 			require_once 'includes/Correspondent.php';
 			$ADK_HIKER = getHiker($con, $ADK_USER_ID);
 			$ADK_CORRESPONDENT = getCorrespondent($con, $ADK_HIKER['ADK_HIKER_CORR_ID']);
+			$disableMsgs = $ADK_HIKER['ADK_HIKER_NUMPEAKS'] >= 46? 'disabled="disabled"': false;
 			break;
 	}
 	

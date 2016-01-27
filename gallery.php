@@ -46,7 +46,7 @@
 
                     <div class="col-xs-6">
                         <div class="form-group">
-							<?php if($ADK_USERGROUP_CDE === 'ADM' || $ADK_USERGROUP_CDE === 'EDT'){?>
+							<?php if($ADK_USERGROUP_CDE === 'ADM' || $ADK_USERGROUP_CDE === 'EDT'){ ?>
 								<label for="select_ADK_HIKER" class="control-label control-label-sm text-right">Filter by user</label>
 								<select id="select_ADK_HIKER" class="form-control form-control-sm">
 									<option value="">Show All</option>
@@ -89,13 +89,13 @@
 					<div id="div_photos" class="scroll" style="max-height:750px;">
 						<?php if(!isset($photos) || count($photos) === 0){ ?>
 							<div class="col-xs-12 text-center font-italic">No photos</div>
-						<?php }else{ ?><ul class="row gallery-photo"><?php for($i = 0; $i < count($photos); $i++){?>
+						<?php }else{ ?><ul class="row gallery-photo"><?php for($i = 0; $i < count($photos); $i++){ ?>
 						<li class="gallery col-xs-6 col-sm-4 col-md-3 col-lg-2" data-peaks="<?php echo $photos[$i]->peaks; ?>">
 							<a href="#" class="photo" data-toggle="modal" data-target="#modal_gallery" data-id="<?php echo $photos[$i]->id; ?>" data-desc="<?php echo $photos[$i]->desc; ?>" data-un="<?php echo $photos[$i]->username; ?>" data-peaks="<?php echo str_replace(',', ', ', $photos[$i]->peaks); ?>">
 								<img src="img/loading.gif" data-original="includes/getImage.php?_=<?php echo $photos[$i]->id; ?>&t=t" class="img-responsive imghover lazy" alt="<?php echo $photos[$i]->name; ?>" title="<?php echo getTitle($photos[$i]); ?>" data-toggle="tooltip" data-container="body" data-placement="bottom" />
 							</a>
 						</li>
-						<?php }?></ul><?php }?>
+						<?php } ?></ul><?php } ?>
 					</div>
 
                 </div>
@@ -116,13 +116,13 @@
 
                     <?php if(!isset($videos) || count($videos) === 0){ ?>
                         <div class="col-xs-12 text-center font-italic">No videos</div>
-                    <?php }else{?><ul class="row gallery-video"><?php for($i = 0; $i < count($videos); $i++){?>
+                    <?php }else{ ?><ul class="row gallery-video"><?php for($i = 0; $i < count($videos); $i++){ ?>
 					<li class="gallery" data-peaks="<?php echo $videos[$i]->peaks; ?>">
 						<a href="#" class="video" data-toggle="modal" data-target="#modal_gallery" data-id="<?php echo $videos[$i]->id; ?>" data-desc="<?php echo $videos[$i]->desc; ?>" data-un="<?php echo $videos[$i]->username; ?>" data-peaks="<?php echo str_replace(',', ', ', $videos[$i]->peaks); ?>">
 							<span title="<?php echo getTitle($videos[$i]); ?>" data-toggle="tooltip" data-container="body" data-placement="right"><?php echo $videos[$i]->name; ?></span>
 						</a>
 					</li>
-					<?php }?></ul><?php }?>
+					<?php } ?></ul><?php } ?>
                     
                 </div>
 
@@ -142,13 +142,13 @@
 
                     <?php if(!isset($docsFiles) || count($docsFiles) === 0){ ?>
                         <div class="col-xs-12 text-center font-italic">No files</div>
-                    <?php }else{?><ul class="row gallery-files"><?php for($i = 0; $i < count($docsFiles); $i++){?>
+                    <?php }else{ ?><ul class="row gallery-files"><?php for($i = 0; $i < count($docsFiles); $i++){ ?>
                         <li class="gallery" data-peaks="<?php echo $docsFiles[$i]->peaks; ?>">
                             <a href="#" onclick="getFile(<?php echo $docsFiles[$i]->id; ?>);">
                                 <span title="<?php echo getTitle($docsFiles[$i]); ?>" data-toggle="tooltip" data-container="body" data-placement="right"><?php echo $docsFiles[$i]->name; ?></span>
                             </a>
                         </li>
-                    <?php }?></ul><?php }?>
+                    <?php } ?></ul><?php } ?>
 
                 </div>
 

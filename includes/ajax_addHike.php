@@ -6,6 +6,7 @@
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
 	require_once 'INSERT.php';
+	require_once 'UPDATE.php';
 	require_once 'Correspondent.php';
 	require_once 'Hike.php';
 	require_once 'Hiker.php';

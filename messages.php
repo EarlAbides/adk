@@ -84,7 +84,7 @@
 						<div class="col-xs-12">
 							<div class="form-group">
 								<div class="col-xs-12 col-sm-10 col-md-8">
-									<?php if($ADK_USERGROUP_CDE == 'ADM' || $ADK_USERGROUP_CDE == 'COR'){?>
+									<?php if($ADK_USERGROUP_CDE == 'ADM' || $ADK_USERGROUP_CDE == 'COR'){ ?>
 										<label for="select_to_username" class="control-label control-label-sm">To</label><br />
 										<select id="select_to_username" name="to_username" class="form-control form-control-sm" required>
 											<?php
@@ -96,11 +96,11 @@
 											?>
 										</select>
 										<span class="help-block with-errors"></span>
-									<?php } elseif($ADK_USERGROUP_CDE == 'HIK'){?>
+									<?php } elseif($ADK_USERGROUP_CDE == 'HIK'){ ?>
 										<label for="textbox_to_username" class="control-label control-label-sm">To</label><br />
 										<input type="text" id="textbox_to_username" name="to_username" class="form-control form-control-sm" readonly="readonly" required />
 										<span class="help-block with-errors"></span>
-									<?php }?>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -141,10 +141,10 @@
 							<div class="form-group">
 								<div class="col-xs-12">
 									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-default" onclick="saveDraft();"><span class="glyphicon glyphicon-file"></span>&nbsp;Save as Draft</button>
+										<button type="button" class="btn btn-sm btn-default" onclick="saveDraft();" <?php echo $disableMsgs; ?>><span class="glyphicon glyphicon-file"></span>&nbsp;Save as Draft</button>
 									</div>
 									<div class="btn-group">	
-										<?php if($_SESSION['ADK_USERGROUP_CDE'] === 'COR' || $_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){?>
+										<?php if($_SESSION['ADK_USERGROUP_CDE'] === 'COR' || $_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){ ?>
 											<button id="savetemplates_dropdown" type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
 												<span class="glyphicon glyphicon-tags" style="top:2px;left:-2px;"></span>&nbsp;Save as Template
 											</button>
@@ -162,13 +162,13 @@
 											</ul>
 											<button type="button" id="button_updateTemplate" class="btn btn-sm btn-default" style="display:none;"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Update Template</button>
 											<button type="button" id="button_deleteTemplate" class="btn btn-sm btn-default" style="display:none;"><span class="glyphicon glyphicon-trash"></span>&nbsp;Delete Template</button>
-										<?php }?>
+										<?php } ?>
 									</div>
 									<div class="btn-group pull-right">
 										<div class="hidden-md hidden-lg"><br /></div>
                                         <button type="button" class="btn btn-sm btn-default" onclick="cancelMessage();">Cancel</button>
 										<button type="reset" class="btn btn-sm btn-default">Clear</button>
-										<button type="submit" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-envelope" style="left:-2px;"></span>&nbsp;Send</button>
+										<button type="submit" class="btn btn-sm btn-default" <?php echo $disableMsgs; ?>><span class="glyphicon glyphicon-envelope" style="left:-2px;"></span>&nbsp;Send</button>
 									</div>
 								</div>
 							</div>
@@ -269,7 +269,7 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<?php if($ADK_USERGROUP_CDE == 'COR') echo '<a id="a_loghike" class="btn btn-sm btn-default">Log Hike</a>'; ?>
-								<button type="button" id="button_reply" class="btn btn-sm btn-default pull-right" onclick="reply();">Reply</button>
+								<button type="button" id="button_reply" class="btn btn-sm btn-default pull-right" onclick="reply();" <?php echo $disableMsgs; ?>>Reply</button>
 							</div>
 						</div>
 					</div>
