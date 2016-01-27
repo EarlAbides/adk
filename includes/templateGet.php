@@ -23,6 +23,10 @@
 		http_response_code(404);
 		exit;
 	}
+	if($ADK_MSG_TMPL->userid != null && $ADK_MSG_TMPL->userid != $_SESSION['ADK_USER_ID']){
+		http_response_code(403);
+		exit;
+	}
 	
 	echo json_encode($ADK_MSG_TMPL);
 	http_response_code(200);

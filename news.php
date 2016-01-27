@@ -31,7 +31,7 @@
 				<div class="container-fluid">
 					
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-
+						
 						<h3 class="text-center">ADK 46er Correspondents Meeting</h3>
 						<h4 class="text-right">January 16th 2016</h4>
 						
