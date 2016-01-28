@@ -73,7 +73,7 @@
 	class Hiker{
 		
 		public $err;
-		public $id, $corrid, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $numpeaks, $hikes, $remainingPeaks, $lastactive;
+		public $id, $corrid, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $numpeaks, $hikes, $lastactive;
 		
 		public function Hiker(){
 			$this->hikes = [];
@@ -185,23 +185,20 @@
 		    if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 		}
 		
-		//public function populateFromSignUp(){
-		//    $this->username = $_POST['username'];
-		//    $this->name = $_POST['name'];
-		//    $this->email = $_POST['email'];
-		//    $this->phone = $_POST['phone'];
-		//    $this->age = $_POST['age'];
-		//    $this->sex = $_POST['sex'];
-		//    $this->address1 = $_POST['address1'];
-		//    $this->address2 = $_POST['address2'];
-		//    $this->city = $_POST['city'];
-		//    $this->state = $_POST['state'];
-		//    $this->zip = $_POST['zip'];
-		//    $this->country = $_POST['country'];
-		//    $this->info = $_POST['personalinfo'];
-		//    $this->reqcorr = $_POST['reqcorr'];
-		//    $this->peakids = $_POST['peakids'];
-		//}
+		public function populateFromApplicant($ADK_USER_ID, $ADK_CORRESPONDENT_ID, $ADK_APPLICANT){
+			$this->id = $ADK_USER_ID;
+			$this->corrid = $ADK_CORRESPONDENT_ID;
+			$this->phone = $ADK_APPLICANT->phone;
+			$this->age = $ADK_APPLICANT->age;
+			$this->sex = $ADK_APPLICANT->sex;
+			$this->address1 = $ADK_APPLICANT->address1;
+			$this->address2 = $ADK_APPLICANT->address2;
+			$this->city = $ADK_APPLICANT->city;
+			$this->state = $ADK_APPLICANT->state;
+			$this->zip = $ADK_APPLICANT->zip;
+			$this->country = $ADK_APPLICANT->country;
+			$this->info = $ADK_APPLICANT->info;
+		}
 		
 	}
 	

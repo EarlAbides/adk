@@ -26,11 +26,6 @@
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');
-			
-			//function sql_getApplicants($con){
-			//    $sql_query = $con->prepare("SELECT ADK_APPLICANT_ID, ADK_APPLICANT_USERNAME, ADK_APPLICANT_NAME, ADK_APPLICANT_EMAIL, ADK_APPLICANT_PHONE, ADK_APPLICANT_STATE FROM ADK_APPLICANT;");
-			//    return $sql_query;
-			//}
 		}
 		
 		public function renderTable(){

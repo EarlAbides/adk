@@ -22,6 +22,20 @@
 			return $COUNT == 0;
 		}
 		
+		public function save($con){
+			$sql_query = sql_addUser($con, $this);
+			$sql_query->execute();
+			$this->id = $sql_query->insert_id;
+		}
+		
+		public function populateFromAddHiker($randomPW){
+			$this->usergroupid = 3;
+			$this->username = $_POST['username'];
+			$this->name = $_POST['name'];
+			$this->email = $_POST['email'];
+			$this->pw = $randomPW;
+		}
+		
 	}
 	
 ?>

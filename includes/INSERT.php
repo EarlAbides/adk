@@ -112,15 +112,25 @@
 	}
 		
 	//User
+	// function sql_addUser($con, $ADK_USER){
+		// $sql_query = $con->prepare(
+		    // "INSERT INTO ADK_USER(ADK_USERGROUP_ID, ADK_USER_USERNAME, ADK_USER_PASSWORD, ADK_USER_NAME, ADK_USER_EMAIL)
+		    // VALUES(?,?,?,?,?);");
+		
+		// $ADK_USER['ADK_USER_PASSWORD'] = md5($ADK_USER['ADK_USER_PASSWORD']);
+		
+		// $sql_query->bind_param('issss', $ADK_USER['ADK_USERGROUP_ID'], $ADK_USER['ADK_USER_USERNAME'], $ADK_USER['ADK_USER_PASSWORD'],
+					// $ADK_USER['ADK_USER_NAME'], $ADK_USER['ADK_USER_EMAIL']);
+		
+		// return $sql_query;
+	// }
 	function sql_addUser($con, $ADK_USER){
 		$sql_query = $con->prepare(
 		    "INSERT INTO ADK_USER(ADK_USERGROUP_ID, ADK_USER_USERNAME, ADK_USER_PASSWORD, ADK_USER_NAME, ADK_USER_EMAIL)
 		    VALUES(?,?,?,?,?);");
 		
-		$ADK_USER['ADK_USER_PASSWORD'] = md5($ADK_USER['ADK_USER_PASSWORD']);
-		
-		$sql_query->bind_param('issss', $ADK_USER['ADK_USERGROUP_ID'], $ADK_USER['ADK_USER_USERNAME'], $ADK_USER['ADK_USER_PASSWORD'],
-					$ADK_USER['ADK_USER_NAME'], $ADK_USER['ADK_USER_EMAIL']);
+		$sql_query->bind_param('issss', $ADK_USER->usergroupid, $ADK_USER->username, md5($ADK_USER->pw),
+					$ADK_USER->name, $ADK_USER->email);
 		
 		return $sql_query;
 	}
