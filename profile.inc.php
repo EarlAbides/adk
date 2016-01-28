@@ -1,10 +1,11 @@
 <?php
 	
 	//Imports
+	require_once 'includes/session.php';
 	require_once 'includes/db_conn.php';
 	require_once 'includes/SELECT.php';
 	require_once 'includes/Correspondent.php';
-	require_once 'includes/Hiker.php';
+	require_once 'includes/classes/Hiker.php';
 	require_once 'includes/User.php';
 	
 	if(isset($_SESSION['ADK_USER_ID'])){
@@ -18,7 +19,12 @@
 	switch($ADK_USERGROUP_CDE){
 		case 'ADM': case 'EDT': $ADK_USER = getUser($con, $ADK_USER_ID); break;
 		case 'COR': $ADK_CORRESPONDENT = getCorrespondent($con, $ADK_USER_ID); break;
-		case 'HIK': $ADK_HIKER = getHiker($con, $ADK_USER_ID); break;
+		//case 'HIK': $ADK_HIKER = getHiker($con, $ADK_USER_ID); break;
+		case 'HIK':
+			$ADK_HIKER = new Hiker($con);
+			$ADK_HIKER->id = $_SESSION['ADK_USER_ID'];
+			$ADK_HIKER->get($con);
+			break;
 		default: header("Location: ./");
 	}
 	

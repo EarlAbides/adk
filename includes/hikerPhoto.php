@@ -8,17 +8,18 @@
 	require_once 'File.php';
 	require_once 'classes/Hiker.php';
 	
-	if(validateImageFile($errMess, $name)) $file = getPOSTFile('photo');
+	if(validateImageFile($errMess, 'photo')) $file = getPOSTFile('photo');
 	else header('Location: ../profile?e='.$errMess);
 	
 	$con = connect_db();
 	
 	$hiker = new Hiker();
-	$hiker->populateFromUpdatePhoto();
+	$hiker->id = $_SESSION['ADK_USER_ID'];
 	
 	if($file !== ''){
 		$fileIDs = addFiles($con, array($file));
-		hiker->updatePhoto($con, $fileIDs[0]);
+		$hiker->photoid = $fileIDs[0];
+		$hiker->updatePhotoID($con);
 	}
 	$con->close();
 	

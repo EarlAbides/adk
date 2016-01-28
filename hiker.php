@@ -52,7 +52,7 @@
 					
 					<div class="pull-right" style="margin-right:3%;">
 						<?php if($_SESSION['ADK_USERGROUP_CDE'] !== 'EDT')
-							echo '<a href="editHiker.php?_='.$ADK_HIKER['ADK_USER_ID'].'">Edit</a>';
+							echo '<a href="editHiker.php?_='.$ADK_HIKER->id.'">Edit</a>';
                         if($_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){ ?>
                             <b>&nbsp;|&nbsp;</b>
 						    <a href="#" onclick="if(confirm('Are you sure you want to delete this hiker?')) $('#button_submit_delete').click();">Delete</a>
@@ -61,13 +61,14 @@
 					
 					<div class="col-xs-12">
 						<div class="form-group">
-							<div class="col-xs-12 col-sm-6" style="display:inline;">
+							<div class="col-xs-12 col-sm-8" style="display:inline;">
+								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive hikerphoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
 								<label class="control-label control-label-sm">Username</label><br />
-								<span><?php echo $ADK_HIKER['ADK_USER_USERNAME']; ?></span>
+								<span><?php echo $ADK_HIKER->username; ?></span>
 							</div>
-							<div class="col-xs-12 col-sm-6 text-right" style="display:inline;">
+							<div class="col-xs-12 col-sm-4 text-right" style="display:inline;">
 								<label class="control-label control-label-sm">Last Active</label><br />
-								<span class="font-italic"><?php echo strpos(date("n/j/y g:ma", strtotime($ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE'])), '1/1/70') === 0? '--': date("n/j/y g:ia", strtotime($ADK_HIKER['ADK_HIKER_LASTACTIVE_DTE'])); ?></span>
+								<span class="font-italic"><?php echo strpos(date("n/j/y g:ma", strtotime($ADK_HIKER->lastactive)), '1/1/70') === 0? '--': date("n/j/y g:ia", strtotime($ADK_HIKER->lastactive)); ?></span>
 							</div>
 						</div>
 					</div>
@@ -80,31 +81,31 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Name</label><br />
-								<span><?php echo $ADK_HIKER['ADK_USER_NAME']; ?></span>
+								<span><?php echo $ADK_HIKER->name; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Email</label><br />
-								<span><a href="mailto:<?php echo $ADK_HIKER['ADK_USER_EMAIL']; ?>"><?php echo $ADK_HIKER['ADK_USER_EMAIL']; ?></a></span>
+								<span><a href="mailto:<?php echo $ADK_HIKER->email; ?>"><?php echo $ADK_HIKER->email; ?></a></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-6">
 								<label class="control-label control-label-sm">Phone</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_PHONE']; ?></span>
+								<span><?php echo $ADK_HIKER->phone; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">Age</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_AGE']; ?></span>
+								<span><?php echo $ADK_HIKER->age; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">Sex</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_SEX']; ?></span>
+								<span><?php echo $ADK_HIKER->sex; ?></span>
 							</div>
 						</div>
 					</div>
@@ -114,39 +115,39 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Address, line 1</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS1']; ?></span>
+								<span><?php echo $ADK_HIKER->address1; ?></span>
 							</div>
 						</div>
-						<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){ ?>
+						<?php if($ADK_HIKER->address2 !== ''){ ?>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Address<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){ ?>, line 1<?php } ?></label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS2']; ?></span>
+								<label class="control-label control-label-sm">Address<?php if($ADK_HIKER->address2 !== ''){ ?>, line 1<?php } ?></label><br />
+								<span><?php echo $ADK_HIKER->address2; ?></span>
 							</div>
 						</div>
 						<?php } ?>
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-6">
 								<label class="control-label control-label-sm">City</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_CITY']; ?></span>
+								<span><?php echo $ADK_HIKER->city; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">State</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_STATE']; ?></span>
+								<span><?php echo $ADK_HIKER->state; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">Zip</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_ZIP']; ?></span>
+								<span><?php echo $ADK_HIKER->zip; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Country</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_COUNTRY']; ?></span>
+								<span><?php echo $ADK_HIKER->country; ?></span>
 							</div>
 						</div>
 					</div>
@@ -159,7 +160,7 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Personal info</label><br />
-								<span class="lgtext"><?php echo $ADK_HIKER['ADK_HIKER_PERSONALINFO']; ?></span>
+								<span class="lgtext"><?php echo $ADK_HIKER->info; ?></span>
 							</div>
 						</div>
 					</div>
@@ -171,10 +172,10 @@
 					<div class="col-xs-12" style="margin-top:10px;">
 						<div class="form-group">
 							<div class="col-xs-6">
-								<a href="./messages?_=<?php echo $ADK_HIKER['ADK_USER_ID']; ?>" class="btn btn-sm btn-default">Send Message</a>
+								<a href="./messages?_=<?php echo $ADK_HIKER->id; ?>" class="btn btn-sm btn-default">Send Message</a>
 							</div>
                             <div class="col-xs-6 text-right">
-								<a href="./gallery?_=<?php echo $ADK_HIKER['ADK_USER_ID']; ?>">View Gallery</a>
+								<a href="./gallery?_=<?php echo $ADK_HIKER->id; ?>">View Gallery</a>
 							</div>
 						</div>
 					</div>
@@ -205,13 +206,7 @@
 												<div class="input-group input-group-sm">
 													<select id="select_remainingpeaks" class="form-control form-control-sm">
 														<option />
-														<?php
-															foreach($ADK_HIKER['ADK_HIKER_REMAININGPEAKS'] as $ADK_PEAK){
-																if($ADK_PEAK['ADK_PEAK_COMPLETE']) $disabled = ' disabled="disabled"';
-																else $disabled = '';
-																echo '<option value="'.$ADK_PEAK['ADK_PEAK_ID'].'"'.$disabled.'>'.$ADK_PEAK['ADK_PEAK_NAME'].'</option>';
-															}
-														?>
+														<?php foreach($ADK_PEAKS->peaks as $ADK_PEAK) echo '<option value="'.$ADK_PEAK->id.'">'.$ADK_PEAK->name.'</option>'; ?>
 													</select>
 													<span id="span_addPeak" class="input-group-addon btn-default pointer" onclick="addPeak(this.previousElementSibling);">Add</span>
 												</div>
@@ -258,7 +253,7 @@
 							
 								<!-- Hidden -->
 								<div style="display:none;">
-									<input type="hidden" id="hikerId" name="id" value="<?php echo $ADK_HIKER['ADK_USER_ID']; ?>" />
+									<input type="hidden" id="hikerId" name="id" value="<?php echo $ADK_HIKER->id; ?>" />
 									<input type="hidden" id="hidden_peakids" name="peakids" />
 									<input type="hidden" id="hidden_hikeid" name="hikeid" />
 									<input type="hidden" id="hidden_prefileids" name="prefileids" />
@@ -277,7 +272,7 @@
 	
 	<div style="display:none;">
 		<form method="post" action="includes/hiker_delete.php" role="form" novalidate>
-			<input type="hidden" name="id" value="<?php echo $ADK_HIKER['ADK_USER_ID']; ?>" />
+			<input type="hidden" name="id" value="<?php echo $ADK_HIKER->id; ?>" />
 			<button type="submit" id="button_submit_delete"></button>
 		</form>
 		<form method="post" action="includes/dl.php">

@@ -8,8 +8,7 @@
 	require_once 'Correspondent.php';
 	require_once 'File.php';
 	
-	$name = 'corrphoto';
-	if(validateImageFile($errMess, $name)) $file = getPOSTFile($name);
+	if(validateImageFile($errMess, 'photo')) $file = getPOSTFile('photo');
 	else header('Location: ../profile?e='.$errMess);
 	
 	$con = connect_db();

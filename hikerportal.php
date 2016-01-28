@@ -44,7 +44,7 @@
 				<div class="container-fluid content content-max" style="margin-bottom:15px;">
 					
 					<h4 class="content-header">
-						<?php echo $ADK_HIKER['ADK_USER_USERNAME']; ?>
+						<?php echo $ADK_HIKER->username; ?>
 						<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
 							<span class="glyphicon glyphicon-chevron-down"></span>
 						</a>
@@ -53,32 +53,33 @@
 					<div class="col-xs-12 col-sm-6">
 						<div class="form-group">
 							<div class="col-xs-12">
+								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive hikerphoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
 								<label class="control-label control-label-sm">Name</label><br />
-								<span><?php echo $ADK_HIKER['ADK_USER_NAME']; ?></span>
+								<span><?php echo $ADK_HIKER->name; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Email</label><br />
-								<span><a href="mailto:<?php echo $ADK_HIKER['ADK_USER_EMAIL']; ?>"><?php echo $ADK_HIKER['ADK_USER_EMAIL']; ?></a></span>
+								<span><a href="mailto:<?php echo $ADK_HIKER->email; ?>"><?php echo $ADK_HIKER->email; ?></a></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-6">
 								<label class="control-label control-label-sm">Phone</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_PHONE']; ?></span>
+								<span><?php echo $ADK_HIKER->phone; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">Age</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_AGE']; ?></span>
+								<span><?php echo $ADK_HIKER->age; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">Sex</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_SEX']; ?></span>
+								<span><?php echo $ADK_HIKER->sex; ?></span>
 							</div>
 						</div>
 					</div>
@@ -87,40 +88,40 @@
 						<div class="hidden-xs hidden-lg" style="display:block;margin-bottom:14px;"></div>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Address<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){ ?>, line 1<?php } ?></label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS1']; ?></span>
+								<label class="control-label control-label-sm">Address<?php if($ADK_HIKER->address2 !== ''){ ?>, line 1<?php } ?></label><br />
+								<span><?php echo $ADK_HIKER->address1; ?></span>
 							</div>
 						</div>
-						<?php if($ADK_HIKER['ADK_HIKER_ADDRESS2'] !== ''){ ?>
+						<?php if($ADK_HIKER->address2 !== ''){ ?>
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Address, line 2</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_ADDRESS2']; ?></span>
+								<span><?php echo $ADK_HIKER->address2; ?></span>
 							</div>
 						</div>
 						<?php } ?>
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-6">
 								<label class="control-label control-label-sm">City</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_CITY']; ?></span>
+								<span><?php echo $ADK_HIKER->city; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">State</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_STATE']; ?></span>
+								<span><?php echo $ADK_HIKER->state; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6 col-sm-3">
 								<label class="control-label control-label-sm">Zip</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_ZIP']; ?></span>
+								<span><?php echo $ADK_HIKER->zip; ?></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Country</label><br />
-								<span><?php echo $ADK_HIKER['ADK_HIKER_COUNTRY']; ?></span>
+								<span><?php echo $ADK_HIKER->country; ?></span>
 							</div>
 						</div>
 					</div>
@@ -129,13 +130,13 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<label class="control-label control-label-sm">Personal info</label><br />
-								<span class="lgtext"><?php echo $ADK_HIKER['ADK_HIKER_PERSONALINFO']; ?></span>
+								<span class="lgtext"><?php echo $ADK_HIKER->info; ?></span>
 							</div>
 						</div>
 					</div>
 
                     <div class="col-xs-12 text-right">
-						<a href="./gallery?_=<?php echo $ADK_HIKER['ADK_USER_ID']; ?>">View Gallery</a>
+						<a href="./gallery?_=<?php echo $ADK_HIKER->id; ?>">View Gallery</a>
 					</div>
 						
 				</div>
@@ -213,13 +214,7 @@
 											<div class="input-group input-group-sm">
 												<select id="select_remainingpeaks" class="form-control form-control-sm">
 													<option />
-													<?php
-														foreach($ADK_HIKER['ADK_HIKER_REMAININGPEAKS'] as $ADK_PEAK){
-															if($ADK_PEAK['ADK_PEAK_COMPLETE']) $disabled = ' disabled="disabled"';
-															else $disabled = '';
-															echo '<option value="'.$ADK_PEAK['ADK_PEAK_ID'].'"'.$disabled.'>'.$ADK_PEAK['ADK_PEAK_NAME'].'</option>';
-														}
-													?>
+													<?php foreach($ADK_PEAKS->peaks as $ADK_PEAK) echo '<option value="'.$ADK_PEAK->id.'">'.$ADK_PEAK->name.'</option>'; ?>
 												</select>
 												<span id="span_addPeak" class="input-group-addon btn-default pointer" onclick="addPeak(this.previousElementSibling);">Add</span>
 											</div>
@@ -266,7 +261,7 @@
 							
 							<!-- Hidden -->
 							<div style="display:none;">
-								<input type="hidden" id="hikerId"name="id" value="<?php echo $ADK_HIKER['ADK_USER_ID']; ?>" />
+								<input type="hidden" id="hikerId"name="id" value="<?php echo $ADK_HIKER->id; ?>" />
 								<input type="hidden" id="hidden_peakids" name="peakids" />
 								<input type="hidden" id="hidden_hikeid" name="hikeid" />
 								<input type="hidden" id="hidden_prefileids" name="prefileids" />

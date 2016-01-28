@@ -154,8 +154,8 @@
 							<br />
 							<div class="form-group">
 								<div class="col-xs-6">
-									<label for="file_corrphoto" class="control-label control-label-sm">Upload Profile Photo</label><br />
-									<input type="file" id="file_corrphoto" name="corrphoto" required />
+									<label for="file_photo" class="control-label control-label-sm">Upload Profile Photo</label><br />
+									<input type="file" id="file_photo" name="photo" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -174,7 +174,7 @@
 				<?php break; case 'HIK':?>
 				
 				<h4 class="content-header">
-					<?php echo $ADK_HIKER['ADK_USER_USERNAME']; ?>
+					<?php echo $ADK_HIKER->username; ?>
 					<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
 						<span class="glyphicon glyphicon-chevron-down"></span>
 					</a>
@@ -187,7 +187,7 @@
 							<div class="form-group">
 								<div class="col-xs-12 col-sm-5">
 									<label for="textbox_username" class="control-label control-label-sm">Username*</label><br />
-									<input type="text" id="textbox_username" name="username" class="form-control form-control-sm" value="<?php echo $ADK_HIKER['ADK_USER_USERNAME']; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-error="&#8226;Required, no spaces" data-remote="includes/ajax_checkApplicantAndUsername.php" data-errors-remote="&#8226;Username already in use" required />
+									<input type="text" id="textbox_username" name="username" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->username; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-error="&#8226;Required, no spaces" data-remote="includes/ajax_checkApplicantAndUsername.php" data-errors-remote="&#8226;Username already in use" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -201,28 +201,28 @@
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_name" class="control-label control-label-sm">Name*</label><br />
-									<input type="text" id="textbox_name" name="name" class="form-control form-control-sm" value="<?php echo $ADK_HIKER['ADK_USER_NAME']; ?>" maxlength="40" placeholder="First Middle Last" required />
+									<input type="text" id="textbox_name" name="name" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->name; ?>" maxlength="40" placeholder="First Middle Last" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_email" class="control-label control-label-sm">Email*</label><br />
-									<input type="email" id="textbox_email" name="email" class="form-control form-control-sm" value="<?php echo $ADK_HIKER['ADK_USER_EMAIL']; ?>" maxlength="50" placeholder="xxx@abc.com" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required />
+									<input type="email" id="textbox_email" name="email" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->email; ?>" maxlength="50" placeholder="xxx@abc.com" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12 col-sm-6">
 									<label for="textbox_phone" class="control-label control-label-sm">Phone</label><br />
-									<input type="text" id="textbox_phone" name="phone" class="form-control form-control-sm" value="<?php echo $ADK_HIKER['ADK_HIKER_PHONE']; ?>" maxlength="14" placeholder="x-xxx-xxx-xxxx" pattern="[\d\-]*" />
+									<input type="text" id="textbox_phone" name="phone" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->phone; ?>" maxlength="14" placeholder="x-xxx-xxx-xxxx" pattern="[\d\-]*" />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-6 col-sm-3">
 									<label for="textbox_age" class="control-label control-label-sm">Age</label><br />
-									<input type="number" id="textbox_age" name="age" class="form-control form-control-sm" value="<?php echo $ADK_HIKER['ADK_HIKER_AGE']; ?>" maxlength="3" placeholder="xxx" pattern="[\d]*" />
+									<input type="number" id="textbox_age" name="age" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->age; ?>" maxlength="3" placeholder="xxx" pattern="[\d]*" />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -231,8 +231,8 @@
 									<label for="select_sex" class="control-label control-label-sm">Sex</label><br />
 									<select id="select_sex" name=sex class="form-control form-control-sm" placeholder="Sex">
 										<option />
-										<option value="M"<?php if($ADK_HIKER['ADK_HIKER_SEX'] == 'M') echo ' selected="selected"'; ?>>M</option>
-										<option value="F"<?php if($ADK_HIKER['ADK_HIKER_SEX'] == 'F') echo ' selected="selected"'; ?>>F</option>
+										<option value="M"<?php if($ADK_HIKER->sex == 'M') echo ' selected="selected"'; ?>>M</option>
+										<option value="F"<?php if($ADK_HIKER->sex == 'F') echo ' selected="selected"'; ?>>F</option>
 									</select>
 									<span class="help-block with-errors"></span>
 								</div>
@@ -244,28 +244,28 @@
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_address1" class="control-label control-label-sm">Address, line 1*</label><br />
-									<input type="text" id="textbox_address1" name="address1" class="form-control form-control-sm" value="<?php echo $ADK_HIKER['ADK_HIKER_ADDRESS1']; ?>" maxlength="40" placeholder="123 xxx St." pattern="[\w\d\s\.\,\']*" required />
+									<input type="text" id="textbox_address1" name="address1" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->address1; ?>" maxlength="40" placeholder="123 xxx St." pattern="[\w\d\s\.\,\']*" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_address2" class="control-label control-label-sm">Address, line 2</label><br />
-									<input type="text" id="textbox_address2" name="address2" class="form-control form-control-sm" value="<?php echo $ADK_HIKER['ADK_HIKER_ADDRESS2']; ?>" maxlength="40" pattern="[\w\d\s\.\,\']*" placeholder="Apt., Floor, etc." />
+									<input type="text" id="textbox_address2" name="address2" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->address2; ?>" maxlength="40" pattern="[\w\d\s\.\,\']*" placeholder="Apt., Floor, etc." />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="select_country" class="control-label control-label-sm">Country*</label><br />
-									<?php echo select_country($ADK_HIKER['ADK_HIKER_COUNTRY']); ?>
+									<?php echo select_country($ADK_HIKER->country); ?>
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12 col-sm-6">
 									<label for="textbox_city" class="control-label control-label-sm">City*</label><br />
-									<input type="text" id="textbox_city" name="city" class="form-control form-control-sm" value="<?php echo $ADK_HIKER['ADK_HIKER_CITY']; ?>" maxlength="40" placeholder="City" pattern="[\w\d\s\.\,\']*" required />
+									<input type="text" id="textbox_city" name="city" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->city; ?>" maxlength="40" placeholder="City" pattern="[\w\d\s\.\,\']*" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -273,10 +273,10 @@
 								<div class="col-xs-6 col-sm-3">
 									<label id="label_select_state" for="select_state" class="control-label control-label-sm">State*</label><br />
 									<?php
-										switch($ADK_HIKER['ADK_HIKER_COUNTRY']){
-											case 'United States': echo select_state($ADK_HIKER['ADK_HIKER_STATE']); break;
-											case 'Canada': echo select_state_ca($ADK_HIKER['ADK_HIKER_STATE']); break;
-											default: echo textbox_stateregion($ADK_HIKER['ADK_HIKER_STATE']);
+										switch($ADK_HIKER->country){
+											case 'United States': echo select_state($ADK_HIKER->state); break;
+											case 'Canada': echo select_state_ca($ADK_HIKER->state); break;
+											default: echo textbox_stateregion($ADK_HIKER->state);
 										}
 									?>
 									<span class="help-block with-errors"></span>
@@ -285,7 +285,7 @@
 							<div class="form-group">
 								<div class="col-xs-6 col-sm-3">
 									<label for="textbox_zip" class="control-label control-label-sm">Zip*</label><br />
-									<input type="text" id="textbox_zip" name="zip" class="form-control form-control-sm" value="<?php echo $ADK_HIKER['ADK_HIKER_ZIP']; ?>" maxlength="10" placeholder="Zip/Postal" pattern="[\w\d\-\s]*" required />
+									<input type="text" id="textbox_zip" name="zip" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->zip; ?>" maxlength="10" placeholder="Zip/Postal" pattern="[\w\d\-\s]*" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -299,7 +299,7 @@
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_personalinfo" class="control-label control-label-sm">Personal info*</label><br />
-									<textarea id="textbox_personalinfo" name="personalinfo" class="form-control form-control-sm" maxlength="1024" placeholder="Personal information" required><?php echo $ADK_HIKER['ADK_HIKER_PERSONALINFO']; ?></textarea>
+									<textarea id="textbox_personalinfo" name="personalinfo" class="form-control form-control-sm" maxlength="1024" placeholder="Personal information" required><?php echo $ADK_HIKER->info; ?></textarea>
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -314,13 +314,13 @@
 						</div>
 					
 						<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
-						<input type="hidden" name="corrid" value="<?php echo $ADK_HIKER['ADK_HIKER_CORR_ID']; ?>" />
+						<input type="hidden" name="corrid" value="<?php echo $ADK_HIKER->corrid; ?>" />
 						
 					</form>
 				</div>
 				
 				<div class="container-fluid">
-					<div class="col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 						<form method="post" action="includes/hikerPhoto.php" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
 							<div class="div_tablewrapper" style="padding:5px;">
 								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive imghover" alt="Photo" title="Photo" />
@@ -328,7 +328,7 @@
 							<br />
 							<div class="form-group">
 								<div class="col-xs-6">
-									<label for="file_corrphoto" class="control-label control-label-sm">Upload Profile Photo</label><br />
+									<label for="file_photo" class="control-label control-label-sm">Upload Profile Photo</label><br />
 									<input type="file" id="file_photo" name="photo" required />
 									<span class="help-block with-errors"></span>
 								</div>

@@ -3,7 +3,7 @@
 				
 		<h4 id="div_myhikes" class="content-header">
 			<?php
-				if(basename($_SERVER["PHP_SELF"], '.php') === 'hiker') echo $ADK_HIKER['ADK_USER_USERNAME'].'\'s Hikes';
+				if(basename($_SERVER["PHP_SELF"], '.php') === 'hiker') echo $ADK_HIKER->username.'\'s Hikes';
 				else echo 'My Hikes';
 			?>
 			<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
@@ -15,7 +15,7 @@
 			<div class="col-xs-12">
 				<div class="pull-right">
 					<label class="control-label control-label-sm">Total Peaks:&nbsp;</label>
-					<span id="span_totalpeaks"><?php echo $ADK_HIKER['ADK_HIKER_NUMPEAKS']; ?></span>
+					<span id="span_totalpeaks"><?php echo $ADK_HIKER->numpeaks; ?></span>
 				</div>
 				<div id="div_table_hikes" class="div_tablewrapper tablewrapper500">
 					<?php echo $table_hikes; ?>
@@ -96,5 +96,5 @@
 	</div>
 </div>
 
-<input type="hidden" id="hidden_ADK_HIKER_NAME" value="<?php echo $ADK_HIKER['ADK_USER_NAME']; ?>" />
-<input type="hidden" id="hidden_ADK_HIKER_USERNAME" value="<?php echo $ADK_HIKER['ADK_USER_USERNAME']; ?>" />
+<input type="hidden" id="hidden_ADK_HIKER_NAME" value="<?php echo $ADK_HIKER->name; ?>" />
+<input type="hidden" id="hidden_ADK_HIKER_USERNAME" value="<?php echo $ADK_HIKER->username; ?>" />

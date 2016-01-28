@@ -130,8 +130,8 @@
 			}
 			
 			//PHP error
-			if($_FILES['corrphoto']['error'] !== 0){
-				$errMess .= 'p'.$_FILES['corrphoto']['error'];
+			if($_FILES['photo']['error'] !== 0){
+				$errMess .= 'p'.$_FILES['photo']['error'];
 				$valid = false;
 			}
 		}

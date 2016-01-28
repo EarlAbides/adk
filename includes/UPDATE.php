@@ -113,6 +113,14 @@
 		return $sql_query;
 	}
 
+	function sql_updateHikerPhotoID($con, $ADK_HIKER){
+        $sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_PHOTO_ID = ? WHERE ADK_USER_ID = ?;");
+		
+		$sql_query->bind_param('ii', $ADK_HIKER->photoid, $ADK_HIKER->id);
+		
+		return $sql_query;
+	}
+	
 	function sql_updateLastActive($con, $ADK_USER_ID){
 		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_LASTACTIVE_DTE = SUBTIME(NOW(),'0 05:00:00.00') WHERE ADK_USER_ID = ?;");
 		

@@ -4,24 +4,29 @@
 	require_once 'includes/db_conn.php';
 	require_once 'includes/SELECT.php';
 	require_once 'includes/Hike.php';
-	require_once 'includes/Hiker.php';
 	require_once 'includes/Correspondent.php';
-	require_once 'includes/Peak.php';
+	require_once 'includes/classes/Hiker.php';
+	require_once 'includes/classes/Peak.php';
 	
 	if($_SESSION['ADK_USER_ID']){
-		$ADK_USER_ID = $_SESSION['ADK_USER_ID'];
-	    if($ADK_USER_ID == '') header("Location: ./");
+		if($_SESSION['ADK_USER_ID'] == '') header("Location: ./");
 	}
 	else header("Location: ./");
 	
 	$con = connect_db();
 	
-	$ADK_HIKER = getHiker($con, $ADK_USER_ID);
-	if($ADK_HIKER == '') header("Location: ./");
-	$ADK_HIKES = getHikes($con, $ADK_USER_ID);
+	$ADK_HIKER = new Hiker();
+	$ADK_HIKER->id = $_SESSION['ADK_USER_ID'];
+	$ADK_HIKER->get($con);
+	if($ADK_HIKER->name == '') header("Location: ./");
+
+	$ADK_HIKES = getHikes($con, $_SESSION['ADK_USER_ID']);
 	$ADK_HIKES = getHikesPeaks($con, $ADK_HIKES);
-    $ADK_HIKER['ADK_HIKER_REMAININGPEAKS'] = getRemainingPeaks($con, $ADK_USER_ID);
-	$ADK_CORRESPONDENT = getCorrespondent($con, $ADK_HIKER['ADK_HIKER_CORR_ID']);
+    
+	$ADK_PEAKS = new Peaks();
+	$ADK_PEAKS->get($con);
+
+	$ADK_CORRESPONDENT = getCorrespondent($con, $ADK_HIKER->corrid);
 	
 	$con->close();
 	
