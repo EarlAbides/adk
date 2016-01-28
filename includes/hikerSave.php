@@ -37,6 +37,7 @@
 	$ADK_HIKER->save($con);
 	
 	//maybe http://blog.fedecarg.com/2009/02/22/mysql-split-string-function/ to split string in getHiker query???
+	// or http://stackoverflow.com/questions/19073500/sql-split-comma-separated-row
 	
 	//get peak list
 	//add hikes
