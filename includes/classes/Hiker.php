@@ -180,10 +180,10 @@
 		    $sql_query->execute();
 		}
 		
-		//public function delete($con){
-		//    $sql_query = sql_deleteApplicant($con, $this->id);
-		//    if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
-		//}
+		public function delete($con){
+		    $sql_query = sql_deleteHiker($con, $this->id);
+		    if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
+		}
 		
 		//public function populateFromSignUp(){
 		//    $this->username = $_POST['username'];

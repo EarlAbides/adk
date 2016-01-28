@@ -33,7 +33,7 @@
 				<div class="container-fluid">
 					<div class="col-xs-12">
 						<div class="div_tablewrapper">
-							<?php echo $table_applicants; ?>
+							<?php echo $ADK_APPLICANTS->renderTable(); ?>
 						</div>
 					</div>
 				</div>

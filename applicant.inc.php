@@ -3,25 +3,23 @@
 	//Imports
 	require_once 'includes/db_conn.php';
 	require_once 'includes/SELECT.php';
-	require_once 'includes/Applicant.php';
 	require_once 'includes/Correspondent.php';
-	require_once 'includes/Peak.php';
+	require_once 'includes/classes/Applicant.php';
+	require_once 'includes/classes/Peak.php';
 	
-	if(isset($_GET['_'])){
-		$ADK_APPLICANT_ID = $_GET['_'];
-		if($ADK_APPLICANT_ID == '') header("Location: ./");
-	}
-	else header("Location: ./");
-	
+	if(!isset($_GET['_']) || !is_numeric($_GET['_'])) header("Location: ./");
 	
 	$con = connect_db();
 	
-	$ADK_APPLICANT = getApplicant($con, $ADK_APPLICANT_ID);
-	if($ADK_APPLICANT == '') header("Location: ./");
+	$ADK_APPLICANT = new Applicant();
+	$ADK_APPLICANT->id = intval($_GET['_']);
+	$ADK_APPLICANT->get($con);
+	if($ADK_APPLICANT->name ==  '') header("Location: ./");
 	
 	$ADK_CORRESPONDENTS = getCorrespondents($con);
 	
-	$ADK_PEAKS = getPeaks($con);
+	$ADK_PEAKS = new Peaks();
+	$ADK_PEAKS->get($con);
 	
 	$con->close();
 	

@@ -20,19 +20,6 @@
 			else die('There was an error running the query ['.$con->error.']');
 			
 			return $COUNT == 0;
-			
-			function sql_isUniqueUsername($con, $username, $exempt){
-				$sql_query = $con->prepare(
-					"SELECT
-						(SELECT COUNT(*) FROM ADK_USER WHERE ADK_USER_USERNAME = ? AND ADK_USER_USERNAME <> ?) +
-						(SELECT COUNT(*) FROM ADK_APPLICANT WHERE ADK_APPLICANT_USERNAME = ? AND ADK_APPLICANT_USERNAME <> ?)
-					AS COUNT;"
-				);
-				
-				$sql_query->bind_param('ssss', $username, $exempt, $username, $exempt);
-				
-				return $sql_query;
-			}
 		}
 		
 	}

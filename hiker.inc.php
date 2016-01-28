@@ -4,6 +4,7 @@
 	require_once 'includes/db_conn.php';
 	require_once 'includes/SELECT.php';
 	require_once 'includes/Hike.php';
+	require_once 'includes/Correspondent.php';
 	require_once 'includes/classes/Hiker.php';
 	require_once 'includes/classes/Peak.php';
 	

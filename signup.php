@@ -59,7 +59,7 @@
 		<?php include 'includes/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
-			<form id="form_signup" method="post" action="includes/applicant_add.php" data-toggle="validator" role="form" novalidate>
+			<form id="form_signup" method="post" action="includes/applicantSave.php" data-toggle="validator" role="form" novalidate>
 				
 				<div class="col-xs-12 content content-max">
 					

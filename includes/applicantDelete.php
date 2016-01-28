@@ -3,9 +3,9 @@
 	//Imports
 	require_once 'db_conn.php';
 	require_once 'DELETE.php';
-	require_once 'Applicant.php';
+	require_once 'classes/Applicant.php';
 	
-	if(!isset($_POST['id']) || !isNumeric($_POST['id'])){
+	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){
 		header('Location: ../applicants?e=i');
 		exit;
 	}

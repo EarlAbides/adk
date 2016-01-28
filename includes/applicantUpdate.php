@@ -4,27 +4,31 @@
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
 	require_once 'UPDATE.php';
-	require_once 'Applicant.php';
-	require_once 'User.php';
+	require_once 'classes/Applicant.php';
+	require_once 'classes/User.php';
 	
 	$con = connect_db();
 	
+	$old_ADK_APPLICANT = new Applicant();
+	$old_ADK_APPLICANT->id = intval($_POST['id']);
+	$old_ADK_APPLICANT->get($con);
+
 	$ADK_APPLICANT = new Applicant();
-	$old_ADK_APPLICANT = $ADK_APPLICANT->get($con);
 	$ADK_APPLICANT->populateFromUpdate();
 	
-	if(!$ADK_APPLICANT->isValid(){
+	if(!$ADK_APPLICANT->isValid()){
 		$con->close();
-		header('Location: ../signup?e='.$this->err);
+		header('Location: ../editApplicant?_='.$ADK_APPLICANT->id.'&e=q');
 		exit;
 	}
 	if(!User::isUniqueUsername($con, $ADK_APPLICANT->username, $old_ADK_APPLICANT->username)){
 		$con->close();
-		header('Location: ../applicant?e=q');
+		header('Location: ../editApplicant?_='.$ADK_APPLICANT->id.'&e=q');
 		exit;
 	}
 	
-	$ADK_APPLICANT->save($con);
+	$ADK_APPLICANT->sanitize();
+	$ADK_APPLICANT->update($con);
 	
 	$con->close();
 	

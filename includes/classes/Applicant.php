@@ -27,10 +27,10 @@
 			}
 			else die('There was an error running the query ['.$con->error.']');
 			
-			function sql_getApplicants($con){
-				$sql_query = $con->prepare("SELECT ADK_APPLICANT_ID, ADK_APPLICANT_USERNAME, ADK_APPLICANT_NAME, ADK_APPLICANT_EMAIL, ADK_APPLICANT_PHONE, ADK_APPLICANT_STATE FROM ADK_APPLICANT;");
-				return $sql_query;
-			}
+			//function sql_getApplicants($con){
+			//    $sql_query = $con->prepare("SELECT ADK_APPLICANT_ID, ADK_APPLICANT_USERNAME, ADK_APPLICANT_NAME, ADK_APPLICANT_EMAIL, ADK_APPLICANT_PHONE, ADK_APPLICANT_STATE FROM ADK_APPLICANT;");
+			//    return $sql_query;
+			//}
 		}
 		
 		public function renderTable(){
@@ -46,7 +46,7 @@
 							</tr>
 						</thead>
 						<tbody>";		
-			if($ADK_APPLICANTS == ''){//If empty
+			if(count($this->applicants) === 0){//If empty
 				$html .= '<tr><td colspan="6" style="text-align:center;font-style:italic;">No new applicants</td></tr>';
 			}	
 			else{
@@ -86,7 +86,7 @@
 			if(strlen($this->username) === 0 || strlen($this->username) > 45) $this->err .= 'u';
 			if(strlen($this->name) === 0 || strlen($this->name) > 40) $this->err .= 'n';
 			if(strlen($this->email) === 0 || strlen($this->email) > 50) $this->err .= 'e';
-			if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) > 50) $this->err .= 'e';
+			if(!filter_var($this->email, FILTER_VALIDATE_EMAIL) > 50) $this->err .= 'e';
 			if(strlen($this->address1) === 0 || strlen($this->address1) > 40) $this->err .= 'a';
 			if(strlen($this->city) === 0 || strlen($this->city) > 40) $this->err .= 'c';
 			if(strlen($this->state) === 0 || strlen($this->state) > 2) $this->err .= 's';
@@ -106,22 +106,6 @@
 			$sql_query = sql_addApplicant($con, $this);
 			$sql_query->execute();
 			$this->id = $sql_query->insert_id;
-			
-			function sql_addApplicant($con, $ADK_APPLICANT){
-				$sql_query = $con->prepare(
-					"INSERT INTO ADK_APPLICANT(ADK_APPLICANT_USERNAME, ADK_APPLICANT_NAME, ADK_APPLICANT_EMAIL, ADK_APPLICANT_PHONE
-						,ADK_APPLICANT_AGE, ADK_APPLICANT_SEX, ADK_APPLICANT_ADDRESS1, ADK_APPLICANT_ADDRESS2
-						,ADK_APPLICANT_CITY, ADK_APPLICANT_STATE, ADK_APPLICANT_ZIP, ADK_APPLICANT_COUNTRY, ADK_APPLICANT_PERSONALINFO
-						,ADK_APPLICANT_REQ_CORR, ADK_APPLICANT_PEAKIDS)
-					VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-				
-				$sql_query->bind_param('sssssssssssssss', $ADK_APPLICANT->username, $ADK_APPLICANT->name, $ADK_APPLICANT->email
-							,$ADK_APPLICANT->phone, $ADK_APPLICANT->age, $ADK_APPLICANT->sex, $ADK_APPLICANT->address1
-							,$ADK_APPLICANT->address2, $ADK_APPLICANT->city, $ADK_APPLICANT->state, $ADK_APPLICANT->zip
-							,$ADK_APPLICANT->country, $ADK_APPLICANT->info, $ADK_APPLICANT->reqcorr, $ADK_APPLICANT->peakids);
-				
-				return $sql_query;
-			}
 		}
 		
 		public function get($con){
@@ -129,7 +113,7 @@
 			if($sql_query->execute()){
 				$sql_query->store_result();
 				$result = sql_get_assoc($sql_query);
-
+				
 				foreach($result as $row){
 					$this->username = $row['ADK_APPLICANT_USERNAME'];
 					$this->name = $row['ADK_APPLICANT_NAME'];
@@ -149,53 +133,11 @@
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');
-
-			function sql_getApplicant($con, $ADK_APPLICANT_ID){
-				$sql_query = $con->prepare(
-					"SELECT A.ADK_APPLICANT_ID, A.ADK_APPLICANT_USERNAME, A.ADK_APPLICANT_NAME, A.ADK_APPLICANT_EMAIL, A.ADK_APPLICANT_PHONE
-						,A.ADK_APPLICANT_AGE, A.ADK_APPLICANT_SEX, A.ADK_APPLICANT_ADDRESS1, A.ADK_APPLICANT_ADDRESS2
-						,A.ADK_APPLICANT_CITY, A.ADK_APPLICANT_STATE, A.ADK_APPLICANT_ZIP, A.ADK_APPLICANT_COUNTRY
-						,A.ADK_APPLICANT_PERSONALINFO, ADK_APPLICANT_REQ_CORR, ADK_APPLICANT_PEAKIDS
-						,SELECT GROUP_CONCAT(' ', ADK_PEAK_NAME) FROM ADK_PEAK WHERE ADK_PEAK_ID IN(A.ADK_APPLICANT_PEAKIDS) ADK_APPLICANT_PEAKLIST
-					FROM ADK_APPLICANT A
-					WHERE ADK_APPLICANT_ID = ?;"
-				);
-
-				$sql_query->bind_param('i', $ADK_CORRESPONDENT_ID);
-
-				return $sql_query;
-			}
 		}
 		
 		public function update($con){
 			$sql_query = sql_updateApplicant($con, $this);
 			$sql_query->execute();
-			
-			function sql_updateApplicant($con, $ADK_APPLICANT){
-				$sql_query = $con->prepare(
-					"UPDATE ADK_APPLICANT
-						SET ADK_APPLICANT_USERNAME = ?
-							,ADK_APPLICANT_NAME = ?
-							,ADK_APPLICANT_EMAIL = ?
-							,ADK_APPLICANT_PHONE = ?
-							,ADK_APPLICANT_AGE = ?
-							,ADK_APPLICANT_SEX = ?
-							,ADK_APPLICANT_ADDRESS1 = ?
-							,ADK_APPLICANT_ADDRESS2 = ?
-							,ADK_APPLICANT_CITY = ?
-							,ADK_APPLICANT_STATE = ?
-							,ADK_APPLICANT_ZIP = ?
-							,ADK_APPLICANT_COUNTRY = ?
-							,ADK_APPLICANT_PERSONALINFO = ?
-					WHERE ADK_APPLICANT_ID = ?;");
-				
-				$sql_query->bind_param('ssssissssssssi', $ADK_APPLICANT->username, $ADK_APPLICANT->name, $ADK_APPLICANT->email
-							,$ADK_APPLICANT->phone, $ADK_APPLICANT->age, $ADK_APPLICANT->sex, $ADK_APPLICANT->address1
-							,$ADK_APPLICANT->address2, $ADK_APPLICANT->city, $ADK_APPLICANT->state, $ADK_APPLICANT->zip
-							,$ADK_APPLICANT->country, $ADK_APPLICANT->info, $ADK_APPLICANT->id);
-				
-				return $sql_query;
-			}
 		}
 		
 		public function delete($con){
@@ -222,7 +164,7 @@
 		}
 		
 		public function populateFromUpdate(){
-			$this->id = $_POST['id'];
+			$this->id = intval($_POST['id']);
 			$this->username = $_POST['username'];
 			$this->name = $_POST['name'];
 			$this->email = $_POST['email'];
