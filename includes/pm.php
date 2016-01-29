@@ -48,29 +48,29 @@
 	}
 	
 	//Correspondent
-	function sendCorrNewHikerPM($con, $ADK_CORRESPONDENT_ID, $ADK_USER, $ADK_HIKER){
+	function sendCorrNewHikerPM($con, $ADK_USER, $ADK_HIKER, $ADK_APPLICANT){
 		$message = "Your have been assigned a new hiker!"."<br><br>";
 		
 		$message .= "Name:<br>";
-		$message .= $ADK_HIKER['ADK_USER_NAME']."<br>";
+		$message .= $ADK_HIKER->name."<br>";
 		$message .= "Username:<br>";
-		$message .= $ADK_HIKER['ADK_USER_USERNAME']."<br>";
+		$message .= $ADK_HIKER->username."<br>";
 		$message .= "Initial Password:<br>";
-		$message .= $ADK_USER['ADK_USER_PASSWORD']."<br><br>"."<br><br>";
+		$message .= $ADK_USER->pw."<br><br>"."<br><br>";
 
 		$message .= "Personal info:<br>";
-		$message .= $ADK_HIKER['ADK_HIKER_PERSONALINFO']."<br><br>";
+		$message .= $ADK_HIKER->info."<br><br>";
 		$message .= "Peaks:<br>";
-		$message .= $ADK_HIKER['ADK_HIKER_PEAKLIST']."<br><br>"."<br><br>";
+		$message .= $ADK_APPLICANT->peaklist."<br><br>"."<br><br>";
 				
 		$message .= "Click <a href=\"./messages?_=".$ADK_HIKER['ADK_USER_ID']."\">here</a> to send the new user hiker a message."."<br><br>";
 		
 		$ADK_MESSAGE = array(
 			'ADK_MESSAGE_FROM_USER_ID' => 1
-	        ,'ADK_MESSAGE_TO_USER_ID' => $ADK_CORRESPONDENT_ID
+	        ,'ADK_MESSAGE_TO_USER_ID' => $ADK_HIKER->corrid
 	        ,'ADK_MESSAGE_RESPOND_ID' => ''
 	        ,'ADK_MESSAGE_ORIG_ID' => ''
-			,'ADK_MESSAGE_TITLE' => 'New Hiker - '.$ADK_HIKER['ADK_USER_USERNAME']
+			,'ADK_MESSAGE_TITLE' => 'New Hiker - '.$ADK_HIKER->username
 			,'ADK_MESSAGE_CONTENT' => $message
 			,'ADK_MESSAGE_DRAFT' => 0
 	    );

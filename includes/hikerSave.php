@@ -45,13 +45,13 @@
 		$ADK_HIKE->addPeak($con, $ADK_PEAK_ID);
 	}
 	
-	//$ADK_CORRESPONDENT = new Correspondent();
-	//$ADK_CORRESPONDENT->id = $ADK_HIKER->corrid;
-	//$ADK_CORRESPONDENT->get($con);	
+	$ADK_CORRESPONDENT = new Correspondent();
+	$ADK_CORRESPONDENT->id = $ADK_HIKER->corrid;
+	$ADK_CORRESPONDENT->get($con);	
 	
-	//sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT);///////////need emails and pms updated to use objects and not array
-	//sendCorrNewHikerEmail($ADK_CORRESPONDENT['ADK_USER_EMAIL'], $ADK_USER, $ADK_HIKER);
-	//sendCorrNewHikerPM($con, $ADK_CORRESPONDENT['ADK_USER_ID'], $ADK_USER, $ADK_HIKER);
+	sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT);
+	sendCorrNewHikerEmail($ADK_CORRESPONDENT->email, $ADK_USER, $ADK_HIKER, $ADK_APPLICANT);
+	sendCorrNewHikerPM($con, $ADK_USER, $ADK_HIKER, $ADK_APPLICANT);
 	
 	$con->close();
 	

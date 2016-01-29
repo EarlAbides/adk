@@ -102,39 +102,39 @@
 	}
 	
 	//Correspondent
-	function sendCorrNewHikerEmail($ADK_CORRESPONDENT_EMAIL, $ADK_USER, $ADK_HIKER){
+	function sendCorrNewHikerEmail($ADK_CORRESPONDENT_EMAIL, $ADK_USER, $ADK_HIKER, $ADK_APPLICANT){
 		$htmlmessage = "Your have been assigned a new hiker!<br><br>";
 		
         $htmlmessage .= "Name:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_USER_NAME']."<br>";
+		$htmlmessage .= $ADK_HIKER->name."<br>";
 		$htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_USER_USERNAME']."<br>";
+		$htmlmessage .= $ADK_HIKER->username."<br>";
 		$htmlmessage .= "Initial Password:<br>";
-		$htmlmessage .= $ADK_USER['ADK_USER_PASSWORD']."<br><br>";
+		$htmlmessage .= $ADK_USER->pw."<br><br>";
 		$htmlmessage .= "Personal info:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_HIKER_PERSONALINFO']."<br><br>";
+		$htmlmessage .= $ADK_HIKER->info."<br><br>";
 		$htmlmessage .= "Peaks:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_HIKER_PEAKLIST']."<br><br>";
+		$htmlmessage .= $ADK_APPLICANT->peaklist."<br><br>";
 		
-		$htmlmessage .= "Click <a href=".$GLOBALS['url']."messages?_=".$ADK_HIKER['ADK_USER_ID'].">here to send the new user a message</a>.<br><br>";
+		$htmlmessage .= "Click <a href=".$GLOBALS['url']."messages?_=".$ADK_HIKER->id.">here to send the new user a message</a>.<br><br>";
 	    
 		$message = "Your have been assigned a new hiker!\r\n\r\n";
 		
         $message .= "Name:\r\n";
-		$message .= $ADK_HIKER['ADK_USER_NAME']."\r\n";
+		$message .= $ADK_HIKER->name."\r\n";
 		$message .= "Username:\r\n";
-		$message .= $ADK_HIKER['ADK_USER_USERNAME']."\r\n";
+		$message .= $ADK_HIKER->username."\r\n";
 		$message .= "Initial Password:\r\n";
-		$message .= $ADK_USER['ADK_USER_PASSWORD']."\r\n\r\n";
+		$message .= $ADK_USER->pw."\r\n\r\n";
 		$message .= "Personal info:\r\n";
-		$message .= $ADK_HIKER['ADK_HIKER_PERSONALINFO']."\r\n\r\n";
+		$message .= $ADK_HIKER->info."\r\n\r\n";
 		$message .= "Peaks:\r\n";
-		$message .= $ADK_HIKER['ADK_HIKER_PEAKLIST']."\r\n\r\n";
+		$message .= $ADK_APPLICANT->peaklist."\r\n\r\n";
 		
-		$message .= "Click below to send the new user a message:\r\n".$GLOBALS['url']."messages?_=".$ADK_HIKER['ADK_USER_ID']."\r\n\r\n";
+		$message .= "Click below to send the new user a message:\r\n".$GLOBALS['url']."messages?_=".$ADK_HIKER->id."\r\n\r\n";
 		
 		$toAddr = $ADK_CORRESPONDENT_EMAIL;
-		$subject = 'New Hiker - '.$ADK_HIKER['ADK_USER_USERNAME'];
+		$subject = 'New Hiker - '.$ADK_HIKER->username;
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
@@ -242,35 +242,35 @@
 		$htmlmessage = "Your account has been created and you have been assigned a correspondent!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_USER['ADK_USER_USERNAME']."<br><br>";
+		$htmlmessage .= $ADK_USER->username."<br><br>";
 		$htmlmessage .= "Initial Password:<br>";
-		$htmlmessage .= $ADK_USER['ADK_USER_PASSWORD']."<br><br><br><br>";
+		$htmlmessage .= $ADK_USER->pw."<br><br><br><br>";
 		
-		$htmlmessage .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT['ADK_USER_NAME'].".<br>";
+		$htmlmessage .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT->name.".<br>";
         $htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_CORRESPONDENT['ADK_USER_USERNAME']."<br><br>";
+		$htmlmessage .= $ADK_CORRESPONDENT->username."<br><br>";
 		$htmlmessage .= "Email:<br>";
-		$htmlmessage .= "<a href=\"mailto:".$ADK_CORRESPONDENT['ADK_USER_EMAIL']."\">".$ADK_CORRESPONDENT['ADK_USER_EMAIL']."</a><br><br><br><br>";
+		$htmlmessage .= "<a href=\"mailto:".$ADK_CORRESPONDENT->email."\">".$ADK_CORRESPONDENT->email."</a><br><br><br><br>";
 
 		$htmlmessage .= "Click <a href=".$GLOBALS['url'].">here to visit the site and log in</a>.<br><br>";
 		
 		$message = "Your account has been created and you have been assigned a correspondent!\r\n\r\n";
 		
 		$message .= "Username:\r\n";
-		$message .= $ADK_USER['ADK_USER_USERNAME']."\r\n\r\n";
+		$message .= $ADK_USER[->username."\r\n\r\n";
 		$message .= "Initial Password:\r\n";
-		$message .= $ADK_USER['ADK_USER_PASSWORD']."\r\n\r\n\r\n\r\n";
+		$message .= $ADK_USER->pw."\r\n\r\n\r\n\r\n";
 		
-		$message .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT['ADK_USER_NAME'].".\r\n";
+		$message .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT->name.".\r\n";
         $message .= "Username:<br>";
-		$message .= $ADK_CORRESPONDENT['ADK_USER_USERNAME']."\r\n\r\n";
+		$message .= $ADK_CORRESPONDENT->username."\r\n\r\n";
 		$message .= "Email:<br>";
-		$message .= $ADK_CORRESPONDENT['ADK_USER_EMAIL']."\r\n\r\n\r\n\r\n";
+		$message .= $ADK_CORRESPONDENT->email."\r\n\r\n\r\n\r\n";
 
 		$message .= "Click below to visit the site and log in:\r\n".$GLOBALS['url']."\r\n\r\n";
 				
-		$toAddr = $ADK_USER['ADK_USER_EMAIL'];
-		$subject = 'New Account Created - '.$ADK_USER['ADK_USER_USERNAME'];
+		$toAddr = $ADK_USER->email;
+		$subject = 'New Account Created - '.$ADK_USER->username;
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
