@@ -51,23 +51,23 @@
 		$null = null;
 		$sql_query = $con->prepare("INSERT INTO ADK_HIKE(ADK_USER_ID, ADK_HIKE_NOTES, ADK_HIKE_DTE) VALUES(?,?,?);");
 		
-		if(!isset($ADK_HIKE['ADK_HIKE_NOTES']) || !$ADK_HIKE['ADK_HIKE_NOTES'] != '') $ADK_HIKE['ADK_HIKE_NOTES'] = $null;
-		if(isset($ADK_HIKE['ADK_HIKE_DTE']) && $ADK_HIKE['ADK_HIKE_DTE'] != ''){
-			$month = substr($ADK_HIKE['ADK_HIKE_DTE'], 0, 2);
-			$day = substr($ADK_HIKE['ADK_HIKE_DTE'], 3, 2);
-			$year = substr($ADK_HIKE['ADK_HIKE_DTE'], 6, 4);
-			$ADK_HIKE['ADK_HIKE_DTE'] = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year));
-		}
-		else $ADK_HIKE['ADK_HIKE_DTE'] = $null;
+		if(!isset($ADK_HIKE->notes) || !$ADK_HIKE->notes != '') $ADK_HIKE->notes = $null;
+		if(isset($ADK_HIKE->datetime) && $ADK_HIKE->datetime != '') $ADK_HIKE->datetime = date("m/d/Y", strtotime($ADK_HIKE->datetime));
+		else $ADK_HIKE->datetime = $null;
 		
-		$sql_query->bind_param('iss', $ADK_HIKE['ADK_USER_ID'], $ADK_HIKE['ADK_HIKE_NOTES'], $ADK_HIKE['ADK_HIKE_DTE']);
+		$sql_query->bind_param('iss', $ADK_HIKE->userid, $ADK_HIKE->notes, $ADK_HIKE->datetime);
 		
 		return $sql_query;
 	}
-	function sql_addHikesPeaks($con){
+
+	function sql_addHikesPeak($con, $ADK_HIKE_ID, $ADK_PEAK_ID){
 		$sql_query = $con->prepare("INSERT INTO ADK_HIKE_PEAK_JCT(ADK_HIKE_ID, ADK_PEAK_ID) VALUES(?,?);");
+
+		$sql_query->bind_param('ii', $ADK_HIKE_ID, $ADK_PEAK_ID);
+
 		return $sql_query;
 	}
+
 	function sql_addHikeFileJcts($con){
 		$sql_query = $con->prepare("INSERT INTO ADK_HIKE_FILE_JCT(ADK_HIKE_ID, ADK_FILE_ID) VALUES(?,?);");
 		return $sql_query;
@@ -81,10 +81,10 @@
 		        ADK_HIKER_PERSONALINFO)
 		    VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
 		
-		$sql_query->bind_param('iisissssssss', $ADK_HIKER['ADK_USER_ID'], $ADK_HIKER['ADK_HIKER_CORR_ID'], $ADK_HIKER['ADK_HIKER_PHONE'],
-					$ADK_HIKER['ADK_HIKER_AGE'], $ADK_HIKER['ADK_HIKER_SEX'], $ADK_HIKER['ADK_HIKER_ADDRESS1'], $ADK_HIKER['ADK_HIKER_ADDRESS2'],
-					$ADK_HIKER['ADK_HIKER_CITY'], $ADK_HIKER['ADK_HIKER_STATE'], $ADK_HIKER['ADK_HIKER_ZIP'], $ADK_HIKER['ADK_HIKER_COUNTRY'],
-					$ADK_HIKER['ADK_HIKER_PERSONALINFO']);
+		$sql_query->bind_param('iisissssssss', $ADK_HIKER->id, $ADK_HIKER->corrid, $ADK_HIKER->phone,
+					$ADK_HIKER->age, $ADK_HIKER->sex, $ADK_HIKER->address1, $ADK_HIKER->address2,
+					$ADK_HIKER->city, $ADK_HIKER->state, $ADK_HIKER->zip, $ADK_HIKER->country,
+					$ADK_HIKER->info);
 		
 		return $sql_query;
 	}
@@ -112,24 +112,14 @@
 	}
 		
 	//User
-	// function sql_addUser($con, $ADK_USER){
-		// $sql_query = $con->prepare(
-		    // "INSERT INTO ADK_USER(ADK_USERGROUP_ID, ADK_USER_USERNAME, ADK_USER_PASSWORD, ADK_USER_NAME, ADK_USER_EMAIL)
-		    // VALUES(?,?,?,?,?);");
-		
-		// $ADK_USER['ADK_USER_PASSWORD'] = md5($ADK_USER['ADK_USER_PASSWORD']);
-		
-		// $sql_query->bind_param('issss', $ADK_USER['ADK_USERGROUP_ID'], $ADK_USER['ADK_USER_USERNAME'], $ADK_USER['ADK_USER_PASSWORD'],
-					// $ADK_USER['ADK_USER_NAME'], $ADK_USER['ADK_USER_EMAIL']);
-		
-		// return $sql_query;
-	// }
 	function sql_addUser($con, $ADK_USER){
 		$sql_query = $con->prepare(
 		    "INSERT INTO ADK_USER(ADK_USERGROUP_ID, ADK_USER_USERNAME, ADK_USER_PASSWORD, ADK_USER_NAME, ADK_USER_EMAIL)
 		    VALUES(?,?,?,?,?);");
 		
-		$sql_query->bind_param('issss', $ADK_USER->usergroupid, $ADK_USER->username, md5($ADK_USER->pw),
+		$ADK_USER->pw = md5($ADK_USER->pw);
+
+		$sql_query->bind_param('issss', $ADK_USER->usergroupid, $ADK_USER->username, $ADK_USER->pw,
 					$ADK_USER->name, $ADK_USER->email);
 		
 		return $sql_query;

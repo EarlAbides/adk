@@ -1,78 +1,83 @@
 <?php
 	
-	class Applicants{
+	class Correspondents{
 		
-		public $applicants;
+		//public $applicants;
 		
-		public function Applicants(){
-			$this->applicants = [];
-		}
+		//public function Applicants(){
+		//    $this->applicants = [];
+		//}
 		
-		public function get($con){
-			$sql_query = sql_getApplicants($con);
-			if($sql_query->execute()){
-				$sql_query->store_result();
-				$result = sql_get_assoc($sql_query);
+		//public function get($con){
+		//    $sql_query = sql_getApplicants($con);
+		//    if($sql_query->execute()){
+		//        $sql_query->store_result();
+		//        $result = sql_get_assoc($sql_query);
 
-				foreach($result as $row){
-					$ADK_APPLICANT = new Applicant();
-					$ADK_APPLICANT->id = $row['ADK_APPLICANT_ID'];
-					$ADK_APPLICANT->username = $row['ADK_APPLICANT_USERNAME'];
-					$ADK_APPLICANT->name = $row['ADK_APPLICANT_NAME'];
-					$ADK_APPLICANT->email = $row['ADK_APPLICANT_EMAIL'];
-					$ADK_APPLICANT->phone = $row['ADK_APPLICANT_PHONE'];
-					$ADK_APPLICANT->state = $row['ADK_APPLICANT_STATE'];
-					array_push($this->applicants, $ADK_APPLICANT);
-				}
-			}
-			else die('There was an error running the query ['.$con->error.']');
-		}
+		//        foreach($result as $row){
+		//            $ADK_APPLICANT = new Applicant();
+		//            $ADK_APPLICANT->id = $row['ADK_APPLICANT_ID'];
+		//            $ADK_APPLICANT->username = $row['ADK_APPLICANT_USERNAME'];
+		//            $ADK_APPLICANT->name = $row['ADK_APPLICANT_NAME'];
+		//            $ADK_APPLICANT->email = $row['ADK_APPLICANT_EMAIL'];
+		//            $ADK_APPLICANT->phone = $row['ADK_APPLICANT_PHONE'];
+		//            $ADK_APPLICANT->state = $row['ADK_APPLICANT_STATE'];
+		//            array_push($this->applicants, $ADK_APPLICANT);
+		//        }
+		//    }
+		//    else die('There was an error running the query ['.$con->error.']');
+		//}
 		
-		public function renderTable(){
-			$html = "<table class=\"selecttable\">
-						<thead>
-							<tr>
-								<th></th>
-								<th>Name</th>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Phone</th>
-								<th>State</th>
-							</tr>
-						</thead>
-						<tbody>";		
-			if(count($this->applicants) === 0){//If empty
-				$html .= '<tr><td colspan="6" style="text-align:center;font-style:italic;">No new applicants</td></tr>';
-			}	
-			else{
-				foreach($this->applicants as $ADK_APPLICANT){
-					$html .= "<tr>
-								<td>
-									<a href=\"./applicant?_=".$ADK_APPLICANT->id."\" class=\"hoverbtn rowselector\">
-										<span class=\"glyphicon glyphicon-search\" title=\"View\" data-toggle=\"tooltip\" data-placement=\"right\" data-container=\"body\"></span>
-									</a>
-								</td>
-								<td>".$ADK_APPLICANT->name."</td>
-								<td>".$ADK_APPLICANT->username."</td>
-								<td>".$ADK_APPLICANT->email."</td>
-								<td>".$ADK_APPLICANT->phone."</td>
-								<td>".$ADK_APPLICANT->state."</td>
-							</tr>";
-				}
-			}
+		//public function renderTable(){
+		//    $html = "<table class=\"selecttable\">
+		//                <thead>
+		//                    <tr>
+		//                        <th></th>
+		//                        <th>Name</th>
+		//                        <th>Username</th>
+		//                        <th>Email</th>
+		//                        <th>Phone</th>
+		//                        <th>State</th>
+		//                    </tr>
+		//                </thead>
+		//                <tbody>";		
+		//    if(count($this->applicants) === 0){//If empty
+		//        $html .= '<tr><td colspan="6" style="text-align:center;font-style:italic;">No new applicants</td></tr>';
+		//    }	
+		//    else{
+		//        foreach($this->applicants as $ADK_APPLICANT){
+		//            $html .= "<tr>
+		//                        <td>
+		//                            <a href=\"./applicant?_=".$ADK_APPLICANT->id."\" class=\"hoverbtn rowselector\">
+		//                                <span class=\"glyphicon glyphicon-search\" title=\"View\" data-toggle=\"tooltip\" data-placement=\"right\" data-container=\"body\"></span>
+		//                            </a>
+		//                        </td>
+		//                        <td>".$ADK_APPLICANT->name."</td>
+		//                        <td>".$ADK_APPLICANT->username."</td>
+		//                        <td>".$ADK_APPLICANT->email."</td>
+		//                        <td>".$ADK_APPLICANT->phone."</td>
+		//                        <td>".$ADK_APPLICANT->state."</td>
+		//                    </tr>";
+		//        }
+		//    }
 			
-			$html .= "</tbody></table>";
+		//    $html .= "</tbody></table>";
 			
-			echo $html;
-		}
+		//    echo $html;
+		//}
 		
 	}
 	
-	class Applicant{
+	class Correspondent{
 		
 		public $err;
 		public $id, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $reqcorr, $peakids, $peaklist;
-		
+		//$ADK_CORRESPONDENT['ADK_USER_ID'] = intval($row['ADK_USER_ID']);
+		//$ADK_CORRESPONDENT['ADK_USER_USERNAME'] = $row['ADK_USER_USERNAME'];
+		//$ADK_CORRESPONDENT['ADK_USER_NAME'] = $row['ADK_USER_NAME'];
+		//$ADK_CORRESPONDENT['ADK_USER_EMAIL'] = $row['ADK_USER_EMAIL'];
+		//$ADK_CORRESPONDENT['ADK_CORR_PHOTO_ID'] = intval($row['ADK_CORR_PHOTO_ID']);
+		//$ADK_CORRESPONDENT['ADK_CORR_PERSONALINFO'] = $row['ADK_CORR_PERSONALINFO'];
 		public function Applicant(){
 			
 		}

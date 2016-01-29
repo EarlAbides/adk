@@ -116,6 +116,13 @@
 		//    }
 		//}
 		
+		
+		public function save($con){
+			$sql_query = sql_addHiker($con, $this);
+			$sql_query->execute();
+			$this->id = $sql_query->insert_id;
+		}
+
 		public function get($con){
 			$sql_query = sql_getHiker($con, $this->id);
 			if($sql_query->execute()){

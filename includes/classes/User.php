@@ -28,11 +28,11 @@
 			$this->id = $sql_query->insert_id;
 		}
 		
-		public function populateFromAddHiker($randomPW){
+		public function populateFromAddHiker($randomPW, $ADK_APPLICANT){
 			$this->usergroupid = 3;
-			$this->username = $_POST['username'];
-			$this->name = $_POST['name'];
-			$this->email = $_POST['email'];
+			$this->username = $ADK_APPLICANT->username;
+			$this->name = $ADK_APPLICANT->name;
+			$this->email = $ADK_APPLICANT->email;
 			$this->pw = $randomPW;
 		}
 		

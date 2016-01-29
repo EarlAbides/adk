@@ -162,8 +162,8 @@
 						</a>
 					</h4>
 					
-					<form method="post" action="includes/corr_assign.php" data-toggle="validator" role="form" novalidate>
-							
+					<form method="post" action="includes/hikerSave.php" data-toggle="validator" role="form" novalidate>
+						
 						<div class="col-xs-12 form-group">
 							<div class="div_tablewrapper">
 								<?php echo $table_correspondents; ?>
@@ -178,10 +178,6 @@
 						</div>
 						
 						<input type="hidden" name="id" value="<?php echo $ADK_APPLICANT->id; ?>" />
-						<input type="hidden" name="usergroupid" value="2" />
-						<input type="hidden" name="username" value="<?php echo $ADK_APPLICANT->username; ?>" />
-						<input type="hidden" name="name" value="<?php echo $ADK_APPLICANT->name; ?>" />
-						<input type="hidden" name="email" value="<?php echo $ADK_APPLICANT->email; ?>" />
 						
 					</form>
 					

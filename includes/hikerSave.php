@@ -5,17 +5,19 @@
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
 	require_once 'INSERT.php';
-	require_once 'Hike.php';
+	require_once 'DELETE.php';
 	require_once 'Message.php';
 	require_once 'randomPW.php';
 	require_once 'email.php';
 	require_once 'pm.php';
 	require_once 'classes/Applicant.php';
+	require_once 'classes/Correspondent.php';
+	require_once 'classes/Hike.php';
 	require_once 'classes/Hiker.php';
 	require_once 'classes/User.php';
 	
-	if(!isset($_POST['id']) || !is_numeric($_POST['id']){header('../applicants?_e=i'); exit;}
-	if(!isset($_POST['corrid']) || !is_numeric($_POST['corrid']){header('../applicant?_='.$_POST['id']); exit;}
+	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){header('Location: ../applicants?_e=i'); exit;}
+	if(!isset($_POST['corrid']) || !is_numeric($_POST['corrid'])){header('Location: ../applicant?_='.$_POST['id'].'&e=c'); exit;}
 	
 	$ADK_APPLICANT_ID = intval($_POST['id']);
 	$ADK_CORRESPONDENT_ID = intval($_POST['corrid']);
@@ -29,25 +31,27 @@
 	$ADK_APPLICANT->delete($con);
 	
 	$ADK_USER = new User();
-	$ADK_USER->populateFromAddHiker($randomPW);
+	$ADK_USER->populateFromAddHiker($randomPW, $ADK_APPLICANT);
 	$ADK_USER->save($con);
 	
 	$ADK_HIKER = new Hiker();
 	$ADK_HIKER->populateFromApplicant($ADK_USER->id, $ADK_CORRESPONDENT_ID, $ADK_APPLICANT);
 	$ADK_HIKER->save($con);
 	
-	//maybe http://blog.fedecarg.com/2009/02/22/mysql-split-string-function/ to split string in getHiker query???
-	// or http://stackoverflow.com/questions/19073500/sql-split-comma-separated-row
+	foreach($ADK_APPLICANT->peakids as $ADK_PEAK_ID){
+		$ADK_HIKE = new Hike();
+		$ADK_HIKE->userid = $ADK_USER->id;
+		$ADK_HIKE->save($con);
+		$ADK_HIKE->addPeak($con, $ADK_PEAK_ID);
+	}
 	
-	//get peak list
-	//add hikes
+	//$ADK_CORRESPONDENT = new Correspondent();
+	//$ADK_CORRESPONDENT->id = $ADK_HIKER->corrid;
+	//$ADK_CORRESPONDENT->get($con);	
 	
-	//get correspondent
-	
-	
-	sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT);///////////need emails and pms updated to use objects and not array
-	sendCorrNewHikerEmail($ADK_CORRESPONDENT['ADK_USER_EMAIL'], $ADK_USER, $ADK_HIKER);
-	sendCorrNewHikerPM($con, $ADK_CORRESPONDENT['ADK_USER_ID'], $ADK_USER, $ADK_HIKER);
+	//sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT);///////////need emails and pms updated to use objects and not array
+	//sendCorrNewHikerEmail($ADK_CORRESPONDENT['ADK_USER_EMAIL'], $ADK_USER, $ADK_HIKER);
+	//sendCorrNewHikerPM($con, $ADK_CORRESPONDENT['ADK_USER_ID'], $ADK_USER, $ADK_HIKER);
 	
 	$con->close();
 	
