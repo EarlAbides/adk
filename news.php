@@ -40,7 +40,7 @@
 						</p>
 
 						<div class="text-center" style="width:100%;">
-							<a href="https://drive.google.com/file/d/0B2sofMrC5zc2ZkF0c3d6LWs1aUU/view?usp=sharing" target="_blank" class="hoverbtn ">
+							<a href="https://drive.google.com/file/d/0B2sofMrC5zc2Y2ZqRTg3V2VodlU/view?usp=sharing" target="_blank" class="hoverbtn ">
 								<img src="img/1-16-16 meeting.png" style="max-height:300px;" />
 							</a>
 						</div>
