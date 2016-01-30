@@ -57,7 +57,7 @@
 							<div class="form-group">
 								<div class="col-xs-12 col-sm-5">
 									<label for="textbox_username" class="control-label control-label-sm">Username*</label><br />
-									<input type="text" id="textbox_username" name="username" class="form-control form-control-sm" value="<?php echo $ADK_APPLICANT->username; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-error="&#8226;Required, no spaces" data-remote="includes/ajax_checkApplicantAndUsername.php" data-errors-remote="&#8226;Username already in use" required />
+									<input type="text" id="textbox_username" name="username" class="form-control form-control-sm" value="<?php echo $ADK_APPLICANT->username; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-error="&#8226;Required, no spaces" data-remote="includes/userIsUnique.php?_=<?php echo $ADK_APPLICANT->username; ?>" data-errors-remote="&#8226;Username already in use" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>

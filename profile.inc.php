@@ -4,25 +4,30 @@
 	require_once 'includes/session.php';
 	require_once 'includes/db_conn.php';
 	require_once 'includes/SELECT.php';
-	require_once 'includes/Correspondent.php';
+	require_once 'includes/classes/Correspondent.php';
 	require_once 'includes/classes/Hiker.php';
-	require_once 'includes/User.php';
+	require_once 'includes/classes/User.php';
 	
-	if(isset($_SESSION['ADK_USER_ID'])){
-		$ADK_USER_ID = intval($_SESSION['ADK_USER_ID']);
-		if($ADK_USER_ID == '') header("Location: ./");
-	}
-	else header("Location: ./");
+	if(!isset($_SESSION['ADK_USER_ID']) || !is_numeric($_SESSION['ADK_USER_ID'])){header("Location: ./"); exit;}
+
+	$ADK_USER_ID = intval($_SESSION['ADK_USER_ID']);
 	
 	$con = connect_db();
 	
 	switch($ADK_USERGROUP_CDE){
-		case 'ADM': case 'EDT': $ADK_USER = getUser($con, $ADK_USER_ID); break;
-		case 'COR': $ADK_CORRESPONDENT = getCorrespondent($con, $ADK_USER_ID); break;
-		//case 'HIK': $ADK_HIKER = getHiker($con, $ADK_USER_ID); break;
+		case 'ADM': case 'EDT':
+			$ADK_USER = new User();
+			$ADK_USER->id = $ADK_USER_ID;
+			$ADK_USER->get($con);
+			break;
+		case 'COR':
+			$ADK_CORRESPONDENT = new Correspondent();
+			$ADK_CORRESPONDENT->id = $ADK_USER_ID;
+			$ADK_CORRESPONDENT->get($con);
+			break;
 		case 'HIK':
 			$ADK_HIKER = new Hiker($con);
-			$ADK_HIKER->id = $_SESSION['ADK_USER_ID'];
+			$ADK_HIKER->id = $ADK_USER_ID;
 			$ADK_HIKER->get($con);
 			break;
 		default: header("Location: ./");

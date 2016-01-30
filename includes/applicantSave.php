@@ -15,7 +15,7 @@
 	
 	$ADK_APPLICANT = new Applicant();
 	$ADK_APPLICANT->populateFromSignUp();
-	
+		
 	if(!$ADK_APPLICANT->isValid()){
 		$con->close();
 		header('Location: ../signup?e='.$this->err);

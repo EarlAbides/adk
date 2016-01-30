@@ -22,6 +22,21 @@
 			
 			return $COUNT == 0;
 		}
+
+		public static function isOldPassword($con, $ADK_USER_PASSWORD){
+			$COUNT = 0;
+			$sql_query = sql_checkUserOldPassword($con, $this->id, $ADK_USER_PASSWORD);
+			if($sql_query->execute()){
+				$sql_query->store_result();
+				$sql_query->bind_result($result);
+				$sql_query->fetch();
+				$COUNT = $result;
+			}
+			else die('There was an error running the query ['.$con->error.']');
+		
+			return $COUNT == 1;
+		}
+
 		
 		public function isValid(){
 			if(strlen($this->username) === 0 || strlen($this->username) > 45) $this->err .= 'u';

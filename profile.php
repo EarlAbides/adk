@@ -41,10 +41,10 @@
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
 				
 				<?php switch($ADK_USERGROUP_CDE){case 'ADM': case 'EDT':?>
-				<form method="post" action="includes/user_update.php" data-toggle="validator" role="form" novalidate>
+				<form method="post" action="includes/userUpdate.php" data-toggle="validator" role="form" novalidate>
 					
 					<h4 class="content-header">
-						<?php echo $ADK_USER['ADK_USER_USERNAME']; ?>
+						<?php echo $ADK_USER->username; ?>
 						<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
 							<span class="glyphicon glyphicon-chevron-down"></span>
 						</a>
@@ -56,21 +56,21 @@
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label class="control-label control-label-sm">Username*</label><br />
-									<input type="text" name="username" class="form-control form-control-sm" value="<?php echo $ADK_USER['ADK_USER_USERNAME']; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-remote="includes/ajax_checkApplicantAndUsername.php" data-errors-remote="&#8226;Username already in use" required />
+									<input type="text" name="username" class="form-control form-control-sm" value="<?php echo $ADK_USER->username; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-remote="includes/userIsUnique.php?_=<?php echo $ADK_USER->username; ?>" data-errors-remote="&#8226;Username already in use" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_name" class="control-label control-label-sm">Name*</label><br />
-									<input type="text" name="name" class="form-control form-control-sm" value="<?php echo $ADK_USER['ADK_USER_NAME']; ?>" maxlength="40" placeholder="First Middle Last" required />
+									<input type="text" name="name" class="form-control form-control-sm" value="<?php echo $ADK_USER->name; ?>" maxlength="40" placeholder="First Middle Last" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_email" class="control-label control-label-sm">Email*</label><br />
-									<input type="text" name="email" class="form-control form-control-sm" value="<?php echo $ADK_USER['ADK_USER_EMAIL']; ?>" maxlength="50" placeholder="xxx@abc.com" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required />
+									<input type="text" name="email" class="form-control form-control-sm" value="<?php echo $ADK_USER->email; ?>" maxlength="50" placeholder="xxx@abc.com" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -89,14 +89,13 @@
 						
 					</div>
 				
-					<!-- Hidden -->
 					<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
 					
 				</form>
 				<?php break; case 'COR':?>
 				
 				<h4 class="content-header">
-					<?php echo $ADK_CORRESPONDENT['ADK_USER_USERNAME']; ?>
+					<?php echo $ADK_CORRESPONDENT->username; ?>
 					<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
 						<span class="glyphicon glyphicon-chevron-down"></span>
 					</a>
@@ -105,32 +104,32 @@
 				<div class="container-fluid">
 				
 					<div class="col-xs-12 col-sm-6">
-						<form method="post" action="includes/corr_update.php" data-toggle="validator" role="form" novalidate>
+						<form method="post" action="includes/corrUpdate.php" data-toggle="validator" role="form" novalidate>
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label class="control-label control-label-sm">Username*</label><br />
-									<input type="text" name="username" class="form-control form-control-sm" value="<?php echo $ADK_CORRESPONDENT['ADK_USER_USERNAME']; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-remote="includes/ajax_checkApplicantAndUsername.php" data-errors-remote="&#8226;Username already in use" required />
+									<input type="text" name="username" class="form-control form-control-sm" value="<?php echo $ADK_CORRESPONDENT->username; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-remote="includes/userIsUnique.php?_=<?php echo $ADK_CORRESPONDENT->username; ?>" data-errors-remote="&#8226;Username already in use" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_name" class="control-label control-label-sm">Name*</label><br />
-									<input type="text" name="name" class="form-control form-control-sm" value="<?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?>" maxlength="40" placeholder="First Middle Last" required />
+									<input type="text" name="name" class="form-control form-control-sm" value="<?php echo $ADK_CORRESPONDENT->name; ?>" maxlength="40" placeholder="First Middle Last" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_email" class="control-label control-label-sm">Email*</label><br />
-									<input type="text" name="email" class="form-control form-control-sm" value="<?php echo $ADK_CORRESPONDENT['ADK_USER_EMAIL']; ?>" maxlength="50" placeholder="xxx@abc.com" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required />
+									<input type="text" name="email" class="form-control form-control-sm" value="<?php echo $ADK_CORRESPONDENT->email; ?>" maxlength="50" placeholder="xxx@abc.com" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-xs-12">
 									<label for="textbox_personalinfo" class="control-label control-label-sm">Personal info</label><br />
-									<textarea id="textbox_personalinfo" name="personalinfo" class="form-control form-control-sm" maxlength="1024" placeholder="Personal information" required><?php echo $ADK_CORRESPONDENT['ADK_CORR_PERSONALINFO']; ?></textarea>
+									<textarea id="textbox_personalinfo" name="personalinfo" class="form-control form-control-sm" maxlength="1024" placeholder="Personal information" required><?php echo $ADK_CORRESPONDENT->info; ?></textarea>
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -149,7 +148,7 @@
 					<div class="col-xs-12 col-sm-6">
 						<form method="post" action="includes/corr_updatephoto.php" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
 							<div class="div_tablewrapper" style="padding:5px;">
-								<img src="includes/getImage.php?_=<?php echo $ADK_CORRESPONDENT['ADK_CORR_PHOTO_ID']; ?>" class="img-responsive imghover" alt="Photo" title="Photo" />
+								<img src="includes/getImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>" class="img-responsive imghover" alt="Photo" title="Photo" />
 							</div>
 							<br />
 							<div class="form-group">
@@ -181,13 +180,13 @@
 				</h4>
 					
 				<div class="container-fluid">
-					<form method="post" action="includes/hiker_update.php" data-toggle="validator" role="form" novalidate>
+					<form method="post" action="includes/hikerUpdate.php" data-toggle="validator" role="form" novalidate>
 						
 						<div class="col-xs-12">
 							<div class="form-group">
 								<div class="col-xs-12 col-sm-5">
 									<label for="textbox_username" class="control-label control-label-sm">Username*</label><br />
-									<input type="text" id="textbox_username" name="username" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->username; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-error="&#8226;Required, no spaces" data-remote="includes/ajax_checkApplicantAndUsername.php" data-errors-remote="&#8226;Username already in use" required />
+									<input type="text" id="textbox_username" name="username" class="form-control form-control-sm" value="<?php echo $ADK_HIKER->username; ?>" maxlength="20" placeholder="Username" pattern="[\S]*" data-error="&#8226;Required, no spaces" data-remote="includes/userIsUnique.php?_=<?php echo $ADK_HIKER->username; ?>" data-errors-remote="&#8226;Username already in use" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>
@@ -345,19 +344,19 @@
 				<div style="display:none;">
 					<template id="template_state_us">
 						<?php
-							$default = $ADK_HIKER['ADK_HIKER_COUNTRY'] === 'United States'? $ADK_HIKER['ADK_HIKER_STATE']: 'NY';
+							$default = $ADK_HIKER->country === 'United States'? $ADK_HIKER->state: 'NY';
 							echo select_state($default);
 						?>
 					</template>
 					<template id="template_state_ca">
 						<?php
-							$default = $ADK_HIKER['ADK_HIKER_COUNTRY'] === 'Canada'? $ADK_HIKER['ADK_HIKER_STATE']: 'ON';
+							$default = $ADK_HIKER->country === 'Canada'? $ADK_HIKER->state: 'ON';
 							echo select_state_ca($default);
 						?>
 					</template>
 					<template id="template_stateregion">
 						<?php
-							$default = ($ADK_HIKER['ADK_HIKER_COUNTRY'] !== 'United States' && $ADK_HIKER['ADK_HIKER_COUNTRY'] !== 'Canada')? $ADK_HIKER['ADK_HIKER_STATE']: '';
+							$default = ($ADK_HIKER->country !== 'United States' && $ADK_HIKER->country !== 'Canada')? $ADK_HIKER->state: '';
 							echo textbox_stateregion($default);
 						?>
 					</template>
@@ -380,7 +379,7 @@
 							<div class="col-xs-12">
 								<div class="col-sm-5">
 									<label for="textbox_oldpassword" class="control-label control-label-sm">Old Password*</label><br />
-									<input type="password" id="textbox_oldpassword" name="oldpassword" class="form-control form-control-sm" maxlength="20" placeholder="Old password" pattern="[\S]*" data-remote="includes/ajax_checkUserOldpw.php" data-remote-id="<?php echo $ADK_USER_ID; ?>" data-errors-remote="&#8226;This does not match your existing password" required />
+									<input type="password" id="textbox_oldpassword" name="oldpassword" class="form-control form-control-sm" maxlength="20" placeholder="Old password" pattern="[\S]*" data-remote="includes/userIsOldPassword.php" data-remote-id="<?php echo $ADK_USER_ID; ?>" data-errors-remote="&#8226;This does not match your existing password" required />
 									<span class="help-block with-errors"></span>
 								</div>
 							</div>

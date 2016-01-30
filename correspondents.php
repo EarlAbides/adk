@@ -57,7 +57,7 @@
 						    <div class="form-group">
 							    <div class="col-xs-12">
 								    <label class="control-label control-label-sm">Username*</label><br />
-								    <input type="text" name="username" class="form-control form-control-sm" maxlength="20" placeholder="Username" pattern="[\S]*" data-remote="includes/ajax_checkApplicantAndUsername.php" data-errors-remote="&#8226;Username already in use" required />
+								    <input type="text" name="username" class="form-control form-control-sm" maxlength="20" placeholder="Username" pattern="[\S]*" data-remote="includes/userIsUnique.php" data-errors-remote="&#8226;Username already in use" required />
 								    <span class="help-block with-errors"></span>
 							    </div>
 						    </div>
