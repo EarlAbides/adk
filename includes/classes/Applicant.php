@@ -125,7 +125,7 @@
 					$this->info = $row['ADK_APPLICANT_PERSONALINFO'];
 					$this->reqcorr = $row['ADK_APPLICANT_REQ_CORR'];
 					$this->peakids = $row['ADK_APPLICANT_PEAKIDS']? explode(',', $row['ADK_APPLICANT_PEAKIDS']): [];
-					$this->peaklist = $row['ADK_APPLICANT_PEAKLIST'];
+					$this->peaklist = ltrim($row['ADK_APPLICANT_PEAKLIST']);
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');

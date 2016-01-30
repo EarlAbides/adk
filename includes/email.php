@@ -106,9 +106,9 @@
 		$htmlmessage = "Your have been assigned a new hiker!<br><br>";
 		
         $htmlmessage .= "Name:<br>";
-		$htmlmessage .= $ADK_HIKER->name."<br>";
+		$htmlmessage .= $ADK_USER->name."<br>";
 		$htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_HIKER->username."<br>";
+		$htmlmessage .= $ADK_USER->username."<br>";
 		$htmlmessage .= "Initial Password:<br>";
 		$htmlmessage .= $ADK_USER->pw."<br><br>";
 		$htmlmessage .= "Personal info:<br>";
@@ -116,14 +116,14 @@
 		$htmlmessage .= "Peaks:<br>";
 		$htmlmessage .= $ADK_APPLICANT->peaklist."<br><br>";
 		
-		$htmlmessage .= "Click <a href=".$GLOBALS['url']."messages?_=".$ADK_HIKER->id.">here to send the new user a message</a>.<br><br>";
+		$htmlmessage .= "Click <a href=".$GLOBALS['url']."messages?_=".$ADK_USER->id.">here to send the new user a message</a>.<br><br>";
 	    
 		$message = "Your have been assigned a new hiker!\r\n\r\n";
 		
         $message .= "Name:\r\n";
-		$message .= $ADK_HIKER->name."\r\n";
+		$message .= $ADK_USER->name."\r\n";
 		$message .= "Username:\r\n";
-		$message .= $ADK_HIKER->username."\r\n";
+		$message .= $ADK_USER->username."\r\n";
 		$message .= "Initial Password:\r\n";
 		$message .= $ADK_USER->pw."\r\n\r\n";
 		$message .= "Personal info:\r\n";
@@ -131,10 +131,10 @@
 		$message .= "Peaks:\r\n";
 		$message .= $ADK_APPLICANT->peaklist."\r\n\r\n";
 		
-		$message .= "Click below to send the new user a message:\r\n".$GLOBALS['url']."messages?_=".$ADK_HIKER->id."\r\n\r\n";
+		$message .= "Click below to send the new user a message:\r\n".$GLOBALS['url']."messages?_=".$ADK_USER->id."\r\n\r\n";
 		
 		$toAddr = $ADK_CORRESPONDENT_EMAIL;
-		$subject = 'New Hiker - '.$ADK_HIKER->username;
+		$subject = 'New Hiker - '.$ADK_USER->username;
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
@@ -257,7 +257,7 @@
 		$message = "Your account has been created and you have been assigned a correspondent!\r\n\r\n";
 		
 		$message .= "Username:\r\n";
-		$message .= $ADK_USER[->username."\r\n\r\n";
+		$message .= $ADK_USER->username."\r\n\r\n";
 		$message .= "Initial Password:\r\n";
 		$message .= $ADK_USER->pw."\r\n\r\n\r\n\r\n";
 		

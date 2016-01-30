@@ -120,7 +120,6 @@
 		public function save($con){
 			$sql_query = sql_addHiker($con, $this);
 			$sql_query->execute();
-			$this->id = $sql_query->insert_id;
 		}
 
 		public function get($con){
@@ -191,7 +190,7 @@
 		    $sql_query = sql_deleteHiker($con, $this->id);
 		    if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 		}
-		
+
 		public function populateFromApplicant($ADK_USER_ID, $ADK_CORRESPONDENT_ID, $ADK_APPLICANT){
 			$this->id = $ADK_USER_ID;
 			$this->corrid = $ADK_CORRESPONDENT_ID;

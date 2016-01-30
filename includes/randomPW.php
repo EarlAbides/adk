@@ -1,7 +1,7 @@
 <?php
 	
 	function randomPW($length){
-		$valid_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()';
+		$valid_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@';
 		$num_valid_chars = strlen($valid_chars) - 1;
 		
 		$randomPW = 'a';
