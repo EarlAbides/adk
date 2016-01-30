@@ -142,7 +142,7 @@ width:100%;
 
 @media print{.noprint, .noprint *{display:none !important;}}
 
-.hikerphoto{max-height:80px;margin:0;float:right;}
+.profilephoto{max-height:80px;margin:0 12px 0 0;display:inline;}
 
 /*Gallery*/
 ul.gallery-photo{margin:0;padding:0;}

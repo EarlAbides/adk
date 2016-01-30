@@ -61,12 +61,11 @@
 					
 					<div class="col-xs-12">
 						<div class="form-group">
-							<div class="col-xs-12 col-sm-8" style="display:inline;">
-								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive hikerphoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
-								<label class="control-label control-label-sm">Username</label><br />
+							<div class="col-xs-12 col-sm-6" style="display:inline;">
+								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
 								<span><?php echo $ADK_HIKER->username; ?></span>
 							</div>
-							<div class="col-xs-12 col-sm-4 text-right" style="display:inline;">
+							<div class="col-xs-12 col-sm-6 text-right" style="display:inline;">
 								<label class="control-label control-label-sm">Last Active</label><br />
 								<span class="font-italic"><?php echo strpos(date("n/j/y g:ma", strtotime($ADK_HIKER->lastactive)), '1/1/70') === 0? '--': date("n/j/y g:ia", strtotime($ADK_HIKER->lastactive)); ?></span>
 							</div>

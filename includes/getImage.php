@@ -23,5 +23,6 @@
 	
 		echo $ADK_FILE['ADK_FILE_CONTENT'];
 	}
+	else header("Location: ../img/question.png");
 	
 ?>

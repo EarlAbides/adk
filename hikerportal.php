@@ -52,9 +52,8 @@
 					
 					<div class="col-xs-12 col-sm-6">
 						<div class="form-group">
-							<div class="col-xs-12">
-								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive hikerphoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
-								<label class="control-label control-label-sm">Name</label><br />
+							<div class="col-xs-12" style="margin-bottom:12px;">
+								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
 								<span><?php echo $ADK_HIKER->name; ?></span>
 							</div>
 						</div>
@@ -152,40 +151,27 @@
 						</a>
 					</h4>
 					
-					<div class="col-xs-12 col-sm-6">
-						<div class="form-group">
-							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Username</label><br />
-								<span><?php echo $ADK_CORRESPONDENT['ADK_USER_USERNAME']; ?></span>
+					<div class="col-xs-12">
+						<div class="col-xs-12 col-sm-2" style="margin-bottom:12px;">
+							<img src="includes/getImage.php?_=<?php echo $ADK_CORRESPONDENT['ADK_CORR_PHOTO_ID']; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?>" title="<?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?>" />
+							<span><?php echo $ADK_CORRESPONDENT['ADK_USER_USERNAME']; ?></span>
+						</div>
+						<div class="col-xs-12 col-sm-2">
+							<label class="control-label control-label-sm">Name</label><br />
+							<span><?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?></span>
+						</div>
+						<div class="col-xs-12 col-sm-8">
+							<label class="control-label control-label-sm">Personal Info</label><br />
+							<div class="scroll scroll100" style="word-break:break-word;">
+								<span><?php echo $ADK_CORRESPONDENT['ADK_CORR_PERSONALINFO']; ?></span>
 							</div>
 						</div>
+
 						<div class="form-group">
-							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Name</label><br />
-								<span><?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?></span>
+							<div class="col-xs-12 text-right">
+								<br />
+								<a href="./messages?_=<?php echo $ADK_CORRESPONDENT['ADK_USER_ID']; ?>" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-envelope" style="left:-2px;"></span>&nbsp;Send Message</a>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Personal Info</label><br />
-								<div class="scroll scroll100" style="word-break:break-word;">
-									<span><?php echo $ADK_CORRESPONDENT['ADK_CORR_PERSONALINFO']; ?></span>
-								</div>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<div class="col-xs-12">
-								<div class="hr"></div>
-								<a href="./messages?_=<?php echo $ADK_CORRESPONDENT['ADK_USER_ID']; ?>" class="btn btn-sm btn-default">Send Message</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-xs-12 col-sm-6">
-						<div class="hidden-md hidden-lg" style="display:block;">&emsp;</div>
-						<div class="div_tablewrapper" style="padding:5px;">
-							<img src="includes/getImage.php?_=<?php echo $ADK_CORRESPONDENT['ADK_CORR_PHOTO_ID']; ?>" class="img-responsive imghover" alt="Photo - <?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?>" title="<?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?>" />
 						</div>
 					</div>
 					
