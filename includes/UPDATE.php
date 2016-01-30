@@ -29,9 +29,9 @@
 	
 	//Correspondent
 	function sql_updateCorrespondent($con, $ADK_CORRESPONDENT){
-		$sql_query = $con->prepare("UPDATE ADK_CORRESPONDENT SET ADK_CORR_PHOTO_ID = ?, ADK_CORR_PERSONALINFO = ? WHERE ADK_USER_ID = ?;");
+		$sql_query = $con->prepare("UPDATE ADK_CORRESPONDENT SET ADK_CORR_PERSONALINFO = ? WHERE ADK_USER_ID = ?;");
 		
-		$sql_query->bind_param('isi', $ADK_CORRESPONDENT['ADK_CORR_PHOTO_ID'], $ADK_CORRESPONDENT['ADK_CORR_PERSONALINFO'], $ADK_CORRESPONDENT['ADK_USER_ID']);
+		$sql_query->bind_param('si', $ADK_CORRESPONDENT->info, $ADK_CORRESPONDENT->id);
 		
 		return $sql_query;
 	}

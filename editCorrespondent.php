@@ -24,7 +24,7 @@
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
-				<form method="post" action="includes/corr_update.php" data-toggle="validator" role="form" novalidate>
+				<form method="post" action="includes/corrUpdate.php" data-toggle="validator" role="form" novalidate>
 					
 					<h4 class="content-header">
 						Edit Staff Correspondent

@@ -2,6 +2,7 @@
 	
 	class User{
 		
+		public $err;
 		public $id, $usergroupid, $username, $name, $email, $pw;
 		
 		public function User(){
@@ -31,6 +32,7 @@
 			return true;
 		}
 
+
 		public function get($con){
 			$sql_query = sql_getUser($con, $this->id);
 			if($sql_query->execute()){
@@ -56,6 +58,14 @@
 			$sql_query = sql_updateUser($con, $this);
 			$sql_query->execute();
 		}
+
+
+		public function populate(){
+			$this->id = intval($_POST['id']);
+			$this->username = $_POST['username'];
+			$this->name = $_POST['name'];
+			$this->email = $_POST['email'];
+		}
 		
 		public function populateFromAddHiker($randomPW, $ADK_APPLICANT){
 			$this->usergroupid = 3;
@@ -63,12 +73,6 @@
 			$this->name = $ADK_APPLICANT->name;
 			$this->email = $ADK_APPLICANT->email;
 			$this->pw = $randomPW;
-		}
-		public function populateFromUpdateHiker(){
-			$this->id = intval($_POST['id']);
-			$this->username = $_POST['username'];
-			$this->name = $_POST['name'];
-			$this->email = $_POST['email'];
 		}
 		
 	}

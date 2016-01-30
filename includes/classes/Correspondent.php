@@ -99,26 +99,11 @@
 		public function Correspondent(){
 			
 		}
-		
-		// public function isValid(){
-			// if(strlen($this->username) === 0 || strlen($this->username) > 45) $this->err .= 'u';
-			// if(strlen($this->name) === 0 || strlen($this->name) > 40) $this->err .= 'n';
-			// if(strlen($this->email) === 0 || strlen($this->email) > 50) $this->err .= 'e';
-			// if(!filter_var($this->email, FILTER_VALIDATE_EMAIL) > 50) $this->err .= 'e';
-			// if(strlen($this->address1) === 0 || strlen($this->address1) > 40) $this->err .= 'a';
-			// if(strlen($this->city) === 0 || strlen($this->city) > 40) $this->err .= 'c';
-			// if(strlen($this->state) === 0 || strlen($this->state) > 2) $this->err .= 's';
-			// if(strlen($this->country) === 0 || strlen($this->country) > 40) $this->err .= 'o';
-			// if(strlen($this->info) === 0) $this->err .= 'i';
-			
-			// if(strlen($this->err) > 0) return false;
-			// return true;
-		// }
 
-		// public function sanitize(){
-			// $this->info = str_replace('<iframe', '</iframe', $this->info);
-			// $this->info = str_replace('<script', '</script', $this->info);
-		// }
+		public function sanitize(){
+			$this->info = str_replace('<iframe', '</iframe', $this->info);
+			$this->info = str_replace('<script', '</script', $this->info);
+		}
 		
 		// public function save($con){
 			// $sql_query = sql_addApplicant($con, $this);
@@ -139,21 +124,21 @@
 					$this->name = $row['ADK_USER_NAME'];
 					$this->email = $row['ADK_USER_EMAIL'];
 					$this->info = $row['ADK_CORR_PERSONALINFO'];
-					//$this->numhikers = $row['ADK_CORR_PERSONALINFO'];
+					$this->numhikers = $row['ADK_CORR_PERSONALINFO'];
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');
 		}
 		
-		// public function update($con){
-			// $sql_query = sql_updateApplicant($con, $this);
-			// $sql_query->execute();
-		// }
+		 public function update($con){
+			 $sql_query = sql_updateCorrespondent($con, $this);
+			 $sql_query->execute();
+		 }
 		
-		// public function delete($con){
-			// $sql_query = sql_deleteApplicant($con, $this->id);
-			// if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
-		// }
+		 public function delete($con){
+			 $sql_query = sql_deleteCorrespondent($con, $this->id);
+			 if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
+		 }
 		
 		// public function populateFromSignUp(){
 			// $this->username = $_POST['username'];

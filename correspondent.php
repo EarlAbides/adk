@@ -34,7 +34,7 @@
 				<div class="container-fluid">
 				
 					<div class="pull-right" style="margin-right:3%;">
-						<a href="editCorrespondent.php?_=<?php echo $ADK_CORRESPONDENT->id; ?>">Edit</a> <b>|</b> 
+						<a href="editCorrespondent?_=<?php echo $ADK_CORRESPONDENT->id; ?>">Edit</a> <b>|</b> 
 						<a href="#" onclick="alert('Do you want this feature?');//if(confirm('Are you sure you want to delete this correspondent?')) $('#button_submit_delete').click();">Delete</a>
 					</div>
 					
