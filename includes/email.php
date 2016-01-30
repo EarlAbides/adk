@@ -143,23 +143,23 @@
 		$htmlmessage = "One of your hikers has been reassigned to a new Staff Correspondent!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_USER_USERNAME']."<br>";
+		$htmlmessage .= $ADK_HIKER->username."<br>";
 		$htmlmessage .= "Name:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_USER_NAME']."<br><br>";
+		$htmlmessage .= $ADK_HIKER->name."<br><br>";
 		
         $htmlmessage .= "If you believe that this was done in error, please contact the site administrator at <a href=\"mailto:".$GLOBALS['adminEmail']."\">".$GLOBALS['adminEmail']."</a>.<br><br>";	
 	
         $message = "One of your hikers has been reassigned to a new Staff Correspondent!\r\n\r\n";
 		
         $message .= "Username:\r\n";
-        $message .= $ADK_HIKER['ADK_USER_USERNAME']."\r\n";
+        $message .= $ADK_HIKER->username."\r\n";
         $message .= "Name:\r\n";
-        $message .= $ADK_HIKER['ADK_USER_NAME']."\r\n\r\n";
+        $message .= $ADK_HIKER->name."\r\n\r\n";
 		
         $message .= "If you believe that this was done in error, please contact the site administrator at ".$GLOBALS['adminEmail'].".<br><br>";
 		
-		$toAddr = $ADK_CORRESPONDENT['ADK_USER_EMAIL'];
-		$subject = 'Hiker Reassignment - '.$ADK_HIKER['ADK_USER_USERNAME'];
+		$toAddr = $ADK_CORRESPONDENT->email;
+		$subject = 'Hiker Reassignment - '.$ADK_HIKER->username;
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
@@ -168,23 +168,23 @@
 		$htmlmessage = "A hiker has been reassigned to you!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_USER_USERNAME']."<br>";
+		$htmlmessage .= $ADK_HIKER->username."<br>";
 		$htmlmessage .= "Name:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_USER_NAME']."<br><br>";
+		$htmlmessage .= $ADK_HIKER->name."<br><br>";
 		
         $htmlmessage .= "If you believe that this was done in error, please contact the site administrator at <a href=\"mailto:".$GLOBALS['adminEmail']."\">".$GLOBALS['adminEmail']."</a>.<br><br>";	
 	
         $message = "A hiker has been reassigned to you!\r\n\r\n";
 		
         $message .= "Username:\r\n";
-        $message .= $ADK_HIKER['ADK_USER_USERNAME']."\r\n";
+        $message .= $ADK_HIKER->username."\r\n";
         $message .= "Name:\r\n";
-        $message .= $ADK_HIKER['ADK_USER_NAME']."\r\n\r\n";
+        $message .= $ADK_HIKER->name."\r\n\r\n";
 		
         $message .= "If you believe that this was done in error, please contact the site administrator at ".$GLOBALS['adminEmail'].".<br><br>";
 		
-		$toAddr = $ADK_CORRESPONDENT['ADK_USER_EMAIL'];
-		$subject = 'Hiker Reassignment - '.$ADK_HIKER['ADK_USER_USERNAME'];
+		$toAddr = $ADK_CORRESPONDENT->email;
+		$subject = 'Hiker Reassignment - '.$ADK_HIKER->username;
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
@@ -298,23 +298,23 @@
 		$htmlmessage = "You have been reassigned to a new Staff Correspondent!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_USER_USERNAME']."<br>";
+		$htmlmessage .= $ADK_HIKER->username."<br>";
 		$htmlmessage .= "Name:<br>";
-		$htmlmessage .= $ADK_HIKER['ADK_USER_NAME']."<br><br>";
+		$htmlmessage .= $ADK_HIKER->name."<br><br>";
 		
         $htmlmessage .= "If you believe that this was done in error, please contact the site administrator at <a href=\"mailto:".$GLOBALS['adminEmail']."\">".$GLOBALS['adminEmail']."</a>.<br><br>";	
 	
         $message = "You have been reassigned to a new Staff Correspondent!\r\n\r\n";
 		
         $message .= "Username:\r\n";
-        $message .= $ADK_CORRESPONDENT['ADK_USER_USERNAME']."\r\n";
+        $message .= $ADK_CORRESPONDENT->username."\r\n";
         $message .= "Name:\r\n";
-        $message .= $ADK_CORRESPONDENT['ADK_USER_NAME']."\r\n\r\n";
+        $message .= $ADK_CORRESPONDENT->name."\r\n\r\n";
 		
         $message .= "If you believe that this was done in error, please contact the site administrator at ".$GLOBALS['adminEmail'].".<br><br>";
 		
-		$toAddr = $ADK_HIKER['ADK_USER_EMAIL'];
-		$subject = 'Hiker Reassignment - '.$ADK_CORRESPONDENT['ADK_USER_USERNAME'];
+		$toAddr = $ADK_HIKER->email;
+		$subject = 'Hiker Reassignment - '.$ADK_CORRESPONDENT->username;
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}

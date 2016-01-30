@@ -92,7 +92,7 @@
 		return $sql_query;
 	}
 	
-	function sql_updateHikersCorr($con, $ADK_USER_ID, $ADK_CORR_ID){
+	function sql_updateHikerCorr($con, $ADK_USER_ID, $ADK_CORR_ID){
 		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_CORR_ID = ? WHERE ADK_USER_ID = ?;");
 		
 		$sql_query->bind_param('ii', $ADK_CORR_ID, $ADK_USER_ID);

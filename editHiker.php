@@ -206,7 +206,7 @@
 		
 		<?php if($_SESSION['ADK_USERGROUP_CDE'] == 'ADM'){ ?>
 		<div class="content-wrapper">
-			<form method="post" action="includes/corr_reassign.php" data-toggle="validator" role="form" novalidate>
+			<form method="post" action="includes/hikerUpdateCorr.php" data-toggle="validator" role="form" novalidate>
 				
 				<div class="col-xs-12 content content-max">
 					

@@ -138,6 +138,11 @@
 		    $sql_query->execute();
 		}
 
+		public function updateCorr($con){
+		    $sql_query = sql_updateHikerCorr($con, $this->id, $this->corrid);
+		    $sql_query->execute();
+		}
+
 		public function updatePhotoID($con){
 		    $sql_query = sql_updateHikerPhotoID($con, $this);
 		    $sql_query->execute();
