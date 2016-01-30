@@ -36,10 +36,10 @@
 		return $sql_query;
 	}
 	
-	function sql_updateCorrPhotoID($con, $ADK_USER_ID, $ADK_FILE_ID){
+	function sql_updateCorrPhotoID($con, $ADK_CORRESPONDENT){
         $sql_query = $con->prepare("UPDATE ADK_CORRESPONDENT SET ADK_CORR_PHOTO_ID = ? WHERE ADK_USER_ID = ?;");
 		
-		$sql_query->bind_param('ii', $ADK_FILE_ID, $ADK_USER_ID);
+		$sql_query->bind_param('ii', $ADK_CORRESPONDENT->photoid, $ADK_CORRESPONDENT->id);
 		
 		return $sql_query;
 	}
@@ -201,10 +201,12 @@
 		return $sql_query;
 	}
 	
-	function sql_updateUserPassword($con, $ADK_USER_ID, $ADK_USER_PASSWORD){
+	function sql_updateUserPW($con, $ADK_USER){
 		$sql_query = $con->prepare("UPDATE ADK_USER SET ADK_USER_PASSWORD = ? WHERE ADK_USER_ID = ?;");
 		
-		$sql_query->bind_param('si', $ADK_USER_PASSWORD, $ADK_USER_ID);
+		$pw = md5($ADK_USER->pw);
+
+		$sql_query->bind_param('si', $pw, $ADK_USER->id);
 		
 		return $sql_query;
 	}

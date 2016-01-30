@@ -14,7 +14,7 @@
 			});
 			
 			$('#textbox_reqcorr').autocomplete({
-				source: 'includes/ajax_getCorrNames.php',
+				source: 'includes/corrGetNames.php',
 				minLength: 2
 			});
 			

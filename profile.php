@@ -146,7 +146,7 @@
 					</div>
 					
 					<div class="col-xs-12 col-sm-6">
-						<form method="post" action="includes/corr_updatephoto.php" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
+						<form method="post" action="includes/corrPhoto.php" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
 							<div class="div_tablewrapper" style="padding:5px;">
 								<img src="includes/getImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>" class="img-responsive imghover" alt="Photo" title="Photo" />
 							</div>
@@ -366,7 +366,7 @@
 			</div>
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
-				<form method="post" action="includes/user_updatepw.php" data-toggle="validator" role="form" novalidate>
+				<form method="post" action="includes/userUpdatePW.php" data-toggle="validator" role="form" novalidate>
 					<h4 class="content-header">
 						Password
 						<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">

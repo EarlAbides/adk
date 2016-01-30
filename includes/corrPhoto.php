@@ -5,7 +5,7 @@
 	require_once 'db_conn.php';
 	require_once 'INSERT.php';
 	require_once 'UPDATE.php';
-	require_once 'Correspondent.php';
+	require_once 'classes/Correspondent.php';
 	require_once 'File.php';
 	
 	if(validateImageFile($errMess, 'photo')) $file = getPOSTFile('photo');
@@ -13,12 +13,13 @@
 	
 	$con = connect_db();
 	
-	$ADK_USER_ID = intval($_POST['id']);
+	$ADK_CORRESPONDENT = new Correspondent();
+	$ADK_CORRESPONDENT->id = intval($_SESSION['ADK_USER_ID']);
 	
 	if($file !== ''){
-		$files = array($file);
-		$fileIDs = addFiles($con, $files);
-		updateCorrPhotoID($con, $ADK_USER_ID, $fileIDs[0]);
+		$fileIDs = addFiles($con, array($file));
+		$ADK_CORRESPONDENT->photoid = $fileIDs[0];
+		$ADK_CORRESPONDENT->updatePhotoID($con);
 	}
 	$con->close();
 	

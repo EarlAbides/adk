@@ -80,8 +80,8 @@
         return $sql_query;
 	}
 	
-	function sql_getMatchingCorrespondents($con, $ADK_APPLICANT_REQ_CORR){
-        $ADK_APPLICANT_REQ_CORR = '%'.$ADK_APPLICANT_REQ_CORR.'%';
+	function sql_getMatchingCorrespondents($con, $term){
+        $term = '%'.$term.'%';
         
 		$sql_query = $con->prepare(
             "SELECT CONCAT(B.ADK_USER_NAME, ' (', B.ADK_USER_USERNAME, ')') AS ADK_CORRESPONDENT
@@ -91,7 +91,7 @@
 				OR B.ADK_USER_USERNAME LIKE ?;"
         );
 
-        $sql_query->bind_param('ss', $ADK_APPLICANT_REQ_CORR, $ADK_APPLICANT_REQ_CORR);
+        $sql_query->bind_param('ss', $term, $term);
 
         return $sql_query;
 	}
@@ -413,7 +413,9 @@
 	function sql_checkUserOldPassword($con, $ADK_USER_ID, $ADK_USER_PASSWORD){
 		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_USER WHERE ADK_USER_ID = ? AND ADK_USER_PASSWORD = ?;");
 
-        $sql_query->bind_param('is', $ADK_USER_ID, $ADK_USER_PASSWORD);
+		$pw = md5($ADK_USER_PASSWORD);
+
+        $sql_query->bind_param('is', $ADK_USER_ID, $pw);
 
         return $sql_query;
 	}

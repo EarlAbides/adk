@@ -13,13 +13,13 @@
 	
 	$con = connect_db();
 	
-	$hiker = new Hiker();
-	$hiker->id = $_SESSION['ADK_USER_ID'];
+	$ADK_HIKER = new Hiker();
+	$ADK_HIKER->id = intval($_SESSION['ADK_USER_ID']);
 	
 	if($file !== ''){
 		$fileIDs = addFiles($con, array($file));
-		$hiker->photoid = $fileIDs[0];
-		$hiker->updatePhotoID($con);
+		$ADK_HIKER->photoid = $fileIDs[0];
+		$ADK_HIKER->updatePhotoID($con);
 	}
 	$con->close();
 	

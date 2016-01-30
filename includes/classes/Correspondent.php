@@ -29,6 +29,21 @@
 		    else die('There was an error running the query ['.$con->error.']');
 		}
 		
+		public function getMatchingNames($con, $term){
+		    $ADK_CORRESPONDENT_NAMES = [];
+			$sql_query = sql_getMatchingCorrespondents($con, $term);
+		    if($sql_query->execute()){
+		        $sql_query->store_result();
+		        $result = sql_get_assoc($sql_query);
+
+		        foreach($result as $row) array_push($ADK_CORRESPONDENT_NAMES, $row['ADK_CORRESPONDENT']);
+		    }
+		    else die('There was an error running the query ['.$con->error.']');
+
+			return $ADK_CORRESPONDENT_NAMES;
+		}
+		
+
 		public function renderSelectTable(){
 			$html = "<table id=\"table_assignCorr\" class=\"selecttable\">
 						<thead>
@@ -134,7 +149,12 @@
 			$sql_query = sql_updateCorrespondent($con, $this);
 			$sql_query->execute();
 		}
-		
+
+		public function updatePhotoID($con){
+		    $sql_query = sql_updateCorrPhotoID($con, $this);
+		    $sql_query->execute();
+		}
+				
 		public function reassignHikers($con, $old_ADK_CORRESPONDENT_ID){
 			$sql_query = sql_updateReassignCorrsHikers($con, $this->id, $old_ADK_CORRESPONDENT_ID);
 			$sql_query->execute();

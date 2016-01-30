@@ -23,7 +23,7 @@
 			return $COUNT == 0;
 		}
 
-		public static function isOldPassword($con, $ADK_USER_PASSWORD){
+		public function isOldPassword($con, $ADK_USER_PASSWORD){
 			$COUNT = 0;
 			$sql_query = sql_checkUserOldPassword($con, $this->id, $ADK_USER_PASSWORD);
 			if($sql_query->execute()){
@@ -71,6 +71,11 @@
 
 		public function update($con){
 			$sql_query = sql_updateUser($con, $this);
+			$sql_query->execute();
+		}
+
+		public function updatePW($con){
+			$sql_query = sql_updateUserPW($con, $this);
 			$sql_query->execute();
 		}
 
