@@ -3,32 +3,31 @@
 	//Imports
 	require_once 'includes/db_conn.php';
 	require_once 'includes/SELECT.php';
-	require_once 'includes/Correspondent.php';
-	require_once 'includes/Hiker.php';
+	require_once 'includes/classes/Correspondent.php';
+	require_once 'includes/classes/Hiker.php';
 	
-	if(isset($_GET['_'])){
-		$ADK_CORR_ID = $_GET['_'];
-		if($ADK_CORR_ID == '') header("Location: ./");
-	}
-	else header("Location: ./");
+	if(!isset($_GET['_']) || !is_numeric($_GET['_'])) header("Location: ./");
+	$ADK_CORR_ID = intval($_GET['_']);
 	
 	$con = connect_db();
 	
-	$ADK_CORRESPONDENT = getCorrespondent($con, $ADK_CORR_ID);
-	if($ADK_CORRESPONDENT == '') header("Location: ./");
+	$ADK_CORRESPONDENT = new Correspondent();
+	$ADK_CORRESPONDENT->id = $ADK_CORR_ID;
+	$ADK_CORRESPONDENT->get($con);
+	if($ADK_CORRESPONDENT->name == '') header("Location: ./");
 	
-	$ADK_HIKERS = getHikers($con, $ADK_CORRESPONDENT['ADK_USER_ID']);
+	$ADK_HIKERS = new Hikers();
+	$ADK_HIKERS->get($con, $ADK_CORRESPONDENT->id);
 	
-	$table_hikers = getTableHikers($ADK_HIKERS);
-
-	//if page is editCorr, 
-		$_ADK_CORRESPONDENTS = getCorrespondents($con);
-		$ADK_CORRESPONDENTS = array();
-		for($i = 0; $i < count($_ADK_CORRESPONDENTS); $i++)
-			if($_ADK_CORRESPONDENTS[$i]['ADK_USER_ID'] !== $ADK_CORRESPONDENT['ADK_USER_ID'])
-				array_push($ADK_CORRESPONDENTS, $_ADK_CORRESPONDENTS[$i]);
-		$table_correspondents = getTableSelectCorrespondents($ADK_CORRESPONDENTS);
-	//}
+	if($GLOBALS['page'] === 'editCorrespondent'){
+		$_ADK_CORRESPONDENTS = new Correspondents();
+		$ADK_CORRESPONDENTS = new Correspondents();
+		$_ADK_CORRESPONDENTS->get($con);
+		foreach($_ADK_CORRESPONDENTS->correspondents as $corr){
+			if($corr->id !== $ADK_CORRESPONDENT->id) array_push($ADK_CORRESPONDENTS->correspondents, $corr);
+		}
+	}
+	
 	$con->close();
 	
 ?>

@@ -4,7 +4,7 @@
 	require_once 'includes/db_conn.php';
 	require_once 'includes/SELECT.php';
 	require_once 'includes/Hike.php';
-	require_once 'includes/Correspondent.php';
+	require_once 'includes/classes/Correspondent.php';
 	require_once 'includes/classes/Hiker.php';
 	require_once 'includes/classes/Peak.php';
 	
@@ -28,8 +28,10 @@
 	$ADK_PEAKS->get($con);
 
 	if($_SESSION['ADK_USERGROUP_CDE'] == 'ADM'){
-		$ADK_CORRESPONDENTS = getCorrespondents($con);
-		if($GLOBALS['page'] === 'editHiker') $table_correspondents = getTableSelectCorrespondents($ADK_CORRESPONDENTS);
+		if($GLOBALS['page'] === 'editHiker'){
+			$ADK_CORRESPONDENTS = new Correspondents();
+			$ADK_CORRESPONDENTS->get($con);
+		}
 	}
 	
 	if(isset($_GET['m'])){

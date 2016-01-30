@@ -84,22 +84,20 @@
 	function sql_updateHiker($con, $ADK_HIKER){
 		$sql_query = $con->prepare(
 			"UPDATE ADK_HIKER
-				SET ADK_HIKER_PHONE = ?,
-					ADK_HIKER_AGE = ?,
-					ADK_HIKER_SEX = ?,
-					ADK_HIKER_ADDRESS1 = ?,
-					ADK_HIKER_ADDRESS2 = ?,
-					ADK_HIKER_CITY = ?,
-					ADK_HIKER_STATE = ?,
-					ADK_HIKER_ZIP = ?,
-					ADK_HIKER_COUNTRY = ?,
-					ADK_HIKER_PERSONALINFO = ?
+				SET ADK_HIKER_PHONE = ?
+					,ADK_HIKER_AGE = ?
+					,ADK_HIKER_SEX = ?
+					,ADK_HIKER_ADDRESS1 = ?
+					,ADK_HIKER_ADDRESS2 = ?
+					,ADK_HIKER_CITY = ?
+					,ADK_HIKER_STATE = ?
+					,ADK_HIKER_ZIP = ?
+					,ADK_HIKER_COUNTRY = ?
+					,ADK_HIKER_PERSONALINFO = ?
 			WHERE ADK_USER_ID = ?;");
 		
-		$sql_query->bind_param('sissssssssi', $ADK_HIKER['ADK_HIKER_PHONE'], $ADK_HIKER['ADK_HIKER_AGE'],
-					$ADK_HIKER['ADK_HIKER_SEX'], $ADK_HIKER['ADK_HIKER_ADDRESS1'], $ADK_HIKER['ADK_HIKER_ADDRESS2'],
-					$ADK_HIKER['ADK_HIKER_CITY'], $ADK_HIKER['ADK_HIKER_STATE'], $ADK_HIKER['ADK_HIKER_ZIP'],
-					$ADK_HIKER['ADK_HIKER_COUNTRY'], $ADK_HIKER['ADK_HIKER_PERSONALINFO'], $ADK_HIKER['ADK_USER_ID']);
+		$sql_query->bind_param('sissssssssi', $ADK_HIKER->phone, $ADK_HIKER->age, $ADK_HIKER->sex, $ADK_HIKER->address1, $ADK_HIKER->address2,
+					$ADK_HIKER->city, $ADK_HIKER->state, $ADK_HIKER->zip, $ADK_HIKER->country, $ADK_HIKER->info, $ADK_HIKER->id);
 		
 		return $sql_query;
 	}
@@ -202,14 +200,13 @@
 	function sql_updateUser($con, $ADK_USER){
 		$sql_query = $con->prepare(
 			"UPDATE ADK_USER
-				SET ADK_USERGROUP_ID = ?,
-					ADK_USER_USERNAME = ?,
-					ADK_USER_NAME = ?,
-					ADK_USER_EMAIL = ?
-			WHERE ADK_USER_ID = ?;");
+				SET ADK_USER_USERNAME = ?
+					,ADK_USER_NAME = ?
+					,ADK_USER_EMAIL = ?
+			WHERE ADK_USER_ID = ?;"
+		);
 		
-		$sql_query->bind_param('isssi', $ADK_USER['ADK_USERGROUP_ID'], $ADK_USER['ADK_USER_USERNAME'], $ADK_USER['ADK_USER_NAME'],
-								$ADK_USER['ADK_USER_EMAIL'], $ADK_USER['ADK_USER_ID']);
+		$sql_query->bind_param('sssi', $ADK_USER->username, $ADK_USER->name, $ADK_USER->email, $ADK_USER->id);
 		
 		return $sql_query;
 	}

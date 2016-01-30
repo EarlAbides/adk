@@ -52,7 +52,7 @@
 					
 					<div class="pull-right" style="margin-right:3%;">
 						<?php if($_SESSION['ADK_USERGROUP_CDE'] !== 'EDT')
-							echo '<a href="editHiker.php?_='.$ADK_HIKER->id.'">Edit</a>';
+							echo '<a href="editHiker?_='.$ADK_HIKER->id.'">Edit</a>';
                         if($_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){ ?>
                             <b>&nbsp;|&nbsp;</b>
 						    <a href="#" onclick="if(confirm('Are you sure you want to delete this hiker?')) $('#button_submit_delete').click();">Delete</a>

@@ -33,7 +33,7 @@
 				<div class="container-fluid">
 					<div class="col-xs-12">
 						<div class="div_tablewrapper tablewrapper500">
-							<?php echo $table_correspondents; ?>
+							<?php echo $ADK_CORRESPONDENTS->renderViewTable(); ?>
 						</div>
 					</div>
 				</div>

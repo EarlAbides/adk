@@ -398,7 +398,7 @@
 	
 	//User
 	function sql_getUser($con, $ADK_USER_ID){
-		$sql_query = $con->prepare("SELECT ADK_USER_ID, ADK_USER_USERNAME, ADK_USER_NAME, ADK_USER_EMAIL FROM ADK_USER WHERE ADK_USER_ID = ?;");
+		$sql_query = $con->prepare("SELECT ADK_USER_USERNAME, ADK_USER_NAME, ADK_USER_EMAIL FROM ADK_USER WHERE ADK_USER_ID = ?;");
 
         $sql_query->bind_param('i', $ADK_USER_ID);
 

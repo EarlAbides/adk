@@ -18,7 +18,7 @@
 	
 	if(!$ADK_APPLICANT->isValid()){
 		$con->close();
-		header('Location: ../editApplicant?_='.$ADK_APPLICANT->id.'&e=q');
+		header('Location: ../editApplicant?_='.$ADK_APPLICANT->id.'&e='.$ADK_APPLICANT->err);
 		exit;
 	}
 	if(!User::isUniqueUsername($con, $ADK_APPLICANT->username, $old_ADK_APPLICANT->username)){
