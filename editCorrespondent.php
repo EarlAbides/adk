@@ -36,7 +36,7 @@
 					<div class="container-fluid">
 				
 						<div class="pull-right" style="margin-right:3%;">
-							<a href="#" onclick="alert('Do you want this feature?');//if(confirm('Are you sure you want to delete this correspondent?')) $('#button_submit_delete').click();">Delete</a>
+							<a href="#" onclick="if(confirm('Are you sure you want to delete this correspondent?')) $('#button_submit_delete').click();">Delete</a>
 						</div>
 					
 						<div class="col-xs-12 col-sm-6">
@@ -125,8 +125,8 @@
 	</div>
 	
 	<div style="display:none;">
-		<form method="post" action="includes/corr_delete.php" role="form" novalidate>
-			<input type="hidden" name="id" value="<?php echo $ADK_CORRESPONDENT['ADK_USER_ID']; ?>" />
+		<form method="post" action="includes/corrDelete.php" role="form" novalidate>
+			<input type="hidden" name="id" value="<?php echo $ADK_CORRESPONDENT->id; ?>" />
 			<button type="submit" id="button_submit_delete"></button>
 		</form>
 	</div>

@@ -193,7 +193,7 @@
         $htmlmessage = "Your 46er Staff Corresondent account has been created!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_USER['ADK_USER_USERNAME']."<br><br>";
+		$htmlmessage .= $ADK_USER->username."<br><br>";
 		$htmlmessage .= "Initial Password:<br>";
 		$htmlmessage .= $randomPW."<br><br><br><br>";
 		
@@ -202,14 +202,14 @@
 		$message = "Your 46er Staff Corresondent account has been created!\r\n\r\n";
 		
 		$message .= "Username:\r\n";
-		$message .= $ADK_USER['ADK_USER_USERNAME']."\r\n\r\n";
+		$message .= $ADK_USER->username."\r\n\r\n";
 		$message .= "Initial Password:\r\n";
 		$message .= $randomPW."\r\n\r\n\r\n\r\n";
 
 		$message .= "Click below to visit the site and log in:\r\n".$GLOBALS['url']."\r\n\r\n";
 				
-		$toAddr = $ADK_USER['ADK_USER_EMAIL'];
-		$subject = 'Staff Correspondent Account Created - '.$ADK_USER['ADK_USER_USERNAME'];
+		$toAddr = $ADK_USER->email;
+		$subject = 'Staff Correspondent Account Created - '.$ADK_USER->username;
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
     }

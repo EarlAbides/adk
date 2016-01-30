@@ -20,7 +20,7 @@
 	//Correspondent
     function sql_addCorrespondent($con, $ADK_CORRESPONDENT){
         $sql_query = $con->prepare("INSERT INTO ADK_CORRESPONDENT(ADK_USER_ID, ADK_CORR_PERSONALINFO) VALUES(?,?);");
-		$sql_query->bind_param('is', $ADK_CORRESPONDENT['ADK_USER_ID'], $ADK_CORRESPONDENT['ADK_CORR_PERSONALINFO']);
+		$sql_query->bind_param('is', $ADK_CORRESPONDENT->id, $ADK_CORRESPONDENT->info);
 		
 		return $sql_query;
     }

@@ -9,6 +9,15 @@
         return $sql_query;
 	}
 	
+	//Correspondent
+	function sql_deleteCorrespondent($con, $ADK_CORRESPONDENT_ID){
+		$sql_query = $con->prepare("DELETE FROM ADK_CORRESPONDENT WHERE ADK_USER_ID = ?;");
+
+        $sql_query->bind_param('i', $ADK_CORRESPONDENT_ID);
+
+        return $sql_query;
+	}
+
 	//Hike
 	function sql_deleteHike($con, $ADK_HIKE_ID){
 		$sql_query = $con->prepare("DELETE FROM ADK_HIKE WHERE ADK_HIKE_ID = ?;");

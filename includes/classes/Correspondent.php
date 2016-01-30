@@ -105,11 +105,11 @@
 			$this->info = str_replace('<script', '</script', $this->info);
 		}
 		
-		// public function save($con){
-			// $sql_query = sql_addApplicant($con, $this);
-			// $sql_query->execute();
-			// $this->id = $sql_query->insert_id;
-		// }
+		public function save($con){
+			$sql_query = sql_addCorrespondent($con, $this);
+			$sql_query->execute();
+			$this->id = $sql_query->insert_id;
+		}
 		
 		public function get($con){
 			$sql_query = sql_getCorrespondent($con, $this->id);
@@ -124,39 +124,21 @@
 					$this->name = $row['ADK_USER_NAME'];
 					$this->email = $row['ADK_USER_EMAIL'];
 					$this->info = $row['ADK_CORR_PERSONALINFO'];
-					$this->numhikers = $row['ADK_CORR_PERSONALINFO'];
+					$this->numhikers = $row['ADK_CORR_NUMHIKERS'];
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');
 		}
 		
-		 public function update($con){
-			 $sql_query = sql_updateCorrespondent($con, $this);
-			 $sql_query->execute();
-		 }
+		public function update($con){
+			$sql_query = sql_updateCorrespondent($con, $this);
+			$sql_query->execute();
+		}
 		
-		 public function delete($con){
-			 $sql_query = sql_deleteCorrespondent($con, $this->id);
-			 if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
-		 }
-		
-		// public function populateFromSignUp(){
-			// $this->username = $_POST['username'];
-			// $this->name = $_POST['name'];
-			// $this->email = $_POST['email'];
-			// $this->phone = $_POST['phone'];
-			// $this->age = $_POST['age'];
-			// $this->sex = $_POST['sex'];
-			// $this->address1 = $_POST['address1'];
-			// $this->address2 = $_POST['address2'];
-			// $this->city = $_POST['city'];
-			// $this->state = $_POST['state'];
-			// $this->zip = $_POST['zip'];
-			// $this->country = $_POST['country'];
-			// $this->info = $_POST['personalinfo'];
-			// $this->reqcorr = $_POST['reqcorr'];
-			// $this->peakids = $_POST['peakids'];
-		// }
+		public function delete($con){
+			$sql_query = sql_deleteCorrespondent($con, $this->id);
+			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
+		}
 		
 	}
 	

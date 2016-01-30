@@ -46,7 +46,7 @@
 						<tbody>";
 		
 			if(count($this->hikers) === 0){//If empty
-				$html .= '<tr><td colspan="6" style="text-align:center;font-style:italic;">No hikers</td></tr>';
+				$html .= '<tr><td colspan="7" style="text-align:center;font-style:italic;">No hikers</td></tr>';
 			}	
 			else{
 				foreach($this->hikers as $ADK_HIKER){
@@ -144,8 +144,10 @@
 		}
 		
 		public function delete($con){
-		    $sql_query = sql_deleteHiker($con, $this->id);
-		    if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
+		    $sql_queries = sql_deleteHiker($con, $this->id);
+			foreach($sql_queries as $sql_query){
+				if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
+			}
 		}
 
 		public function populateFromApplicant($ADK_USER_ID, $ADK_CORRESPONDENT_ID, $ADK_APPLICANT){

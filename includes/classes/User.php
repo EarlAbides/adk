@@ -61,7 +61,7 @@
 
 
 		public function populate(){
-			$this->id = intval($_POST['id']);
+			if(isset($_POST['id'])) $this->id = intval($_POST['id']);
 			$this->username = $_POST['username'];
 			$this->name = $_POST['name'];
 			$this->email = $_POST['email'];

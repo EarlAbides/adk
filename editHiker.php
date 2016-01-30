@@ -245,7 +245,7 @@
 	</div>
 	
 	<div style="display:none;">
-		<form method="post" action="includes/hiker_delete.php" role="form" novalidate>
+		<form method="post" action="includes/hikerDelete.php" role="form" novalidate>
 			<input type="hidden" name="id" value="<?php echo $ADK_HIKER->id; ?>" />
 			<button type="submit" id="button_submit_delete"></button>
 		</form>

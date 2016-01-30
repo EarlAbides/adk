@@ -49,7 +49,7 @@
 					</a>
 				</h4>
 
-                <form method="post" action="includes/corr_add.php" data-toggle="validator" role="form" novalidate>
+                <form method="post" action="includes/corrSave.php" data-toggle="validator" role="form" novalidate>
 					
 				    <div class="container-fluid">
 				    

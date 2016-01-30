@@ -80,22 +80,22 @@
 	
     function sendNewCorrPM($con, $ADK_USER, $randomPW){
 		$message = "Username:<br>";
-		$message .= $ADK_USER['ADK_USER_USERNAME']."<br><br>";
+		$message .= $ADK_USER->username."<br><br>";
 		$message .= "Name:<br>";
-		$message .= $ADK_USER['ADK_USER_NAME']."<br><br>";
+		$message .= $ADK_USER->name."<br><br>";
 		$message .= "Email:<br>";
-		$message .= $ADK_USER['ADK_USER_EMAIL']."<br><br>";
+		$message .= $ADK_USER->email."<br><br>";
 		$message .= "Initial Password:<br>";
 		$message .= $randomPW."<br><br>";
 
-		$message .= "Click <a href=\"./correspondent?_=".$ADK_USER['ADK_USER_ID']."\">here</a> to view."."<br><br>";
+		$message .= "Click <a href=\"./correspondent?_=".$ADK_USER->id."\">here</a> to view."."<br><br>";
 		
 		$ADK_MESSAGE = array(
 			'ADK_MESSAGE_FROM_USER_ID' => 1
 	        ,'ADK_MESSAGE_TO_USER_ID' => 1
 	        ,'ADK_MESSAGE_RESPOND_ID' => ''
 	        ,'ADK_MESSAGE_ORIG_ID' => ''
-			,'ADK_MESSAGE_TITLE' => 'New Correspondent - '.$ADK_USER['ADK_USER_USERNAME']
+			,'ADK_MESSAGE_TITLE' => 'New Correspondent - '.$ADK_USER->username
 			,'ADK_MESSAGE_CONTENT' => $message
 			,'ADK_MESSAGE_DRAFT' => 0
 	    );
