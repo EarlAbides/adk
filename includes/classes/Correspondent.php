@@ -135,6 +135,11 @@
 			$sql_query->execute();
 		}
 		
+		public function reassignHikers($con, $old_ADK_CORRESPONDENT_ID){
+			$sql_query = sql_updateReassignCorrsHikers($con, $this->id, $old_ADK_CORRESPONDENT_ID);
+			$sql_query->execute();
+		}
+
 		public function delete($con){
 			$sql_query = sql_deleteCorrespondent($con, $this->id);
 			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');

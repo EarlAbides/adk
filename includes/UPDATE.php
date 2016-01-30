@@ -44,10 +44,10 @@
 		return $sql_query;
 	}
 	
-	function sql_updateReassignCorrsHikers($con, $ADK_USER_ID, $newCorrID){
+	function sql_updateReassignCorrsHikers($con, $ADK_USER_ID, $old_ADK_CORRESPONDENT_ID){
 		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_CORR_ID = ? WHERE ADK_HIKER_CORR_ID = ?;");
 		
-		$sql_query->bind_param('ii', $newCorrID, $ADK_USER_ID);
+		$sql_query->bind_param('ii', $ADK_USER_ID, $old_ADK_CORRESPONDENT_ID);
 		
 		return $sql_query;
 	}

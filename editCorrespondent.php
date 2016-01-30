@@ -89,7 +89,7 @@
 			</div>
 
 			<div class="col-xs-12 content content-max">
-				<form method="post" action="includes/corr_reassignhikers.php" data-toggle="validator" role="form" novalidate>
+				<form method="post" action="includes/corrReassignHikers.php" data-toggle="validator" role="form" novalidate>
 					
 					<h4 class="content-header">
 						Reassign <?php echo $ADK_CORRESPONDENT->username; ?>'s Hikers
