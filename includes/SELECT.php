@@ -52,17 +52,6 @@
         return $sql_query;
 	}
 	
-	//Changelog
-	function sql_getChangelog($con){
-		$sql_query = $con->prepare(
-            "SELECT ADK_CHANGE_ID, ADK_CHANGE_TITLE, ADK_CHANGE_DESC, ADK_CHANGE_DTE, ADK_CHANGE_PRIORITY, ADK_CHANGE_DONE
-			FROM ADK_CHANGELOG
-			ORDER BY ADK_CHANGE_DONE;"
-        );
-
-        return $sql_query;
-	}
-	
 	//Correspondent
 	function sql_getCorrespondents($con){
 		$sql_query = $con->prepare(

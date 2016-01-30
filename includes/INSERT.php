@@ -17,18 +17,7 @@
 		return $sql_query;
 	}
 	
-	//Changelog
-	function sql_addChange($con, $ADK_CHANGE){
-		$sql_query = $con->prepare(
-		    "INSERT INTO ADK_CHANGELOG(ADK_CHANGE_TITLE, ADK_CHANGE_DESC, ADK_CHANGE_DTE, ADK_CHANGE_PRIORITY)
-		    VALUES(?,?, NOW(),?);");
-		
-		$sql_query->bind_param('ssi', $ADK_CHANGE['ADK_CHANGE_TITLE'], $ADK_CHANGE['ADK_CHANGE_DESC'], $ADK_CHANGE['ADK_CHANGE_PRIORITY']);
-		
-		return $sql_query;
-	}
-	
-    //Correspondent
+	//Correspondent
     function sql_addCorrespondent($con, $ADK_CORRESPONDENT){
         $sql_query = $con->prepare("INSERT INTO ADK_CORRESPONDENT(ADK_USER_ID, ADK_CORR_PERSONALINFO) VALUES(?,?);");
 		$sql_query->bind_param('is', $ADK_CORRESPONDENT['ADK_USER_ID'], $ADK_CORRESPONDENT['ADK_CORR_PERSONALINFO']);

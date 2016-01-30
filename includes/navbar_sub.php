@@ -8,7 +8,6 @@
 			case 'correspondents': $correspondents = $class; break;
 			case 'hikerportal': $hikerportal = $class; break;
 			case 'hikers': $hikers = $class; break;
-			case 'changelog': $changelog = $class; break;
 			case 'guideCorr': $guideCorr = $class; break;
 			case 'guideHiker': $guideHiker = $class; break;
             case 'login': $login = $class; break;
@@ -43,14 +42,12 @@
 					<li<?php if(isset($hikers)) echo $hikers; ?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($guideCorr)) echo $guideCorr; ?>><a href="./guideCorr">Correspondent Guidelines</a></li>
 					<li<?php if(isset($lnt)) echo $lnt; ?>><a href="./lnt">Leave No Trace</a></li>
-					<li<?php if(isset($changelog)) echo $changelog; ?>><a href="./changelog">Change log</a></li>
 				<?php } ?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'ADM'))){ ?>
 					<li<?php if(isset($applicants)) echo $applicants; ?>><a href="./applicants">Applicants</a></li>
 					<li<?php if(isset($hikers)) echo $hikers; ?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($correspondents)) echo $correspondents; ?>><a href="./correspondents">Correspondents</a></li>
 					<li<?php if(isset($gallery)) echo $gallery; ?>><a href="./gallery">Gallery</a></li>
-					<li<?php if(isset($changelog)) echo $changelog; ?>><a href="./changelog">Change log</a></li>
 					<li<?php if(isset($lnt)) echo $lnt; ?>><a href="./lnt">Leave No Trace</a></li>
 				<?php } ?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'HIK'))){ ?>

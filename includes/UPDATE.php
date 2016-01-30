@@ -27,16 +27,6 @@
 		return $sql_query;
 	}
 	
-	//Change log
-	function sql_updateChangeDone($con, $ADK_CHANGE_ID, $ADK_CHANGE_DONE){
-		$sql_query = $con->prepare(
-		    "UPDATE ADK_CHANGELOG SET ADK_CHANGE_DONE = ? WHERE ADK_CHANGE_ID = ?;");
-		
-		$sql_query->bind_param('ii', $ADK_CHANGE_DONE, $ADK_CHANGE_ID);
-		
-		return $sql_query;
-	}
-	
 	//Correspondent
 	function sql_updateCorrespondent($con, $ADK_CORRESPONDENT){
 		$sql_query = $con->prepare("UPDATE ADK_CORRESPONDENT SET ADK_CORR_PHOTO_ID = ?, ADK_CORR_PERSONALINFO = ? WHERE ADK_USER_ID = ?;");
