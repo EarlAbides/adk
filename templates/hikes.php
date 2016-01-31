@@ -18,7 +18,7 @@
 					<span id="span_totalpeaks"><?php echo $ADK_HIKER->numpeaks; ?></span>
 				</div>
 				<div id="div_table_hikes" class="div_tablewrapper tablewrapper500">
-					<?php echo $table_hikes; ?>
+					<?php $ADK_HIKES->renderTable($ADK_HIKER->numpeaks); ?>
 				</div>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 					<div class="col-sm-12 text-right">
 						<a class="pointer" onclick="editHike();">Edit</a>
 						<b>&nbsp;|&nbsp;</b>
-						<a href="#" onclick="if(confirm('Are you sure you want to delete this hike?')) deleteHike();" style="margin-right:5%;">Delete</a>
+						<a class="pointer" onclick="if(confirm('Are you sure you want to delete this hike?')) deleteHike();" style="margin-right:5%;">Delete</a>
 					</div>
 				<?php } ?>
 								

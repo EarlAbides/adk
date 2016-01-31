@@ -152,25 +152,25 @@
 					</h4>
 					
 					<div class="col-xs-12">
-						<div class="col-xs-12 col-sm-2" style="margin-bottom:12px;">
-							<img src="includes/getImage.php?_=<?php echo $ADK_CORRESPONDENT['ADK_CORR_PHOTO_ID']; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?>" title="<?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?>" />
-							<span><?php echo $ADK_CORRESPONDENT['ADK_USER_USERNAME']; ?></span>
+						<div class="col-xs-12 col-sm-3" style="margin-bottom:12px;">
+							<img src="includes/getImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_CORRESPONDENT->name; ?>" title="<?php echo $ADK_CORRESPONDENT->name; ?>" />
+							<span><?php echo $ADK_CORRESPONDENT->username; ?></span>
 						</div>
 						<div class="col-xs-12 col-sm-2">
 							<label class="control-label control-label-sm">Name</label><br />
-							<span><?php echo $ADK_CORRESPONDENT['ADK_USER_NAME']; ?></span>
+							<span><?php echo $ADK_CORRESPONDENT->name; ?></span>
 						</div>
-						<div class="col-xs-12 col-sm-8">
+						<div class="col-xs-12 col-sm-7">
 							<label class="control-label control-label-sm">Personal Info</label><br />
 							<div class="scroll scroll100" style="word-break:break-word;">
-								<span><?php echo $ADK_CORRESPONDENT['ADK_CORR_PERSONALINFO']; ?></span>
+								<span><?php echo $ADK_CORRESPONDENT->info; ?></span>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-xs-12 text-right">
 								<br />
-								<a href="./messages?_=<?php echo $ADK_CORRESPONDENT['ADK_USER_ID']; ?>" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-envelope" style="left:-2px;"></span>&nbsp;Send Message</a>
+								<a href="./messages?_=<?php echo $ADK_CORRESPONDENT->id; ?>" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-envelope" style="left:-2px;"></span>&nbsp;Send Message</a>
 							</div>
 						</div>
 					</div>

@@ -133,7 +133,7 @@ function editHike(){
 function deleteHike(){
 	cancelHike();
 	var td = document.getElementsByClassName('viewing')[0];
-	$.post('includes/ajax_deleteHike.php'
+	$.post('includes/hikeDelete.php'
 		,{
 			userid: document.getElementById('hikerId').value
 			,hikeid: getHikeInfo(td).ADK_HIKE_ID
@@ -142,9 +142,7 @@ function deleteHike(){
 			var cont = document.getElementById('div_hike_data').parentNode;
             cont.className = cont.className.replace('max', 'min');
             document.getElementById('div_table_hikes').innerHTML = ret;
-            document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
-			enableDisableSelectOptions(getUsedPeakIDs());
-			document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
+			document.getElementById('span_totalpeaks').innerHTML = document.getElementById('table_hikes').getAttribute('data-numpeaks');
 			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
 		}
 	).error(function(ret){
@@ -170,8 +168,6 @@ function cancelHike(){
     }
     
     select_remainingpeaks.value = '';
-    var usedPeakIDs = getUsedPeakIDs();
-    enableDisableSelectOptions(usedPeakIDs);
     document.getElementById('textbox_hikedate').value = '';
     document.getElementById('textbox_notes').value = '';
 	document.getElementById('hidden_prefileids').value = '';
@@ -407,13 +403,6 @@ function enable_disable_addPeak(){
     document.getElementById('button_addUpdateHike').disabled = false;
     if($('#select_remainingpeaks').value == '' && $('#div_peaks_container')[0].innerHTML == '') document.getElementById('button_addUpdateHike').disabled = true;
     if($('#textbox_hikedate')[0].value == '') document.getElementById('button_addUpdateHike').disabled = true;
-}
-function enableDisableSelectOptions(usedPeakIDs){
-    var select_remainingpeaks = document.getElementById('select_remainingpeaks');
-    for(var i = 0; i < select_remainingpeaks.children.length; i++){
-        select_remainingpeaks.children[i].disabled = false;
-        if(usedPeakIDs.indexOf(parseInt(select_remainingpeaks.children[i].value)) !== -1) select_remainingpeaks.children[i].disabled = true;
-    }
 }
 
 //File

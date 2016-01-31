@@ -20,27 +20,32 @@
 
 	//Hike
 	function sql_deleteHike($con, $ADK_HIKE_ID){
-		$sql_query = $con->prepare("DELETE FROM ADK_HIKE WHERE ADK_HIKE_ID = ?;");
+		$queries = array(
+			"SET SQL_SAFE_UPDATES = 0;"			
+			,"DELETE FROM ADK_HIKE_FILE_JCT WHERE ADK_HIKE_ID = ?;"
+			,"DELETE FROM ADK_HIKE_PEAK_JCT WHERE ADK_HIKE_ID = ?;"
+			,"DELETE FROM ADK_HIKE WHERE ADK_HIKE_ID = ?;"
+			,"SET SQL_SAFE_UPDATES = 1;"
+		);
 
-        $sql_query->bind_param('i', $ADK_HIKE_ID);
+        $sql_queries = array(
+            $con->prepare($queries[0])
+            ,$con->prepare($queries[1])
+            ,$con->prepare($queries[2])
+            ,$con->prepare($queries[3])
+            ,$con->prepare($queries[4])
+        );
 
-        return $sql_query;
-	}
-	
-	function sql_deleteHikePeakJcts($con, $ADK_HIKE_ID){
-		$sql_query = $con->prepare("DELETE FROM ADK_HIKE_PEAK_JCT WHERE ADK_HIKE_ID = ?;");
+        for($i = 0; $i < count($sql_queries); $i++){
+            $_ADK_HIKE_ID = []; $types = '';
+            $qCount = substr_count($queries[$i], '?');
+            for($j = 0; $j < $qCount; $j++) array_push($_ADK_HIKE_ID, $ADK_HIKE_ID);
+            foreach($_ADK_HIKE_ID as $id) $types .= 'i';
+            $_ADK_HIKE_ID = array_merge(array($types), $_ADK_HIKE_ID);
+            if($qCount > 0) call_user_func_array(array($sql_queries[$i], 'bind_param'), refValues($_ADK_HIKE_ID));
+        }
 
-        $sql_query->bind_param('i', $ADK_HIKE_ID);
-
-        return $sql_query;
-	}
-	
-	function sql_deleteHikeFileJcts($con, $ADK_HIKE_ID){
-		$sql_query = $con->prepare("DELETE FROM ADK_HIKE_FILE_JCT WHERE ADK_HIKE_ID = ?;");
-
-        $sql_query->bind_param('i', $ADK_HIKE_ID);
-
-        return $sql_query;
+        return $sql_queries;
 	}
 
     //Hiker

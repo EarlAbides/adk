@@ -1,12 +1,127 @@
 <?php
 	
+	class Hikes{
+		
+		public $hikes, $userid;
+
+		public function Hikes(){
+			$this->hikes = [];
+		}
+
+		public function get($con){
+			$sql_query = sql_getHikes($con, $this->userid);
+			if($sql_query->execute()){
+				$sql_query->store_result();
+				$result = sql_get_assoc($sql_query);
+
+				foreach($result as $row){
+					$ADK_HIKE = new Hike();
+					$ADK_HIKE->id = intval($row['ADK_HIKE_ID']);
+					$ADK_HIKE->notes = $row['ADK_HIKE_NOTES'];
+					$ADK_HIKE->datetime = $row['ADK_HIKE_DTE'] === null? 'N/A': date("m/d/Y", strtotime($row['ADK_HIKE_DTE']));
+					$ADK_HIKE->numpeaks = $row['ADK_HIKE_NUMPEAKS'];
+
+					//peaks
+					$peakNames = [];
+					$sql_query = sql_getHikesPeaks($con, $ADK_HIKE->id);
+					if($sql_query->execute()){
+						$sql_query->store_result();
+						$result = sql_get_assoc($sql_query);
+
+						foreach($result as $row){
+							$ADK_PEAK = new Peak();
+							$ADK_PEAK->id = intval($row['ADK_PEAK_ID']);
+							$ADK_PEAK->name = $row['ADK_PEAK_NAME'];
+							$ADK_PEAK->height = $row['ADK_PEAK_HEIGHT'];
+							array_push($peakNames, $ADK_PEAK->name);
+							array_push($ADK_HIKE->peaks, $ADK_PEAK);
+						}
+					}
+					else die('There was an error running the query ['.$con->error.']');
+					$ADK_HIKE->label = join(', ', $peakNames);
+
+					//files
+					$sql_query = sql_getHikesFiles($con, $ADK_HIKE->id);
+					if($sql_query->execute()){
+						$sql_query->store_result();
+						$result = sql_get_assoc($sql_query);
+                    
+						foreach($result as $row){
+							$ADK_FILE = new File();
+							$ADK_FILE->id = intval($row['ADK_FILE_ID']);
+							$ADK_FILE->name = $row['ADK_FILE_NAME'];
+							$ADK_FILE->desc = $row['ADK_FILE_DESC'];
+							$ADK_FILE->size = intval($row['ADK_FILE_SIZE']);
+							array_push($ADK_HIKE->files, $ADK_FILE);
+						}
+					}
+
+					array_push($this->hikes, $ADK_HIKE);
+				}
+			}
+			else die('There was an error running the query ['.$con->error.']');		
+		}
+
+
+		public function renderTable($numPeaks){
+			$peakIDs = [];
+			$html = "<table id=\"table_hikes\" class=\"selecttable dt\" data-numpeaks=".$numPeaks.">
+						<thead>
+							<tr>
+								<th style=\"width:5%;\"></th>
+								<th style=\"width:72%;\">Peaks</th>
+								<th style=\"width:15%;\">Date</th>
+								<th style=\"width:8%;\">#&nbsp;Peaks</th>
+							</tr>
+						</thead>
+						<tbody>";
+		
+			if(count($this->hikes) === 0){//If empty
+				$html .= '<tr><td colspan="4" style="text-align:center;font-style:italic;">No hikes</td></tr>';
+			}	
+			else{
+				foreach($this->hikes as $ADK_HIKE){
+					$html .= "<tr>
+								<td>
+									<input type=\"hidden\" name=\"hikeid\" value=\"".$ADK_HIKE->id."\" />
+									<input type=\"hidden\" name=\"numpeaks\" value=\"".$ADK_HIKE->numpeaks."\" />
+									<div name=\"notes\" style=\"display:none;\">".$ADK_HIKE->notes."</div>
+									<input type=\"hidden\" name=\"date\" value=\"".$ADK_HIKE->datetime."\" />
+									<div style=\"display:none;\">";
+					foreach($ADK_HIKE->peaks as $ADK_PEAK){
+						array_push($peakIDs, $ADK_PEAK->id);
+						$html .= "		<input type=\"hidden\" data-id=\"".$ADK_PEAK->id."\" data-name=\"".$ADK_PEAK->name."\" data-height=\"".$ADK_PEAK->height."\" />";
+					}
+					$html .= "		</div><div style=\"display:none;\">";
+					foreach($ADK_HIKE->files as $ADK_FILE)
+						$html .= "		<input type=\"hidden\" data-id=\"".$ADK_FILE->id."\" data-name=\"".$ADK_FILE->name."\" data-desc=\"".$ADK_FILE->desc."\" data-size=\"".$ADK_FILE->size."\" />";
+					$html .= "		</div>
+									<a onclick=\"viewHike(this.parentNode);\" class=\"hoverbtn pointer rowselector\">
+										<span class=\"glyphicon glyphicon-zoom-in\" title=\"Hike Details\" data-toggle=\"tooltip\" data-placement=\"right\" data-container=\"body\"></span>
+									</a>
+								</td>
+								<td>".$ADK_HIKE->label."</td>
+								<td>".$ADK_HIKE->datetime."</td>
+								<td style=\"text-align:center;\">".$ADK_HIKE->numpeaks."</td>
+							</tr>";
+				}
+			}
+		
+			$html .= "</tbody></table><input type=\"hidden\" id=\"hidden_usedPeakIDs\" value=\"".implode(',', $peakIDs)."\" />";
+		
+			echo $html;
+		}
+		
+	}
+	
 	class Hike{
 		
 		public $err;
-		public $id, $userid, $notes, $datetime;
+		public $id, $userid, $notes, $datetime, $peaks, $files, $numpeaks, $label;
 		
 		public function Hike(){
-			
+			$this->peaks = [];
+			$this->files = [];			
 		}
 		
 		//public function isValid(){
@@ -118,8 +233,10 @@
 		//}
 
 		public function delete($con){
-		    $sql_query = sql_deleteHiker($con, $this->id);
-		    if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
+			$sql_queries = sql_deleteHike($con, $this->id);
+			foreach($sql_queries as $sql_query){
+				if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
+			}
 		}
 		
 	}
