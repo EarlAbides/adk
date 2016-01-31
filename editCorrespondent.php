@@ -3,7 +3,7 @@
 <?php require_once 'includes/loginredir.php'; ?>
 <?php require_once 'correspondent.inc.php'; ?>
 
-<?php include 'includes/head.php'; ?>
+<?php include 'templates/head.php'; ?>
 	<script>
 		$(document).ready(function(){
 			var t = document.getElementById('table_assignCorr').children[1];
@@ -16,11 +16,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php'; ?>
-	<?php include 'includes/logo.php'; ?>
+	<?php include 'templates/navbar.php'; ?>
+	<?php include 'templates/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php'; ?>
+		<?php include 'templates/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
@@ -121,7 +121,7 @@
 
 		</div>
 
-		<?php include 'includes/footer.php'; ?>
+		<?php include 'templates/footer.php'; ?>
 	</div>
 	
 	<div style="display:none;">

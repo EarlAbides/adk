@@ -4,7 +4,7 @@
 <?php include 'includes/variables_site.php'; ?>
 <?php require_once 'gallery.inc.php'; ?>
 
-<?php include 'includes/head.php'; ?>
+<?php include 'templates/head.php'; ?>
     <script src="js/jquery.lazyload.min.js"></script>
     <script src="js/gallery.min.js"></script>
 	<script>
@@ -22,11 +22,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php'; ?>
-	<?php include 'includes/logo.php'; ?>
+	<?php include 'templates/navbar.php'; ?>
+	<?php include 'templates/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php'; ?>
+		<?php include 'templates/navbar_sub.php'; ?>
 		<div class="content-wrapper">
             
             <div class="col-xs-12 content content-max" style="margin-bottom:15px;">
@@ -155,7 +155,7 @@
 			</div>
 
 		</div>
-		<?php include 'includes/footer.php'; ?>
+		<?php include 'templates/footer.php'; ?>
 	</div>
 
     <div style="display:none;">

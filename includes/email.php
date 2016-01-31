@@ -321,23 +321,23 @@
 
 	
 	//Message
-	function sendPMNotifyEmail($ADK_MESSAGE, $ADK_MESSAGE_TO_EMAIL){
+	function sendPMNotifyEmail($ADK_MESSAGE, $ADK_USER){
         $url = $GLOBALS['url'].'messages';
         
 		$htmlmessage = "You have a Private Message waiting for you on the ADK 46er Correspondence Website from:<br>";
-		$htmlmessage .= $ADK_MESSAGE['ADK_MESSAGE_FROM_NAME']."<br>";
-		$htmlmessage .= "(".$ADK_MESSAGE['ADK_MESSAGE_FROM_USERNAME'].")<br><br>";
+		$htmlmessage .= $ADK_MESSAGE->fromname."<br>";
+		$htmlmessage .= "(".$ADK_MESSAGE->fromusername.")<br><br>";
 		
 		$htmlmessage .= "-----------------------------------<br>";
 		$htmlmessage .= "Log in to <a href=\"".$GLOBALS['url']."\">".$GLOBALS['url']."</a> now to reply!<br><br><br><br>";
 		
 		$message = "You have a Private Message waiting for you on the ADK 46er Correspondence Website from:\r\n";
-		$message .= $ADK_MESSAGE['ADK_MESSAGE_FROM_NAME']." (".$ADK_MESSAGE['ADK_MESSAGE_FROM_USERNAME'].")\r\n\r\n";
+		$message .= $ADK_MESSAGE->fromname." (".$ADK_MESSAGE->fromusername.")\r\n\r\n";
 		
 		$message .= "-----------------------------------\r\n";
 		$message .= "Log in to ".$url." now to reply!\r\n\r\n\r\n\r\n";
 			
-		$toAddr = $ADK_MESSAGE_TO_EMAIL;
+		$toAddr = $ADK_USER->email;
 		$subject = 'You have received a Private Message';
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);

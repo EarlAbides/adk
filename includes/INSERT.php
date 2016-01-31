@@ -29,11 +29,8 @@
 	function sql_addFile($con){
 		$sql_query = $con->prepare("INSERT INTO ADK_FILE(ADK_FILE_NAME, ADK_FILE_SAVENAME, ADK_FILE_DESC, ADK_FILE_SIZE, ADK_FILE_TYPE) VALUES(?,?,?,?,?);");
 		return $sql_query;
-	}	
-	function sql_addMessageFileJcts($con){
-		$sql_query = $con->prepare("INSERT INTO ADK_MESSAGE_FILE_JCT(ADK_MESSAGE_ID, ADK_FILE_ID) VALUES(?,?);");
-		return $sql_query;
 	}
+	
 	
 	//Hike
 	function sql_addHike($con, $ADK_HIKE){
@@ -86,9 +83,13 @@
 			VALUES(?,?,?,?, SUBTIME(NOW(),'0 12:00:00.00'), ?);"
 		);
 		
-		$sql_query->bind_param('iissi', $ADK_MESSAGE['ADK_MESSAGE_FROM_USER_ID'], $ADK_MESSAGE['ADK_MESSAGE_TO_USER_ID'],
-					$ADK_MESSAGE['ADK_MESSAGE_TITLE'], $ADK_MESSAGE['ADK_MESSAGE_CONTENT'], $ADK_MESSAGE['ADK_MESSAGE_DRAFT']);
+		$sql_query->bind_param('iissi', $ADK_MESSAGE->fromid, $ADK_MESSAGE->toid, $ADK_MESSAGE->title, $ADK_MESSAGE->content, $ADK_MESSAGE->isdraft);
 		
+		return $sql_query;
+	}
+
+	function sql_addMessageFileJcts($con){
+		$sql_query = $con->prepare("INSERT INTO ADK_MESSAGE_FILE_JCT(ADK_MESSAGE_ID, ADK_FILE_ID) VALUES(?,?);");
 		return $sql_query;
 	}
 

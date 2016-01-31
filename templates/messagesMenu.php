@@ -28,7 +28,7 @@
 						<span class="glyphicon glyphicon-file"></span>&nbsp;Drafts
 					</a>
 				</li>
-				<?php if($_SESSION['ADK_USERGROUP_CDE'] === 'COR' || $_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){ ?>
+				<?php if($ADK_USERGROUP_CDE === 'COR' || $ADK_USERGROUP_CDE === 'ADM'){ ?>
 					<li class="col-xs-12 col-sm-3 col-md-12">
 						<?php include 'templatesMenu.php'; ?>
 					</li>

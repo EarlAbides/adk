@@ -32,7 +32,7 @@
 	
 		echo "<script>
 				$(document).ready(function(){
-						$.get('includes/ajax_messageGetNewCount.php',
+						$.get('includes/messageGetNewCount.php',
 							function(ret){
 								if(parseInt(ret) > 0){
 									var html = '<span class=\"badge newmessages\">' + ret + '</span>';

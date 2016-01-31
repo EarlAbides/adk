@@ -182,7 +182,7 @@ function cancelMessage(){document.getElementById('div_messages_main').innerHTML 
 
 function message_markRead(ADK_MESSAGE_ID, span){
     if(document.getElementById('h4_folderName').innerHTML == 'Inbox'){
-        $.post('includes/ajax_messageMarkRead', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},
+        $.post('includes/messageMarkRead', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},
             function(){if(span) span.classList.remove('font-bold');}
         );
         var badge = document.getElementById('span_messages').children[0];
@@ -196,7 +196,7 @@ function message_markRead(ADK_MESSAGE_ID, span){
 function viewMessage(ADK_MESSAGE_ID){
     if(typeof editor !== 'undefined') editor.destroy();
 	var div_messages_main = document.getElementById('div_messages_main');
-    $.post('includes/ajax_getMessage', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},
+    $.post('includes/messageGet.php', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},
         function(ret){
             div_messages_main.innerHTML = '';
 
@@ -205,27 +205,27 @@ function viewMessage(ADK_MESSAGE_ID){
             var ADK_MESSAGE = JSON.parse(ret);
             
             //Message
-            document.getElementById('span_messagefromusername').innerHTML = ADK_MESSAGE.ADK_MESSAGE_FROM_NAME + ' (' + ADK_MESSAGE.ADK_MESSAGE_FROM_USERNAME + ')';
-            document.getElementById('span_messagetousername').innerHTML = ADK_MESSAGE.ADK_MESSAGE_TO_NAME + ' (' + ADK_MESSAGE.ADK_MESSAGE_TO_USERNAME + ')';
-            document.getElementById('span_messagesubject').innerHTML = ADK_MESSAGE.ADK_MESSAGE_TITLE;
-            document.getElementById('span_messagedte').innerHTML = ADK_MESSAGE.ADK_MESSAGE_DTE + '&nbsp;' + ADK_MESSAGE.ADK_MESSAGE_TME;
-            document.getElementById('span_messagecontent').innerHTML = ADK_MESSAGE.ADK_MESSAGE_CONTENT;
-            document.getElementById('hidden_viewmessageid').value = ADK_MESSAGE.ADK_MESSAGE_ID;
-            document.getElementById('hidden_viewfromid').value = ADK_MESSAGE.ADK_MESSAGE_FROM_USER_ID;
-            document.getElementById('hidden_viewtoid').value = ADK_MESSAGE.ADK_MESSAGE_TO_USER_ID;
+            document.getElementById('span_messagefromusername').innerHTML = ADK_MESSAGE.fromname + ' (' + ADK_MESSAGE.fromusername + ')';
+            document.getElementById('span_messagetousername').innerHTML = ADK_MESSAGE.toname + ' (' + ADK_MESSAGE.tousername + ')';
+            document.getElementById('span_messagesubject').innerHTML = ADK_MESSAGE.title;
+            document.getElementById('span_messagedte').innerHTML = ADK_MESSAGE.date + '&nbsp;' + ADK_MESSAGE.time;
+            document.getElementById('span_messagecontent').innerHTML = ADK_MESSAGE.content;
+            document.getElementById('hidden_viewmessageid').value = ADK_MESSAGE.id;
+            document.getElementById('hidden_viewfromid').value = ADK_MESSAGE.fromid;
+            document.getElementById('hidden_viewtoid').value = ADK_MESSAGE.toid;
 
             //Reply button
-            if(ADK_MESSAGE.ADK_MESSAGE_FROM_USER_ID === 1) document.getElementById('button_reply').style.display = 'none';
+            if(ADK_MESSAGE.fromid === 1) document.getElementById('button_reply').style.display = 'none';
 			else document.getElementById('button_reply').style.display = '';
 
             //Attachments
             var ul_messageattachments = document.getElementById('ul_messageattachments');
-            if(ADK_MESSAGE.ADK_FILES !== ''){
-                var html = '', files = ADK_MESSAGE.ADK_FILES;
+            if(ADK_MESSAGE.files !== ''){
+                var html = '', files = ADK_MESSAGE.files;
                 for(var i = 0; i < files.length; i++){
-                    html += '<li><a class="pointer hoverbtn" data-id="' + files[i].ADK_FILE_ID + '" data-desc="' + files[i].ADK_FILE_DESC + 
-                        '" data-size="' + files[i].ADK_FILE_SIZE + '" onclick="getFile(' + files[i].ADK_FILE_ID + ');">' + 
-                        files[i].ADK_FILE_NAME + '</a></li>';
+                    html += '<li><a class="pointer hoverbtn" data-id="' + files[i].id + '" data-desc="' + files[i].desc + 
+                        '" data-size="' + files[i].size + '" onclick="getFile(' + files[i].id + ');">' + 
+                        files[i].name + '</a></li>';
                 }
                 ul_messageattachments.innerHTML = html;
             }
@@ -234,8 +234,8 @@ function viewMessage(ADK_MESSAGE_ID){
             //Correspondent Log Hike
             var a_loghike = document.getElementById('a_loghike');
             if(a_loghike){
-                if(!ADK_MESSAGE.isFromHiker) a_loghike.style.display = 'none';
-                else a_loghike.setAttribute('href', './hiker?_=' + ADK_MESSAGE.ADK_MESSAGE_FROM_USER_ID + '&m=' + ADK_MESSAGE.ADK_MESSAGE_ID);
+                if(!ADK_MESSAGE.isfromhiker) a_loghike.style.display = 'none';
+                else a_loghike.setAttribute('href', './hiker?_=' + ADK_MESSAGE.fromid + '&m=' + ADK_MESSAGE.id);
             }
         }
     );
@@ -315,7 +315,7 @@ function sortMessages(button){
 }
 
 function getFolder(id){
-    $.post('includes/ajax_messageGetFolder', {ADK_USER_ID: document.getElementById('hidden_userid').value, id: id},
+    $.post('includes/messageGetFolder', {id: id},
         function(ret){
             document.getElementById('div_table_messages').innerHTML = ret;
             bind_messagesClick();
@@ -348,32 +348,34 @@ function bind_messagesClick(){
 
 function openDraft(ADK_MESSAGE_ID){
     newMessage();
-	$.post('includes/ajax_getMessage', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},
+	$.post('includes/messageGet', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},
         function(ret){
             var ADK_MESSAGE = JSON.parse(ret);
 
-			if(document.getElementById('hidden_usergroupcde').value !== 'HIK') document.getElementById('select_to_username').value = ADK_MESSAGE.ADK_MESSAGE_TO_USER_ID;
-			document.getElementById('textbox_subject').value = ADK_MESSAGE.ADK_MESSAGE_TITLE;
+			if(document.getElementById('hidden_usergroupcde').value !== 'HIK') document.getElementById('select_to_username').value = ADK_MESSAGE.toid;
+			document.getElementById('textbox_subject').value = ADK_MESSAGE.title;
 			
 			var wysiIframeBody = getWysiIframeBody();
-			if(wysiIframeBody) wysiIframeBody.innerHTML = ADK_MESSAGE.ADK_MESSAGE_CONTENT;
-			else document.getElementById('textbox_message').value = ADK_MESSAGE.ADK_MESSAGE_CONTENT;
+			if(wysiIframeBody) wysiIframeBody.innerHTML = ADK_MESSAGE.content;
+			else document.getElementById('textbox_message').value = ADK_MESSAGE.content;
             
             //Attachments
             var ul_messageattachments = document.getElementById('ul_messageattachments');
-            if(ADK_MESSAGE.ADK_FILES !== ''){
-                var html = '', files = ADK_MESSAGE.ADK_FILES;
+            if(ADK_MESSAGE.files.length){
+                var html = '', files = ADK_MESSAGE.files;
                 for(var i = 0; i < files.length; i++){
-                    html += '<li><a class="pointer hoverbtn" data-id="' + files[i].ADK_FILE_ID + '" data-desc="' + files[i].ADK_FILE_DESC + 
-                        '" data-size="' + files[i].ADK_FILE_SIZE + '" onclick="getFile(' + files[i].ADK_FILE_ID + ');">' + 
-                        files[i].ADK_FILE_NAME + '</a></li>';
+                    html += '<li><a class="pointer hoverbtn" data-id="' + files[i].id + '" data-desc="' + files[i].desc + 
+                        '" data-size="' + files[i].size + '" onclick="getFile(' + files[i].id + ');">' + 
+                        files[i].name + '</a></li>';//TODO: fix this
                 }
                 ul_messageattachments.innerHTML = html;
             }
 
 			//Mark as draft
-			var hidden_wasDraft = document.createElement('input'), form = document.getElementById('form_newMessage')
+			var hidden_wasDraft = document.createElement('input')
+				,form = document.getElementById('form_newMessage')
 				,hidden_messageid = document.createElement('input');
+
 			hidden_wasDraft.setAttribute('type', 'hidden');
 			hidden_wasDraft.setAttribute('name', 'wasdraft');
 			hidden_wasDraft.value = 'true';
@@ -397,7 +399,7 @@ function deleteMessage(){
 
     var h4_folderName = document.getElementById('h4_folderName');
 
-    $.post('includes/ajax_messageDelete.php',
+    $.post('includes/messageDelete.php',
         {
             id: document.getElementById('hidden_viewmessageid').value,
             tofrom: h4_folderName.innerHTML === 'Sent'? 's': 'i'

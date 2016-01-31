@@ -4,7 +4,7 @@
 <?php require_once 'includes/variables.php'; ?>
 <?php require_once 'applicant.inc.php'; ?>
 
-<?php include 'includes/head.php'; ?>
+<?php include 'templates/head.php'; ?>
 	<script>
 		$(document).ready(function(){
 			$('#select_country').change(function(){
@@ -29,11 +29,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php'; ?>
-	<?php include 'includes/logo.php'; ?>
+	<?php include 'templates/navbar.php'; ?>
+	<?php include 'templates/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php'; ?>
+		<?php include 'templates/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<form method="post" action="includes/applicantUpdate.php" data-toggle="validator" role="form" novalidate>
@@ -192,7 +192,7 @@
 			</form>
 			
 		</div>
-		<?php include 'includes/footer.php'; ?>
+		<?php include 'templates/footer.php'; ?>
 	</div>
 	
 	<div style="display:none;">

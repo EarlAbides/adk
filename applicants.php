@@ -3,7 +3,7 @@
 <?php require_once 'includes/loginredir.php'; ?>
 <?php require_once 'applicants.inc.php'; ?>
 
-<?php include 'includes/head.php'; ?>
+<?php include 'templates/head.php'; ?>
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script>
@@ -14,11 +14,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php'; ?>
-	<?php include 'includes/logo.php'; ?>
+	<?php include 'templates/navbar.php'; ?>
+	<?php include 'templates/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php'; ?>
+		<?php include 'templates/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 content content-max">
@@ -41,7 +41,7 @@
 			</div>
 			
 		</div>
-		<?php include 'includes/footer.php'; ?>
+		<?php include 'templates/footer.php'; ?>
 	</div>
 	
 </body>

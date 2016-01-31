@@ -4,7 +4,7 @@
 <?php require_once 'includes/variables.php'; ?>
 <?php require_once 'profile.inc.php'; ?>
 
-<?php include 'includes/head.php'; ?>
+<?php include 'templates/head.php'; ?>
 	<?php if($ADK_USERGROUP_CDE === 'HIK'){ ?>
 	<script>
 		$(document).ready(function(){
@@ -31,11 +31,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php'; ?>
-	<?php include 'includes/logo.php'; ?>
+	<?php include 'templates/navbar.php'; ?>
+	<?php include 'templates/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php'; ?>
+		<?php include 'templates/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
@@ -421,7 +421,7 @@
 			</div>
 			
 		</div>
-		<?php include 'includes/footer.php'; ?>
+		<?php include 'templates/footer.php'; ?>
 	</div>
 	
 </body>

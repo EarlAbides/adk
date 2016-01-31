@@ -4,7 +4,7 @@
 <?php require_once 'includes/variables.php'; ?>
 <?php require_once 'hikerportal.inc.php'; ?>
 
-<?php include 'includes/head.php'; ?>
+<?php include 'templates/head.php'; ?>
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
@@ -33,11 +33,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php'; ?>
-	<?php include 'includes/logo.php'; ?>
+	<?php include 'templates/navbar.php'; ?>
+	<?php include 'templates/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php'; ?>
+		<?php include 'templates/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12">
@@ -217,7 +217,7 @@
 									<div class="col-xs-12">
 										<div class="form-group">
 											<label for="textbox_notes" class="control-label control-label-sm">Notes</label><br />
-											<?php include 'includes/wysihtml-toolbar.php'; ?>
+											<?php include 'templates/wysihtml-toolbar.php'; ?>
 											<textarea id="textbox_notes" name="notes" class="form-control form-control-sm" style="min-height:100px;" placeholder="Notes, messages" maxlength="16384"></textarea>
 											<span class="help-block with-errors"></span>
 										</div>
@@ -260,7 +260,7 @@
 			</div>
 			
 		</div>
-		<?php include 'includes/footer.php'; ?>
+		<?php include 'templates/footer.php'; ?>
 	</div>
 
     <div style="display:none;">

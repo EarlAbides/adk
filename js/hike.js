@@ -6,14 +6,14 @@
     if(hidden_ADK_MESSAGE_JSON){
         var ADK_MESSAGE = JSON.parse(hidden_ADK_MESSAGE_JSON.value);
 
-        document.getElementById('textbox_notes').value = ADK_MESSAGE.ADK_MESSAGE_CONTENT;
+        document.getElementById('textbox_notes').value = ADK_MESSAGE.content;
 
         var messagefileids = [];
-        for(var i = 0; i < ADK_MESSAGE.ADK_FILES.length; i ++){
-            messagefileids.push(ADK_MESSAGE.ADK_FILES[i].ADK_FILE_ID);
-            var html = '<li><a class="pointer hoverbtn" data-id="' + ADK_MESSAGE.ADK_FILES[i].ADK_FILE_ID + '" ' +
-                        'data-desc="' + ADK_MESSAGE.ADK_FILES[i].ADK_FILE_DESC + '" data-size="' + ADK_MESSAGE.ADK_FILES[i].ADK_FILE_SIZE + '"' +
-                        'onclick="getFile(' + ADK_MESSAGE.ADK_FILES[i].ADK_FILE_ID + ');">' + ADK_MESSAGE.ADK_FILES[i].ADK_FILE_NAME + '</a></li>';
+        for(var i = 0; i < ADK_MESSAGE.files.length; i ++){
+            messagefileids.push(ADK_MESSAGE.files[i].id);
+            var html = '<li><a class="pointer hoverbtn" data-id="' + ADK_MESSAGE.files[i].id + '" ' +
+                        'data-desc="' + ADK_MESSAGE.files[i].desc + '" data-size="' + ADK_MESSAGE.files[i].size + '"' +
+                        'onclick="getFile(' + ADK_MESSAGE.files[i].id + ');">' + ADK_MESSAGE.files[i].name + '</a></li>';
             
             document.getElementById('ul_hikeattachments').innerHTML += html;
         }

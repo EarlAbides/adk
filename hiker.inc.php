@@ -34,13 +34,14 @@
 		}
 	}
 	
-	if(isset($_GET['m'])){
-		if($_GET['m'] !== ''){
-			require_once 'includes/Message.php';
-			$ADK_MESSAGE = getMessage($con, $_GET['m']);
-			if($ADK_MESSAGE == '') unset($ADK_MESSAGE);
-			else $ADK_MESSAGE = htmlspecialchars(json_encode($ADK_MESSAGE));
-		}
+	if(isset($_GET['m']) || is_numeric($_GET['m'])){
+		require_once 'includes/classes/File.php';
+		require_once 'includes/classes/Message.php';
+		$ADK_MESSAGE = new Message();
+		$ADK_MESSAGE->id = $_GET['m'];
+		$ADK_MESSAGE->userid = intval($_SESSION['ADK_USER_ID']);
+		$ADK_MESSAGE->get($con);
+		if($ADK_MESSAGE->title == '') unset($ADK_MESSAGE);
 	}
 	
 	$con->close();

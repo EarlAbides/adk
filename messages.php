@@ -4,7 +4,7 @@
 <?php require_once 'includes/variables.php'; ?>
 <?php require_once 'messages.inc.php'; ?>
 
-<?php include 'includes/head.php'; ?>
+<?php include 'templates/head.php'; ?>
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/wysihtml.js"></script>
 	<script src="js/message.min.js"></script>
@@ -12,11 +12,11 @@
 </head>
 
 <body>
-	<?php include 'includes/navbar.php'; ?>
-	<?php include 'includes/logo.php'; ?>
+	<?php include 'templates/navbar.php'; ?>
+	<?php include 'templates/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'includes/navbar_sub.php'; ?>
+		<?php include 'templates/navbar_sub.php'; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
@@ -36,7 +36,7 @@
 							<?php include 'templates/messagesMenu.php'; ?>
 							
 							<div id="div_table_messages">
-								<?php echo $table_messages; ?>
+								<?php $ADK_MESSAGES->renderTable(); ?>
 							</div>
 							<div style="position:relative;bottom:0;">
 								<div class="hr"></div>
@@ -61,7 +61,7 @@
 					
 					<input type="hidden" id="hidden_userid" value="<?php echo $ADK_USER_ID; ?>" />
 					<input type="hidden" id="hidden_usergroupcde" value="<?php echo $ADK_USERGROUP_CDE; ?>" />
-					<?php if($ADK_TO_USER_ID !== '') echo '<input type="hidden" id="hidden_newMessage" />'; ?>
+					<?php if($ADK_TO_USER_ID) echo '<input type="hidden" id="hidden_newMessage" />'; ?>
 					<div id="div_messages_main" class="col-xs-12 col-md-9"></div>
 					
 				</div>
@@ -69,13 +69,13 @@
 			</div>
 			
 		</div>
-		<?php include 'includes/footer.php'; ?>
+		<?php include 'templates/footer.php'; ?>
 	</div>
 	
 	<div style="display:none;">
 		
 		<template id="template_newMessage">
-			<form id="form_newMessage" action="includes/message_send.php" method="post" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
+			<form id="form_newMessage" action="includes/messageSave.php" method="post" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
 				<div class="container-fluid content-max">
 					
 					<fieldset class="fieldset">
@@ -88,9 +88,9 @@
 										<label for="select_to_username" class="control-label control-label-sm">To</label><br />
 										<select id="select_to_username" name="to_username" class="form-control form-control-sm" required>
 											<?php
-												if($ADK_HIKERS !== ''){
-													foreach($ADK_HIKERS as $ADK_HIKER){
-														echo '<option value="'.$ADK_HIKER['ADK_USER_ID'].'">'.$ADK_HIKER['ADK_USER_NAME'].' ('.$ADK_HIKER['ADK_USER_USERNAME'].')</option>';
+												if(count($ADK_HIKERS->hikers) > 0){
+													foreach($ADK_HIKERS->hikers as $ADK_HIKER){
+														echo '<option value="'.$ADK_HIKER->id.'">'.$ADK_HIKER->name.' ('.$ADK_HIKER->username.')</option>';
 													}
 												}
 											?>
@@ -118,7 +118,7 @@
 						<div class="col-xs-12" style="margin:2px 0 6px;">
 							<div class="form-group">
 								<div class="col-xs-12">
-									<?php include 'includes/wysihtml-toolbar.php'; ?>
+									<?php include 'templates/wysihtml-toolbar.php'; ?>
 									<textarea id="textbox_message" name="message" class="form-control form-control-sm" style="min-height:100px;" maxlength="16384" placeholder="Message"></textarea>
 									<span class="help-block with-errors"></span>
 								</div>
@@ -144,7 +144,7 @@
 										<button type="button" class="btn btn-sm btn-default" onclick="saveDraft();" <?php echo $disableMsgs; ?>><span class="glyphicon glyphicon-file"></span>&nbsp;Save as Draft</button>
 									</div>
 									<div class="btn-group">	
-										<?php if($_SESSION['ADK_USERGROUP_CDE'] === 'COR' || $_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){ ?>
+										<?php if($ADK_USERGROUP_CDE === 'COR' || $ADK_USERGROUP_CDE === 'ADM'){ ?>
 											<button id="savetemplates_dropdown" type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
 												<span class="glyphicon glyphicon-tags" style="top:2px;left:-2px;"></span>&nbsp;Save as Template
 											</button>
@@ -182,9 +182,9 @@
 					<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
 					<input type="hidden" id="hidden_replyfileids" name="replyfileids" />
 					<?php
-						if(isset($ADK_TO_USER) && $ADK_TO_USER !== ''){
-							$toID = $ADK_TO_USER['ADK_USER_ID']; $toUsername = $ADK_TO_USER['ADK_USER_USERNAME'];
-							$toName = $ADK_TO_USER['ADK_USER_NAME']; $toEmail = $ADK_TO_USER['ADK_USER_EMAIL'];
+						if(isset($ADK_TO_USER) && $ADK_TO_USER->name != ''){
+							$toID = $ADK_TO_USER->id; $toUsername = $ADK_TO_USER->username;
+							$toName = $ADK_TO_USER->name; $toEmail = $ADK_TO_USER->email;
 						}
 						else{$toID = ''; $toUsername = ''; $toName = ''; $toEmail = '';}
 						echo '<input type="hidden" id="hidden_touserid" name="touserid" value="'.$toID.'" />';
@@ -192,11 +192,11 @@
 						echo '<input type="hidden" id="hidden_tousername" value="'.$toName.'" />';
 						echo '<input type="hidden" id="hidden_touseremail" name="toemail" value="'.$toEmail.'" />';
 						
-						if($ADK_USERGROUP_CDE == 'HIK'){
-							echo '<input type="hidden" id="hidden_coruserid" name="touserid" value="'.$ADK_CORRESPONDENT['ADK_USER_ID'].'" />';
-							echo '<input type="hidden" id="hidden_coruserusername" value="'.$ADK_CORRESPONDENT['ADK_USER_USERNAME'].'" />';
-							echo '<input type="hidden" id="hidden_corusername" value="'.$ADK_CORRESPONDENT['ADK_USER_NAME'].'" />';
-							echo '<input type="hidden" id="hidden_coruseremail" value="'.$ADK_CORRESPONDENT['ADK_USER_EMAIL'].'" />';
+						if($ADK_USERGROUP_CDE === 'HIK'){
+							echo '<input type="hidden" id="hidden_coruserid" name="touserid" value="'.$ADK_CORRESPONDENT->id.'" />';
+							echo '<input type="hidden" id="hidden_coruserusername" value="'.$ADK_CORRESPONDENT->username.'" />';
+							echo '<input type="hidden" id="hidden_corusername" value="'.$ADK_CORRESPONDENT->name.'" />';
+							echo '<input type="hidden" id="hidden_coruseremail" value="'.$ADK_CORRESPONDENT->email.'" />';
 						}
 					?>
 				</div>

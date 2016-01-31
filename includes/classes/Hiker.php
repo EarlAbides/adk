@@ -83,6 +83,11 @@
 		public function Hiker(){
 			$this->hikes = [];
 		}
+
+		public static function updateLastActive($con, $ADK_USER_ID){
+			$sql_query = sql_updateLastActive($con, $ADK_USER_ID);
+			$sql_query->execute();
+		}
 		
 		public function isValid(){
 		    if(strlen($this->address1) === 0 || strlen($this->address1) > 40) $this->err .= 'a';
