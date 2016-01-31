@@ -420,16 +420,15 @@
         return $sql_query;
 	}
 	
-	function sql_checkIsUser($con, $ADK_USER_USERNAME, $ADK_USER_EMAIL){
+	function sql_isUser($con, $ADK_USER){
         $sql_query = $con->prepare(
             "SELECT ADK_USER_ID, ADK_USER_USERNAME, ADK_USER_NAME, ADK_USER_EMAIL,
 				RIGHT(ADK_USER_PASSWORD, 8) AS last8hash
 			FROM ADK_USER
-			WHERE ADK_USER_USERNAME = ?
-				AND ADK_USER_EMAIL = ?;"
+			WHERE ADK_USER_USERNAME = ? AND ADK_USER_EMAIL = ?;"
         );
 
-        $sql_query->bind_param('ss', $ADK_USER_USERNAME, $ADK_USER_EMAIL);
+        $sql_query->bind_param('ss', $ADK_USER->username, $ADK_USER->email);
 
         return $sql_query;
 	}

@@ -128,9 +128,9 @@
 		return $COUNT == 1;
 	}
 	
-	function checkIsUser($con, $ADK_USER_USERNAME, $ADK_USER_EMAIL){
+	function checkIsUser($con){
         $ADK_USER = '';
-		$sql_query = sql_checkIsUser($con, $ADK_USER_USERNAME, $ADK_USER_EMAIL);
+		$sql_query = sql_checkIsUser($con, $this);
 		if($sql_query->execute()){
             $sql_query->store_result();
             $result = sql_get_assoc($sql_query);

@@ -3,7 +3,7 @@
 	class User{
 		
 		public $err;
-		public $id, $usergroupid, $username, $name, $email, $pw;
+		public $id, $usergroupid, $username, $name, $email, $pw, $last8hash;
 		
 		public function User(){
 			
@@ -21,6 +21,23 @@
 			else die('There was an error running the query ['.$con->error.']');
 			
 			return $COUNT == 0;
+		}
+
+		public function isUser($con){
+			$sql_query = sql_isUser($con, $this);
+			if($sql_query->execute()){
+				$sql_query->store_result();
+				$result = sql_get_assoc($sql_query);
+
+				foreach($result as $row){
+					$this->id = $row['ADK_USER_ID'];
+					$this->username = $row['ADK_USER_USERNAME'];
+					$this->name = $row['ADK_USER_NAME'];
+					$this->email = $row['ADK_USER_EMAIL'];
+					$this->last8hash = $row['last8hash'];
+				}
+			}
+			else die('There was an error running the query ['.$con->error.']');
 		}
 
 		public function isOldPassword($con, $ADK_USER_PASSWORD){
@@ -47,6 +64,19 @@
 			return true;
 		}
 
+		public function isValidHash($con, $last8hash){
+			$COUNT = 0;
+			$sql_query = sql_checkValidHash($con, $this->id, $last8hash);
+			if($sql_query->execute()){
+				$sql_query->store_result();
+				$sql_query->bind_result($result);
+				$sql_query->fetch();
+				$COUNT = $result;
+			}
+			else die('There was an error running the query ['.$con->error.']');
+		
+			return $COUNT == 1;
+		}
 
 		public function get($con){
 			$sql_query = sql_getUser($con, $this->id);

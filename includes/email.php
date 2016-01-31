@@ -345,18 +345,18 @@
 	
 	//User
 	function sendPWResetLinkEmail($ADK_USER){
-		$url = $GLOBALS['url']."forgot?__=".$ADK_USER['last8hash'].$ADK_USER['ADK_USER_ID'];
+		$url = $GLOBALS['url']."forgot?_=".$ADK_USER->last8hash.$ADK_USER->id;
 		
-		$htmlmessage = $ADK_USER['ADK_USER_NAME'].",<br><br>";
+		$htmlmessage = $ADK_USER->name.",<br><br>";
 		$htmlmessage .= "You (or someone) requested a password for your account on ".$GLOBALS['url'].".<br>";
 		$htmlmessage .= "If this was not you, please ignore this email. Otherwise, <a href=\"".$url."\">click here to reset your password and log in</a>.<br><br>";
 		
-		$message = $ADK_USER['ADK_USER_NAME'].",\r\n\r\n";
+		$message = $ADK_USER->name.",\r\n\r\n";
 		$message .= "You (or someone) requested a password for your account on ".$GLOBALS['url'].".\r\n";
 		$message .= "If this was not you, please ignore this email. Otherwise, click below to reset your password and log in:\r\n";
 		$message .= $url."\r\n\r\n";
 				
-		$toAddr = $ADK_USER['ADK_USER_EMAIL'];
+		$toAddr = $ADK_USER->email;
 		$subject = 'Reset Your Password';
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);

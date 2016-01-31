@@ -15,11 +15,11 @@
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
 				
-				<?php if($validHash){ ?>
+				<?php if($ADK_USER->username){ ?>
 					<form id="form_forgotpw" method="post" action="includes/userUpdatePW.php" data-toggle="validator" role="form" novalidate>
 						
 						<h4 class="content-header">
-							Reset Password - <?php echo $ADK_USER['ADK_USER_USERNAME']; ?>
+							Reset Password - <?php echo $ADK_USER->username; ?>
 							<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
 								<span class="glyphicon glyphicon-chevron-down"></span>
 							</a>
@@ -68,10 +68,7 @@
 						
 						</div>
 						
-						<!-- Hidden -->
-						<div style="display:none;">
-							<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
-						</div>
+						<input type="hidden" name="id" value="<?php echo $ADK_USER->id; ?>" />
 					
 					</form>
 				<?php }else{ ?>

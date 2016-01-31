@@ -1,21 +1,21 @@
 <?php
 	
-	//Imports
-	require_once 'includes/db_conn.php';
-	require_once 'includes/SELECT.php';
-	require_once 'includes/User.php';
-	
 	$errMess = '';
 	$validHash = false;
 	
-	if(isset($_GET['__'])){//Reset password
-		if(($_GET['__'] !== '') && (strlen($_GET['__']) > 8)){
+	if(isset($_GET['_'])){//Reset password
+		if(($_GET['_'] !== '') && (strlen($_GET['_']) > 8)){			
+			require_once 'includes/db_conn.php';
+			require_once 'includes/SELECT.php';
+			require_once 'includes/classes/User.php';
+			
 			$con = connect_db();
 			
-			$last8hash = substr($_GET['__'], 0, 8);
-			$ADK_USER_ID = intval(substr($_GET['__'], 8));
-            $validHash = checkValidHash($con, $ADK_USER_ID, $last8hash);
-			if($validHash) $ADK_USER = getUser($con, $ADK_USER_ID);
+			$last8hash = substr($_GET['_'], 0, 8);
+
+			$ADK_USER = new User();
+			$ADK_USER->id = intval(substr($_GET['_'], 8));
+            if($ADK_USER->isValidHash($con, $last8hash)) $ADK_USER->get($con);
 			
             $con->close();
 		}

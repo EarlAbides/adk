@@ -6,7 +6,6 @@
 	require_once 'classes/User.php';
 
 	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){header('Location: ../'); exit;}
-	if(!isset($_POST['oldpassword']) || strlen($_POST['oldpassword']) === 0){header('Location: ../'); exit;}
 	
 	$con = connect_db();
 
@@ -30,7 +29,7 @@
 	switch($_SESSION['ADK_USERGROUP_CDE']){
 		case 'COR': header('Location: ../hikers'); break;
 		case 'HIK': header('Location: ../hikerportal'); break;
-		default: header('Location: ../');
+		default: header('Location: ../?123');
 	}
 	
 ?>

@@ -414,8 +414,8 @@
 						</div>
 					</div>
 					
-					<!-- Hidden -->
 					<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
+					<input type="hidden" name="checkold" />
 					
 				</form>
 			</div>
