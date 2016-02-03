@@ -1,8 +1,8 @@
 <?php
 	
 	//Imports
-	require_once 'db_conn.php';
-	require_once 'SELECT.php';
+	require_once 'db/db_conn.php';
+	require_once 'db/SELECT.php';
 	require_once 'File.php';
 	
 	$ADK_FILE_ID = $_POST['id'];

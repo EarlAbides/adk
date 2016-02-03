@@ -1,8 +1,8 @@
 <?php
 	
 	//Imports
-	require_once 'db_conn.php';
-	require_once 'DELETE.php';
+	require_once 'db/db_conn.php';
+	require_once 'db/DELETE.php';
 	require_once 'classes/Applicant.php';
 	
 	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){header('Location: ../applicants?e=i'); exit;}

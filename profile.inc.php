@@ -2,8 +2,8 @@
 	
 	//Imports
 	require_once 'includes/session.php';
-	require_once 'includes/db_conn.php';
-	require_once 'includes/SELECT.php';
+	require_once 'includes/db/db_conn.php';
+	require_once 'includes/db/SELECT.php';
 	require_once 'includes/classes/Correspondent.php';
 	require_once 'includes/classes/Hiker.php';
 	require_once 'includes/classes/User.php';

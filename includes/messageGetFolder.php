@@ -2,8 +2,8 @@
 	
 	//Imports
 	require_once 'session.php';
-	require_once 'db_conn.php';
-	require_once 'SELECT.php';
+	require_once 'db/db_conn.php';
+	require_once 'db/SELECT.php';
 	require_once 'classes/Message.php';
 
 	if(!isset($_SESSION['ADK_USER_ID']) || !is_numeric($_SESSION['ADK_USER_ID'])){http_response_code(400); exit;}

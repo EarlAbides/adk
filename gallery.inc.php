@@ -1,8 +1,8 @@
 <?php
 	
 	//Imports
-	require_once 'includes/db_conn.php';
-	require_once 'includes/SELECT.php';
+	require_once 'includes/db/db_conn.php';
+	require_once 'includes/db/SELECT.php';
     require_once 'includes/Gallery.php';
 	require_once 'includes/Hiker.php';
     require_once 'includes/User.php';

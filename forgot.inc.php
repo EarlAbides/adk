@@ -5,8 +5,8 @@
 	
 	if(isset($_GET['_'])){//Reset password
 		if(($_GET['_'] !== '') && (strlen($_GET['_']) > 8)){			
-			require_once 'includes/db_conn.php';
-			require_once 'includes/SELECT.php';
+			require_once 'includes/db/db_conn.php';
+			require_once 'includes/db/SELECT.php';
 			require_once 'includes/classes/User.php';
 			
 			$con = connect_db();

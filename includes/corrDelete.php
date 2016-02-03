@@ -2,9 +2,9 @@
 	
 	//Imports
 	require_once 'session.php';
-	require_once 'db_conn.php';
-	require_once 'SELECT.php';
-	require_once 'DELETE.php';
+	require_once 'db/db_conn.php';
+	require_once 'db/SELECT.php';
+	require_once 'db/DELETE.php';
 	require_once 'classes/Correspondent.php';
 	
 	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){
