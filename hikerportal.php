@@ -10,7 +10,7 @@
 	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script src="js/jquery.tablesorter.min.js"></script>
 	<script src="js/wysihtml.js"></script>
-	<script src="js/hike.js"></script>
+	<script src="js/hike.min.js"></script>
 	<script src="js/jquery-dl.min.js"></script>
 	<script>
 		$(document).ready(function(){
