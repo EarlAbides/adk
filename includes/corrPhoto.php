@@ -2,9 +2,9 @@
 	
 	//Imports
 	require_once 'session.php';
-	require_once 'db_conn.php';
-	require_once 'INSERT.php';
-	require_once 'UPDATE.php';
+	require_once 'db/db_conn.php';
+	require_once 'db/INSERT.php';
+	require_once 'db/UPDATE.php';
 	require_once 'classes/Correspondent.php';
 	require_once 'classes/File.php';
 

@@ -3,8 +3,8 @@
 	//Imports
 	require_once 'session.php';
 	require_once 'variables_site.php';
-	require_once 'db_conn.php';
-	require_once 'SELECT.php';
+	require_once 'db/db_conn.php';
+	require_once 'db/SELECT.php';
 	require_once 'email.php';
 	require_once 'classes/User.php';
 	

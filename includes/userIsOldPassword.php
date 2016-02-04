@@ -1,8 +1,8 @@
 <?php
 	
 	////Imports
-	require_once 'db_conn.php';
-	require_once 'SELECT.php';
+	require_once 'db/db_conn.php';
+	require_once 'db/SELECT.php';
 	require_once 'classes/User.php';
 
 	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){http_response_code(400); exit;}

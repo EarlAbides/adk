@@ -2,8 +2,8 @@
 	
 	//Imports
 	require_once 'session.php';
-	require_once 'db_conn.php';
-	require_once 'UPDATE.php';
+	require_once 'db/db_conn.php';
+	require_once 'db/UPDATE.php';
 	require_once 'classes/Message.php';
 
 	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){http_response_code(400); exit;}
