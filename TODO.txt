@@ -1,8 +1,24 @@
-﻿move date textbox next to peak select
+﻿46er completion email
+
+verify notify corr on 46
+
+move date textbox next to peak select
 
 login/logout, and anything else odd remaining in includes/ -> change to new formats if possible
+
+date columns in db on pretty much every table
+
+DEC feed
+
+news page update section
 
 modal windows for all err messages/alerts
 	-maybe error json object for all ajax stuff
 
+reports page
+
+sign up disclaimer/LNT
+
+Youtube howto
+	
 -Auto scrolling site wide - check if item is onscreen before scrolling to make it less annoying
