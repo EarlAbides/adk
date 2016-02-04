@@ -6,7 +6,6 @@
 	require_once 'SELECT.php';
 	require_once 'INSERT.php';
 	require_once 'DELETE.php';
-	require_once 'Message.php';
 	require_once 'randomPW.php';
 	require_once 'email.php';
 	require_once 'pm.php';
@@ -14,6 +13,7 @@
 	require_once 'classes/Correspondent.php';
 	require_once 'classes/Hike.php';
 	require_once 'classes/Hiker.php';
+	require_once 'classes/Message.php';
 	require_once 'classes/User.php';
 	
 	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){header('Location: ../applicants?_e=i'); exit;}

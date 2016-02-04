@@ -219,20 +219,20 @@
 		
 		$htmlmessage = $headerTxt."<br><br>";
 		
-	    $htmlmessage .= $ADK_HIKER['ADK_USER_NAME']." (".$ADK_HIKER['ADK_USER_USERNAME'].")<br>";
-	    $htmlmessage .= $ADK_HIKE['peakNames']."<br><br>";
+	    $htmlmessage .= $ADK_HIKER->name." (".$ADK_HIKER->username.")<br>";
+	    $htmlmessage .= $ADK_HIKE->label."<br><br>";
 		
-	    $htmlmessage .= "Click <a href=".$GLOBALS['url']."hiker?_=".$ADK_HIKER['ADK_USER_ID']."#".$ADK_HIKE['ADK_HIKE_ID'].">here to see it</a>.<br><br>";
+	    $htmlmessage .= "Click <a href=".$GLOBALS['url']."hiker?_=".$ADK_HIKER->id."#".$ADK_HIKE->id.">here to see it</a>.<br><br>";
 	    
 	    $message = $headerTxt."\r\n\r\n";
 		
-	    $message .= $ADK_HIKER['ADK_USER_NAME']." (".$ADK_HIKER['ADK_USER_USERNAME'].")\r\n";
-	    $message .= $ADK_HIKE['peakNames']."\r\n\r\n";
+	    $message .= $ADK_HIKER->name." (".$ADK_HIKER->username.")\r\n";
+	    $message .= $ADK_HIKE->label."\r\n\r\n";
 		
-	    $message .= "Click below to see it:\r\n".$GLOBALS['url']."hiker?_=".$ADK_HIKER['ADK_USER_ID']."#".$ADK_HIKE['ADK_HIKE_ID']."\r\n\r\n";
+	    $message .= "Click below to see it:\r\n".$GLOBALS['url']."hiker?_=".$ADK_HIKER->id."#".$ADK_HIKE->id."\r\n\r\n";
 		
-	    $toAddr = $ADK_CORRESPONDENT['ADK_USER_EMAIL'];
-	    $subject = 'New Hiker - '.$ADK_HIKER['ADK_USER_USERNAME'];
+	    $toAddr = $ADK_CORRESPONDENT->email;
+	    $subject = 'New Hiker - '.$ADK_HIKER->username;
 		
 	    PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}

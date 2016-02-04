@@ -5,10 +5,10 @@
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
 	require_once 'INSERT.php';
-	require_once 'Message.php';
 	require_once 'email.php';
 	require_once 'pm.php';
 	require_once 'classes/Applicant.php';
+	require_once 'classes/Message.php';
 	require_once 'classes/User.php';
 	
 	$con = connect_db();

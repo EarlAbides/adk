@@ -289,7 +289,7 @@
 			
 		</template>
 		
-		<form method="post" action="includes/dl.php">
+		<form method="post" action="includes/fileGet.php">
 			<input type="hidden" id="hidden_fileid" name="id" />
 			<input type="submit" id="button_download" />
 		</form>

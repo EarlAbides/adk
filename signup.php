@@ -216,21 +216,21 @@
 							<div class="col-xs-12 col-sm-4" style="margin:0;">
 								<label class="control-label control-label-sm">List any peaks you've climbed</label><br />
 								<ul class="peaklist">
-									<?php for($i = 0; $i < 16; $i++) echo makeCheckbox($ADK_PEAKS[$i]); ?>
+									<?php for($i = 0; $i < 16; $i++) echo makeCheckbox($ADK_PEAKS->peaks[$i]); ?>
 								</ul>
 							</div>
 
 							<div class="col-xs-12 col-sm-4" style="margin:0;">
 								<div class="hidden-xs">&emsp;</div>
 								<ul class="peaklist">
-									<?php for($i = 16; $i < 31; $i++) echo makeCheckbox($ADK_PEAKS[$i]); ?>
+									<?php for($i = 16; $i < 31; $i++) echo makeCheckbox($ADK_PEAKS->peaks[$i]); ?>
 								</ul>
 							</div>
 
 							<div class="col-xs-12 col-sm-4" style="margin:0;">
 								<div class="hidden-xs">&emsp;</div>
 								<ul class="peaklist">
-									<?php for($i = 31; $i < 46; $i++) echo makeCheckbox($ADK_PEAKS[$i]); ?>
+									<?php for($i = 31; $i < 46; $i++) echo makeCheckbox($ADK_PEAKS->peaks[$i]); ?>
 								</ul>
 							</div>
 

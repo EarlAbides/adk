@@ -47,6 +47,22 @@
 
         return $sql_queries;
 	}
+	
+	function sql_deleteHikePeakJcts($con, $ADK_HIKE_ID){
+		$sql_query = $con->prepare("DELETE FROM ADK_HIKE_PEAK_JCT WHERE ADK_HIKE_ID = ?;");
+
+        $sql_query->bind_param('i', $ADK_HIKE_ID);
+
+        return $sql_query;
+	}
+	
+	function sql_deleteHikeFileJcts($con, $ADK_HIKE_ID){
+		$sql_query = $con->prepare("DELETE FROM ADK_HIKE_FILE_JCT WHERE ADK_HIKE_ID = ?;");
+
+        $sql_query->bind_param('i', $ADK_HIKE_ID);
+
+        return $sql_query;
+	}
 
     //Hiker
     function sql_deleteHiker($con, $ADK_USER_ID){

@@ -10,7 +10,7 @@
 	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script src="js/jquery.tablesorter.min.js"></script>
 	<script src="js/wysihtml.js"></script>
-	<script src="js/hike.min.js"></script>
+	<script src="js/hike.js"></script>
 	<script src="js/jquery-dl.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -53,7 +53,7 @@
 					<div class="col-xs-12 col-sm-6">
 						<div class="form-group">
 							<div class="col-xs-12" style="margin-bottom:12px;">
-								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
+								<img src="includes/fileGetImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
 								<span><?php echo $ADK_HIKER->name; ?></span>
 							</div>
 						</div>
@@ -153,7 +153,7 @@
 					
 					<div class="col-xs-12">
 						<div class="col-xs-12 col-sm-3" style="margin-bottom:12px;">
-							<img src="includes/getImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_CORRESPONDENT->name; ?>" title="<?php echo $ADK_CORRESPONDENT->name; ?>" />
+							<img src="includes/fileGetImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_CORRESPONDENT->name; ?>" title="<?php echo $ADK_CORRESPONDENT->name; ?>" />
 							<span><?php echo $ADK_CORRESPONDENT->username; ?></span>
 						</div>
 						<div class="col-xs-12 col-sm-2">
@@ -205,7 +205,7 @@
 												<span id="span_addPeak" class="input-group-addon btn-default pointer" onclick="addPeak(this.previousElementSibling);">Add</span>
 											</div>
 										<span class="help-block with-errors"></span>
-										<div id="div_peaks_container"></div>
+											<ul id="ul_addpeaks"></ul>
 									</div>
 									<div class="col-xs-12 col-sm-3 col-sm-offset-4">
 										<div class="form-group">
@@ -248,7 +248,7 @@
 							<!-- Hidden -->
 							<div style="display:none;">
 								<input type="hidden" id="hikerId"name="id" value="<?php echo $ADK_HIKER->id; ?>" />
-								<input type="hidden" id="hidden_peakids" name="peakids" />
+								<input type="hidden" id="hidden_peaks" name="peaks" />
 								<input type="hidden" id="hidden_hikeid" name="hikeid" />
 								<input type="hidden" id="hidden_prefileids" name="prefileids" />
 							</div>
@@ -264,7 +264,7 @@
 	</div>
 
     <div style="display:none;">
-		<form method="post" action="includes/dl.php">
+		<form method="post" action="includes/fileGet.php">
 			<input type="hidden" id="hidden_fileid" name="id" />
 			<input type="submit" id="button_download" />
 		</form>

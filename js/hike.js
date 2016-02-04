@@ -1,7 +1,4 @@
 ﻿$(document).ready(function(){
-    $('#span_addPeak').click(function(){enable_disable_addPeak()});
-    $('#textbox_hikedate, #select_remainingpeaks').keyup(function(){enable_disable_addPeak()});
-
     var hidden_ADK_MESSAGE_JSON = document.getElementById('hidden_ADK_MESSAGE_JSON');
     if(hidden_ADK_MESSAGE_JSON){
         var ADK_MESSAGE = JSON.parse(hidden_ADK_MESSAGE_JSON.value);
@@ -29,18 +26,38 @@
 		var ADK_HIKE_ID = window.location.hash.replace('#', '');
 		$('input[name="hikeid"][value="' + ADK_HIKE_ID + '"]').parent().children().last().click();
 	}
+
+	//addpeak remove/change date bindings
+	$('#ul_addpeaks').on('click', '.addpeak-name', function(){removePeak(this);})
+	.on('mouseenter', '.addpeak-name', function(){
+		this.parentNode.classList.add('redhover-on');
+	})
+	.on('mouseleave', '.addpeak-name', function(){
+		this.parentNode.classList.remove('redhover-on');
+	})
+	$('#ul_addpeaks').on('click', '.addpeak-date', function(){editPeakDate(this);});
+
 });
 
 //Hike
 function addUpdateHike(form){
-    addPeak();
+	function getPeaks(){
+		return $('#ul_addpeaks li').get().map(function(li){
+			ADK_PEAK = {
+				ADK_PEAK_ID: $(li.children[0]).data('peakid')
+				,ADK_PEAK_DTE: li.children[1].innerHTML
+			};			
+			return ADK_PEAK;
+		});
+	}
 
-    var ADK_PEAK_IDS = getPeakIds();
-    if(ADK_PEAK_IDS.length == 0) return false;
-    document.getElementById('hidden_peakids').value = ADK_PEAK_IDS.join(',');
+    addPeak();
+    var ADK_PEAKS = getPeaks();
+    if(ADK_PEAKS.length == 0) return false;
+    document.getElementById('hidden_peaks').value = ADK_PEAKS.map(function(p){return p.ADK_PEAK_ID + ' ' + p.ADK_PEAK_DTE}).join(',');
 
 	
-    var url = document.getElementById('h4span_addUpdateHike').innerHTML === 'Add Hike'? 'includes/ajax_addHike.php': 'includes/ajax_updateHike.php';
+    var url = document.getElementById('h4span_addUpdateHike').innerHTML === 'Add Hike'? 'includes/hikeSave.php': 'includes/hikeUpdate.php';
 	$.ajax({
 		url: url
 		,data: new FormData(form)
@@ -84,7 +101,7 @@ function editHike(){
     var td = document.getElementsByClassName('viewing')[0];
     var ADK_HIKE = getHikeInfo(td);
 
-    var div_peaks_container = document.getElementById('div_peaks_container');
+    var ul_addpeaks = document.getElementById('ul_addpeaks');
     var ul_hikeattachments = document.getElementById('ul_hikeattachments');
 
     //Form
@@ -93,14 +110,7 @@ function editHike(){
     document.getElementById('hidden_hikeid').value = ADK_HIKE.ADK_HIKE_ID;
 
     //Peaks
-    for(var i = 0; i < ADK_HIKE.ADK_PEAKS.length; i++){
-        var span = document.createElement('span');
-        span.innerHTML = ADK_HIKE.ADK_PEAKS[i].ADK_PEAK_NAME;
-        span.className = 'redhover';
-        span.setAttribute('onclick', 'removePeak(this);');
-        span.setAttribute('data-peakid', ADK_HIKE.ADK_PEAKS[i].ADK_PEAK_ID);
-        div_peaks_container.appendChild(span);
-    }
+    for(var i = 0; i < ADK_HIKE.ADK_PEAKS.length; i++) addPeakLi(ADK_HIKE.ADK_PEAKS[i]);
     
     //Files
     var fileIDs = [];
@@ -159,13 +169,10 @@ function deleteHike(){
 }
 
 function cancelHike(){
-    var h4span_addUpdateHike = document.getElementById('h4span_addUpdateHike');
     var select_remainingpeaks = document.getElementById('select_remainingpeaks');
 
-    if(h4span_addUpdateHike.innerHTML !== 'Add Hike'){//Cancel Edit hike
-        h4span_addUpdateHike.innerHTML = 'Add Hike';
-        document.getElementById('button_addUpdateHike').innerHTML = 'Add Hike';
-    }
+    document.getElementById('h4span_addUpdateHike').innerHTML = 'Add Hike';
+	document.getElementById('button_addUpdateHike').innerHTML = 'Add Hike'
     
     select_remainingpeaks.value = '';
     document.getElementById('textbox_hikedate').value = '';
@@ -173,8 +180,10 @@ function cancelHike(){
 	document.getElementById('hidden_prefileids').value = '';
 	var wysiIframeBody = getWysiIframeBody();
 	if(wysiIframeBody) wysiIframeBody.innerHTML = '';
-    document.getElementById('div_peaks_container').innerHTML = '';
+	var ul_addpeaks = document.getElementById('ul_addpeaks');
+	while(ul_addpeaks.firstChild) ul_addpeaks.removeChild(ul_addpeaks.firstChild);
     document.getElementById('ul_hikeattachments').innerHTML = '';
+	while(ul_hikeattachments.firstChild) ul_hikeattachments.removeChild(ul_hikeattachments.firstChild);
     $.fn.downloader.removeAll();
 
 	$('.wysihtml5-command-active').each(function(){$(this).click();});
@@ -184,27 +193,24 @@ function getHikeInfo(td){
     var ADK_HIKE_ID = td.children[0].value;
     var ADK_HIKE_NOTES = td.children[2].innerHTML;
     var ADK_HIKE_DTE = td.children[3].value !== 'N/A'? td.children[3].value: '';
-    var ADK_PEAKS = [];
-    var ADK_FILES = [];
-
-    var peaks = td.children[4].children;
-    for(var i = 0; i < peaks.length; i++){
-        var ADK_PEAK = {};
-        ADK_PEAK.ADK_PEAK_ID = $(peaks[i]).data('id');
-        ADK_PEAK.ADK_PEAK_NAME = $(peaks[i]).data('name');
-        ADK_PEAK.ADK_PEAK_HEIGHT = $(peaks[i]).data('height');
-        ADK_PEAKS.push(ADK_PEAK);
-    }
-
-    var files = td.children[5].children;
-    for(var i = 0; i < files.length; i++){
-        var ADK_FILE = {};
-        ADK_FILE.ADK_FILE_ID = $(files[i]).data('id');
-        ADK_FILE.ADK_FILE_NAME = $(files[i]).data('name');
-        ADK_FILE.ADK_FILE_DESC = $(files[i]).data('desc');
-        ADK_FILE.ADK_FILE_SIZE = $(files[i]).data('size');
-        ADK_FILES.push(ADK_FILE);
-    }
+    
+	var ADK_PEAKS = [].slice.call(td.children[4].children).map(function(x){
+		return {
+			ADK_PEAK_ID: $(x).data('id')
+			,ADK_PEAK_NAME: $(x).data('name')
+			,ADK_PEAK_HEIGHT: $(x).data('height')
+			,ADK_PEAK_DTE: $(x).data('date')
+		};
+	});
+	
+    var ADK_FILES = [].slice.call(td.children[5].children).map(function(x){
+		return {
+			ADK_FILE_ID: $(x).data('id')
+			,ADK_FILE_NAME: $(x).data('name')
+			,ADK_FILE_DESC: $(x).data('desc')
+			,ADK_FILE_SIZE: $(x).data('size')
+		};
+	});
 
     return {
         ADK_HIKE_ID: ADK_HIKE_ID,
@@ -219,37 +225,44 @@ function viewHike(td){
 	function getFileCategory(ADK_FILE_NAME){
 		var ext = ADK_FILE_NAME.split('.').pop();
 		switch(ext){
-            case 'jpg': case 'jpeg': case 'png': case 'gif': case 'tif': case 'tiff': return 'Picture';
-            case 'mpg': case 'mpeg': case 'avi': case 'mov': case 'webm': case 'mkv': case 'flv': case 'ogg':
-            case 'oggv': case 'wmv': case 'mp4': return 'Video';
-            default: return 'Doc/File';
+            case 'jpg': case 'jpeg': case 'png': case 'gif': case 'tif': case 'tiff':
+				return 'Picture';
+            case 'mpg': case 'mpeg': case 'avi': case 'mov': case 'webm': case 'mkv': case 'flv': case 'ogg': case 'oggv': case 'wmv': case 'mp4':
+				return 'Video';
+            default:
+				return 'Doc/File';
         }
 	}
-
+	
     $('.viewing').each(function(){this.classList.remove('viewing');});
     td.classList.add('viewing');
     var ADK_HIKE = getHikeInfo(td);
-
+	
     var table_hikespeaks = document.getElementById('table_hikespeaks');
     var table_hikeattachments = document.getElementById('table_hikeattachments');
     var span_hikenotes = document.getElementById('span_hikenotes');
-
+	
     table_hikespeaks.children[1].innerHTML = '';
     table_hikeattachments.children[1].innerHTML = '';
     span_hikenotes.innerHTML = ADK_HIKE.ADK_HIKE_NOTES;
     document.getElementById('a_heightFormat').innerHTML = '(ft)';
-
+	
+	//peaks
     for(var i = 0; i < ADK_HIKE.ADK_PEAKS.length; i++){
         var tr = document.createElement('tr');
         var td1 = document.createElement('td');
         td1.innerHTML = ADK_HIKE.ADK_PEAKS[i].ADK_PEAK_NAME;
         var td2 = document.createElement('td');
-        td2.innerHTML = ADK_HIKE.ADK_PEAKS[i].ADK_PEAK_HEIGHT;
+        td2.innerHTML = ADK_HIKE.ADK_PEAKS[i].ADK_PEAK_DTE;
+		var td3 = document.createElement('td');
+        td3.innerHTML = ADK_HIKE.ADK_PEAKS[i].ADK_PEAK_HEIGHT;
         tr.appendChild(td1);
         tr.appendChild(td2);
+        tr.appendChild(td3);
         table_hikespeaks.children[1].appendChild(tr);
     }
-
+	
+	//files
     for(var i = 0; i < ADK_HIKE.ADK_FILES.length; i++){
         var tr = document.createElement('tr');
         var td1 = document.createElement('td');
@@ -267,22 +280,14 @@ function viewHike(td){
         tr.appendChild(td4); tr.appendChild(td5);
         table_hikeattachments.children[1].appendChild(tr);
     }
-
+	
     //Maximize if minimized
-    if($(td).parents('div.container-fluid')[0].nextElementSibling.classList.contains('content-min'))
-        $('#a_maxmin_hike_data').click();
-
+    if($(td).parents('div.container-fluid')[0].nextElementSibling.classList.contains('content-min')) $('#a_maxmin_hike_data').click();
+	
 	tooltip();
     //$('.selecttable').trigger('update');
-
+	
 	$('html, body').animate({scrollTop: $("#div_hike_data").offset().top}, 600);
-}
-
-function getPeakIds(){
-    var spans = document.getElementById('div_peaks_container').querySelectorAll('span');
-    var ADK_PEAK_IDS = [];
-    for(var i = 0; i < spans.length; i++) ADK_PEAK_IDS.push($(spans[i]).data('peakid'));
-    return ADK_PEAK_IDS;
 }
 
 function getUsedPeakIDs(){
@@ -295,14 +300,14 @@ function convertFormat(a){
     var table_hikespeaks = document.getElementById('table_hikespeaks').children[1];
     if(a.innerHTML.indexOf('m') === -1){//ft to m
         for(var i = 0; i < table_hikespeaks.children.length; i++){
-            var td = table_hikespeaks.children[i].children[1];
+            var td = table_hikespeaks.children[i].children[2];
             td.innerHTML = Math.round(parseFloat(td.innerHTML) / 3.2808);
         }
         a.innerHTML = '(m)';
     }
     else{//m to ft
         for(var i = 0; i < table_hikespeaks.children.length; i++){
-            var td = table_hikespeaks.children[i].children[1];
+            var td = table_hikespeaks.children[i].children[2];
             td.innerHTML = Math.round(parseFloat(td.innerHTML) * 3.2808);
         }
         a.innerHTML = '(ft)';
@@ -321,8 +326,12 @@ function enableDisable_addHike(){
 	}
 	if($(this).find('.has-error').length > 0){disable(true); return;}
 
-	if((document.getElementById('select_remainingpeaks').value === '' && document.getElementById('div_peaks_container').innerHTML === '')
-		&& document.getElementById('textbox_hikedate').innerHTML === ''){disable(true); return;}
+	if(document.getElementById('select_remainingpeaks').value === ''
+		&& document.getElementById('ul_addpeaks').innerHTML === ''
+		&& document.getElementById('textbox_hikedate').innerHTML === ''){
+		disable(true);
+		return;
+	}
 }
 
 function modal_hike(){
@@ -361,48 +370,63 @@ function printView(){
 
 //Peak
 function addPeak(select){
-    if(!select) select = document.getElementById('select_remainingpeaks');
-    if(select.value == '') return;
+	if(!select) select = document.getElementById('select_remainingpeaks');
+    if(select.value === '') return;
     var option = select.options[select.selectedIndex];
-    var ADK_PEAK_ID = select.value;
-    var ADK_PEAK_NAME = option.innerHTML;
+	var textbox_hikedate = document.getElementById('textbox_hikedate');
+    var ADK_PEAK = {
+		ADK_PEAK_ID: select.value
+		,ADK_PEAK_NAME: option.innerHTML
+		,ADK_PEAK_DTE: textbox_hikedate.value
+	};
+	
+	if(!/(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d/.test(ADK_PEAK.ADK_PEAK_DTE)){
+		$(textbox_hikedate).blur();
+		return false;
+	}
+
     select.selectedIndex = -1;
 
-    var div_peaks_container = document.getElementById('div_peaks_container');
-
-    var span = document.createElement('span');
-    span.innerHTML = ADK_PEAK_NAME;
-    span.classList.add('redhover');
-    span.setAttribute('onclick', 'removePeak(this);');
-    span.setAttribute('data-peakid', ADK_PEAK_ID);
-	span.setAttribute('title', 'Remove Peak');
-	span.setAttribute('data-toggle', 'tooltip');
-	span.setAttribute('data-container', 'body');
-
-    div_peaks_container.appendChild(span);
-    option.disabled = true;
+	addPeakLi(ADK_PEAK);
+    
 	tooltip();
 }
+function addPeakLi(ADK_PEAK){
+	var ul_addpeaks = document.getElementById('ul_addpeaks');
 
-function removePeak(span){
-    var ADK_PEAK_ID = $(span).data('peakid');
-    var select = document.getElementById('select_remainingpeaks');
-    for(var i = 0; i < select.children.length; i++){
-        if(select.children[i].value == ADK_PEAK_ID){
-            select.children[i].disabled = false; break;
-        }
-    }
+	var $li = $('<li>');
+	var $a_name = $('<a class="addpeak-name" title="Remove Peak" data-toggle="tooltip" data-container="body" data-peakid="' + ADK_PEAK.ADK_PEAK_ID + '">' + ADK_PEAK.ADK_PEAK_NAME + '</a>');
+	var $a_date = $('<a class="addpeak-date">' + ADK_PEAK.ADK_PEAK_DTE + '</a>');
 
-    var div_peaks_container = span.parentNode;
-    div_peaks_container.removeChild(span);
+	$li.append($a_name);
+	$li[0].innerHTML += '(';
+	$li.append($a_date);
+	$li[0].innerHTML += ')';
 
-    enable_disable_addPeak();
+    ul_addpeaks.appendChild($li[0]);
 }
 
-function enable_disable_addPeak(){
-    document.getElementById('button_addUpdateHike').disabled = false;
-    if($('#select_remainingpeaks').value == '' && $('#div_peaks_container')[0].innerHTML == '') document.getElementById('button_addUpdateHike').disabled = true;
-    if($('#textbox_hikedate')[0].value == '') document.getElementById('button_addUpdateHike').disabled = true;
+function editPeakDate(a){
+	var $input = $('<input type="text" class="date" value="' + a.innerHTML + '" style="visibility:hidden;width:0;height:0;">')
+	$(a.parentNode).append($input);
+	$input.datepicker({
+		changeMonth: true
+		,changeYear: true
+		,maxDate: '+2d'
+		,yearRange: '-100:+0'
+	})
+	.datepicker('show')
+	.on('change', function(){
+		$(this).datepicker('hide').datepicker('destroy');
+		a.innerHTML = this.value;
+		$(this).remove();
+	});
+}
+
+function removePeak(a){
+	$(a.parentNode).remove();
+	enableDisable_addHike();
+	tooltip();
 }
 
 //File

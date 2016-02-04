@@ -3,20 +3,22 @@
 	//Imports
 	require_once 'db_conn.php';
 	require_once 'SELECT.php';
-	require_once 'File.php';
-	
-	$ADK_FILE_ID = $_GET['_'];
+	require_once 'classes/File.php';
+
+	if(!isset($_GET['_']) || !is_numeric($_GET['_'])){http_response_code(404); exit;}
 	
 	$con = connect_db();
 	
-	$ADK_FILE = getFile($con, $ADK_FILE_ID, false, false);
+	//$ADK_FILE = getFile($con, $ADK_FILE_ID, false, false);
+	$ADK_FILE = new File();
+	$ADK_FILE->id = intval($_GET['_']);
+	$ADK_FILE->get($con, false, false);
 	
 	$con->close();
 
-	if($ADK_FILE !== ''){
-		$filePath = '../uploads/'.$ADK_FILE['ADK_FILE_SAVENAME'][0].'/'.$ADK_FILE['ADK_FILE_SAVENAME'][1].'/'.$ADK_FILE['ADK_FILE_SAVENAME'];
-		$stream = new VideoStream($filePath);
-		$stream->start();
+	if($ADK_FILE->name != ''){
+		$videoStream = new VideoStream('../uploads/'.$ADK_FILE->savename[0].'/'.$ADK_FILE->savename[1].'/'.$ADK_FILE->savename);
+		$videoStream->start();
 	}
 
     class VideoStream{

@@ -15,7 +15,7 @@
 	if(!isset($_SESSION['ADK_USER_ID'])) exit;
 	
 	$ADK_FILES = new Files();
-	if(!$ADK_FILES->isValid()){header('Location: ../messages?_'.$_POST['touserid'].'=&e='.$errMess); exit;}
+	if(!$ADK_FILES->isValid()){header('Location: ../messages?_'.$_POST['touserid'].'=&e='.$ADK_FILES->err); exit;}
 	$ADK_FILES->populate();
 	
 	$con = connect_db();

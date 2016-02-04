@@ -11,14 +11,14 @@
 			$this->fileIDs = [];
 		}
 
-		private function moveFileToProtected(){
-			$path = '../uploads/'.$this->savename[0].'/'.$this->savename[1];
-			if(!is_dir($path)) mkdir($path, 0777, true);
-			$src = $path.'/'.$this->savename;
-			if(!move_uploaded_file($ADK_FILE->tmp_name, $src)) echo 'Error getting files';
+		//private function moveFileToProtected(){
+		//    $path = '../uploads/'.$this->savename[0].'/'.$this->savename[1];
+		//    if(!is_dir($path)) mkdir($path, 0777, true);
+		//    $src = $path.'/'.$this->savename;
+		//    if(!move_uploaded_file($ADK_FILE->tmp_name, $src)) echo 'Error getting files';
 
-			return $src;
-		}
+		//    return $src;
+		//}
 
 		public function isValid(){
 			$valid = true;
@@ -92,18 +92,7 @@
 				}
 			}
 		}
-
-		public function populateSingle(){
-			if($_FILES[$name]['size'] > 0){
-				$ADK_FILE = new File();
-				$ADK_FILE->name = basename($_FILES[$name]['name']);
-				$ADK_FILE->tmp_name = $_FILES[$name]['tmp_name'];
-				$ADK_FILE->size = $_FILES[$name]['size'];
-				array_push($this->files, $ADK_FILE);
-			}
 		
-			return $file;
-		}
 	}
 	
 	class File{
@@ -115,6 +104,7 @@
 			
 		}
 
+
 		public function moveToProtected(){
 			$path = '../uploads/'.$this->savename[0].'/'.$this->savename[1];
 			if(!is_dir($path)) mkdir($path, 0777, true);
@@ -122,6 +112,28 @@
 			if(!move_uploaded_file($this->tmp_name, $src)) $this->err .= 't';
 
 			return $src;
+		}
+
+		public function isValid(){
+			$valid = true;
+			if($_FILES['photo']['size'] !== 0){
+				$ext = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+				$fileTypes = array('jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff', 'bmp');
+			
+				//File type
+				if(!in_array($ext, $fileTypes)){
+					$errMess .= 't';
+					$valid = false;
+				}
+			
+				//PHP error
+				if($_FILES['photo']['error'] !== 0){
+					$errMess .= 'p'.$_FILES['photo']['error'];
+					$valid = false;
+				}
+			}
+		
+			return $valid;
 		}
 
 		public function makeThumbnail($src, $path, $desired_width){
@@ -159,6 +171,7 @@
 			}
 		}
 		
+
 		public function get($con, $returnContent, $getThumb){
 			$sql_query = sql_getFile($con, $this->id);
 			if($sql_query->execute()){
@@ -174,45 +187,30 @@
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');
-
-			if($returnContent && $ADK_FILE->savename != ''){
-				if($getThumb) $file = '../uploads/thumb/'.$ADK_FILE->savename[0].'/'.$ADK_FILE->savename[1].'/'.$ADK_FILE->savename;
-				else $file = '../uploads/'.$ADK_FILE->savename[0].'/'.$ADK_FILE->savename[1].'/'.$ADK_FILE->savename;
+			
+			if($returnContent && $this->savename != ''){
+				if($getThumb) $file = '../uploads/thumb/'.$this->savename[0].'/'.$this->savename[1].'/'.$this->savename;
+				else $file = '../uploads/'.$this->savename[0].'/'.$this->savename[1].'/'.$this->savename;
 				$fp = fopen($file, 'r');
-				if($getThumb) $ADK_FILE->size = filesize($file);
-				$ADK_FILE->content = fread($fp, $ADK_FILE->size);
+				if($getThumb) $this->size = filesize($file);
+				$this->content = fread($fp, $this->size);
 				fclose($fp);
 			}
-
-			return $ADK_FILE;
 		}
-
-		//public function save($con){
-		//    $sql_query = sql_addUser($con, $this);
-		//    $sql_query->execute();
-		//    $this->id = $sql_query->insert_id;
-		//}
-
-		//public function update($con){
-		//    $sql_query = sql_updateUser($con, $this);
-		//    $sql_query->execute();
-		//}
-
-
-		//public function populate(){
-		//    if(isset($_POST['id'])) $this->id = intval($_POST['id']);
-		//    $this->username = $_POST['username'];
-		//    $this->name = $_POST['name'];
-		//    $this->email = $_POST['email'];
-		//}
 		
-		//public function populateFromAddHiker($randomPW, $ADK_APPLICANT){
-		//    $this->usergroupid = 3;
-		//    $this->username = $ADK_APPLICANT->username;
-		//    $this->name = $ADK_APPLICANT->name;
-		//    $this->email = $ADK_APPLICANT->email;
-		//    $this->pw = $randomPW;
-		//}
+
+		public function populate(){
+			if($_FILES['photo']['size'] > 0){
+				$this->name = basename($_FILES['photo']['name']);
+				$this->savename = sha1(openssl_random_pseudo_bytes(40));
+				$this->desc = 'Profile Photo';
+				$this->tmp_name = $_FILES['photo']['tmp_name'];
+				$this->size = $_FILES['photo']['size'];
+				$this->type = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+			}
+		
+			return $file;
+		}
 		
 	}
 	

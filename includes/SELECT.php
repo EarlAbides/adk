@@ -147,10 +147,10 @@
 	}
 	function sql_getHikesPeaks($con, $ADK_HIKE_ID){
 		$sql_query = $con->prepare(
-            "SELECT A.ADK_PEAK_ID, A.ADK_PEAK_NAME, A.ADK_PEAK_HEIGHT
-				FROM ADK_PEAK A
-					LEFT JOIN ADK_HIKE_PEAK_JCT B ON A.ADK_PEAK_ID = B.ADK_PEAK_ID
-				WHERE B.ADK_HIKE_ID = ?;"
+            "SELECT P.ADK_PEAK_ID, P.ADK_PEAK_NAME, P.ADK_PEAK_HEIGHT, HP.ADK_PEAK_DTE
+			FROM ADK_PEAK P
+				LEFT JOIN ADK_HIKE_PEAK_JCT HP ON P.ADK_PEAK_ID = HP.ADK_PEAK_ID
+			WHERE HP.ADK_HIKE_ID = ?;"
         );
 
         $sql_query->bind_param('i', $ADK_HIKE_ID);

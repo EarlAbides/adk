@@ -56,16 +56,14 @@
 	function sql_updateHike($con, $ADK_HIKE){
 		$sql_query = $con->prepare(
 			"UPDATE ADK_HIKE
-				SET ADK_HIKE_NOTES = ?,
-					ADK_HIKE_DTE = ?
+				SET ADK_HIKE_NOTES = ?
+					,ADK_HIKE_DTE = ?
 			WHERE ADK_HIKE_ID = ?;");
 		
-		$month = substr($ADK_HIKE['ADK_HIKE_DTE'], 0, 2);
-		$day = substr($ADK_HIKE['ADK_HIKE_DTE'], 3, 2);
-		$year = substr($ADK_HIKE['ADK_HIKE_DTE'], 6, 4);
-		$ADK_HIKE['ADK_HIKE_DTE'] = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year));
+		if($ADK_HIKE->notes == '') $ADK_HIKE->notes = $null;
+		$dt = $ADK_HIKE->datetime != ''? date('Y-m-d', strtotime($ADK_HIKE->datetime)): $null;
 		
-		$sql_query->bind_param('ssi', $ADK_HIKE['ADK_HIKE_NOTES'], $ADK_HIKE['ADK_HIKE_DTE'], $ADK_HIKE['ADK_HIKE_ID']);
+		$sql_query->bind_param('ssi', $ADK_HIKE->notes, $dt, $ADK_HIKE->id);
 		
 		return $sql_query;
 	}

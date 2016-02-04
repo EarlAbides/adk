@@ -92,7 +92,7 @@
 						<?php }else{ ?><ul class="row gallery-photo"><?php for($i = 0; $i < count($photos); $i++){ ?>
 						<li class="gallery col-xs-6 col-sm-4 col-md-3 col-lg-2" data-peaks="<?php echo $photos[$i]->peaks; ?>">
 							<a href="#" class="photo" data-toggle="modal" data-target="#modal_gallery" data-id="<?php echo $photos[$i]->id; ?>" data-desc="<?php echo $photos[$i]->desc; ?>" data-un="<?php echo $photos[$i]->username; ?>" data-peaks="<?php echo str_replace(',', ', ', $photos[$i]->peaks); ?>">
-								<img src="img/loading.gif" data-original="includes/getImage.php?_=<?php echo $photos[$i]->id; ?>&t=t" class="img-responsive imghover lazy" alt="<?php echo $photos[$i]->name; ?>" title="<?php echo getTitle($photos[$i]); ?>" data-toggle="tooltip" data-container="body" data-placement="bottom" />
+								<img src="img/loading.gif" data-original="includes/fileGetImage.php?_=<?php echo $photos[$i]->id; ?>&t=t" class="img-responsive imghover lazy" alt="<?php echo $photos[$i]->name; ?>" title="<?php echo getTitle($photos[$i]); ?>" data-toggle="tooltip" data-container="body" data-placement="bottom" />
 							</a>
 						</li>
 						<?php } ?></ul><?php } ?>
@@ -159,7 +159,7 @@
 	</div>
 
     <div style="display:none;">
-		<form method="post" action="includes/dl.php">
+		<form method="post" action="includes/fileGet.php">
 			<input type="hidden" id="hidden_fileid" name="id" />
 			<input type="submit" id="button_download" />
 		</form>

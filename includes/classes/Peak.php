@@ -33,7 +33,7 @@
 	
 	class Peak{
 		
-		public $id, $name, $height;
+		public $id, $name, $height, $datetime;
 		
 		public function Peak(){
 			

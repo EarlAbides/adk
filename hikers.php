@@ -33,7 +33,7 @@
 				<div class="container-fluid">
 					<div class="col-xs-12">
 						<div id="div_hikertable" class="div_tablewrapper">
-							<?php echo $table_hikers; ?>
+							<?php $ADK_HIKERS->renderTable(); ?>
 						</div>
 					</div>
 				</div>

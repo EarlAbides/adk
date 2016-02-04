@@ -192,10 +192,14 @@ font-size:12px;
 #div_modal_loading, #div_modal_loading div{background-color:transparent;border:0;box-shadow:none;-webkit-box-shadow:none;}
 
 /*Hike tool*/
-#div_peaks_container{font-size:0.85em;}
-#div_peaks_container span:not(:last-child):after{content:", ";}
-.redhover{cursor:pointer;}
-.redhover:hover{color:#B10000 !important;text-decoration:line-through;}
+#ul_addpeaks{
+font-size:0.85em;
+list-style-type:none;
+padding:0;
+}
+#ul_addpeaks li a{cursor:pointer;color:#000;}
+#ul_addpeaks li a:first-child, #ul_addpeaks li a:first-child:hover{margin-right:4px;text-decoration:none;}
+.redhover-on, .redhover-on a, .redhover:hover{color:#B10000 !important;text-decoration:line-through;}
 .has-error .redhover, .has-error th{color:#B10000;}
 
 /*Tables*/

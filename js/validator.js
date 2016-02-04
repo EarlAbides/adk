@@ -223,7 +223,7 @@
 
 	if(!document.getElementsByClassName('jqdl-attachments').length) x();
 	else{
-		if($el[0].parentNode.parentNode.id = 'downloader'){
+		if($el[0].parentNode && $el[0].parentNode.parentNode.id === 'downloader'){
 			var $group = $el.closest('.form-group')
 			if(!$group[0].classList.contains('has_error')){
 				var $block = $group.find('.help-block.with-errors')

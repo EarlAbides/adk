@@ -148,7 +148,7 @@
 					<div class="col-xs-12 col-sm-6">
 						<form method="post" action="includes/corrPhoto.php" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
 							<div class="div_tablewrapper" style="padding:5px;">
-								<img src="includes/getImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>" class="img-responsive imghover" alt="Photo" title="Photo" />
+								<img src="includes/fileGetImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>" class="img-responsive imghover" alt="Photo" title="Photo" />
 							</div>
 							<br />
 							<div class="form-group">
@@ -322,7 +322,7 @@
 					<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 						<form method="post" action="includes/hikerPhoto.php" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
 							<div class="div_tablewrapper" style="padding:5px;">
-								<img src="includes/getImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive imghover" alt="Photo" title="Photo" />
+								<img src="includes/fileGetImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive imghover" alt="Photo" title="Photo" />
 							</div>
 							<br />
 							<div class="form-group">

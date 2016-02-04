@@ -37,19 +37,21 @@
 		$null = null;
 		$sql_query = $con->prepare("INSERT INTO ADK_HIKE(ADK_USER_ID, ADK_HIKE_NOTES, ADK_HIKE_DTE) VALUES(?,?,?);");
 		
-		if(!isset($ADK_HIKE->notes) || !$ADK_HIKE->notes != '') $ADK_HIKE->notes = $null;
-		if(isset($ADK_HIKE->datetime) && $ADK_HIKE->datetime != '') $ADK_HIKE->datetime = date("m/d/Y", strtotime($ADK_HIKE->datetime));
-		else $ADK_HIKE->datetime = $null;
+		if($ADK_HIKE->notes == '') $ADK_HIKE->notes = $null;
+		$dt = $ADK_HIKE->datetime != ''? date('Y-m-d', strtotime($ADK_HIKE->datetime)): $null;
 		
-		$sql_query->bind_param('iss', $ADK_HIKE->userid, $ADK_HIKE->notes, $ADK_HIKE->datetime);
+		$sql_query->bind_param('iss', $ADK_HIKE->userid, $ADK_HIKE->notes, $dt);
 		
 		return $sql_query;
 	}
 
-	function sql_addHikesPeak($con, $ADK_HIKE_ID, $ADK_PEAK_ID){
-		$sql_query = $con->prepare("INSERT INTO ADK_HIKE_PEAK_JCT(ADK_HIKE_ID, ADK_PEAK_ID) VALUES(?,?);");
+	function sql_addHikesPeak($con, $ADK_HIKE_ID, $ADK_PEAK){
+		$null = null;
+		$sql_query = $con->prepare("INSERT INTO ADK_HIKE_PEAK_JCT(ADK_HIKE_ID, ADK_PEAK_ID, ADK_PEAK_DTE) VALUES(?,?,?);");
 
-		$sql_query->bind_param('ii', $ADK_HIKE_ID, $ADK_PEAK_ID);
+		$dt = $ADK_PEAK->datetime != ''? date('Y-m-d', strtotime($ADK_PEAK->datetime)): $null;
+
+		$sql_query->bind_param('iis', $ADK_HIKE_ID, $ADK_PEAK->id, $dt);
 
 		return $sql_query;
 	}

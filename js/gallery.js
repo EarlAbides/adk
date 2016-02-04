@@ -52,7 +52,7 @@
 		video.setAttribute('id', 'video');
 		video.setAttribute('controls', 'controls');
 		video.setAttribute('width', '100%');
-		video.innerHTML = '<source id="videosource" src="includes/getVideo.php?_=' + id + '" type="video/' + name.split('.').pop() + '" />';
+		video.innerHTML = '<source id="videosource" src="includes/fileGetVideo.php?_=' + id + '" type="video/' + name.split('.').pop() + '" />';
 		
 		document.getElementById('modal_gallery_container').innerHTML = video.outerHTML;
 		

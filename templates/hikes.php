@@ -46,8 +46,9 @@
 						<table id="table_hikespeaks" class="selecttable">
 							<thead>
 								<tr>
-									<th class="pointer" style="width:66%;">Name</th>
-									<th class="pointer" style="width:34%;">Height <small><a id="a_heightFormat" class="pointer hoverbtn" onclick="convertFormat(this);">(ft)</a></small></th>
+									<th class="pointer" style="width:63%;">Name</th>
+									<th class="pointer" style="width:18%;">Date</th>
+									<th class="pointer" style="width:29%;">Height <small><a id="a_heightFormat" class="pointer hoverbtn" onclick="convertFormat(this);">(ft)</a></small></th>
 								</tr>
 							</thead>
 							<tbody></tbody>

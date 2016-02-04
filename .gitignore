@@ -223,3 +223,5 @@ img/bg/
 includes/PHPMailer/
 /includes/ajax_deleteHike.php
 /js/jquery.lazyload.min.js
+/includes/hikeUpdate.php
+/includes/hikeSave.php

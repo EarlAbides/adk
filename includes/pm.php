@@ -34,17 +34,13 @@
 		$message .= $ADK_APPLICANT->peaklist."<br><br>";
 		$message .= "Click <a href=\"./applicant?_=".$ADK_APPLICANT->id."\">here</a> to view."."<br><br>";
 		
-		$ADK_MESSAGE = array(
-			'ADK_MESSAGE_FROM_USER_ID' => 1
-	        ,'ADK_MESSAGE_TO_USER_ID' => 1
-	        ,'ADK_MESSAGE_RESPOND_ID' => ''
-	        ,'ADK_MESSAGE_ORIG_ID' => ''
-			,'ADK_MESSAGE_TITLE' => 'New Applicant  - '.$ADK_APPLICANT->name
-			,'ADK_MESSAGE_CONTENT' => $message
-			,'ADK_MESSAGE_DRAFT' => 0
-	    );
-		
-		addSysMessage($con, $ADK_MESSAGE);
+		$ADK_MESSAGE = new Message();
+		$ADK_MESSAGE->fromid = 1;
+		$ADK_MESSAGE->toid = 1;
+		$ADK_MESSAGE->title = 'New Applicant  - '.$ADK_APPLICANT->name;
+		$ADK_MESSAGE->content = $message;
+		$ADK_MESSAGE->isdraft = 0;
+		$ADK_MESSAGE->save($con);
 	}
 	
 	//Correspondent
@@ -65,17 +61,13 @@
 				
 		$message .= "Click <a href=\"./messages?_=".$ADK_USER->id."\">here</a> to send the new user hiker a message."."<br><br>";
 		
-		$ADK_MESSAGE = array(
-			'ADK_MESSAGE_FROM_USER_ID' => 1
-	        ,'ADK_MESSAGE_TO_USER_ID' => $ADK_HIKER->corrid
-	        ,'ADK_MESSAGE_RESPOND_ID' => ''
-	        ,'ADK_MESSAGE_ORIG_ID' => ''
-			,'ADK_MESSAGE_TITLE' => 'New Hiker - '.$ADK_USER->username
-			,'ADK_MESSAGE_CONTENT' => $message
-			,'ADK_MESSAGE_DRAFT' => 0
-	    );
-		
-		addSysMessage($con, $ADK_MESSAGE);
+		$ADK_MESSAGE = new Message();
+		$ADK_MESSAGE->fromid = 1;
+		$ADK_MESSAGE->toid = $ADK_HIKER->corrid;
+		$ADK_MESSAGE->title = 'New Hiker  - '.$ADK_USER->username;
+		$ADK_MESSAGE->content = $message;
+		$ADK_MESSAGE->isdraft = 0;
+		$ADK_MESSAGE->save($con);
 	}
 	
     function sendNewCorrPM($con, $ADK_USER, $randomPW){
@@ -90,17 +82,13 @@
 
 		$message .= "Click <a href=\"./correspondent?_=".$ADK_USER->id."\">here</a> to view."."<br><br>";
 		
-		$ADK_MESSAGE = array(
-			'ADK_MESSAGE_FROM_USER_ID' => 1
-	        ,'ADK_MESSAGE_TO_USER_ID' => 1
-	        ,'ADK_MESSAGE_RESPOND_ID' => ''
-	        ,'ADK_MESSAGE_ORIG_ID' => ''
-			,'ADK_MESSAGE_TITLE' => 'New Correspondent - '.$ADK_USER->username
-			,'ADK_MESSAGE_CONTENT' => $message
-			,'ADK_MESSAGE_DRAFT' => 0
-	    );
-		
-		addSysMessage($con, $ADK_MESSAGE);
+		$ADK_MESSAGE = new Message();
+		$ADK_MESSAGE->fromid = 1;
+		$ADK_MESSAGE->toid = 1;
+		$ADK_MESSAGE->title = 'New Correspondent  - '.$ADK_USER->username;
+		$ADK_MESSAGE->content = $message;
+		$ADK_MESSAGE->isdraft = 0;
+		$ADK_MESSAGE->save($con);
 	}
 
 	function sendCorrHikeAddUpdatePM($con, $ADK_HIKER, $ADK_CORRESPONDENT, $ADK_HIKE, $isUpdate){
@@ -109,31 +97,27 @@
 
 		if($isUpdate){
 			$headerTxt = "One of your hikers has updated a hike log!<br><br>";
-			$title = "Hike log updated - ".$ADK_HIKER['ADK_USER_USERNAME'];
+			$title = "Hike log updated - ".$ADK_HIKER->username;
 		}
 		else{
 			$headerTxt = "One of your hikers has added a hike log!<br><br>";
-			$title = "Hike log added - ".$ADK_HIKER['ADK_USER_USERNAME'];
+			$title = "Hike log added - ".$ADK_HIKER->username;
 		}
 
 		$message = $headerTxt;
 		
-		$message .= $ADK_HIKER['ADK_USER_NAME']." (".$ADK_HIKER['ADK_USER_USERNAME'].")<br>";
-	    $message .= $ADK_HIKE['peakNames']."<br><br>";
+		$message .= $ADK_HIKER->name." (".$ADK_HIKER->username.")<br>";
+	    $message .= $ADK_HIKE->label."<br><br>";
 
-		$message .= "Click <a href=\"".$GLOBALS['url']."hiker?_=".$ADK_HIKER['ADK_USER_ID']."#".$ADK_HIKE['ADK_HIKE_ID']."\">here to see it</a>.<br><br>";
+		$message .= "Click <a href=\"".$GLOBALS['url']."hiker?_=".$ADK_HIKER->id."#".$ADK_HIKE->id."\">here to see it</a>.<br><br>";
 		
-		$ADK_MESSAGE = array(
-			'ADK_MESSAGE_FROM_USER_ID' => 1
-	        ,'ADK_MESSAGE_TO_USER_ID' => $ADK_CORRESPONDENT['ADK_USER_ID']
-	        ,'ADK_MESSAGE_RESPOND_ID' => ''
-	        ,'ADK_MESSAGE_ORIG_ID' => ''
-			,'ADK_MESSAGE_TITLE' => $title
-			,'ADK_MESSAGE_CONTENT' => $message
-			,'ADK_MESSAGE_DRAFT' => 0
-	    );
-		
-		addSysMessage($con, $ADK_MESSAGE);
+		$ADK_MESSAGE = new Message();
+		$ADK_MESSAGE->fromid = 1;
+		$ADK_MESSAGE->toid = $ADK_CORRESPONDENT->id;
+		$ADK_MESSAGE->title = $title;
+		$ADK_MESSAGE->content = $message;
+		$ADK_MESSAGE->isdraft = 0;
+		$ADK_MESSAGE->save($con);
 	}
 
 ?>
