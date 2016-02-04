@@ -72,7 +72,7 @@
 					
 					</form>
 				<?php }else{ ?>
-					<form id="form_forgotpw" method="post" action="includes/forgotpw.php" data-toggle="validator" role="form" novalidate>
+					<form id="form_forgotpw" method="post" action="includes/userForgotPW.php" data-toggle="validator" role="form" novalidate>
 					
 						<h4 class="content-header">
 							Forgot your password?
