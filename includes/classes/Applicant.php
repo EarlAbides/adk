@@ -4,7 +4,7 @@
 		
 		public $applicants;
 		
-		public function Applicants(){
+		public function __construct(){
 			$this->applicants = [];
 		}
 		
@@ -73,7 +73,7 @@
 		public $err;
 		public $id, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $reqcorr, $peakids, $peaklist;
 		
-		public function Applicant(){
+		public function __construct(){
 			
 		}
 		

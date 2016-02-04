@@ -4,7 +4,7 @@
 		
 		public $correspondents;
 		
-		public function Correspondents(){
+		public function __construct(){
 		    $this->correspondents = [];
 		}
 		
@@ -111,7 +111,7 @@
 		public $err;
 		public $id, $photoid, $username, $name, $email, $info, $numhikers;
 		
-		public function Correspondent(){
+		public function __construct(){
 			
 		}
 

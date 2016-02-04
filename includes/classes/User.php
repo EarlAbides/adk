@@ -5,7 +5,7 @@
 		public $err;
 		public $id, $usergroupid, $username, $name, $email, $pw, $last8hash;
 		
-		public function User(){
+		public function __construct(){
 			
 		}
 		

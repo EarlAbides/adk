@@ -5,20 +5,12 @@
 		public $err;
 		public $files, $fileIDs;
 
-		public function Files(){
+		public function __construct(){
 			$this->err = '';
 			$this->files = [];
 			$this->fileIDs = [];
 		}
 
-		//private function moveFileToProtected(){
-		//    $path = '../uploads/'.$this->savename[0].'/'.$this->savename[1];
-		//    if(!is_dir($path)) mkdir($path, 0777, true);
-		//    $src = $path.'/'.$this->savename;
-		//    if(!move_uploaded_file($ADK_FILE->tmp_name, $src)) echo 'Error getting files';
-
-		//    return $src;
-		//}
 
 		public function isValid(){
 			$valid = true;
@@ -53,9 +45,9 @@
 			$con->autocommit(false);
 		
 			foreach($this->files as $ADK_FILE){
-				$src = $ADK_FILE->moveToProtected();//Move to /uploads/...
+				$src = $ADK_FILE->moveToProtected();//move to /uploads/...
 
-			    //Make thumbnail
+			    //make thumbnail
 			    $isImage = $ADK_FILE->type === 'jpg' || $ADK_FILE->type === 'jpeg' || $ADK_FILE->type === 'png' || $ADK_FILE->type === 'gif';
 			    if($isImage){
 			        $path = '../uploads/thumb/'.$ADK_FILE->savename[0].'/'.$ADK_FILE->savename[1];
@@ -64,7 +56,7 @@
 			        $ADK_FILE->makeThumbnail($src, $path, 160);
 			    }
 				
-			    //Add file info
+			    //add file info
 			    $sql_query = sql_addFile($con);
 			    $sql_query->bind_param('sssis', $ADK_FILE->name, $ADK_FILE->savename, $ADK_FILE->desc, $ADK_FILE->size, $ADK_FILE->type);
 			    $sql_query->execute();
@@ -100,7 +92,7 @@
 		public $err;
 		public $id, $name, $tmp_name, $savename, $desc, $size, $type;
 		
-		public function File(){
+		public function __construct(){
 			
 		}
 

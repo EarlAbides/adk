@@ -4,7 +4,7 @@
 		
 		public $userid, $messages, $foldername;
 		
-		public function Messages(){
+		public function __construct(){
 		    $this->messages = [];
 		}
 
@@ -112,7 +112,7 @@
 	    public $err;
 	    public $id, $userid, $fromid, $fromusername, $toid, $tousername, $title, $content, $date, $time, $files, $isread, $hasfiles, $isfromhiker, $isdraff;
 		
-	    public function Message(){
+	    public function __construct(){
 			$this->files = [];
 	    }
 

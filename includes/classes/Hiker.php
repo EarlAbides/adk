@@ -4,10 +4,11 @@
 		
 		public $hikers;
 		
-		public function Hikers(){
+		public function __construct(){
 			$this->hikers = [];
 		}
 		
+
 		public function get($con, $ADK_HIKER_CORR_ID){
 			$sql_query = sql_getHikers($con, $ADK_HIKER_CORR_ID);
 			if($sql_query->execute()){
@@ -80,15 +81,11 @@
 		public $err;
 		public $id, $corrid, $corrname, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $numpeaks, $hikes, $lastactive;
 		
-		public function Hiker(){
+		public function __construct(){
 			$this->hikes = [];
 		}
 
-		public static function updateLastActive($con, $ADK_USER_ID){
-			$sql_query = sql_updateLastActive($con, $ADK_USER_ID);
-			$sql_query->execute();
-		}
-		
+				
 		public function isValid(){
 		    if(strlen($this->address1) === 0 || strlen($this->address1) > 40) $this->err .= 'a';
 		    if(strlen($this->city) === 0 || strlen($this->city) > 40) $this->err .= 'c';
@@ -153,6 +150,11 @@
 		    $sql_query->execute();
 		}
 		
+		public static function updateLastActive($con, $ADK_USER_ID){
+			$sql_query = sql_updateLastActive($con, $ADK_USER_ID);
+			$sql_query->execute();
+		}
+
 		public function delete($con){
 		    $sql_queries = sql_deleteHiker($con, $this->id);
 			foreach($sql_queries as $sql_query){

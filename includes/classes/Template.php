@@ -4,7 +4,7 @@
 		
 		public $public, $private;
 		
-		public function Templates(){
+		public function __construct(){
 			$this->public = [];
 			$this->private = [];
 		}		
@@ -36,7 +36,7 @@
 		public $err;
 		public $id, $userid, $name, $content, $datetime;
 		
-		public function Template(){
+		public function __construct(){
 			
 		}
 		

@@ -35,7 +35,7 @@
 		
 		public $id, $name, $height, $datetime;
 		
-		public function Peak(){
+		public function __construct(){
 			
 		}
 		

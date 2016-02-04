@@ -4,9 +4,10 @@
 		
 		public $hikes, $userid;
 
-		public function Hikes(){
+		public function __construct(){
 			$this->hikes = [];
 		}
+
 
 		public function get($con){
 			$sql_query = sql_getHikes($con, $this->userid);
@@ -120,10 +121,11 @@
 		public $err;
 		public $id, $userid, $notes, $datetime, $peaks, $files, $numpeaks, $label;
 		
-		public function Hike(){
+		public function __construct(){
 			$this->peaks = [];
 			$this->files = [];			
 		}
+
 
 		private function getEarliestDate(){
 			$earliest = '';
