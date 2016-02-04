@@ -3,34 +3,40 @@
 	//Imports
 	require_once 'includes/db/db_conn.php';
 	require_once 'includes/db/SELECT.php';
-    require_once 'includes/Gallery.php';
-	require_once 'includes/Hiker.php';
-    require_once 'includes/User.php';
-    require_once 'includes/Peak.php';
+    require_once 'includes/classes/File.php';
+    require_once 'includes/classes/Gallery.php';
+	require_once 'includes/classes/Hiker.php';
+    require_once 'includes/classes/Peak.php';
+    require_once 'includes/classes/User.php';
 	
 	if(isset($_GET['_'])) $ADK_USER_ID = intval($_GET['_']);
 	else $ADK_USER_ID = 0;
+	$ADK_USERGROUP_CDE = $_SESSION['ADK_USERGROUP_CDE'];
 	
 	$con = connect_db();
     
-	if($ADK_USER_ID > 0) $ADK_USER = getUser($con, $ADK_USER_ID);
+	if($ADK_USER_ID > 0){
+		$ADK_USER = new User();
+		$ADK_USER->id = $ADK_USER_ID;
+		$ADK_USER->get($con);
+	}
 	else $ADK_USER_ID = '%';
 
-    $ADK_PEAKS = getPeaks($con);
+    $ADK_PEAKS = new Peaks();
+	$ADK_PEAKS->get($con);
 
-	$ADK_FILE_GALLERY = getFileGallery($con, $ADK_USER_ID);
+	$ADK_GALLERY = new Gallery();
+	$ADK_GALLERY->userid = $ADK_USER_ID;
+	$ADK_GALLERY->get($con);
 
-	if($ADK_USERGROUP_CDE === 'ADM' || $ADK_USERGROUP_CDE === 'EDT') $ADK_HIKERS = getHikers($con);
+	if($ADK_USERGROUP_CDE === 'ADM' || $ADK_USERGROUP_CDE === 'EDT'){
+		$ADK_HIKERS = new Hikers();
+		$ADK_HIKERS->get($con, '%');
+	}
 	
 	$con->close();
 
-
-    if($ADK_FILE_GALLERY !== ''){
-        $photos = $ADK_FILE_GALLERY->getPhotos();
-        $videos = $ADK_FILE_GALLERY->getVideos();
-        $docsFiles = $ADK_FILE_GALLERY->getDocsAndFiles();
-    }
-
+	
 	function getTitle($photo){
 		$title = $photo->name;
 		if($photo->peaks != '') $title .= "\n".$photo->peaks;

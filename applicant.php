@@ -166,7 +166,7 @@
 						
 						<div class="col-xs-12 form-group">
 							<div class="div_tablewrapper">
-								<?php echo $table_correspondents; ?>
+								<?php $ADK_CORRESPONDENTS->renderSelectTable(); ?>
 								<span class="help-block with-errors"></span>
 							</div>
 						</div>

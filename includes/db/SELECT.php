@@ -97,7 +97,18 @@
 	}
 	
 	//File
-    function sql_getFileGallery($con, $ADK_USER_ID){
+    function sql_getFile($con, $ADK_FILE_ID){
+		$sql_query = $con->prepare(
+            "SELECT ADK_FILE_ID, ADK_FILE_NAME, ADK_FILE_SAVENAME, ADK_FILE_SIZE, ADK_FILE_TYPE
+			FROM ADK_FILE WHERE ADK_FILE_ID = ?;"
+        );
+
+        $sql_query->bind_param('i', $ADK_FILE_ID);
+
+        return $sql_query;
+	}
+	
+	function sql_getFileGallery($con, $ADK_USER_ID){
         $sql_query = $con->prepare(
             "SELECT F.ADK_FILE_ID, F.ADK_FILE_NAME, F.ADK_FILE_SAVENAME, F.ADK_FILE_DESC, F.ADK_FILE_SIZE, F.ADK_FILE_TYPE, U.ADK_USER_USERNAME
                 ,(SELECT GROUP_CONCAT(P.ADK_PEAK_NAME) FROM ADK_PEAK P
@@ -119,17 +130,6 @@
 
         return $sql_query;
     }
-
-	function sql_getFile($con, $ADK_FILE_ID){
-		$sql_query = $con->prepare(
-            "SELECT ADK_FILE_ID, ADK_FILE_NAME, ADK_FILE_SAVENAME, ADK_FILE_SIZE, ADK_FILE_TYPE
-			FROM ADK_FILE WHERE ADK_FILE_ID = ?;"
-        );
-
-        $sql_query->bind_param('i', $ADK_FILE_ID);
-
-        return $sql_query;
-	}
 	
 	//Hike
 	function sql_getHikes($con, $ADK_USER_ID){
