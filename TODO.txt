@@ -1,4 +1,9 @@
-﻿46er completion email
+﻿Fix js total peak count after add/update
+
+show total peak count and unique peak count, and maybe % completed
+
+
+46er completion email
 
 verify notify corr on 46
 

@@ -159,10 +159,11 @@
 	}
 	function sql_getHikesFiles($con, $ADK_HIKE_ID){
 		$sql_query = $con->prepare(
-            "SELECT A.ADK_FILE_ID, A.ADK_FILE_NAME, A.ADK_FILE_DESC, A.ADK_FILE_SIZE
-				FROM ADK_FILE A
-					LEFT JOIN ADK_HIKE_FILE_JCT B ON A.ADK_FILE_ID = B.ADK_FILE_ID
-				WHERE B.ADK_HIKE_ID = ?;"
+            "SELECT F.ADK_FILE_ID, F.ADK_FILE_NAME, F.ADK_FILE_DESC, F.ADK_FILE_SIZE
+			FROM ADK_FILE F
+				LEFT JOIN ADK_HIKE_FILE_JCT HF ON F.ADK_FILE_ID = HF.ADK_FILE_ID
+			WHERE HF.ADK_HIKE_ID = ?
+			ORDER BY F.ADK_FILE_NAME;"
         );
         
         $sql_query->bind_param('i', $ADK_HIKE_ID);
