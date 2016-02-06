@@ -19,7 +19,7 @@
 					$ADK_HIKE = new Hike();
 					$ADK_HIKE->id = intval($row['ADK_HIKE_ID']);
 					$ADK_HIKE->notes = $row['ADK_HIKE_NOTES'];
-					$ADK_HIKE->datetime = $row['ADK_HIKE_DTE'] === null? 'N/A': date("m/d/Y", strtotime($row['ADK_HIKE_DTE']));
+					$ADK_HIKE->datetime = $row['ADK_HIKE_DTE'] === null? '--': date("m/d/Y", strtotime($row['ADK_HIKE_DTE']));
 					$ADK_HIKE->numpeaks = $row['ADK_HIKE_NUMPEAKS'];
 					
 					//peaks
@@ -34,7 +34,7 @@
 							$ADK_PEAK->id = intval($row['ADK_PEAK_ID']);
 							$ADK_PEAK->name = $row['ADK_PEAK_NAME'];
 							$ADK_PEAK->height = $row['ADK_PEAK_HEIGHT'];
-							$ADK_PEAK->datetime = $row['ADK_PEAK_DTE'];
+							$ADK_PEAK->datetime = $row['ADK_PEAK_DTE'] === null? '--': date("m/d/Y", strtotime($row['ADK_PEAK_DTE']));
 							array_push($peakNames, $ADK_PEAK->name);
 							array_push($ADK_HIKE->peaks, $ADK_PEAK);
 						}
@@ -90,7 +90,7 @@
 									<input type=\"hidden\" name=\"date\" value=\"".$ADK_HIKE->datetime."\" />
 									<div style=\"display:none;\">";
 					foreach($ADK_HIKE->peaks as $ADK_PEAK){
-						$html .= "		<input type=\"hidden\" data-id=\"".$ADK_PEAK->id."\" data-name=\"".$ADK_PEAK->name."\" data-height=\"".$ADK_PEAK->height."\" data-date=\"".date('m/d/Y', strtotime($ADK_PEAK->datetime))."\" />";
+						$html .= "		<input type=\"hidden\" data-id=\"".$ADK_PEAK->id."\" data-name=\"".$ADK_PEAK->name."\" data-height=\"".$ADK_PEAK->height."\" data-date=\"".($ADK_PEAK->datetime === '--'? $ADK_PEAK->datetime: date('m/d/Y', strtotime($ADK_PEAK->datetime)))."\" />";
 					}
 					$html .= "		</div><div style=\"display:none;\">";
 					foreach($ADK_HIKE->files as $ADK_FILE)

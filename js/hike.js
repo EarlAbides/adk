@@ -135,9 +135,7 @@ function editHike(){
 
     //Attachments
 	
-	
-	enableDisable_addHike();
-	
+		
     //Scroll
     $('html, body').animate({scrollTo: $(span_maxminAddUpdateHike).offset().top}, 600);
 }
@@ -194,7 +192,7 @@ function cancelHike(){
 function getHikeInfo(td){
     var ADK_HIKE_ID = td.children[0].value;
     var ADK_HIKE_NOTES = td.children[2].innerHTML;
-    var ADK_HIKE_DTE = td.children[3].value !== 'N/A'? td.children[3].value: '';
+    var ADK_HIKE_DTE = td.children[3].value !== '--'? td.children[3].value: '';
     
 	var ADK_PEAKS = [].slice.call(td.children[4].children).map(function(x){
 		return {
@@ -322,12 +320,13 @@ function enableDisable_addHike(){
 	}
 	if($(this).find('.has-error').length > 0){disable(true); return;}
 
-	if(document.getElementById('select_remainingpeaks').value === ''
-		&& document.getElementById('ul_addpeaks').innerHTML === ''
-		&& document.getElementById('textbox_hikedate').innerHTML === ''){
-		disable(true);
-		return;
-	}
+	var ul_addpeaks = document.getElementById('ul_addpeaks');
+	if(document.getElementById('select_remainingpeaks').value === '' && ul_addpeaks.innerHTML === ''){disable(true); return;}
+
+	$('.addpeak-date').each(function(){if(this.innerHTML === '???'){disable(true); return;}});
+
+	if(ul_addpeaks.innerHTML === ''){disable(false); return;}
+	if(document.getElementById('textbox_hikedate').value === '') disable(false);
 }
 
 function modal_hike(){
@@ -392,7 +391,7 @@ function addPeakLi(ADK_PEAK){
 
 	var $li = $('<li>');
 	var $a_name = $('<a class="addpeak-name" title="Remove Peak" data-toggle="tooltip" data-container="body" data-peakid="' + ADK_PEAK.ADK_PEAK_ID + '">' + ADK_PEAK.ADK_PEAK_NAME + '</a>');
-	var $a_date = $('<a class="addpeak-date">' + ADK_PEAK.ADK_PEAK_DTE + '</a>');
+	var $a_date = $('<a class="addpeak-date">' + (ADK_PEAK.ADK_PEAK_DTE === '--'? '???': ADK_PEAK.ADK_PEAK_DTE) + '</a>');
 
 	$li.append($a_name);
 	$li[0].innerHTML += '(';
@@ -415,6 +414,11 @@ function editPeakDate(a){
 	.on('change', function(){
 		$(this).datepicker('hide').datepicker('destroy');
 		a.innerHTML = this.value;
+		enableDisable_addHike();
+		$(this).remove();
+	})
+	.on('blur', function(){
+		enableDisable_addHike();
 		$(this).remove();
 	});
 }

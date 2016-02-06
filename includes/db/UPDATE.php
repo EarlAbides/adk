@@ -54,6 +54,7 @@
 
 	//Hike
 	function sql_updateHike($con, $ADK_HIKE){
+		$null = null;
 		$sql_query = $con->prepare(
 			"UPDATE ADK_HIKE
 				SET ADK_HIKE_NOTES = ?
