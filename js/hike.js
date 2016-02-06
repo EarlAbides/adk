@@ -69,7 +69,9 @@ function addUpdateHike(form){
 		,success: function(ret){
 			$('#div_modal_loading').modal('hide');
 			document.getElementById('div_table_hikes').innerHTML = ret;
-			document.getElementById('span_totalpeaks').innerHTML = getUsedPeakIDs().length;
+			var table_hikes = document.getElementById('table_hikes');
+			document.getElementById('span_numclimbed').innerHTML = table_hikes.getAttribute('data-numclimbed');
+			document.getElementById('span_numpeaks').innerHTML = table_hikes.getAttribute('data-numpeaks') + ' (' + table_hikes.getAttribute('data-percent') + '%)';
 			cancelHike();
 			var a_maxmin_hike_data = document.getElementById('a_maxmin_hike_data');
 			if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1) $(a_maxmin_hike_data).click();
@@ -288,12 +290,6 @@ function viewHike(td){
     //$('.selecttable').trigger('update');
 	
 	$('html, body').animate({scrollTop: $("#div_hike_data").offset().top}, 600);
-}
-
-function getUsedPeakIDs(){
-    var usedPeakIDs = document.getElementById('hidden_usedPeakIDs').value.split(',');
-    for(var i = 0; i < usedPeakIDs.length; i++) usedPeakIDs[i] = parseInt(usedPeakIDs[i]);
-    return usedPeakIDs;
 }
 
 function convertFormat(a){

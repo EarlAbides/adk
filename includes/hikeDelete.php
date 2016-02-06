@@ -39,6 +39,6 @@
 	$con->close();
 	
 	http_response_code(200);
-	$ADK_HIKES->renderTable($ADK_HIKER->numpeaks);
+	$ADK_HIKES->renderTable($ADK_HIKER->numpeaks, $ADK_HIKER->numclimbed, $ADK_HIKER->percent);
 	
 ?>

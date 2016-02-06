@@ -13,12 +13,12 @@
 					
 		<div class="container-fluid" style="margin-bottom:-5px;">
 			<div class="col-xs-12">
-				<div class="pull-right">
-					<label class="control-label control-label-sm">Total Peaks:&nbsp;</label>
-					<span id="span_totalpeaks"><?php echo $ADK_HIKER->numpeaks; ?></span>
+				<div class="pull-right" style="margin-right:1%;">
+					<label class="control-label control-label-sm">Total Climbed:&nbsp;</label><span id="span_numclimbed"><?php echo $ADK_HIKER->numclimbed; ?></span><br />
+					<label class="control-label control-label-sm">Total Peaks:&nbsp;</label><span id="span_numpeaks"><?php echo $ADK_HIKER->numpeaks.' ('.$ADK_HIKER->percent.'%)'; ?></span>
 				</div>
 				<div id="div_table_hikes" class="div_tablewrapper tablewrapper500">
-					<?php $ADK_HIKES->renderTable($ADK_HIKER->numpeaks); ?>
+					<?php $ADK_HIKES->renderTable($ADK_HIKER->numpeaks, $ADK_HIKER->numclimbed, $ADK_HIKER->percent); ?>
 				</div>
 			</div>
 		</div>

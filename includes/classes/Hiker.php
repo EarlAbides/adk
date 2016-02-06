@@ -79,7 +79,7 @@
 	class Hiker{
 		
 		public $err;
-		public $id, $corrid, $corrname, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $numpeaks, $hikes, $lastactive;
+		public $id, $corrid, $corrname, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $numpeaks, $numoverall, $hikes, $lastactive;
 		
 		public function __construct(){
 			$this->hikes = [];
@@ -129,7 +129,9 @@
 					$this->zip = preg_replace('/(\d{5})(\d{4})/i', '-', $row['ADK_HIKER_ZIP']);
 					$this->country = $row['ADK_HIKER_COUNTRY'];
 					$this->info = $row['ADK_HIKER_PERSONALINFO'];
+					$this->numclimbed = intval($row['ADK_HIKER_NUMCLIMBED']);
 					$this->numpeaks = intval($row['ADK_HIKER_NUMPEAKS']);
+					$this->percent = round(($this->numpeaks / 46) * 100);
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');

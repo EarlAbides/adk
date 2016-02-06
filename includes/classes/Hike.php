@@ -21,7 +21,7 @@
 					$ADK_HIKE->notes = $row['ADK_HIKE_NOTES'];
 					$ADK_HIKE->datetime = $row['ADK_HIKE_DTE'] === null? 'N/A': date("m/d/Y", strtotime($row['ADK_HIKE_DTE']));
 					$ADK_HIKE->numpeaks = $row['ADK_HIKE_NUMPEAKS'];
-
+					
 					//peaks
 					$peakNames = [];
 					$sql_query = sql_getHikesPeaks($con, $ADK_HIKE->id);
@@ -65,9 +65,8 @@
 		}
 
 
-		public function renderTable($numPeaks){
-			$peakIDs = [];
-			$html = "<table id=\"table_hikes\" class=\"selecttable dt\" data-numpeaks=".$numPeaks.">
+		public function renderTable($numPeaks, $numClimbed, $percent){
+			$html = "<table id=\"table_hikes\" class=\"selecttable dt\" data-numpeaks=".$numPeaks." data-numclimbed=".$numClimbed." data-percent=".$percent.">
 						<thead>
 							<tr>
 								<th style=\"width:5%;\"></th>
@@ -91,7 +90,6 @@
 									<input type=\"hidden\" name=\"date\" value=\"".$ADK_HIKE->datetime."\" />
 									<div style=\"display:none;\">";
 					foreach($ADK_HIKE->peaks as $ADK_PEAK){
-						array_push($peakIDs, $ADK_PEAK->id);
 						$html .= "		<input type=\"hidden\" data-id=\"".$ADK_PEAK->id."\" data-name=\"".$ADK_PEAK->name."\" data-height=\"".$ADK_PEAK->height."\" data-date=\"".date('m/d/Y', strtotime($ADK_PEAK->datetime))."\" />";
 					}
 					$html .= "		</div><div style=\"display:none;\">";
@@ -109,7 +107,7 @@
 				}
 			}
 		
-			$html .= "</tbody></table><input type=\"hidden\" id=\"hidden_usedPeakIDs\" value=\"".implode(',', $peakIDs)."\" />";
+			$html .= "</tbody></table>";
 		
 			echo $html;
 		}
