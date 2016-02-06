@@ -1,15 +1,4 @@
-﻿Fix js total peak count after add/update
-
-show total peak count and unique peak count, and maybe % completed
-
-
-46er completion email
-
-verify notify corr on 46
-
-move date textbox next to peak select
-
-login/logout, and anything else odd remaining in includes/ -> change to new formats if possible
+﻿login/logout, and anything else odd remaining in includes/ -> change to new formats if possible
 
 date columns in db on pretty much every table
 

@@ -14,9 +14,9 @@
 				<div class="col-xs-12">
 					<div class="form-group">
 						<div class="col-xs-12 col-sm-5">
-							<label for="select_remainingpeaks" class="control-label control-label-sm">Peak*</label><br />
+							<label for="select_addpeaks" class="control-label control-label-sm">Peak*</label><br />
 								<div class="input-group input-group-sm">
-									<select id="select_remainingpeaks" class="form-control form-control-sm">
+									<select id="select_addpeaks" class="form-control form-control-sm">
 										<option />
 										<?php foreach($ADK_PEAKS->peaks as $ADK_PEAK) echo '<option value="'.$ADK_PEAK->id.'">'.$ADK_PEAK->name.'</option>'; ?>
 									</select>

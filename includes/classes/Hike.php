@@ -66,6 +66,7 @@
 
 
 		public function renderTable($numPeaks, $numClimbed, $percent){
+			$peakIDs = [];
 			$html = "<table id=\"table_hikes\" class=\"selecttable dt\" data-numpeaks=".$numPeaks." data-numclimbed=".$numClimbed." data-percent=".$percent.">
 						<thead>
 							<tr>
@@ -76,10 +77,9 @@
 							</tr>
 						</thead>
 						<tbody>";
-		
 			if(count($this->hikes) === 0){//If empty
 				$html .= '<tr><td style="width:100%;text-align:center;font-style:italic;">No hikes</td><td style="width:0;"></td><td style="width:0;"></td><td style="width:0;"></td></tr>';
-			}	
+			}
 			else{
 				foreach($this->hikes as $ADK_HIKE){
 					$html .= "<tr>
@@ -90,6 +90,7 @@
 									<input type=\"hidden\" name=\"date\" value=\"".$ADK_HIKE->datetime."\" />
 									<div style=\"display:none;\">";
 					foreach($ADK_HIKE->peaks as $ADK_PEAK){
+						array_push($peakIDs, $ADK_PEAK->id);
 						$html .= "		<input type=\"hidden\" data-id=\"".$ADK_PEAK->id."\" data-name=\"".$ADK_PEAK->name."\" data-height=\"".$ADK_PEAK->height."\" data-date=\"".($ADK_PEAK->datetime === '--'? $ADK_PEAK->datetime: date('m/d/Y', strtotime($ADK_PEAK->datetime)))."\" />";
 					}
 					$html .= "		</div><div style=\"display:none;\">";
@@ -107,7 +108,7 @@
 				}
 			}
 		
-			$html .= "</tbody></table>";
+			$html .= "</tbody></table><input type=\"hidden\" id=\"hidden_usedPeakIDs\" value=\"".implode(',', $peakIDs)."\" />";
 		
 			echo $html;
 		}

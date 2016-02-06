@@ -37,6 +37,8 @@
 	})
 	$('#ul_addpeaks').on('click', '.addpeak-date', function(){editPeakDate(this);});
 
+	markCompletedPeaks();
+
 });
 
 //Hike
@@ -76,6 +78,7 @@ function addUpdateHike(form){
 			var a_maxmin_hike_data = document.getElementById('a_maxmin_hike_data');
 			if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1) $(a_maxmin_hike_data).click();
 			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
+			markCompletedPeaks();
 		}
 		,error: function(ret){
 			var errMess = '';
@@ -138,6 +141,8 @@ function editHike(){
 		
     //Scroll
     $('html, body').animate({scrollTo: $(span_maxminAddUpdateHike).offset().top}, 600);
+	
+	enableDisable_addHike();
 }
 
 function deleteHike(){
@@ -152,8 +157,9 @@ function deleteHike(){
 			var cont = document.getElementById('div_hike_data').parentNode;
             cont.className = cont.className.replace('max', 'min');
             document.getElementById('div_table_hikes').innerHTML = ret;
-			document.getElementById('span_totalpeaks').innerHTML = document.getElementById('table_hikes').getAttribute('data-numpeaks');
+			document.getElementById('span_numpeaks').innerHTML = document.getElementById('table_hikes').getAttribute('data-numpeaks');
 			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
+			markCompletedPeaks();
 		}
 	).error(function(ret){
 		var errMess = '';
@@ -169,12 +175,12 @@ function deleteHike(){
 }
 
 function cancelHike(){
-    var select_remainingpeaks = document.getElementById('select_remainingpeaks');
+    var select_addpeaks = document.getElementById('select_addpeaks');
 
     document.getElementById('h4span_addUpdateHike').innerHTML = 'Add Hike';
 	document.getElementById('button_addUpdateHike').innerHTML = 'Add Hike'
     
-    select_remainingpeaks.value = '';
+    select_addpeaks.value = '';
     document.getElementById('textbox_hikedate').value = '';
     document.getElementById('textbox_notes').value = '';
 	document.getElementById('hidden_prefileids').value = '';
@@ -187,6 +193,7 @@ function cancelHike(){
     $.fn.downloader.removeAll();
 
 	$('.wysihtml5-command-active').each(function(){$(this).click();});
+	markCompletedPeaks();
 }
 
 function getHikeInfo(td){
@@ -321,7 +328,7 @@ function enableDisable_addHike(){
 	if($(this).find('.has-error').length > 0){disable(true); return;}
 
 	var ul_addpeaks = document.getElementById('ul_addpeaks');
-	if(document.getElementById('select_remainingpeaks').value === '' && ul_addpeaks.innerHTML === ''){disable(true); return;}
+	if(document.getElementById('select_addpeaks').value === '' && ul_addpeaks.innerHTML === ''){disable(true); return;}
 
 	$('.addpeak-date').each(function(){if(this.innerHTML === '???'){disable(true); return;}});
 
@@ -365,9 +372,10 @@ function printView(){
 
 //Peak
 function addPeak(select){
-	if(!select) select = document.getElementById('select_remainingpeaks');
+	if(!select) select = document.getElementById('select_addpeaks');
     if(select.value === '') return;
     var option = select.options[select.selectedIndex];
+	option.classList.add('font-italic');
 	var textbox_hikedate = document.getElementById('textbox_hikedate');
     var ADK_PEAK = {
 		ADK_PEAK_ID: select.value
@@ -427,6 +435,21 @@ function removePeak(a){
 	$(a.parentNode).remove();
 	enableDisable_addHike();
 	tooltip();
+	markCompletedPeaks();
+	var select_addpeak_opts = document.getElementById('select_addpeaks').children;
+	$('.addpeak-name').each(function(){
+		for(var i = 0; i < select_addpeak_opts.length; i++){
+			if($(this).data('peakid') == select_addpeak_opts[i].value) select_addpeak_opts[i].classList.add('font-italic');
+		}
+	});
+}
+
+function markCompletedPeaks(){
+	var peakIDs = document.getElementById('hidden_usedPeakIDs').value.split(',');
+	$('#select_addpeaks option').each(function(){
+		if(peakIDs.indexOf(this.value) !== -1) this.classList.add('font-italic');
+		else this.classList.remove('font-italic');
+	});
 }
 
 //File

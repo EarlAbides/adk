@@ -232,9 +232,30 @@
 	    $message .= "Click below to see it:\r\n".$GLOBALS['url']."hiker?_=".$ADK_HIKER->id."#".$ADK_HIKE->id."\r\n\r\n";
 		
 	    $toAddr = $ADK_CORRESPONDENT->email;
-	    $subject = 'New Hiker - '.$ADK_HIKER->username;
+	    $subject = $isUpdate? 'Hike Log Updated - '.$ADK_HIKER->username: 'Hike Log Added - '.$ADK_HIKER->username;
 		
 	    PHPMailer($toAddr, $subject, $htmlmessage, $message);
+	}
+
+	function sendCorr46erCompletionEmail($ADK_HIKER, $ADK_CORRESPONDENT){
+		$url = 'http://adk46er.org/how-to-join.html';
+		
+		$htmlmessage = "One of your hikers just completed their 46!<br><br>";
+		$htmlmessage .= $ADK_HIKER->name."<br><br>";
+		
+		$htmlmessage .= "Hey I need text for this.<br>";
+		$htmlmessage .= "Click <a href=\"$url\">here</a> to see how to become a registered 46er.<br><br>";
+		
+		$message = "One of your hikers just completed their 46!\r\n\r\n";
+		$message .= $ADK_HIKER->name."\r\n\r\n";
+		
+		$message .= "Hey I need text for this.\r\n";
+		$message .= "Visit $url to see how to become a registered 46er.\r\n\r\n";
+		
+		$toAddr = $ADK_CORRESPONDENT->email;
+		$subject = '46er Completion - '.$ADK_HIKER->username;
+		
+		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 
 	//Hiker
@@ -275,7 +296,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 
-	function send46erCompletionEmail($ADK_USER){
+	function send46erCompletionEmail($ADK_HIKER){
 		$url = 'http://adk46er.org/how-to-join.html';
 		
 		$htmlmessage = "Congratulations!<br><br>";
@@ -288,8 +309,8 @@
 		$message .= "Hey I need text for this.\r\n";
 		$message .= "Visit $url to see how to become a registered 46er.\r\n\r\n";
 		
-		$toAddr = $ADK_USER['ADK_USER_EMAIL'];
-		$subject = 'Congratulations - '.$ADK_USER['ADK_USER_NAME'];
+		$toAddr = $ADK_HIKER->email;
+		$subject = 'Congratulations - '.$ADK_HIKER->name;
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
