@@ -285,7 +285,7 @@ function viewHike(td){
     if($(td).parents('div.container-fluid')[0].nextElementSibling.classList.contains('content-min')) $('#a_maxmin_hike_data').click();
 	
 	tooltip();
-    //$('.selecttable').trigger('update');
+    $('.selecttable').trigger('update');
 	
 	$('html, body').animate({scrollTop: $("#div_hike_data").offset().top}, 600);
 }
