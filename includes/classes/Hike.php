@@ -20,6 +20,7 @@
 					$ADK_HIKE->id = intval($row['ADK_HIKE_ID']);
 					$ADK_HIKE->notes = $row['ADK_HIKE_NOTES'];
 					$ADK_HIKE->datetime = $row['ADK_HIKE_DTE'] === null? '--': date("m/d/Y", strtotime($row['ADK_HIKE_DTE']));
+					$ADK_HIKE->ts = $row['ADK_HIKE_TS'] === null? '--': date("m/d/Y h:ia", strtotime($row['ADK_HIKE_TS']));
 					$ADK_HIKE->numpeaks = $row['ADK_HIKE_NUMPEAKS'];
 					
 					//peaks
@@ -71,8 +72,9 @@
 						<thead>
 							<tr>
 								<th style=\"width:5%;\"></th>
-								<th style=\"width:72%;\">Peaks</th>
-								<th style=\"width:15%;\">Date</th>
+								<th style=\"width:63%;\">Peaks</th>
+								<th style=\"width:12%;\">Date</th>
+								<th style=\"width:12%;\">Last Updated</th>
 								<th style=\"width:8%;\">#&nbsp;Peaks</th>
 							</tr>
 						</thead>
@@ -103,6 +105,7 @@
 								</td>
 								<td>".$ADK_HIKE->label."</td>
 								<td>".$ADK_HIKE->datetime."</td>
+								<td>".$ADK_HIKE->ts."</td>
 								<td style=\"text-align:center;\">".$ADK_HIKE->numpeaks."</td>
 							</tr>";
 				}

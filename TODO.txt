@@ -1,6 +1,4 @@
-﻿login/logout, and anything else odd remaining in includes/ -> change to new formats if possible
-
-date columns in db on pretty much every table
+﻿date columns in db on pretty much every table
 
 DEC feed
 

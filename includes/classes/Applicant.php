@@ -22,6 +22,7 @@
 					$ADK_APPLICANT->email = $row['ADK_APPLICANT_EMAIL'];
 					$ADK_APPLICANT->phone = $row['ADK_APPLICANT_PHONE'];
 					$ADK_APPLICANT->state = $row['ADK_APPLICANT_STATE'];
+					$ADK_APPLICANT->datetime = $row['ADK_APPLICANT_DTE'];
 					array_push($this->applicants, $ADK_APPLICANT);
 				}
 			}
@@ -32,15 +33,16 @@
 			$html = "<table class=\"selecttable\">
 						<thead>
 							<tr>
-								<th></th>
-								<th>Name</th>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Phone</th>
-								<th>State</th>
+								<th style=\"width:2%;\"></th>
+								<th style=\"width:28%;\">Name</th>
+								<th style=\"width:23%;\">Username</th>
+								<th style=\"width:22%;\">Email</th>
+								<th style=\"width:7%;\">Phone</th>
+								<th style=\"width:8%;\">State</th>
+								<th style=\"width:10%;\">Date Added</th>
 							</tr>
 						</thead>
-						<tbody>";		
+						<tbody>";
 			if(count($this->applicants) === 0){//If empty
 				$html .= '<tr><td colspan="6" style="text-align:center;font-style:italic;">No new applicants</td></tr>';
 			}	
@@ -57,6 +59,7 @@
 								<td>".$ADK_APPLICANT->email."</td>
 								<td>".$ADK_APPLICANT->phone."</td>
 								<td>".$ADK_APPLICANT->state."</td>
+								<td>".date('m/d/Y h:ia', strtotime($ADK_APPLICANT->datetime))."</td>
 							</tr>";
 				}
 			}
@@ -71,7 +74,7 @@
 	class Applicant{
 		
 		public $err;
-		public $id, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $reqcorr, $peakids, $peaklist;
+		public $id, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $reqcorr, $peakids, $peaklist, $datetime;
 		
 		public function __construct(){
 			

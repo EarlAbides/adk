@@ -59,6 +59,7 @@
 			"UPDATE ADK_HIKE
 				SET ADK_HIKE_NOTES = ?
 					,ADK_HIKE_DTE = ?
+					,ADK_HIKE_TS = CURRENT_TIMESTAMP
 			WHERE ADK_HIKE_ID = ?;");
 		
 		if($ADK_HIKE->notes == '') $ADK_HIKE->notes = $null;

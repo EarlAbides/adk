@@ -23,6 +23,7 @@
 		            $ADK_CORRESPONDENT->email = $row['ADK_USER_EMAIL'];
 		            $ADK_CORRESPONDENT->phone = $row['ADK_CORR_PERSONALINFO'];
 		            $ADK_CORRESPONDENT->numhikers = intval($row['ADK_CORR_NUMHIKERS']);
+		            $ADK_CORRESPONDENT->datetime = $row['ADK_CORR_DTE'];
 					array_push($this->correspondents, $ADK_CORRESPONDENT);
 		        }
 		    }
@@ -80,6 +81,7 @@
 								<th>Name</th>
 								<th>Username</th>
 								<th>Email</th>
+								<th>Member Since</th>
 								<th>#&nbsp;Hikers</th>
 							</tr>
 						</thead>
@@ -95,6 +97,7 @@
 							<td>".$ADK_CORRESPONDENT->name."</td>
 							<td>".$ADK_CORRESPONDENT->username."</td>
 							<td>".$ADK_CORRESPONDENT->email."</td>
+							<td>".date('m/d/Y', strtotime($ADK_CORRESPONDENT->datetime))."</td>
 							<td>".$ADK_CORRESPONDENT->numhikers."</td>
 						</tr>";
 			}
@@ -109,7 +112,7 @@
 	class Correspondent{
 		
 		public $err;
-		public $id, $photoid, $username, $name, $email, $info, $numhikers;
+		public $id, $photoid, $username, $name, $email, $info, $numhikers, $datetime;
 		
 		public function __construct(){
 			

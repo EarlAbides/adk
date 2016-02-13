@@ -24,6 +24,7 @@
 					$ADK_HIKER->name = $row['ADK_USER_NAME'];
 					$ADK_HIKER->email = $row['ADK_USER_EMAIL'];
 					$ADK_HIKER->numpeaks = $row['ADK_HIKER_NUMPEAKS'];
+					$ADK_HIKER->datetime = $row['ADK_HIKER_DTE'];
 					$ADK_HIKER->lastactive = $row['ADK_HIKER_LASTACTIVE_DTE'];
 					array_push($this->hikers, $ADK_HIKER);
 				}
@@ -40,6 +41,7 @@
 								<th>Username</th>
 								<th>Email</th>
 								<th>Staff Correspondent</th>
+								<th>Hiker Since</th>
 								<th>Last Active</th>
 								<th>#&nbsp;Peaks</th>
 							</tr>
@@ -63,6 +65,7 @@
 								<td>".$ADK_HIKER->username."</td>
 								<td>".$ADK_HIKER->email."</td>
 								<td>".$ADK_HIKER->corrname."</td>
+								<td>".date('m/d/Y', strtotime($ADK_HIKER->datetime))."</td>
 								<td>".$ADK_HIKER->lastactive."</td>
 								<td>".$ADK_HIKER->numpeaks."</td>
 							</tr>";
@@ -79,7 +82,7 @@
 	class Hiker{
 		
 		public $err;
-		public $id, $corrid, $corrname, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $numpeaks, $numoverall, $hikes, $lastactive;
+		public $id, $corrid, $corrname, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $numpeaks, $numoverall, $hikes, $datetime, $lastactive;
 		
 		public function __construct(){
 			$this->hikes = [];

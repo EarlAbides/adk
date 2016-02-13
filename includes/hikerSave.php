@@ -14,6 +14,7 @@
 	require_once 'classes/Hike.php';
 	require_once 'classes/Hiker.php';
 	require_once 'classes/Message.php';
+	require_once 'classes/Peak.php';
 	require_once 'classes/User.php';
 	
 	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){header('Location: ../applicants?_e=i'); exit;}
@@ -40,9 +41,11 @@
 	
 	foreach($ADK_APPLICANT->peakids as $ADK_PEAK_ID){
 		$ADK_HIKE = new Hike();
+		$ADK_PEAK = new Peak();
+		$ADK_PEAK->id = $ADK_PEAK_ID;
 		$ADK_HIKE->userid = $ADK_USER->id;
 		$ADK_HIKE->save($con);
-		$ADK_HIKE->addPeak($con, $ADK_PEAK_ID);
+		$ADK_HIKE->addPeak($con, $ADK_PEAK);
 	}
 	
 	$ADK_CORRESPONDENT = new Correspondent();
