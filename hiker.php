@@ -62,7 +62,7 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-6" style="display:inline;">
-								<img src="includes/fileGetImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
+								<img src="includes/fileGetImage.php?_=<?php echo $ADK_HIKER->photoid; ?>&t=t" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
 								<span><?php echo $ADK_HIKER->username; ?></span>
 							</div>
 							<div class="col-xs-12 col-sm-6 text-right" style="display:inline;">

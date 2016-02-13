@@ -61,7 +61,7 @@
 					
 					<div class="col-xs-12 col-sm-6">
 						<div class="container-fluid">
-							<img src="includes/fileGetImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>" class="img-responsive imghover" alt="Photo - <?php echo $ADK_CORRESPONDENT->name; ?>" title="<?php echo $ADK_CORRESPONDENT->name; ?>" />
+							<img src="includes/fileGetImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>&t=t" class="img-responsive imghover" alt="Photo - <?php echo $ADK_CORRESPONDENT->name; ?>" title="<?php echo $ADK_CORRESPONDENT->name; ?>" />
 						</div>
 					</div>
 						

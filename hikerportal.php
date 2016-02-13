@@ -53,7 +53,7 @@
 					<div class="col-xs-12 col-sm-6">
 						<div class="form-group">
 							<div class="col-xs-12" style="margin-bottom:12px;">
-								<img src="includes/fileGetImage.php?_=<?php echo $ADK_HIKER->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
+								<img src="includes/fileGetImage.php?_=<?php echo $ADK_HIKER->photoid; ?>&t=t" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_HIKER->name; ?>" title="<?php echo $ADK_HIKER->name; ?>" />
 								<span><?php echo $ADK_HIKER->name; ?></span>
 							</div>
 						</div>
@@ -153,7 +153,7 @@
 					
 					<div class="col-xs-12">
 						<div class="col-xs-12 col-sm-3" style="margin-bottom:12px;">
-							<img src="includes/fileGetImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_CORRESPONDENT->name; ?>" title="<?php echo $ADK_CORRESPONDENT->name; ?>" />
+							<img src="includes/fileGetImage.php?_=<?php echo $ADK_CORRESPONDENT->photoid; ?>&t=t" class="img-responsive profilephoto" alt="Photo - <?php echo $ADK_CORRESPONDENT->name; ?>" title="<?php echo $ADK_CORRESPONDENT->name; ?>" />
 							<span><?php echo $ADK_CORRESPONDENT->username; ?></span>
 						</div>
 						<div class="col-xs-12 col-sm-2">
