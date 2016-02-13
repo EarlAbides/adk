@@ -3,6 +3,7 @@
 	//Imports
 	require_once 'db/db_conn.php';
 	require_once 'db/SELECT.php';
+	require_once 'classes/User.php';
 	
 	if(empty($_POST['username'])){header("Location: index?e=un"); exit;} 
 	if(empty($_POST['password'])){header("Location: index?e=pw"); exit;}
@@ -20,13 +21,13 @@
 		$result = sql_get_assoc($sql_query);
 
 		foreach($result as $row){
-			$ADK_USER['ADK_USER_ID'] = $row['ADK_USER_ID'];
-			$ADK_USER['ADK_USER_USERNAME'] = $row['ADK_USER_USERNAME'];
-			$ADK_USER['ADK_USERGROUP_ID'] = $row['ADK_USERGROUP_ID'];
-			$ADK_USER['ADK_USER_NAME'] = $row['ADK_USER_NAME'];
-			$ADK_USER['ADK_USER_EMAIL'] = $row['ADK_USER_EMAIL'];
-			$ADK_USER['ADK_USERGROUP_CDE'] = $row['ADK_USERGROUP_CDE'];
-			$ADK_USER['ADK_USERGROUP_DESC'] = $row['ADK_USERGROUP_DESC'];
+			$ADK_USER = new User();
+			$ADK_USER->id = $row['ADK_USER_ID'];
+			$ADK_USER->username = $row['ADK_USER_USERNAME'];
+			$ADK_USER->usernameusergroupid = $row['ADK_USERGROUP_ID'];
+			$ADK_USER->name = $row['ADK_USER_NAME'];
+			$ADK_USER->email = $row['ADK_USER_EMAIL'];
+			$ADK_USER->usergroupcde = $row['ADK_USERGROUP_CDE'];
 		}
 	}
 	else die('There was an error running the query ['.$con->error.']');
@@ -39,11 +40,11 @@
 	//Start session
 	session_set_cookie_params(0);
 	session_start();
-	$_SESSION['ADK_USER_ID'] = $ADK_USER['ADK_USER_ID'];
-	$_SESSION['ADK_USER_USERNAME'] = $ADK_USER['ADK_USER_USERNAME'];
-	$_SESSION['ADK_USER_NAME'] = $ADK_USER['ADK_USER_NAME'];
-	$_SESSION['ADK_USER_EMAIL'] = $ADK_USER['ADK_USER_EMAIL'];
-	$_SESSION['ADK_USERGROUP_CDE'] = $ADK_USER['ADK_USERGROUP_CDE'];
+	$_SESSION['ADK_USER_ID'] =$ADK_USER->id;
+	$_SESSION['ADK_USER_USERNAME'] = $ADK_USER->username;
+	$_SESSION['ADK_USER_NAME'] = $ADK_USER->name;
+	$_SESSION['ADK_USER_EMAIL'] = $ADK_USER->email;
+	$_SESSION['ADK_USERGROUP_CDE'] = $ADK_USER->usergroupcde;
 	
 	header("Location: ../".$page);
 	
