@@ -26,7 +26,7 @@
 					$ADK_GALLERY_ITEM->desc = $row['ADK_FILE_DESC'];
 					$ADK_GALLERY_ITEM->size = $row['ADK_FILE_SIZE'];
 					$ADK_GALLERY_ITEM->type = $row['ADK_FILE_TYPE'];
-					$ADK_GALLERY_ITEM->peaks = $row['ADK_FILE_PEAKS'];
+					$ADK_GALLERY_ITEM->peaks = $row['ADK_FILE_PEAKS']? $row['ADK_FILE_PEAKS']: 'Private Message';
 					$ADK_GALLERY_ITEM->username = $row['ADK_USER_USERNAME'];
 					
 					array_push($this->files, $ADK_GALLERY_ITEM);

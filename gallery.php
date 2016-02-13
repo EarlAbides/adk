@@ -6,7 +6,7 @@
 
 <?php include 'templates/head.php'; ?>
     <script src="js/jquery.lazyload.min.js"></script>
-    <script src="js/gallery.min.js"></script>
+    <script src="js/gallery.js"></script>
 	<script>
 		$(function(){
 		    $('img.lazy').show().lazyload({
@@ -64,7 +64,7 @@
 						    <select id="select_filter" class="form-control form-control-sm">
                                 <option value="">Show All</option>
                                 <option disabled="disabled" role="separator" >-------------------------</option>
-                                <?php foreach($ADK_PEAKS as $ADK_PEAK) echo '<option value="'.$ADK_PEAK->name.'">'.$ADK_PEAK->name.'</option>'; ?>
+                                <?php foreach($ADK_PEAKS->peaks as $ADK_PEAK) echo '<option value="'.$ADK_PEAK->name.'">'.$ADK_PEAK->name.'</option>'; ?>
                             </select>
 						    <span class="help-block with-errors"></span>
                         </div>
