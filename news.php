@@ -1,5 +1,6 @@
-<?php require_once 'includes/session.php'; ?>
 <?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
+<?php require_once 'includes/session.php'; ?>
+<?php require_once 'includes/loginredir.php'; ?>
 <?php include 'includes/variables_site.php'; ?>
 
 <?php include 'templates/head.php'; ?>

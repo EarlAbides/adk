@@ -34,16 +34,17 @@
 		<div id="navbar_sub" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li<?php if(isset($home)) echo $home; ?>><a href="./">Home</a></li>
-				<li<?php if(isset($news)) echo $news; ?>><a href="./news">News</a></li>
 				<?php if(!isset($_SESSION['ADK_USER_ID'])){ ?>
 					<li<?php if(isset($signup)) echo $signup; ?>><a href="./signup">Sign Up</a></li>
 				<?php } ?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'COR'))){ ?>
+					<li<?php if(isset($news)) echo $news; ?>><a href="./news">News</a></li>
 					<li<?php if(isset($hikers)) echo $hikers; ?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($guideCorr)) echo $guideCorr; ?>><a href="./guideCorr">Correspondent Guidelines</a></li>
 					<li<?php if(isset($lnt)) echo $lnt; ?>><a href="./lnt">Leave No Trace</a></li>
 				<?php } ?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'ADM'))){ ?>
+					<li<?php if(isset($news)) echo $news; ?>><a href="./news">News</a></li>
 					<li<?php if(isset($applicants)) echo $applicants; ?>><a href="./applicants">Applicants</a></li>
 					<li<?php if(isset($hikers)) echo $hikers; ?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($correspondents)) echo $correspondents; ?>><a href="./correspondents">Correspondents</a></li>
@@ -56,6 +57,7 @@
 					<li<?php if(isset($lnt)) echo $lnt; ?>><a href="./lnt">Leave No Trace</a></li>
 				<?php } ?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'EDT'))){ ?>
+					<li<?php if(isset($news)) echo $news; ?>><a href="./news">News</a></li>
 					<li<?php if(isset($hikers)) echo $hikers; ?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($gallery)) echo $gallery; ?>><a href="./gallery">Gallery</a></li>
 					<li<?php if(isset($lnt)) echo $lnt; ?>><a href="./lnt">Leave No Trace</a></li>
