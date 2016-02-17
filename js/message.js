@@ -1,13 +1,13 @@
 ﻿$(document).ready(function(){
 
-    //Send message
+    //Send message from hiker profile screen
     if(document.getElementById('hidden_newMessage')){
-        //Show New Message
         var template_newMessageHTML = document.getElementById('template_newMessage').innerHTML;
         document.getElementById('div_messages_main').innerHTML = template_newMessageHTML;
         $('#downloader').downloader({desc: true});
 
         populateNewMessage();
+		initEditor();
     }
 
     //Message table links
