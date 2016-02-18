@@ -191,7 +191,7 @@
 	</div>
 	
 	<div style="display:none;">
-		<?php if($_SESSION['ADK_USERGROUP_CDE'] !== 'ADM'){ ?>
+		<?php if($_SESSION['ADK_USERGROUP_CDE'] === 'ADM'){ ?>
 			<form method="post" action="includes/hikerDelete.php" role="form" novalidate>
 				<input type="hidden" name="id" value="<?php echo $ADK_HIKER->id; ?>" />
 				<button type="submit" id="button_submit_delete"></button>
