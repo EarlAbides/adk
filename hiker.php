@@ -120,7 +120,7 @@
 						<?php if($ADK_HIKER->address2 !== ''){ ?>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<label class="control-label control-label-sm">Address<?php if($ADK_HIKER->address2 !== ''){ ?>, line 1<?php } ?></label><br />
+								<label class="control-label control-label-sm">Address<?php if($ADK_HIKER->address2 !== ''){ ?>, line 2<?php } ?></label><br />
 								<span><?php echo $ADK_HIKER->address2; ?></span>
 							</div>
 						</div>
