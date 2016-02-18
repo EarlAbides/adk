@@ -1,26 +1,23 @@
 <?php require_once 'includes/session.php'; ?>
 <?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
 <?php include 'templates/head.php'; ?>
+    <script src="js/weather.min.js"></script>
     <script>
         $(document).ready(function(){
             $('.hometab').click(function(){
                 this.classList.add('hometab-disabled');
-
-                var seperator = document.querySelector('.hometab-section-seperator');
-                seperator.style.display = 'block';
-                setTimeout(function(){seperator.style.display = 'none';}, 630);
-                
+                var seperator=document.querySelector('.hometab-section-seperator');
+                seperator.style.display='block';
+                setTimeout(function(){seperator.style.display='none';},630);                
                 if(this.classList.contains('hometab-intro')){
                     document.querySelector('.hometab-about').classList.remove('hometab-disabled');
-                    var toMax = document.querySelector('#home_intro'), toMin = document.querySelector('#home_about');
+                    var toMax = document.querySelector('#home_intro'),toMin=document.querySelector('#home_about');
                 }
                 else{
                     document.querySelector('.hometab-intro').classList.remove('hometab-disabled');
-                    var toMax = document.querySelector('#home_about'), toMin = document.querySelector('#home_intro');
+                    var toMax=document.querySelector('#home_about'),toMin=document.querySelector('#home_intro');
                 }
-
-                $(toMin).animate({height: '0'}, 650);
-                $(toMax).animate({height: '100%'}, 650);
+                $(toMin).animate({height:'0'},650);$(toMax).animate({height:'100%'},650);
             });
         });
     </script>
@@ -33,7 +30,7 @@
 	<div class="container-fluid">
 		<?php include 'templates/navbar_sub.php'; ?>
 		<div class="content-wrapper">
-		
+			
 			<div class="col-xs-12 col-sm-8">
 				<div class="container-fluid content content-max">
 					
@@ -51,7 +48,7 @@
                     </span>
 					
                     <div id="home_intro">
-
+						
                         <br />
 					    
                         <p>Welcome!</p>
@@ -131,6 +128,8 @@
 					</div>
 				</div>
 			</div>
+
+			<?php include 'templates/weather.html'; ?>
 			
 		</div>
 		<?php include 'templates/footer.php'; ?>

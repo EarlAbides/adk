@@ -225,3 +225,4 @@ includes/PHPMailer/
 /js/jquery.lazyload.min.js
 /includes/hikeUpdate.php
 /includes/hikeSave.php
+/data/

@@ -9,3 +9,4 @@ jquery.lazyload
 1000hz/bootstrap-validator
 wysihtml
 PHPMailer
+Weather Underground - http://www.wunderground.com/

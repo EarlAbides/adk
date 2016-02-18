@@ -1,6 +1,15 @@
-﻿date columns in db on pretty much every table
+﻿fix hiker since -> '--'
 
-DEC feed
+fix peak date not showing error
+
+gallery filter - by peak on all users, by hike on single users
+	allow corrs gallery tab of hikers
+
+profile pic modal
+
+attachments table show pics
+
+DEC email alert reader
 
 news page update section
 
@@ -14,3 +23,5 @@ sign up disclaimer/LNT
 Youtube howto
 	
 -Auto scrolling site wide - check if item is onscreen before scrolling to make it less annoying
+
+winter 46er
