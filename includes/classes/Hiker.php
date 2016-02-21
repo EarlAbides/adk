@@ -65,7 +65,7 @@
 								<td>".$ADK_HIKER->username."</td>
 								<td>".$ADK_HIKER->email."</td>
 								<td>".$ADK_HIKER->corrname."</td>
-								<td>".date('m/d/Y', strtotime($ADK_HIKER->datetime))."</td>
+								<td>".(date('Y', strtotime($ADK_HIKER->datetime)) === '1970'? '--': date('m/d/Y', strtotime($ADK_HIKER->datetime)))."</td>
 								<td>".$ADK_HIKER->lastactive."</td>
 								<td>".$ADK_HIKER->numpeaks."</td>
 							</tr>";

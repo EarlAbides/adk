@@ -23,7 +23,7 @@
 		            $ADK_CORRESPONDENT->email = $row['ADK_USER_EMAIL'];
 		            $ADK_CORRESPONDENT->phone = $row['ADK_CORR_PERSONALINFO'];
 		            $ADK_CORRESPONDENT->numhikers = intval($row['ADK_CORR_NUMHIKERS']);
-		            $ADK_CORRESPONDENT->datetime = $row['ADK_CORR_DTE'];
+					$ADK_CORRESPONDENT->datetime = $row['ADK_CORR_DTE'];
 					array_push($this->correspondents, $ADK_CORRESPONDENT);
 		        }
 		    }
@@ -97,7 +97,7 @@
 							<td>".$ADK_CORRESPONDENT->name."</td>
 							<td>".$ADK_CORRESPONDENT->username."</td>
 							<td>".$ADK_CORRESPONDENT->email."</td>
-							<td>".date('m/d/Y', strtotime($ADK_CORRESPONDENT->datetime))."</td>
+							<td>".(date('Y', strtotime($ADK_CORRESPONDENT->datetime)) === '1970'? '--': date('m/d/Y', strtotime($ADK_CORRESPONDENT->datetime)))."</td>
 							<td>".$ADK_CORRESPONDENT->numhikers."</td>
 						</tr>";
 			}
