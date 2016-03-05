@@ -16,9 +16,17 @@
 		}
 		else{
 			for(var i = 0; i < lis.length; i++){
-				var peaks = lis[i].getAttribute('data-peaks').split(',');
-				if(peaks.indexOf(this.value) === -1) lis[i].style.display = 'none';
-				else lis[i].style.display = '';
+				var peaks = this.value.indexOf(',') !== -1? lis[i].getAttribute('data-peaks'): lis[i].getAttribute('data-peaks').split(',');
+				if(this.value.indexOf(',') !== -1){
+					var peaks = lis[i].getAttribute('data-peaks');
+					if(peaks !== this.value.replace(/, /g, ',')) lis[i].style.display = 'none';
+					else lis[i].style.display = '';
+				}
+				else{
+					var peaks = lis[i].getAttribute('data-peaks').split(',');
+					if(peaks.indexOf(this.value) === -1) lis[i].style.display = 'none';
+					else lis[i].style.display = '';
+				}				
 			}
 		}
 	});

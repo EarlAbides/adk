@@ -102,7 +102,7 @@ img.imghover:hover{opacity:1;}
 .hoverbtn{opacity:0.8;cursor:pointer;}
 .hoverbtn:hover{opacity:1;}
 a.hoverbtn, a.hoverbtn:hover, a.hoverbtn:active, a.hoverbtn:visited, a.hoverbtn:focus{color:#252C2F;font-size:12px;text-decoration:none;}
-.content-header{border-bottom:2px solid;margin-left:auto;margin-right:auto;padding-bottom:2px;padding-left:4px;}
+.content-header{border-bottom:2px solid;margin-left:4px;margin-right:4px;padding-bottom:2px;padding-left:4px;}
 .content-header .hoverbtn{float:right;margin-right:4px;}
 .error{color:#A94442;}
 textarea{resize:vertical;max-height:120px;overflow-y:auto;}

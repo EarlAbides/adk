@@ -6,7 +6,7 @@
 
 <?php include 'templates/head.php'; ?>
     <script src="js/jquery.lazyload.min.js"></script>
-    <script src="js/gallery.min.js"></script>
+    <script src="js/gallery.js"></script>
 	<script>
 		$(function(){
 		    $('img.lazy').show().lazyload({
@@ -44,9 +44,9 @@
 
                     <br />
 
-                    <div class="col-xs-6">
+                    <div class="col-xs-12 col-sm-4 col-md-5">
                         <div class="form-group">
-							<?php if($ADK_USERGROUP_CDE === 'ADM' || $ADK_USERGROUP_CDE === 'EDT'){ ?>
+							<?php if($ADK_USERGROUP_CDE !== 'HIK'){ ?>
 								<label for="select_ADK_HIKER" class="control-label control-label-sm text-right">Filter by user</label>
 								<select id="select_ADK_HIKER" class="form-control form-control-sm">
 									<option value="">Show All</option>
@@ -58,15 +58,25 @@
 						</div>
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-5 col-md-offset-2">
                         <div class="pull-right">
-                            <label for="select_filter" class="control-label control-label-sm text-right">Filter by peak</label>
-						    <select id="select_filter" class="form-control form-control-sm">
-                                <option value="">Show All</option>
-                                <option disabled="disabled" role="separator" >-------------------------</option>
-                                <?php foreach($ADK_PEAKS->peaks as $ADK_PEAK) echo '<option value="'.$ADK_PEAK->name.'">'.$ADK_PEAK->name.'</option>'; ?>
-                            </select>
-						    <span class="help-block with-errors"></span>
+							<?php if($ADK_USER_ID !== '%'){ ?>
+								<label for="select_filter" class="control-label control-label-sm text-right">Filter by hike</label>
+								<select id="select_filter" class="form-control form-control-sm">
+									<option value="">Show All</option>
+									<option disabled="disabled" role="separator" >-------------------------</option>
+									<?php foreach($ADK_HIKES->hikes as $ADK_HIKE) echo '<option value="'.$ADK_HIKE->label.'">'.$ADK_HIKE->label.'</option>'; ?>
+								</select>
+								<span class="help-block with-errors"></span>
+							<?php  }else{ ?>
+								<label for="select_filter" class="control-label control-label-sm text-right">Filter by peak</label>
+								<select id="select_filter" class="form-control form-control-sm">
+									<option value="">Show All</option>
+									<option disabled="disabled" role="separator" >-------------------------</option>
+									<?php foreach($ADK_PEAKS->peaks as $ADK_PEAK) echo '<option value="'.$ADK_PEAK->name.'">'.$ADK_PEAK->name.'</option>'; ?>
+								</select>
+								<span class="help-block with-errors"></span>
+							<?php } ?>
                         </div>
                     </div>
                     

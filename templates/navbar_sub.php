@@ -40,6 +40,7 @@
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'COR'))){ ?>
 					<li<?php if(isset($news)) echo $news; ?>><a href="./news">News</a></li>
 					<li<?php if(isset($hikers)) echo $hikers; ?>><a href="./hikers">Hikers</a></li>
+					<li<?php if(isset($gallery)) echo $gallery; ?>><a href="./gallery">Gallery</a></li>
 					<li<?php if(isset($guideCorr)) echo $guideCorr; ?>><a href="./guideCorr">Correspondent Guidelines</a></li>
 					<li<?php if(isset($lnt)) echo $lnt; ?>><a href="./lnt">Leave No Trace</a></li>
 				<?php } ?>
