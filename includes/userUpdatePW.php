@@ -17,7 +17,7 @@
 	$ADK_USER->pw = $_POST['password'];
 
 	if(isset($_POST['checkold'])){
-		require_once 'SELECT.php';
+		require_once 'db/SELECT.php';
 		if(!$ADK_USER->isOldPassword($con, $_POST['oldpassword'])){header('Location: ../profile?e=o'); exit;}
 	}
 	if($ADK_USER_PASSWORD !== $ADK_USER_PASSWORD_CONFIRM){header('Location: ../profile?e=m'); exit;}
