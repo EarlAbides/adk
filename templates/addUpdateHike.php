@@ -28,7 +28,7 @@
 						<div class="col-xs-12 col-sm-3 col-sm-offset-4">
 							<div class="form-group">
 								<label for="textbox_hikedate" class="control-label control-label-sm">Date*</label><br />
-								<input type="text" id="textbox_hikedate" name="date" class="form-control form-control-sm date" maxlength="10" placeholder="MM/DD/YYYY" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" />
+								<input type="text" id="textbox_hikedate" name="date" class="form-control form-control-sm date" maxlength="10" placeholder="MM/DD/YYYY" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" required="required" />
 								<span class="help-block with-errors"></span>
 							</div>
 						</div>
