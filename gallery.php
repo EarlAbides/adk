@@ -6,7 +6,7 @@
 
 <?php include 'templates/head.php'; ?>
     <script src="js/jquery.lazyload.min.js"></script>
-    <script src="js/gallery.js"></script>
+    <script src="js/gallery.min.js"></script>
 	<script>
 		$(function(){
 		    $('img.lazy').show().lazyload({

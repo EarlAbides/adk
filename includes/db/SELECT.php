@@ -114,7 +114,7 @@
         return $sql_query;
 	}
 	
-	function sql_getFileGallery($con, $ADK_USER_ID){
+	function sql_getFileGallery($con, $ADK_USER_ID, $ADK_CORR_ID){
         $sql_query = $con->prepare(
             "SELECT F.ADK_FILE_ID, F.ADK_FILE_NAME, F.ADK_FILE_SAVENAME, F.ADK_FILE_DESC, F.ADK_FILE_SIZE, F.ADK_FILE_TYPE, U.ADK_USER_USERNAME
                 ,(SELECT GROUP_CONCAT(P.ADK_PEAK_NAME) FROM ADK_PEAK P
@@ -127,12 +127,13 @@
                 LEFT JOIN ADK_MESSAGE_FILE_JCT MF ON F.ADK_FILE_ID = MF.ADK_FILE_ID
                 LEFT JOIN ADK_MESSAGE M ON MF.ADK_MESSAGE_ID = M.ADK_MESSAGE_ID
 				LEFT JOIN ADK_USER U ON H.ADK_USER_ID = U.ADK_USER_ID OR M.ADK_MESSAGE_FROM_USER_ID = U.ADK_USER_ID
-            WHERE H.ADK_USER_ID LIKE ?
-                OR M.ADK_MESSAGE_FROM_USER_ID LIKE ?
+            WHERE (H.ADK_USER_ID LIKE ?
+                OR M.ADK_MESSAGE_FROM_USER_ID LIKE ?)
+				AND U.ADK_USER_ID IN(SELECT H.ADK_USER_ID FROM ADK_HIKER H WHERE ADK_HIKER_CORR_ID LIKE ?)
             ORDER BY ADK_FILE_ID DESC;"
         );
 
-        $sql_query->bind_param('ss', $ADK_USER_ID, $ADK_USER_ID);
+        $sql_query->bind_param('sss', $ADK_USER_ID, $ADK_USER_ID, $ADK_CORR_ID);
 
         return $sql_query;
     }

@@ -2,18 +2,19 @@
 	
     class Gallery extends Files{
 		
-		public $userid, $photos, $videos, $docs;
+		public $userid, $corrid, $photos, $videos, $docs;
 		
 		public function __construct(){
 			parent::__construct();
 			$this->photos = [];
 			$this->videos = [];
 			$this->docs = [];
+			$this->corrid = '%';
 		}
 		
 
 		public function get($con){
-			 $sql_query = sql_getFileGallery($con, $this->userid);
+			 $sql_query = sql_getFileGallery($con, $this->userid, $this->corrid);
 			if($sql_query->execute()){
 				$sql_query->store_result();
 				$result = sql_get_assoc($sql_query);

@@ -32,6 +32,7 @@
 
 	$ADK_GALLERY = new Gallery();
 	$ADK_GALLERY->userid = $ADK_USER_ID;
+	if($ADK_USERGROUP_CDE === 'COR') $ADK_GALLERY->corrid = $_SESSION['ADK_USER_ID'];
 	$ADK_GALLERY->get($con);
 
 	if($ADK_USERGROUP_CDE !== 'HIK'){
