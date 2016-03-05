@@ -29,7 +29,7 @@
 	switch($_SESSION['ADK_USERGROUP_CDE']){
 		case 'COR': header('Location: ../hikers'); break;
 		case 'HIK': header('Location: ../hikerportal'); break;
-		default: header('Location: ../?123');
+		default: header('Location: ../');
 	}
 	
 ?>
