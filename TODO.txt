@@ -1,6 +1,4 @@
-﻿fix hiker since -> '--'
-
-fix peak date not showing error
+﻿fix peak date not showing error
 
 gallery filter - by peak on all users, by hike on single users
 	allow corrs gallery tab of hikers

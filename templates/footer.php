@@ -19,3 +19,5 @@
 		</div>
 	</div>
 </nav>
+
+<?php include 'templates/analyticstracking.php'; ?>
