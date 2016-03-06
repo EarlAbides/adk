@@ -20,7 +20,7 @@
         $('html, body').animate({scrollTop: $(span_maxminAddUpdateHike).offset().top}, 600);
     }
 
-	$('#form_addUpdateHike').on('change', enableDisable_addHike);
+	$('#form_addUpdateHike, #textbox_hikedate').on('change', enableDisable_addHike);
 
 	if(parseInt(window.location.hash.replace('#', ''))){
 		var ADK_HIKE_ID = window.location.hash.replace('#', '');
@@ -332,8 +332,7 @@ function enableDisable_addHike(){
 
 	$('.addpeak-date').each(function(){if(this.innerHTML === '???'){disable(true); return;}});
 
-	if(ul_addpeaks.innerHTML === ''){disable(false); return;}
-	if(document.getElementById('textbox_hikedate').value === '') disable(false);
+	if(ul_addpeaks.innerHTML === '' || (document.getElementById('select_addpeaks').value === '' && document.getElementById('textbox_hikedate').value === '')){disable(false); return;}
 }
 
 function modal_hike(){
