@@ -270,8 +270,6 @@
 		$htmlmessage .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT->name.".<br>";
         $htmlmessage .= "Username:<br>";
 		$htmlmessage .= $ADK_CORRESPONDENT->username."<br><br>";
-		$htmlmessage .= "Email:<br>";
-		$htmlmessage .= "<a href=\"mailto:".$ADK_CORRESPONDENT->email."\">".$ADK_CORRESPONDENT->email."</a><br><br><br><br>";
 
 		$htmlmessage .= "Click <a href=".$GLOBALS['url'].">here to visit the site and log in</a>.<br><br>";
 		
@@ -285,8 +283,6 @@
 		$message .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT->name.".\r\n";
         $message .= "Username:<br>";
 		$message .= $ADK_CORRESPONDENT->username."\r\n\r\n";
-		$message .= "Email:<br>";
-		$message .= $ADK_CORRESPONDENT->email."\r\n\r\n\r\n\r\n";
 
 		$message .= "Click below to visit the site and log in:\r\n".$GLOBALS['url']."\r\n\r\n";
 				
