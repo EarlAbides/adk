@@ -84,7 +84,7 @@
 		$.fn.downloader.clearEmpty = function(fileInputs){
 			if(fileInputs.length){
 				for(var i = fileInputs.length - 1; i >= 0; i--){
-					if(!fileInputs[i].files.length) $.remove(fileInputs[i]);
+					if(!fileInputs[i].files.length) $(fileInputs[i]).remove();
 				}
 				document.getElementById('hidden_fileIndex').value = fileInputs.length;
 			}
