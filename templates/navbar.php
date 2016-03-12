@@ -110,10 +110,10 @@
 						</a>
 						<ul class="dropdown-menu" role="menu">
 							<li>
-								<a href="./profile">Edit Profile <span class="glyphicon glyphicon-home pull-right"></span></a>
+								<a href="./profile"><span class="glyphicon glyphicon-home pull-right"></span>Edit Profile</a>
 							</li>
 							<li>
-								<a href="includes/logout.php">Logout <span class="glyphicon glyphicon-log-out pull-right"></span></a>
+								<a href="includes/logout.php"><span class="glyphicon glyphicon-log-out pull-right"></span>Logout</a>
 							</li>
 						</ul>
 					</li>

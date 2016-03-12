@@ -267,10 +267,13 @@ table.dataTable thead .sorting_desc{background-image:url("../img/sort_desc.png")
 #div_messages_main{padding:0;}
 #div_messages_main fieldset.fieldset{background-color:#F2ECCD;}
 #div_table_messages{height:350px;overflow-y:auto;border-top:1px solid;}
+#div_table_messages a.messagebtn{font-size:12px;}
 @media(max-width:992px){
     #div_table_messages{height:200px;}
 }
 #div_table_messages ul.ul a{font-size:1.2em;}
+#table_messages tr[data-isread='false'] span{color:#337ab7;}
+
 .messagecontent{background-color:#E5E5E5;}
 
 .badge.newmessages{
@@ -297,6 +300,12 @@ line-height:1;
 -webkit-font-smoothing:antialiased;
 -moz-osx-font-smoothing:grayscale;
 }
+
+.message-filter a{
+font-size:0.6em;
+cursor:pointer;
+}
+.message-filter a.active{color:#000;cursor:default;text-decoration:none;}
 
 #ul_templates{overflow-y:auto;max-height:450px;width:350px;}
 #ul_templates a{padding:0;}

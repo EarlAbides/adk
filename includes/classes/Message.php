@@ -50,9 +50,16 @@
 			return $COUNT;
 		}
 		
-
 		public function renderTable(){
-			$html = "<h4 id=\"h4_folderName\" style=\"border-bottom:1px solid;\">".$this->foldername."</h4>
+			$html = "<h4 id=\"h4_folderName\" style=\"border-bottom:1px solid;\">".$this->foldername;
+			if($this->foldername === 'Inbox'){
+				$html .= "<div class=\"message-filter pull-right\">
+							<a class=\"message-filter-all active\">All</a>&nbsp;
+							<a class=\"message-filter-unread\">Unread</a>&nbsp;
+							<a class=\"message-filter-read\">Read</a>
+						</div>";
+			}
+			$html .= "</h4>
 					<table id=\"table_messages\" class=\"selecttable\"><thead></thead><tbody>";
 			if(count($this->messages) === 0) $html .= '<tr><td style="text-align:center;font-style:italic;">No messages</td></tr>';
 			else{		
@@ -71,25 +78,25 @@
 					if($this->foldername === 'Inbox'){if($ADK_MESSAGE->isread == false) $bold = ' class="font-bold";';}
 					if($ADK_MESSAGE->hasfiles) $icon .= '<span class="glyphicon glyphicon-paperclip"></span>';
 				
-					$html .= "<tr data-name=\"".$displayUsername."\" data-date=\"".$ADK_MESSAGE->date." ".$ADK_MESSAGE->time."\">
+					$html .= "<tr data-name=\"".$displayUsername."\" data-date=\"".$ADK_MESSAGE->date." ".$ADK_MESSAGE->time."\" data-isread=\"".($ADK_MESSAGE->isread? 'true': 'false')."\">
 								<td>
 									<a class=\"messagebtn hoverbtn rowselector\" data-id=\"".$ADK_MESSAGE->id."\">
-										<div class=\"col-xs-1\" style=\"padding:0;vertical-align:middle;\">".$icon."</div>
+										<div class=\"col-xs-1\" style=\"max-width:5%;padding:0;vertical-align:middle;\">".$icon."</div>
 										<div class=\"col-xs-11\" style=\"padding:0;\">
 											<div class=\"container-fluid nopadding nomargin\">
-												<div class=\"col-xs-6 nopadding\" style=\"text-overflow:ellipsis;overflow:hidden;\">
-													<span".$bold." style=\"width:120px;display:inline-block;\">".$ADK_MESSAGE->title."</span>
+												<div class=\"col-xs-7 nopadding\" style=\"text-overflow:ellipsis;overflow:hidden;\">
+													<span".$bold." style=\"display:inline-block;\">".$ADK_MESSAGE->title."</span>
 												</div>
-												<div class=\"col-xs-6 nopadding\">
+												<div class=\"col-xs-5 nopadding\">
 													<span class=\"pull-right\">".$ADK_MESSAGE->date."</span>
 												</div>
 											</div>
 											<div class=\"container-fluid nopadding nomargin\">
-												<div class=\"col-xs-6 nopadding\">
+												<div class=\"col-xs-7 nopadding\">
 													<span class=\"glyphicon glyphicon-user\" style=\"display:inline-block;vertical-align:text-top;\"></span>
 													<span>".$displayUsername."</span>
 												</div>
-												<div class=\"col-xs-6 nopadding\">
+												<div class=\"col-xs-5 nopadding\">
 													<span class=\"pull-right\">".$ADK_MESSAGE->time."</span>
 												</div>
 											</div>

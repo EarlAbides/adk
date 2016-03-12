@@ -16,6 +16,30 @@
     //Sort
     $('.messageSort').click(function(){sortMessages(this);});
 
+	//filter
+	$('#div_table_messages').on('click', '.message-filter a', function(){
+		if(this.className.indexOf('active') !== -1) return;
+
+		$('.message-filter a.active').removeClass('active');
+		this.classList.add('active');
+
+		var filterBy;
+		if(this.className.indexOf('unread') !== -1) filterBy = 1;
+		else if(this.className.indexOf('read') !== -1) filterBy = 2;
+
+		if(!filterBy) $('#table_messages tr').css('display', 'table-row');
+		else{
+			$('#table_messages tr').each(function(){
+				if(filterBy === 1) this.style.display = this.getAttribute('data-isread') === 'true'? 'none': 'table-row';
+				else this.style.display = this.getAttribute('data-isread') === 'true'? 'table-row': 'none';
+			});
+		}
+		$('#table_messages tr:visible').each(function(i){
+			if(i % 2 === 0) this.style['background-color'] = '#ededed';
+			else this.style['background-color'] = '#dce1f9';
+		});
+	});
+
     //select_to_username bind
     $('#select_to_username').change(function(){
         document.getElementById('hidden_touserid').value = this.value;
@@ -180,11 +204,12 @@ function reply(){
 
 function cancelMessage(){document.getElementById('div_messages_main').innerHTML = '';destroyEditor();}
 
-function message_markRead(ADK_MESSAGE_ID, span){
-    if(document.getElementById('h4_folderName').innerHTML == 'Inbox'){
-        $.post('includes/messageMarkRead', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},
-            function(){if(span) span.classList.remove('font-bold');}
-        );
+function message_markRead(ADK_MESSAGE_ID, span, tr){
+    if(document.getElementById('h4_folderName').innerHTML.indexOf('Inbox') !== -1){
+        $.post('includes/messageMarkRead', {ADK_MESSAGE_ID: ADK_MESSAGE_ID},function(){
+			if(span) span.classList.remove('font-bold');
+			if(tr) tr.setAttribute('data-isread', 'true');
+		});
         var badge = document.getElementById('span_messages').children[0];
         if(badge){
             badge.innerHTML = parseInt(badge.innerHTML) - 1;
@@ -335,15 +360,14 @@ function getFolder(id){
 }
 
 function bind_messagesClick(){
-    $('a.messagebtn').click(
-        function(){
-			if(document.getElementById('h4_folderName').innerHTML === 'Drafts') openDraft(this.getAttribute('data-id'));
-            else{
-				message_markRead(this.getAttribute('data-id'), this.children[1].children[0].children[0].children[0]);
-				viewMessage(this.getAttribute('data-id'));
-			}
-        }
-    );
+    $('a.messagebtn').click(function(){
+		if(document.getElementById('h4_folderName').innerHTML.indexOf('Drafts') !== -1) openDraft(this.getAttribute('data-id'));
+        else{
+			message_markRead(this.getAttribute('data-id'), this.children[1].children[0].children[0].children[0], this.parentNode.parentNode);
+			viewMessage(this.getAttribute('data-id'));
+		}
+		
+    });
 }
 
 function openDraft(ADK_MESSAGE_ID){
@@ -405,7 +429,7 @@ function deleteMessage(){
             tofrom: h4_folderName.innerHTML === 'Sent'? 's': 'i'
         },
         function(){
-            if(document.getElementById('h4_folderName').innerHTML === 'Sent') getFolder(1);
+            if(document.getElementById('h4_folderName').innerHTML.indexOf('Sent') !== -1) getFolder(1);
             else getFolder(0);
             newMessage();
         }
