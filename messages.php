@@ -8,7 +8,7 @@
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/wysihtml.js"></script>
 	<script src="js/message.min.js"></script>
-	<script src="js/jquery-dl.min.js"></script>
+	<script src="js/jqul.min.js"></script>
 </head>
 
 <body>
