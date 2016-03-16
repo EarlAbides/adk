@@ -147,6 +147,10 @@ width:100%;
 .peaklist{list-style:none;margin:0;}
 .peaklist label{font-weight:normal;}
 
+#select_addpeaks{border-top-right-radius:0;border-bottom-right-radius:0;}
+#textbox_hikedate{margin-left:-1px;border-radius:0;}
+#span_addPeak{width:42px;border-top-left-radius:0;border-bottom-left-radius:0;}
+
 #div_hikertable{max-height:600px;}
 
 .modal-header{background-color:#CECECE;border-top-left-radius:6px;border-top-right-radius:6px;}

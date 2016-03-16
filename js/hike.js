@@ -38,7 +38,6 @@
 	$('#ul_addpeaks').on('click', '.addpeak-date', function(){editPeakDate(this);});
 
 	markCompletedPeaks();
-
 });
 
 //Hike

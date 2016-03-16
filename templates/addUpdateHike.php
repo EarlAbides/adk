@@ -13,24 +13,28 @@
 				
 				<div class="col-xs-12">
 					<div class="form-group">
-						<div class="col-xs-12 col-sm-5">
-							<label for="select_addpeaks" class="control-label control-label-sm">Peak*</label><br />
-								<div class="input-group input-group-sm">
+						<div class="col-xs-12 col-sm-7">
+							<div class="container-fluid nopadding nomargin">
+								<div class="col-xs-12 col-sm-5 col-md-3 form-group nopadding nomargin">
+									<label for="select_addpeaks" class="control-label control-label-sm">Peak*</label><br />
 									<select id="select_addpeaks" class="form-control form-control-sm">
 										<option />
 										<?php foreach($ADK_PEAKS->peaks as $ADK_PEAK) echo '<option value="'.$ADK_PEAK->id.'">'.$ADK_PEAK->name.'</option>'; ?>
 									</select>
-									<span id="span_addPeak" class="input-group-addon btn-default pointer" onclick="addPeak(this.previousElementSibling);">Add</span>
 								</div>
-							<span class="help-block with-errors"></span>
-							<ul id="ul_addpeaks"></ul>
+								<div class="col-xs-8 col-sm-4 col-md-2 form-group nopadding nomargin">
+									<label for="textbox_hikedate" class="control-label control-label-sm">Date*</label><br />
+									<input type="text" id="textbox_hikedate" name="date" class="form-control form-control-sm date" maxlength="10" placeholder="MM/DD/YYYY" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" required="required" />
+									<span class="help-block with-errors"></span>
+								</div>
+								<div class="col-xs-1 form-group nopadding nomargin">
+									<br />
+									<span id="span_addPeak" class="input-group-addon btn-default pointer" onclick="addPeak(document.getElementById(select_addpeaks));">Add</span>
+								</div>
+							</div>														
 						</div>
-						<div class="col-xs-12 col-sm-3 col-sm-offset-4">
-							<div class="form-group">
-								<label for="textbox_hikedate" class="control-label control-label-sm">Date*</label><br />
-								<input type="text" id="textbox_hikedate" name="date" class="form-control form-control-sm date" maxlength="10" placeholder="MM/DD/YYYY" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" required="required" />
-								<span class="help-block with-errors"></span>
-							</div>
+						<div class="col-xs-12">
+							<ul id="ul_addpeaks"></ul>
 						</div>
 						<div class="col-xs-12">
 							<div class="form-group">

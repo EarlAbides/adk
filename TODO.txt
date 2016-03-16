@@ -1,9 +1,4 @@
-﻿message read/unread filter
-
-make unread messages a brighter color or something
-
-
-profile pic modal
+﻿profile pic modal
 
 attachments table show pics
 
