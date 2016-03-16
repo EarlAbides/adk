@@ -109,8 +109,6 @@
 		$htmlmessage .= $ADK_USER->name."<br>";
 		$htmlmessage .= "Username:<br>";
 		$htmlmessage .= $ADK_USER->username."<br>";
-		$htmlmessage .= "Initial Password:<br>";
-		$htmlmessage .= $ADK_USER->pw."<br><br>";
 		$htmlmessage .= "Personal info:<br>";
 		$htmlmessage .= $ADK_HIKER->info."<br><br>";
 		$htmlmessage .= "Peaks:<br>";
@@ -124,8 +122,6 @@
 		$message .= $ADK_USER->name."\r\n";
 		$message .= "Username:\r\n";
 		$message .= $ADK_USER->username."\r\n";
-		$message .= "Initial Password:\r\n";
-		$message .= $ADK_USER->pw."\r\n\r\n";
 		$message .= "Personal info:\r\n";
 		$message .= $ADK_HIKER->info."\r\n\r\n";
 		$message .= "Peaks:\r\n";
