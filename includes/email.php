@@ -303,10 +303,9 @@
 		$htmlmessage .= "Your next step is to register formally.<br>";
 		$htmlmessage .= "Click <a href=\"$url\">here</a> to see how to become a registered 46er.<br><br>";
 
-		//$htmlmessage .= "Now that you have finished, you will be able to access your account on this the Correspondent Program for records. However, you will not be able to add more climbing logs.<br><br>";
 		$htmlmessage .= "Now that you have finished, you will still be able to access your account on this the Correspondent Program for records. However, you will not be able to send messages to your staff correspondent.<br><br>";
 		$htmlmessage .= "But the journey does not need to end here. Learn more about the 46er organization and get involved. We sponsor many conservation efforts and do our part to support initiatives to keep this one of a kind experience available for the next generations. Teach people 'Leave No Trace' and 'Walk Softly' and set an example as a 46er.<br><br>";
-		$htmlmessage .= "An easy and fun way to get involved is join a trail work session. The schedule is posted here: <a href=\"$url2\">$url2</a><br><br><br>";
+		$htmlmessage .= "An easy and fun way to get involved is join a trail work session. The schedule is posted <a href=\"$url2\">here</a><br><br><br>";
 
 		$htmlmessage .= "Forward we go!<br>";
 
@@ -318,10 +317,9 @@
 		$message .= "Your next step is to register formally.\r\n";
 		$message .= "Go to $url to see how to become a registered 46er.\r\n\r\n";
 
-		//$message .= "Now that you have finished, you will be able to access your account on this the Correspondent Program for records. However, you will not be able to add more climbing logs.\r\n\r\n";
 		$message .= "Now that you have finished, you will still be able to access your account on this the Correspondent Program for records. However, you will not be able to send messages to your staff correspondent.\r\n\r\n";
 		$message .= "But the journey does not need to end here. Learn more about the 46er organization and get involved. We sponsor many conservation efforts and do our part to support initiatives to keep this one of a kind experience available for the next generations. Teach people 'Leave No Trace' and 'Walk Softly' and set an example as a 46er.\r\n\r\n";
-		$message .= "An easy and fun way to get involved is join a trail work session. The schedule is posted here: $url2\r\n\r\n\r\n";
+		$message .= "An easy and fun way to get involved is join a trail work session. The schedule is posted at $url2\r\n\r\n\r\n";
 
 		$message .= "Forward we go!\r\n";
 		
