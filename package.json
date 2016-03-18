@@ -1,0 +1,22 @@
+{
+  "name": "adk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "copywww": "copyfiles ./* /var/www/adk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neilsimp1/adk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neilsimp1/adk/issues"
+  },
+  "homepage": "https://github.com/neilsimp1/adk#readme"
+}
