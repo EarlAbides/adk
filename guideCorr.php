@@ -33,24 +33,24 @@
 					
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 						<p>
-							&emsp;The purpose of this document is to serve as a guide to the new correspondent and a reference to
-							the experienced correspondent.
+							&emsp;The purpose of this document is to serve as a guide to the new correspondent and a reference to the experienced
+							correspondent. It is our wish keep the correspondence program alive, and while honoring the old format, we need to use
+							digital technology because of what it can do for us. Although Grace Hudowalski has left us, let's always remember and
+							honor this unique tradition of the&nbsp;46ers.
 						</p>
 						<p>
-							&emsp;The history of this office goes back to the 46ers in Troy in late thirties and the 46ers that formed
-							in the forties. Grace Hudowalski initiated the procedures outlined here. She had a very efficient system
-							of recording and corresponding to the climbers. She did this without the aid of a computer. She could be
-							critical at times. As when she felt a climber was improper in reporting their climbs. In time the number
-							of climbers increased and Grace was getting older. It became difficult for her to keep up. A staff of helpers
-							organized the Office of the Historian. Under her watchful eye a team of correspondents filled in for what
-							Grace was doing by herself. Even though this is done by paper and snail mail it still worked for many years
-							keeping the traditional format set up by&nbsp;Grace.
+							&emsp;The history of this office goes back to the 46ers in Troy, NY in late thirties, and the 46ers that formed in the
+							forties. Grace Hudowalski initiated the procedures outlined here. She had a very efficient system of recording and
+							corresponding to the climbers. She did this without the aid of a computer. She could be critical at times, like when she
+							felt a climber was improper in reporting their climbs. In time, the number of climbers increased and Grace was getting
+							older. It became difficult for her to keep up. A staff of helpers organized the Office of the Historian. Under her watchful eye,
+							a team of correspondents filled in for what Grace was doing by herself. Even though this was done by paper and snail mail,
+							it still worked for many years keeping the traditional format set up by&nbsp;Grace.
 						</p>
 						<p>
-							&emsp;It is our wish keep the correspondence program alive and while honoring the old format we need to
-							use digital technology as for what it can do for us. Although Grace has left us let's always remember and honor
-							this unique tradition of the 46ers. We will accommodate paper and pen 'snail mail' and archive via a scan, but
-							push for email or message board electronic records as it is so much&nbsp;easier.
+							&emsp;Thanks for your desire to give back by being an ADK 46er Correspondent. You are the spirit of Grace and honor
+							the unique tradition of the 46ers. Be mindful in your message towards conservation and preservation of the Adirondack
+							Mountains we are so privileged to&nbsp;share.
 						</p>						
 					</div>
 					
@@ -88,7 +88,7 @@
 						<p>
 							You will receive an email from the site administrator indicating you have a hiker. 
 							That means that an account has been set up in their name with you as their correspondent.
-							Please take it upon yourself to reach out to the hiker and introduce yourself.
+							Please take it upon yourself to reach out to the hiker and introduce&nbsp;yourself.
 						</p>
 					</div>
 					
@@ -99,7 +99,25 @@
                             info in the textbox. If they can not remember the date, best guess on month and use the first day
                             of that month. A response for each message is a goal. You will need to develop your own style and
                             your own relationship with each hiker. The object is to build a nice trusting relationship, make
-                            a friend, and inspire them to the next adventure.
+                            a friend, and inspire them to the next&nbsp;adventure.
+						</p>
+						<p>
+							There is no intent to overwhelm anyone. However, hikers shouldn't wait too long for a response. It
+							is a complete balance of I don't want to over task correspondents vs. I want the experience to be solid,
+							consistent, professional, and available. Please don't get over concerned if you get bunches of
+							messages in a short period, because this will happen. I certainly don't care if you simply reply quickly
+							and tell the Hiker you'll review and get back to them or something similar. It might have taken several
+							weeks under the old system for the Correspondent to reply. However, I fully wish that every trip report
+							garners a Correspondent&nbsp;response.
+						</p>
+						<p>
+							This is how it works: Hiker messaging and logged hikes send an automated email to the Correspondent indicating
+							that the Hiker logged a hike. This so the Correspondent can go online, see it, and perhaps message the Hiker
+							(that is what I would hope you would do.). To avoid runaways or edits or multiple loggings creating and email
+							notification frenzy, we have a 24 hour timer so that another email will not be sent for 24 hours after the last
+							logging or edit of a hike. Further, all logs and edits have a date stamp on the Hiker page. Conversely, when a
+							Correspondent sends a message to a Hiker, they get an automated email indicating a message from their Correspondent
+							has been&nbsp;posted.
 						</p>
 					</div>
 					
