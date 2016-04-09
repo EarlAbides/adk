@@ -104,7 +104,7 @@
 						<p>
 							There is no intent to overwhelm anyone. However, hikers shouldn't wait too long for a response. It
 							is a complete balance of I don't want to over task correspondents vs. I want the experience to be solid,
-							consistent, professional, and available. Please don't get over concerned if you get bunches of
+							consistent, professional, and available. Please don't get overly concerned if you get bunches of
 							messages in a short period, because this will happen. I certainly don't care if you simply reply quickly
 							and tell the Hiker you'll review and get back to them or something similar. It might have taken several
 							weeks under the old system for the Correspondent to reply. However, I fully wish that every trip report

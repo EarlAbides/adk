@@ -186,23 +186,95 @@
 	}
 
     function sendNewCorrEmail($ADK_USER, $randomPW){
-        $htmlmessage = "Your 46er Staff Corresondent account has been created!<br><br>";
+		$url1 = "https://pogoplug.com/s/0Crhw6PdEjs/";
+		$url2 = "http://adk.nfshost.com/signup";
+		$url3 = "http://adk.nfshost.com/";
 		
+		////////////////////////
+
+        $htmlmessage = "Hello new Correspondent! I wish to express my excitement and enthusiasm with the successful launch of the program and the rebirth of the 46er tradition. We have both long time veteran correspondents as well as many newbies here. I look forward to meeting you, and invite communication between correspondents. I fully believe in continued success and growth of this program. Let's have some fun!<br><br><br>";
+		
+		$htmlmessage .= "Your login information<br>";
+
 		$htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_USER->username."<br><br>";
+		$htmlmessage .= "<b>".$ADK_USER->username."</b><br><br>";
 		$htmlmessage .= "Initial Password:<br>";
-		$htmlmessage .= $randomPW."<br><br><br><br>";
+		$htmlmessage .= "<b>".$randomPW."</b><br><br>";
+		$htmlmessage .= "It is recommended that you update your password and edit your profile upon first logging in.<br><br><br><br>";
 		
-		$htmlmessage .= "Click <a href=".$GLOBALS['url'].">here to visit the site and log in</a>.<br><br>";
+		$htmlmessage .= "My name is Mark Simpson and together with my son Neil and support from so many wonderful people, we have built this program from scratch. Neil and I are fellow 46ers. It is our wish keep the correspondence program alive, and while honoring the old format we need to use digital technology because of what it can do for us. Although Grace has left us, let's always remember and honor this unique tradition of the Adirondack 46ers.<br><br>";
+		$htmlmessage .= "I do my very best to distribute the hikers in a balanced and intelligent fashion. I have not refused any Hiker applicant, but will do so when I detect monkey business in the application, and have no issue barring a hiker upon your request (at the IP level). I can also easily reassign hikers to another correspondent. When all 46 peaks are logged, both hiker and correspondent will receive an email notice pointing them to the Office of the Historian and suggestions of giving back.<br><br><br>";
+
+		$htmlmessage .= "I have created a cloud based folder for our use. It is available <a href=\"$url1\">here</a>. Please bookmark it. At this time, I have placed correspondence samples from years ago for you to look at to mimic or borrow verbiage, LNT info, a current Correspondents list and some other items.<br><br><br>";
+
+		$htmlmessage .= "There is no intent to overwhelm anyone. However, hikers shouldn't wait too long for a response. It is a complete balance of I don't want to over task correspondents vs. I want the experience to be solid, consistent, professional, and available. Please don't get overly concerned if you get bunches of messages in a short period, because this will happen. I certainly don't care if you simply reply quickly and tell the Hiker you'll review and get back to them or something similar. It might have taken several weeks under the old system for the Correspondent to reply. However, I fully wish that every trip report garners a Correspondent response.<br><br>";
+		$htmlmessage .= "This is how it works: Hiker messaging and logged hikes send an automated email to the Correspondent indicating that the Hiker logged a hike. This so the Correspondent can go online, see it, and perhaps message the Hiker (that is what I would hope you would do.). To avoid runaways or edits or multiple loggings creating and email notification frenzy, we have a 24 hour timer so that another email will not be sent for 24 hours after the last logging or edit of a hike. Further, all logs and edits have a date stamp on the Hiker page. Conversely, when a Correspondent sends a message to a Hiker, they get an automated email indicating a message from their Correspondent has been posted.<br><br><br>";
+
+		$htmlmessage .= "Introduction letters and messaging - To facilitate a rapport with the Hiker, I ask that you, the Correspondent, send a message to the new Hiker as soon as possible after being notified. There are a couple templates that can be used when you are busy, but they are not complete. They are there to aid. Make each message special and meaningful to the Hiker, just like Grace did. I will not accept us acting like a computer generated response.<br><br>";
+		$htmlmessage .= "Lack of response from a hiker - It's way too early to cooment on this other than to use your own judgement whether to send another follow up message. The site can handle as many users as we can throw at it, and we can work on filtering or making hiker groups for your convenience later next year.<br><br>";
+		$htmlmessage .= "Hiker education - As stated above, there is information posted in the cloud location <a href=\"$url1\">here</a>. Please use forum this as an opportunity for education. It would be a shame to see all the good work that has been done in reseeding and getting the trails to where they are presently. We can and should do our part to toward Hiker education and turning neophytes into good 46ers.<br><br>";
+		$htmlmessage .= "Hiking advice - This is the most difficult item we have, and it will come up as a question time and time again. Here is an excellent response:<br><br>";
 		
-		$message = "Your 46er Staff Corresondent account has been created!\r\n\r\n";
+		$htmlmessage .= "&emsp;<i>If I had confidence in a hiker and had established a relationship, I don't think I would have a problem telling them which route I took (if asked directly). It would include a little disclaimer and the plusses & minuses of any alternate routes. I would also tell them to read trip reports on the ADK High Peaks Forum to help them decide. I certainly wouldn't encourage anyone to go outside of their comfort zone. If you are really not comfortable offering your experience, then don't. I think you just have to do what you think is best based on the info you have to work with. Good luck!</i><br><br>";
+
+		$htmlmessage .= "Hikers acknowledged a disclaimer at sign up. In the legal world, it means crap. If, for example, a correspondent tells a hiker, \"No problem, you can EASILY climb Saddleback from Basin in February, it's a piece of cake. You are real experienced, and HECK, I did it! My Mom did it! Probably won't even need cramp-ons!\" and the hiker gets hurt, we are in deep doo-doo, disclaimer or not. Straight to the point, don't give out trail advice. I like the statement above as he tells them what he did and then he points the hiker to a resource.<br><br><br>";
+
+		$htmlmessage .= "Further, and as help if you have to be away for for a period, 10 days or more, I can easily move your the hikers to me until your return.<br><br><br><br>";
+
+
+		$htmlmessage .= "Whereas you are now a Correspondent on the website, YOU HAVE NO HIKERS. There will be a test. I will not assign you any Hikers until you pass this test. I encourage for you to \"train\" by creating a hiker account so to 'see the other side'. Simply sign up <a href=\"$url2\">here</a> and create a Hiker Acct and name yourself as Correspondent. FYI, when you access a Hikers account or any table on the site, click on the magnifying glass to the left for more information. I will be sending you the test *soon*.<br><br><br>";
+
+		$htmlmessage .= "Thanks for your desire to give back by being an ADK 46er Correspondent. You are the spirit of Grace Hudowalski and honor the unique tradition of the 46ers. Be mindful in your message towards conservation and preservation of the Adirondacks Mountains we are so privileged to share.<br><br><br><br>";
+
+		$htmlmessage .= "Forward We Go!<br><br>";
+		$htmlmessage .= "Best Regards,<br><br>";
+		$htmlmessage .= "Mark Simpson #6038<br><br><br>";
+
+		$htmlmessage .= "<a href=\"$url3\">$url3</a><br>";
 		
+		////////////////////////
+
+		$message = "Hello new Correspondent! I wish to express my excitement and enthusiasm with the successful launch of the program and the rebirth of the 46er tradition. We have both long time veteran correspondents as well as many newbies here. I look forward to meeting you, and invite communication between correspondents. I fully believe in continued success and growth of this program. Let's have some fun!\r\n\r\n\r\n";
+		
+		$message .= "Your login information\r\n";
+
 		$message .= "Username:\r\n";
 		$message .= $ADK_USER->username."\r\n\r\n";
 		$message .= "Initial Password:\r\n";
-		$message .= $randomPW."\r\n\r\n\r\n\r\n";
+		$message .= $randomPW."\r\n";
+		$message .= "It is recommended that you update your password and edit your profile upon first logging in.\r\n\r\n\r\n\r\n";
 
-		$message .= "Click below to visit the site and log in:\r\n".$GLOBALS['url']."\r\n\r\n";
+		$message .= "My name is Mark Simpson and together with my son Neil and support from so many wonderful people, we have built this program from scratch. Neil and I are fellow 46ers. It is our wish keep the correspondence program alive, and while honoring the old format we need to use digital technology because of what it can do for us. Although Grace has left us, let's always remember and honor this unique tradition of the Adirondack 46ers.\r\n\r\n";
+		$message .= "I do my very best to distribute the hikers in a balanced and intelligent fashion. I have not refused any Hiker applicant, but will do so when I detect monkey business in the application, and have no issue barring a hiker upon your request (at the IP level). I can also easily reassign hikers to another correspondent. When all 46 peaks are logged, both hiker and correspondent will receive an email notice pointing them to the Office of the Historian and suggestions of giving back.\r\n\r\n";
+
+		$message .= "I have created a cloud based folder for our use. It is available at $url1. Please bookmark it. At this time, I have placed correspondence samples from years ago for you to look at to mimic or borrow verbiage, LNT info, a current Correspondents list and some other items.\r\n\r\n\r\n";
+
+		$message .= "There is no intent to overwhelm anyone. However, hikers shouldn't wait too long for a response. It is a complete balance of I don't want to over task correspondents vs. I want the experience to be solid, consistent, professional, and available. Please don't get overly concerned if you get bunches of messages in a short period, because this will happen. I certainly don't care if you simply reply quickly and tell the Hiker you'll review and get back to them or something similar. It might have taken several weeks under the old system for the Correspondent to reply. However, I fully wish that every trip report garners a Correspondent response.\r\n\r\n";
+		$message .= "This is how it works: Hiker messaging and logged hikes send an automated email to the Correspondent indicating that the Hiker logged a hike. This so the Correspondent can go online, see it, and perhaps message the Hiker (that is what I would hope you would do.). To avoid runaways or edits or multiple loggings creating and email notification frenzy, we have a 24 hour timer so that another email will not be sent for 24 hours after the last logging or edit of a hike. Further, all logs and edits have a date stamp on the Hiker page. Conversely, when a Correspondent sends a message to a Hiker, they get an automated email indicating a message from their Correspondent has been posted.\r\n\r\n\r\n";
+
+		$message .= "Introduction letters and messaging - To facilitate a rapport with the Hiker, I ask that you, the Correspondent, send a message to the new Hiker as soon as possible after being notified. There are a couple templates that can be used when you are busy, but they are not complete. They are there to aid. Make each message special and meaningful to the Hiker, just like Grace did. I will not accept us acting like a computer generated response.\r\n\r\n";
+		$message .= "Lack of response from a hiker - It's way too early to cooment on this other than to use your own judgement whether to send another follow up message. The site can handle as many users as we can throw at it, and we can work on filtering or making hiker groups for your convenience later next year.\r\n\r\n";
+		$message .= "Hiker education - As stated above, there is information posted in the cloud location at $url1. Please use forum this as an opportunity for education. It would be a shame to see all the good work that has been done in reseeding and getting the trails to where they are presently. We can and should do our part to toward Hiker education and turning neophytes into good 46ers.\r\n\r\n";
+		$message .= "Hiking advice - This is the most difficult item we have, and it will come up as a question time and time again. Here is an excellent response:\r\n\r\n";
+		
+		$message .= "\tIf I had confidence in a hiker and had established a relationship, I don't think I would have a problem telling them which route I took (if asked directly). It would include a little disclaimer and the plusses & minuses of any alternate routes. I would also tell them to read trip reports on the ADK High Peaks Forum to help them decide. I certainly wouldn't encourage anyone to go outside of their comfort zone. If you are really not comfortable offering your experience, then don't. I think you just have to do what you think is best based on the info you have to work with. Good luck!\r\n\r\n";
+
+		$message .= "Hikers acknowledged a disclaimer at sign up. In the legal world, it means crap. If, for example, a correspondent tells a hiker, \"No problem, you can EASILY climb Saddleback from Basin in February, it's a piece of cake. You are real experienced, and HECK, I did it! My Mom did it! Probably won't even need cramp-ons!\" and the hiker gets hurt, we are in deep doo-doo, disclaimer or not. Straight to the point, don't give out trail advice. I like the statement above as he tells them what he did and then he points the hiker to a resource.\r\n\r\n\r\n";
+
+		$message .= "Further, and as help if you have to be away for for a period, 10 days or more, I can easily move your the hikers to me until your return.\r\n\r\n\r\n\r\n";
+
+
+		$message .= "Whereas you are now a Correspondent on the website, YOU HAVE NO HIKERS. There will be a test. I will not assign you any Hikers until you pass this test. I encourage for you to \"train\" by creating a hiker account so to 'see the other side'. Simply sign up at $url2 and create a Hiker Acct and name yourself as Correspondent. FYI, when you access a Hikers account or any table on the site, click on the magnifying glass to the left for more information. I will be sending you the test *soon*.\r\n\r\n\r\n";
+
+		$message .= "Thanks for your desire to give back by being an ADK 46er Correspondent. You are the spirit of Grace Hudowalski and honor the unique tradition of the 46ers. Be mindful in your message towards conservation and preservation of the Adirondacks Mountains we are so privileged to share.\r\n\r\n\r\n\r\n";
+
+		$message .= "Forward We Go!\r\n\r\n";
+		$message .= "Best Regards,\r\n\r\n";
+		$message .= "Mark Simpson #6038\r\n\r\n";
+
+		$message .= "$url3\r\n";
+
+		////////////////////////
 				
 		$toAddr = $ADK_USER->email;
 		$subject = 'Staff Correspondent Account Created - '.$ADK_USER->username;
@@ -259,9 +331,9 @@
 		$htmlmessage = "Your account has been created and you have been assigned a correspondent!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
-		$htmlmessage .= $ADK_USER->username."<br><br>";
+		$htmlmessage .= "<b>".$ADK_USER->username."</b><br><br>";
 		$htmlmessage .= "Initial Password:<br>";
-		$htmlmessage .= $ADK_USER->pw."<br><br><br><br>";
+		$htmlmessage .= "<b>".$ADK_USER->pw."</b><br><br><br><br>";
 		
 		$htmlmessage .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT->name.".<br>";
         $htmlmessage .= "Username:<br>";
