@@ -14,7 +14,7 @@
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 content content-max">
-					
+				
 				<h4 class="content-header">
 					Leave No Trace
 					<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
