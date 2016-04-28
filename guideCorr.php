@@ -35,8 +35,7 @@
 						<p>
 							&emsp;The purpose of this document is to serve as a guide to the new correspondent and a reference to the experienced
 							correspondent. It is our wish keep the correspondence program alive, and while honoring the old format, we need to use
-							digital technology because of what it can do for us. Although Grace Hudowalski has left us, let's always remember and
-							honor this unique tradition of the&nbsp;46ers.
+							digital technology. Although Grace Hudowalski has left us, let's always remember and honor this unique tradition of the&nbsp;46ers.
 						</p>
 						<p>
 							&emsp;The history of this office goes back to the 46ers in Troy, NY in late thirties, and the 46ers that formed in the
@@ -62,7 +61,7 @@
 					
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 
-						<h4 class="text-center"><a href="http://ppl.ug/cx87VzXrA_8/" target="_blank">ADK 46er Walk Softly Brochure</a></h4>
+						<h4 class="text-center"><a href="http://ppl.ug/0Crhw6PdEjs/" target="_blank">Correspondents Program Data</a></h4>
 						
 						<h3 class="font-underline">Basic Tenets</h3>
 						
