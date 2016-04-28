@@ -33,9 +33,9 @@
 					
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 						<p>
-							&emsp;The purpose of this document is to serve as a guide to the new correspondent and a reference to the experienced
+							&emsp;The purpose of this document is to serve as a guide to the new correspondent, and as a reference to the experienced
 							correspondent. It is our wish keep the correspondence program alive, and while honoring the old format, we need to use
-							digital technology. Although Grace Hudowalski has left us, let's always remember and honor this unique tradition of the&nbsp;46ers.
+							digital technology. Although <a href="http://adk46er.org/history.html">Grace Hudowalski</a> has left us, let's always remember and honor this unique tradition of the&nbsp;46ers.
 						</p>
 						<p>
 							&emsp;The history of this office goes back to the 46ers in Troy, NY in late thirties, and the 46ers that formed in the

@@ -34,7 +34,7 @@
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 						<p>
 							&emsp;The ADK 46ers have developed site for reporting, recording personal climbs and keeping alive the tradition
-                            that Grace Hudowalski established many years ago. She personally corresponded to this author, it meant much to
+                            that <a href="http://adk46er.org/history.html">Grace Hudowalski</a> established many years ago. She personally corresponded to this author, it meant much to
                             me and kept me driven to complete the high 46.  By creating this account, you can log your hikes and climbs, add
                             information about the hike, and include digital memorabilia. All information posted is can be viewed by the ADK46ers
                             and we may even select a story or picture for&nbsp;publication!
