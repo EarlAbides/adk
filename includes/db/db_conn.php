@@ -18,7 +18,7 @@
 
     function getDBConf(){
         $db_conf = [];
-        $handle = fopen(!strpos(getcwd(), 'includes')? '../protected/db_adk': '../../protected/db_adk', 'r');
+        $handle = fopen('../.adk_db', 'r');
         if($handle){
             while(($line = fgets($handle)) !== false) array_push($db_conf, rtrim($line));
             fclose($handle);

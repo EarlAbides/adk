@@ -7,7 +7,7 @@
 	
 	if(filemtime($filepath) < $dt->getTimestamp()){
 		$apiKeys = [];
-        $handle = fopen('../../protected/api_adk', 'r');
+        $handle = fopen('../.adk_api', 'r');
         if($handle){
             while(($line = fgets($handle)) !== false) array_push($apiKeys, rtrim($line));
             fclose($handle);

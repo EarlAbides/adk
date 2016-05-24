@@ -222,3 +222,6 @@ uploads/
 img/bg/
 includes/PHPMailer/
 /data/
+
+.adk_db
+.adk_api
