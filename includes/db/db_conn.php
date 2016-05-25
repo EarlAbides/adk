@@ -18,7 +18,7 @@
 
     function getDBConf(){
         $db_conf = [];
-        $handle = fopen('../.adk_db', 'r');
+        $handle = fopen(!strpos(getcwd(), 'includes')? '.adk_db': '../.adk_db', 'r');;
         if($handle){
             while(($line = fgets($handle)) !== false) array_push($db_conf, rtrim($line));
             fclose($handle);
