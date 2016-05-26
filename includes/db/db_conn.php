@@ -17,8 +17,13 @@
 	}
 
     function getDBConf(){
-        $db_conf = [];
-        $handle = fopen(!strpos(getcwd(), 'includes')? '.adk_db': '../.adk_db', 'r');;
+		$env = isset($_SERVER['NFSN_SITE_ROOT']) ? 'PRD' : 'DEV';
+		$path = '.adk_db';
+		if($env === 'PRD') $path = '../protected/'.$path;
+		if(strpos(getcwd(), 'includes')) $path = '../'.$path;
+
+		$db_conf = [];
+        $handle = fopen($path, 'r');;
         if($handle){
             while(($line = fgets($handle)) !== false) array_push($db_conf, rtrim($line));
             fclose($handle);

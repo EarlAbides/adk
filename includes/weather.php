@@ -6,8 +6,13 @@
 	$dt->sub(new DateInterval('PT1H'));
 	
 	if(filemtime($filepath) < $dt->getTimestamp()){
+		$env = isset($_SERVER['NFSN_SITE_ROOT']) ? 'PRD' : 'DEV';
+		$path = '.adk_api';
+		if($env === 'PRD') $path = '../protected/'.$path;
+		$path = '../'.$path;
+
 		$apiKeys = [];
-        $handle = fopen('../.adk_api', 'r');
+        $handle = fopen($path, 'r');
         if($handle){
             while(($line = fgets($handle)) !== false) array_push($apiKeys, rtrim($line));
             fclose($handle);
