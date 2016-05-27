@@ -34,6 +34,7 @@
 					<div class="col-xs-12">
 						<div class="div_tablewrapper tablewrapper500">
 							<?php echo $ADK_CORRESPONDENTS->renderViewTable(); ?>
+							<a href="includes/reportCorrs.php">Export</a>
 						</div>
 					</div>
 				</div>

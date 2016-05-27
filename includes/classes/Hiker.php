@@ -118,6 +118,7 @@
 
 				foreach($result as $row){
 					$this->corrid = $row['ADK_HIKER_CORR_ID'];
+					$this->corrname = $row['ADK_HIKER_CORR_NAME'];
 					$this->photoid = intval($row['ADK_HIKER_PHOTO_ID']);
 					$this->username = $row['ADK_USER_USERNAME'];
 					$this->name = $row['ADK_USER_NAME'];
@@ -135,6 +136,7 @@
 					$this->numclimbed = intval($row['ADK_HIKER_NUMCLIMBED']);
 					$this->numpeaks = intval($row['ADK_HIKER_NUMPEAKS']);
 					$this->percent = round(($this->numpeaks / 46) * 100);
+					$this->datetime = $row['ADK_HIKER_DTE'];
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');

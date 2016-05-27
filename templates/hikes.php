@@ -19,6 +19,7 @@
 				</div>
 				<div id="div_table_hikes" class="div_tablewrapper tablewrapper500">
 					<?php $ADK_HIKES->renderTable($ADK_HIKER->numpeaks, $ADK_HIKER->numclimbed, $ADK_HIKER->percent); ?>
+					<a href="includes/reportHiker.php?_=<?php echo $ADK_HIKER->id; ?>">Export</a>
 				</div>
 			</div>
 		</div>

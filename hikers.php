@@ -33,7 +33,10 @@
 				<div class="container-fluid">
 					<div class="col-xs-12">
 						<div id="div_hikertable" class="div_tablewrapper">
-							<?php $ADK_HIKERS->renderTable(); ?>
+							<?php 
+								$ADK_HIKERS->renderTable(); 
+								if($ADK_USERGROUP_CDE === 'ADM') echo '<a href="includes/reportHikers.php">Export</a>';								
+							?>
 						</div>
 					</div>
 				</div>
