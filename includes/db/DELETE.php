@@ -9,6 +9,14 @@
         return $sql_query;
 	}
 	
+    function sql_deleteApplicantPeakJcts($con, $ADK_APPLICANT_ID){
+		$sql_query = $con->prepare("DELETE FROM ADK_APPLICANT_PEAK_JCT WHERE ADK_APPLICANT_ID = ?;");
+        
+        $sql_query->bind_param('i', $ADK_APPLICANT_ID);
+        
+        return $sql_query;
+	}
+    
 	//Correspondent
 	function sql_deleteCorrespondent($con, $ADK_CORRESPONDENT_ID){
 		$sql_query = $con->prepare("DELETE FROM ADK_CORRESPONDENT WHERE ADK_USER_ID = ?;");

@@ -166,12 +166,12 @@
 			$sql_query->execute();
 			$this->id = $sql_query->insert_id;
 		}
-
+		
 		public function addPeak($con, $ADK_PEAK){
 			$sql_query = sql_addHikesPeak($con, $this->id, $ADK_PEAK);
 			$sql_query->execute();
 		}
-
+		
 		public function addFiles($con, $fileIDs){
 	        $sql_query = sql_addHikeFileJcts($con);
 			$con->query("START TRANSACTION");
@@ -182,7 +182,7 @@
 			$sql_query->close();
 			$con->query("COMMIT");
 	    }
-
+		
 		public function update($con){
 			$sql_query = sql_updateHike($con, $this);
 			$sql_query->execute();
@@ -194,23 +194,23 @@
 				if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 			}
 		}
-
+		
 		public function deletePeaks($con){
 			$sql_query = sql_deleteHikePeakJcts($con, $this->id);
 			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 		}
-
+		
 		public function deleteFiles($con){
 			$sql_query = sql_deleteHikeFileJcts($con, $this->id);
 			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 		}
-
-
+		
+		
 		public function populate(){
 			if(isset($_POST['hikeid'])) $this->id = intval($_POST['hikeid']);
 			$this->userid = intval($_POST['id']);
 			$this->notes = $_POST['notes'];
-
+			
 			$peaks = explode(',', $_POST['peaks']);
 			foreach($peaks as $peak){
 				$els = explode(' ', $peak);

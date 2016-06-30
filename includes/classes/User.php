@@ -92,24 +92,24 @@
 			}
 			else die('There was an error running the query ['.$con->error.']');
 		}
-
+		
 		public function save($con){
 			$sql_query = sql_addUser($con, $this);
 			$sql_query->execute();
 			$this->id = $sql_query->insert_id;
 		}
-
+		
 		public function update($con){
 			$sql_query = sql_updateUser($con, $this);
 			$sql_query->execute();
 		}
-
+		
 		public function updatePW($con){
 			$sql_query = sql_updateUserPW($con, $this);
 			$sql_query->execute();
 		}
-
-
+		
+		
 		public function populate(){
 			if(isset($_POST['id'])) $this->id = intval($_POST['id']);
 			$this->username = $_POST['username'];
@@ -117,7 +117,7 @@
 			$this->email = $_POST['email'];
 		}
 		
-		public function populateFromAddHiker($randomPW, $ADK_APPLICANT){
+		public function populateFromApplicant($randomPW, $ADK_APPLICANT){
 			$this->usergroupid = 3;
 			$this->username = $ADK_APPLICANT->username;
 			$this->name = $ADK_APPLICANT->name;

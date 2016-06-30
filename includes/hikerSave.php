@@ -32,17 +32,15 @@
 	$ADK_APPLICANT->delete($con);
 	
 	$ADK_USER = new User();
-	$ADK_USER->populateFromAddHiker($randomPW, $ADK_APPLICANT);
+	$ADK_USER->populateFromApplicant($randomPW, $ADK_APPLICANT);
 	$ADK_USER->save($con);
 	
 	$ADK_HIKER = new Hiker();
 	$ADK_HIKER->populateFromApplicant($ADK_USER->id, $ADK_CORRESPONDENT_ID, $ADK_APPLICANT);
 	$ADK_HIKER->save($con);
 	
-	foreach($ADK_APPLICANT->peakids as $ADK_PEAK_ID){
+	foreach($ADK_APPLICANT->peaks as $ADK_PEAK){
 		$ADK_HIKE = new Hike();
-		$ADK_PEAK = new Peak();
-		$ADK_PEAK->id = $ADK_PEAK_ID;
 		$ADK_HIKE->userid = $ADK_USER->id;
 		$ADK_HIKE->save($con);
 		$ADK_HIKE->addPeak($con, $ADK_PEAK);

@@ -9,6 +9,7 @@
 	require_once 'pm.php';
 	require_once 'classes/Applicant.php';
 	require_once 'classes/Message.php';
+	require_once 'classes/Peak.php';
 	require_once 'classes/User.php';
 	
 	$con = connect_db();
@@ -29,6 +30,7 @@
 	
 	$ADK_APPLICANT->sanitize();
 	$ADK_APPLICANT->save($con);
+	foreach($ADK_APPLICANT->peaks as $ADK_PEAK) $ADK_APPLICANT->addPeak($con, $ADK_PEAK);
 	$ADK_APPLICANT->get($con);
 	
 	sendNewApplicantEmail($ADK_APPLICANT);
