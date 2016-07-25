@@ -61,13 +61,13 @@ function addUpdateHike(form){
     var url = document.getElementById('h4span_addUpdateHike').innerHTML === 'Add Hike'? 'includes/hikeSave.php': 'includes/hikeUpdate.php';
 	$.ajax({
 		url: url
-		,data: new FormData(form)
-		,processData: false
-		,contentType: false
-		,enctype: 'multipart/form-data'
-		,type: 'POST'
-		,timeout: 120000
-		,success: function(ret){
+		, data: new FormData(form)
+		, processData: false
+		, contentType: false
+		, enctype: 'multipart/form-data'
+		, type: 'POST'
+		, timeout: 120000
+		, success: function(ret){
 			$('#div_modal_loading').modal('hide');
 			document.getElementById('div_table_hikes').innerHTML = ret;
 			var table_hikes = document.getElementById('table_hikes');
@@ -79,7 +79,7 @@ function addUpdateHike(form){
 			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
 			markCompletedPeaks();
 		}
-		,error: function(ret){
+		, error: function(ret){
 			var errMess = '';
 			if(ret.responseText.indexOf('t') !== -1) errMess += 'Invalid file type\r\n';
 			if(ret.responseText.indexOf('p') !== -1){
@@ -148,11 +148,11 @@ function deleteHike(){
 	cancelHike();
 	var td = document.getElementsByClassName('viewing')[0];
 	$.post('includes/hikeDelete.php'
-		,{
+		, {
 			userid: document.getElementById('hikerId').value
-			,hikeid: getHikeInfo(td).ADK_HIKE_ID
+			, hikeid: getHikeInfo(td).ADK_HIKE_ID
 		}
-		,function(ret){
+		, function(ret){
 			var cont = document.getElementById('div_hike_data').parentNode;
             cont.className = cont.className.replace('max', 'min');
             document.getElementById('div_table_hikes').innerHTML = ret;
@@ -203,54 +203,41 @@ function getHikeInfo(td){
 	var ADK_PEAKS = [].slice.call(td.children[4].children).map(function(x){
 		return {
 			ADK_PEAK_ID: $(x).data('id')
-			,ADK_PEAK_NAME: $(x).data('name')
-			,ADK_PEAK_HEIGHT: $(x).data('height')
-			,ADK_PEAK_DTE: $(x).data('date')
+			, ADK_PEAK_NAME: $(x).data('name')
+			, ADK_PEAK_HEIGHT: $(x).data('height')
+			, ADK_PEAK_DTE: $(x).data('date')
 		};
 	});
 	
     var ADK_FILES = [].slice.call(td.children[5].children).map(function(x){
 		return {
 			ADK_FILE_ID: $(x).data('id')
-			,ADK_FILE_NAME: $(x).data('name')
-			,ADK_FILE_DESC: $(x).data('desc')
-			,ADK_FILE_SIZE: $(x).data('size')
+			, ADK_FILE_NAME: $(x).data('name')
+			, ADK_FILE_DESC: $(x).data('desc')
+			, ADK_FILE_SIZE: $(x).data('size')
+			, ADK_FILE_TYPE: $(x).data('type')
 		};
 	});
 
     return {
-        ADK_HIKE_ID: ADK_HIKE_ID,
-        ADK_HIKE_NOTES: ADK_HIKE_NOTES,
-        ADK_HIKE_DTE: ADK_HIKE_DTE,
-        ADK_PEAKS: ADK_PEAKS,
-        ADK_FILES: ADK_FILES
+        ADK_HIKE_ID: ADK_HIKE_ID
+        , ADK_HIKE_NOTES: ADK_HIKE_NOTES
+        , ADK_HIKE_DTE: ADK_HIKE_DTE
+        , ADK_PEAKS: ADK_PEAKS
+        , ADK_FILES: ADK_FILES
     }
 }
 
 function viewHike(td){
-	function getFileCategory(ADK_FILE_NAME){
-		var ext = ADK_FILE_NAME.split('.').pop();
-		switch(ext){
-            case 'jpg': case 'jpeg': case 'png': case 'gif': case 'tif': case 'tiff':
-				return 'Picture';
-            case 'mpg': case 'mpeg': case 'avi': case 'mov': case 'webm': case 'mkv': case 'flv': case 'ogg': case 'oggv': case 'wmv': case 'mp4':
-				return 'Video';
-            default:
-				return 'Doc/File';
-        }
-	}
-	
-    $('.viewing').each(function(){this.classList.remove('viewing');});
+	$('.viewing').each(function(){this.classList.remove('viewing');});
     td.classList.add('viewing');
     var ADK_HIKE = getHikeInfo(td);
 	
     var table_hikespeaks = document.getElementById('table_hikespeaks');
-    var table_hikeattachments = document.getElementById('table_hikeattachments');
-    var span_hikenotes = document.getElementById('span_hikenotes');
+    var p_hikenotes = document.getElementById('p_hikenotes');
 	
     table_hikespeaks.children[1].innerHTML = '';
-    table_hikeattachments.children[1].innerHTML = '';
-    span_hikenotes.innerHTML = ADK_HIKE.ADK_HIKE_NOTES;
+    p_hikenotes.innerHTML = ADK_HIKE.ADK_HIKE_NOTES;
     document.getElementById('a_heightFormat').innerHTML = '(ft)';
 	
 	//peaks
@@ -268,24 +255,27 @@ function viewHike(td){
         table_hikespeaks.children[1].appendChild(tr);
     }
 	
-	//files
-    for(var i = 0; i < ADK_HIKE.ADK_FILES.length; i++){
-        var tr = document.createElement('tr');
-        var td1 = document.createElement('td');
-        td1.innerHTML = '<a class="pointer hoverbtn" onclick="getFile(' + ADK_HIKE.ADK_FILES[i].ADK_FILE_ID + ');"><span class="glyphicon glyphicon-download" title=\"Download\" data-toggle=\"tooltip\" data-placement=\"top\" data-container=\"body\"></span></a>';
-        td1.style['padding-left'] = '0';
-        var td2 = document.createElement('td');
-        td2.innerHTML = ADK_HIKE.ADK_FILES[i].ADK_FILE_NAME;
-        var td3 = document.createElement('td');
-        td3.innerHTML = ADK_HIKE.ADK_FILES[i].ADK_FILE_DESC;
-        var td4 = document.createElement('td');
-        td4.innerHTML = getFileCategory(ADK_HIKE.ADK_FILES[i].ADK_FILE_NAME);
-        var td5 = document.createElement('td');
-        td5.innerHTML = $.fn.downloader.bytesToSize(ADK_HIKE.ADK_FILES[i].ADK_FILE_SIZE);
-        tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
-        tr.appendChild(td4); tr.appendChild(td5);
-        table_hikeattachments.children[1].appendChild(tr);
+	////files
+    var $ul = $('ul.gallery-photo');
+	$ul.empty();
+	for(var i = 0; i < ADK_HIKE.ADK_FILES.length; i++){		
+		if(ADK_HIKE.ADK_FILES[i].ADK_FILE_TYPE === 'photo'){
+			$li = $('<li class="gallery col-xs-6 col-sm-4 col-md-3 col-lg-2">');
+			$a = $('<a href="#" class="photo" data-toggle="modal" data-target="#modal_gallery" data-id="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_ID + '" data-desc="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_DESC + '">');
+			$img = $('<img src="img/loading.gif" data-original="includes/fileGetImage.php?_=' + ADK_HIKE.ADK_FILES[i].ADK_FILE_ID + '&t=t" class="img-responsive imghover lazy" alt="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_NAME + '" title="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_NAME + '" data-toggle="tooltip" data-container="body" data-placement="bottom" />');
+
+			$li.append($a.append($img));
+			$ul.append($li);
+		}
+
+		$('img.lazy').lazyload({
+			container: $('#div_photos')
+			, effect: 'fadeIn'
+			, threshold: 10
+		});
     }
+
+	bindPhotoModal();
 	
     //Maximize if minimized
     if($(td).parents('div.container-fluid')[0].nextElementSibling.classList.contains('content-min')) $('#a_maxmin_hike_data').click();
@@ -366,6 +356,45 @@ function printView(){
 	html += '<pre style="word-break:break-word;">' + ADK_HIKE.ADK_HIKE_NOTES + '</pre>';
 
 	newWindow.document.write(fontSizeScript + html);
+}
+
+function bindPhotoModal(){
+	$('#div_photos .photo').on('click', function(){
+		var desc = getDownloadLink(this.getAttribute('data-id')) +
+			'<strong>' + this.getAttribute('data-un') + '</strong><br />' + this.getAttribute('data-peaks') +
+			'<div class="hr"></div>' + this.getAttribute('data-desc');
+		document.getElementById('modal_gallery_label').innerHTML = this.children[0].getAttribute('alt');
+		document.getElementById('modal_gallery_desc').innerHTML = desc;
+		var img = this.children[0].cloneNode();
+		img.setAttribute('data-original', img.src.replace('&t=t', ''));
+		img.src = 'img/loading.gif';
+		img.classList.remove('imghover');
+		$('#modal_gallery_container').html('').append(img);
+		$(img).attr('src', $(img).data('original'));
+
+		return true;
+	});
+	$('#div_photos .video').on('click', function(){
+		var id = this.getAttribute('data-id'), name = this.children[0].innerHTML
+			,desc = getDownloadLink(this.getAttribute('data-id')) +
+				'<strong>' + this.getAttribute('data-un') + '</strong><br />' + this.getAttribute('data-peaks') +
+				'<div class="hr"></div>' + this.getAttribute('data-desc');
+
+		document.getElementById('modal_gallery_label').innerHTML = name;
+		document.getElementById('modal_gallery_desc').innerHTML = desc;
+		
+		var video = document.createElement('video');
+		video.setAttribute('id', 'video');
+		video.setAttribute('controls', 'controls');
+		video.setAttribute('width', '100%');
+		video.innerHTML = '<source id="videosource" src="includes/fileGetVideo.php?_=' + id + '" type="video/' + name.split('.').pop() + '" />';
+		
+		document.getElementById('modal_gallery_container').innerHTML = video.outerHTML;
+		
+		bindVideoError();
+
+		return true;
+	});
 }
 
 //Peak

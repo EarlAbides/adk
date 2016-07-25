@@ -95,8 +95,15 @@
 		public function __construct(){
 			
 		}
-
-
+		
+		public function getType(){
+			switch($this->type){
+				case 'jpg': case 'jpeg': case 'png': case 'gif': case 'tif': case 'tiff': return 'photo';
+				case 'mpg': case 'mpeg': case 'avi': case 'mov': case 'webm': case 'mkv': case 'flv': case 'ogg': case 'oggv': case 'wmv': case 'mp4': return 'video';
+				default: return 'doc';
+			}
+		}
+		
 		public function moveToProtected(){
 			$path = '../uploads/'.$this->savename[0].'/'.$this->savename[1];
 			if(!is_dir($path)) mkdir($path, 0777, true);
@@ -105,7 +112,7 @@
 
 			return $src;
 		}
-
+		
 		public function isValid(){
 			$valid = true;
 			if($_FILES['photo']['size'] !== 0){
@@ -127,7 +134,7 @@
 		
 			return $valid;
 		}
-
+		
 		public function makeThumbnail($src, $path, $desired_width){
 			$dest = $path.'/'.$this->savename;
 			
@@ -163,7 +170,7 @@
 			}
 		}
 		
-
+		
 		public function get($con, $returnContent, $getThumb){
 			$sql_query = sql_getFile($con, $this->id);
 			if($sql_query->execute()){
@@ -190,7 +197,6 @@
 			}
 		}
 		
-
 		public function populate(){
 			if($_FILES['photo']['size'] > 0){
 				$this->name = basename($_FILES['photo']['name']);

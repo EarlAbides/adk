@@ -219,6 +219,9 @@ padding:0;
 .redhover-on, .redhover-on a, .redhover:hover{color:#B10000 !important;text-decoration:line-through;}
 .has-error .redhover, .has-error th{color:#B10000;}
 
+#table_hikespeaks thead tr{font-size:18px !important;line-height:1.2;}
+#table_hikespeaks th{padding-top:10px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:normal;}
+
 /*Tables*/
 .div_tablewrapper{
 width:98%;

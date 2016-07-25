@@ -67,9 +67,7 @@
 		bindVideoError();
 
 		return true;
-	});
-
-	
+	});	
 
 });
 

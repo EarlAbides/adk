@@ -12,21 +12,23 @@
 	<script src="js/wysihtml.js"></script>
 	<script src="js/hike.min.js"></script>
 	<script src="js/jqul.min.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script>
+    <script src="js/gallery.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			$('.date').datepicker({
 				changeMonth: true
-				,changeYear: true
-				,maxDate: '+2d'
-				,yearRange: '-100:+0'
+				, changeYear: true
+				, maxDate: '+2d'
+				, yearRange: '-100:+0'
 			});
 			$('#downloader').downloader({desc: true});
 			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
 			$('.selecttable').tablesorter();
 			var editor = new wysihtml5.Editor('textbox_notes', {
 				toolbar: 'wysihtml-toolbar'
-				,parserRules: wysihtml5ParserRules
-				,stylesheets: 'css/wysihtml.css'
+				, parserRules: wysihtml5ParserRules
+				, stylesheets: 'css/wysihtml.css'
 			});
 		});
 	</script>
@@ -195,6 +197,7 @@
 
     <?php include 'templates/modal/hikenotes.html'; ?>
     <?php include 'templates/modal/loading.html'; ?>
+    <?php include 'templates/modal/gallery.html'; ?>
 	
 </body>
 </html>

@@ -55,6 +55,7 @@
 							$ADK_FILE->name = $row['ADK_FILE_NAME'];
 							$ADK_FILE->desc = $row['ADK_FILE_DESC'];
 							$ADK_FILE->size = intval($row['ADK_FILE_SIZE']);
+							$ADK_FILE->type = $row['ADK_FILE_TYPE'];
 							array_push($ADK_HIKE->files, $ADK_FILE);
 						}
 					}
@@ -97,7 +98,7 @@
 					}
 					$html .= "		</div><div style=\"display:none;\">";
 					foreach($ADK_HIKE->files as $ADK_FILE)
-						$html .= "		<input type=\"hidden\" data-id=\"".$ADK_FILE->id."\" data-name=\"".$ADK_FILE->name."\" data-desc=\"".$ADK_FILE->desc."\" data-size=\"".$ADK_FILE->size."\" />";
+						$html .= "		<input type=\"hidden\" data-id=\"".$ADK_FILE->id."\" data-name=\"".$ADK_FILE->name."\" data-desc=\"".$ADK_FILE->desc."\" data-size=\"".$ADK_FILE->size."\" data-type=".$ADK_FILE->getType()." />";
 					$html .= "		</div>
 									<a onclick=\"viewHike(this.parentNode);\" class=\"hoverbtn pointer rowselector\">
 										<span class=\"glyphicon glyphicon-zoom-in\" title=\"Hike Details\" data-toggle=\"tooltip\" data-placement=\"right\" data-container=\"body\"></span>

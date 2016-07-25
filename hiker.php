@@ -12,6 +12,8 @@
 	<script src="js/wysihtml.js"></script>
 	<script src="js/hike.min.js"></script>
 	<script src="js/jqul.min.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script>
+    <script src="js/gallery.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			$('.date').datepicker({
@@ -206,6 +208,7 @@
 
 	<?php include 'templates/modal/hikenotes.html'; ?>
     <?php include 'templates/modal/loading.html'; ?>
+    <?php include 'templates/modal/gallery.html'; ?>
 	
 </body>
 </html>

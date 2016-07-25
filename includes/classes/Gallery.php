@@ -31,11 +31,10 @@
 					$ADK_GALLERY_ITEM->username = $row['ADK_USER_USERNAME'];
 					
 					array_push($this->files, $ADK_GALLERY_ITEM);
-					switch($ADK_GALLERY_ITEM->type){
-						case 'jpg': case 'jpeg': case 'png': case 'gif': case 'tif': case 'tiff': array_push($this->photos, $ADK_GALLERY_ITEM); break;
-						case 'mpg': case 'mpeg': case 'avi': case 'mov': case 'webm': case 'mkv': case 'flv': case 'ogg':
-						case 'oggv': case 'wmv': case 'mp4': array_push($this->videos, $ADK_GALLERY_ITEM); break;
-						default: array_push($this->docs, $ADK_GALLERY_ITEM);
+					switch($ADK_GALLERY_ITEM->getType()){
+						case 'photo': array_push($this->photos, $ADK_GALLERY_ITEM); break;
+						case 'video': array_push($this->videos, $ADK_GALLERY_ITEM); break;
+						case 'doc': array_push($this->docs, $ADK_GALLERY_ITEM);
 					}
 				}
 			}
