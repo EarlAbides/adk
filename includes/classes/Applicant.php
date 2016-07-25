@@ -74,10 +74,10 @@
 	class Applicant{
 		
 		public $err;
-		public $id, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $reqcorr, $peakids, $peaklist, $datetime;
+		public $id, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $reqcorr, $peakids, $peaks, $peaklist, $datetime;
 		
 		public function __construct(){
-			
+			$this->peaks = [];
 		}
 		
 		public function isValid(){
@@ -106,6 +106,11 @@
 			$this->id = $sql_query->insert_id;
 		}
 		
+		public function addPeak($con, $ADK_PEAK){
+			$sql_query = sql_addApplicantPeakJcts($con, $this->id, $ADK_PEAK->id);
+			$sql_query->execute();
+		}
+		
 		public function get($con){
 			$sql_query = sql_getApplicant($con, $this->id);
 			if($sql_query->execute()){
@@ -127,8 +132,22 @@
 					$this->country = $row['ADK_APPLICANT_COUNTRY'];
 					$this->info = $row['ADK_APPLICANT_PERSONALINFO'];
 					$this->reqcorr = $row['ADK_APPLICANT_REQ_CORR'];
-					$this->peakids = $row['ADK_APPLICANT_PEAKIDS']? explode(',', $row['ADK_APPLICANT_PEAKIDS']): [];
 					$this->peaklist = ltrim($row['ADK_APPLICANT_PEAKLIST']);
+					
+					$sql_query = sql_getApplicantsPeaks($con, $this->id);
+					if($sql_query->execute()){
+						$sql_query->store_result();
+						$result = sql_get_assoc($sql_query);
+
+						foreach($result as $row){
+							$ADK_PEAK = new Peak();
+							$ADK_PEAK->id = intval($row['ADK_PEAK_ID']);
+							$ADK_PEAK->name = $row['ADK_PEAK_NAME'];
+							$ADK_PEAK->height = $row['ADK_PEAK_HEIGHT'];
+							array_push($this->peaks, $ADK_PEAK);
+						}
+					}
+					else die('There was an error running the query ['.$con->error.']');
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');
@@ -140,7 +159,13 @@
 		}
 		
 		public function delete($con){
+			$this->deletePeaks($con);
 			$sql_query = sql_deleteApplicant($con, $this->id);
+			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
+		}
+		
+		public function deletePeaks($con){
+			$sql_query = sql_deleteApplicantPeakJcts($con, $this->id);
 			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 		}
 		
@@ -159,7 +184,12 @@
 			$this->country = $_POST['country'];
 			$this->info = $_POST['personalinfo'];
 			$this->reqcorr = $_POST['reqcorr'];
-			$this->peakids = $_POST['peakids'];
+			$peakIDs = explode(',', $_POST['peakids']);
+			foreach($peakIDs as $peakID){
+				$ADK_PEAK = new Peak();
+				$ADK_PEAK->id = intval($peakID);
+				array_push($this->peaks, $ADK_PEAK);
+			}
 		}
 		
 		public function populateFromUpdate(){
