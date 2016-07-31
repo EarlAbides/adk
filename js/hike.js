@@ -57,6 +57,7 @@ function addUpdateHike(form){
     if(ADK_PEAKS.length == 0) return false;
     document.getElementById('hidden_peaks').value = ADK_PEAKS.map(function(p){return p.ADK_PEAK_ID + ' ' + p.ADK_PEAK_DTE}).join(',');
 
+	var currentHikeID = $('.viewing a.hoverbtn').data('id');
 	
     var url = document.getElementById('h4span_addUpdateHike').innerHTML === 'Add Hike'? 'includes/hikeSave.php': 'includes/hikeUpdate.php';
 	$.ajax({
@@ -75,7 +76,7 @@ function addUpdateHike(form){
 			document.getElementById('span_numpeaks').innerHTML = table_hikes.getAttribute('data-numpeaks') + ' (' + table_hikes.getAttribute('data-percent') + '%)';
 			cancelHike();
 			var a_maxmin_hike_data = document.getElementById('a_maxmin_hike_data');
-			if(a_maxmin_hike_data.children[0].className.indexOf('down') !== -1) $(a_maxmin_hike_data).click();
+			$('a.hoverbtn[data-id="' + currentHikeID + '"]').click();
 			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
 			markCompletedPeaks();
 		}
@@ -229,6 +230,10 @@ function getHikeInfo(td){
 }
 
 function viewHike(td){
+	function getTitle(ADK_FILE){
+		return ADK_FILE.ADK_FILE_NAME + "\n" + (ADK_FILE.ADK_FILE_DESC ? ADK_FILE.ADK_FILE_DESC + "\n" : '') + $.fn.downloader.bytesToSize(ADK_FILE.ADK_FILE_SIZE);
+	}
+
 	$('.viewing').each(function(){this.classList.remove('viewing');});
     td.classList.add('viewing');
     var ADK_HIKE = getHikeInfo(td);
@@ -256,26 +261,56 @@ function viewHike(td){
     }
 	
 	////files
-    var $ul = $('ul.gallery-photo');
-	$ul.empty();
+	var hasVideos = false, hasDocs = false;
+    var $ul_photos = $('ul.gallery-photo')
+		, $ul_videos = $('ul.gallery-video')
+		, $ul_docs = $('ul.gallery-files');
+	$ul_photos.empty();
+	$ul_videos.empty();
+	$ul_docs.empty();
+
 	for(var i = 0; i < ADK_HIKE.ADK_FILES.length; i++){		
-		if(ADK_HIKE.ADK_FILES[i].ADK_FILE_TYPE === 'photo'){
-			$li = $('<li class="gallery col-xs-6 col-sm-4 col-md-3 col-lg-2">');
-			$a = $('<a href="#" class="photo" data-toggle="modal" data-target="#modal_gallery" data-id="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_ID + '" data-desc="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_DESC + '">');
-			$img = $('<img src="img/loading.gif" data-original="includes/fileGetImage.php?_=' + ADK_HIKE.ADK_FILES[i].ADK_FILE_ID + '&t=t" class="img-responsive imghover lazy" alt="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_NAME + '" title="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_NAME + '" data-toggle="tooltip" data-container="body" data-placement="bottom" />');
+		switch(ADK_HIKE.ADK_FILES[i].ADK_FILE_TYPE){
+			case 'photo':
+				$li = $('<li class="gallery col-xs-6 col-sm-4 col-md-3 col-lg-2">');
+				$a = $('<a href="#" class="photo" data-toggle="modal" data-target="#modal_gallery" data-id="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_ID + '" data-desc="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_DESC + '">');
+				$img = $('<img src="img/loading.gif" data-original="includes/fileGetImage.php?_=' + ADK_HIKE.ADK_FILES[i].ADK_FILE_ID + '&t=t" class="img-responsive imghover lazy" alt="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_NAME + '" title="' + getTitle(ADK_HIKE.ADK_FILES[i]) + '" data-toggle="tooltip" data-container="body" data-placement="bottom" />');
 
-			$li.append($a.append($img));
-			$ul.append($li);
+				$li.append($a.append($img));
+				$ul_photos.append($li);
+
+				break;
+			case 'video':
+				var hasVideos = true;
+				$li = $('<li class="gallery" data-peaks="' + ADK_HIKE.ADK_PEAKS.join(', ') + '">');
+				$a = $('<a href="#" class="video" data-toggle="modal" data-target="#modal_gallery" data-id="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_ID + '" data-desc="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_DESC + '">');
+				$span = $('<span title="' + getTitle(ADK_HIKE.ADK_FILES[i]) + '" data-toggle="tooltip" data-container="body" data-placement="right">' + ADK_HIKE.ADK_FILES[i].ADK_FILE_NAME + '</span>');
+				$ul_videos.append($li.append($a.append($span)));
+
+				break;
+			case 'doc':
+				hasDocs = true;
+				$li = $('<li class="gallery" data-peaks="' + ADK_HIKE.ADK_PEAKS.join(', ') + '">');
+				$a = $('<a href="#" data-id="' + ADK_HIKE.ADK_FILES[i].ADK_FILE_ID + '">');
+				$span = $('<span title="' + getTitle(ADK_HIKE.ADK_FILES[i]) + '" data-toggle="tooltip" data-container="body" data-placement="right">' + ADK_HIKE.ADK_FILES[i].ADK_FILE_NAME + '</span>');
+				$ul_docs.append($li.append($a.append($span)));
+
+				$a.on('click', function(){getFile($(this).data('id'));});
+
+				break;
 		}
-
-		$('img.lazy').lazyload({
-			container: $('#div_photos')
-			, effect: 'fadeIn'
-			, threshold: 10
-		});
     }
+	
+	$('img.lazy').lazyload({
+		container: $('#div_photos')
+		, effect: 'fadeIn'
+		, threshold: 10
+	});
 
 	bindPhotoModal();
+
+	if(hasVideos) $('.gallery-video-header').show(); else $('.gallery-video-header').hide();
+	if(hasDocs) $('.gallery-doc-header').show(); else $('.gallery-doc-header').hide();
 	
     //Maximize if minimized
     if($(td).parents('div.container-fluid')[0].nextElementSibling.classList.contains('content-min')) $('#a_maxmin_hike_data').click();
@@ -374,7 +409,7 @@ function bindPhotoModal(){
 
 		return true;
 	});
-	$('#div_photos .video').on('click', function(){
+	$('#div_videos .video').on('click', function(){
 		var id = this.getAttribute('data-id'), name = this.children[0].innerHTML
 			,desc = getDownloadLink(this.getAttribute('data-id')) +
 				'<strong>' + this.getAttribute('data-un') + '</strong><br />' + this.getAttribute('data-peaks') +

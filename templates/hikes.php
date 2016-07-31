@@ -82,7 +82,16 @@
 									</div>
 								</div>
 								<div class="col-xs-12">
-									
+									<h4 class="gallery-video-header">Videos</h4>
+									<div id="div_videos" class="scroll" style="max-height:750px;">
+										<ul class="row gallery-video"></ul>
+									</div>
+								</div>
+								<div class="col-xs-12">
+									<h4 class="gallery-doc-header">Documents and Files</h4>
+									<div id="div_videos" class="scroll" style="max-height:750px;">
+										<ul class="row gallery-files"></ul>
+									</div>
 								</div>
 							</div>
 

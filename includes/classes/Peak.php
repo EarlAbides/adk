@@ -4,7 +4,7 @@
 		
 		public $peaks;
 		
-		public function Peaks(){
+		public function __construct(){
 			$this->peaks = [];
 		}
 		

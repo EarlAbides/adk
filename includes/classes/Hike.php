@@ -100,7 +100,7 @@
 					foreach($ADK_HIKE->files as $ADK_FILE)
 						$html .= "		<input type=\"hidden\" data-id=\"".$ADK_FILE->id."\" data-name=\"".$ADK_FILE->name."\" data-desc=\"".$ADK_FILE->desc."\" data-size=\"".$ADK_FILE->size."\" data-type=".$ADK_FILE->getType()." />";
 					$html .= "		</div>
-									<a onclick=\"viewHike(this.parentNode);\" class=\"hoverbtn pointer rowselector\">
+									<a onclick=\"viewHike(this.parentNode);\" data-id=\"".$ADK_HIKE->id."\" class=\"hoverbtn pointer rowselector\">
 										<span class=\"glyphicon glyphicon-zoom-in\" title=\"Hike Details\" data-toggle=\"tooltip\" data-placement=\"right\" data-container=\"body\"></span>
 									</a>
 								</td>
