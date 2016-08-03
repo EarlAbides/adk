@@ -17,6 +17,8 @@
 	$ADK_FILES = new Files();
 	if(!$ADK_FILES->isValid()){header('Location: ../messages?_'.$_POST['touserid'].'=&e='.$ADK_FILES->err); exit;}
 	$ADK_FILES->populate();
+
+	$notification = '?m=d';
 	
 	$con = connect_db();
 
@@ -33,6 +35,7 @@
 	$ADK_MESSAGE->get($con);
 	
 	if(!isset($_POST['draft'])){
+		$notification = '?m=s';
 		$ADK_USER = new User();
 		$ADK_USER->id = $ADK_MESSAGE->toid;
 		$ADK_USER->get($con);
@@ -55,6 +58,6 @@
 	
 	$con->close();
 	
-	header('Location: ../messages?m=s');
+	header('Location: ../messages'.$notification);
 	
 ?>

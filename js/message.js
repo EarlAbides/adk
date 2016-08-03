@@ -103,6 +103,9 @@
 			case 's':
 				$notify = $('<span class="font-italic error message-notify message-notify-sent">Message sent successfully</span>');
 				break;
+			case 'd':
+				$notify = $('<span class="font-italic error message-notify message-notify-draft">Draft saved successfully</span>');
+				break;
 		}
 		$('.content-wrapper').prepend($notify);
 		$('#table_messages, .messages-menu a, .messages-menu input, .messages-menu button').one('click', function(){$notify.remove();});
