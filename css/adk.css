@@ -309,6 +309,9 @@ line-height:1;
 -webkit-font-smoothing:antialiased;
 -moz-osx-font-smoothing:grayscale;
 }
+.message-folder-list a{display:block;}
+.message-folder-list a.active{background-color:#dce1f9;font-weight:bold;}
+.message-folder-list a:hover{font-weight:bold;}
 
 .message-filter a{
 font-size:0.6em;

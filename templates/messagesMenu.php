@@ -12,7 +12,7 @@
 	</div>
 	<div class="col-xs-7" style="padding:0;">
 		<div class="container-fluid">
-			<ul class="ul ul-left">
+			<ul class="ul ul-left message-folder-list">
 				<li class="col-xs-12 col-sm-3 col-md-12">
 					<a class="hoverbtn pointer folder active" onclick="getFolder(0);">
 						<span class="glyphicon glyphicon-inbox"></span>&nbsp;Inbox
