@@ -55,6 +55,6 @@
 	
 	$con->close();
 	
-	header('Location: ../messages');
+	header('Location: ../messages?m=s');
 	
 ?>

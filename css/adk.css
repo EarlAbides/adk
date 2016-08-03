@@ -292,6 +292,8 @@ top:-7px;
 right:5px;
 }
 
+.message-notify{display:block;margin-bottom:8px;}
+
 .messages-menu{padding:6px 0 4px;}
 .messages-menu li{display:inline;padding:0;}
 .messages-menu li .dropdown-menu li{display:list-item;}

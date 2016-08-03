@@ -96,6 +96,18 @@
 		document.getElementById('button_deleteTemplate').style.display = 'none';
 	}
 
+	//message sent notice
+	if($_GET('m')){
+		var $notify;
+		switch($_GET('m')){
+			case 's':
+				$notify = $('<span class="font-italic error message-notify message-notify-sent">Message sent successfully</span>');
+				break;
+		}
+		$('.content-wrapper').prepend($notify);
+		$('#table_messages, .messages-menu a, .messages-menu input, .messages-menu button').one('click', function(){$notify.remove();});
+	}
+
 });
 
 function populateNewMessage(){
