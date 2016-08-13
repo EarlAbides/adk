@@ -11,7 +11,7 @@
 		$mail->Host = 'smtp.gmail.com';
 		$mail->SMTPAuth = true;
 		$mail->Username = 'adk46ertrailswm@gmail.com';
-		$mail->Password = '123Abbey';
+		$mail->Password = '123Abbey!';
 		$mail->SMTPSecure = 'ssl';
 		$mail->Port = 465;
 		
@@ -103,7 +103,7 @@
 	
 	//Correspondent
 	function sendCorrNewHikerEmail($ADK_CORRESPONDENT_EMAIL, $ADK_USER, $ADK_HIKER, $ADK_APPLICANT){
-		$htmlmessage = "Your have been assigned a new hiker!<br><br>";
+		$htmlmessage = "You have been assigned a new hiker!<br><br>";
 		
         $htmlmessage .= "Name:<br>";
 		$htmlmessage .= $ADK_USER->name."<br>";
@@ -116,7 +116,7 @@
 		
 		$htmlmessage .= "Click <a href=".$GLOBALS['url']."messages?_=".$ADK_USER->id.">here to send the new user a message</a>.<br><br>";
 	    
-		$message = "Your have been assigned a new hiker!\r\n\r\n";
+		$message = "You have been assigned a new hiker!\r\n\r\n";
 		
         $message .= "Name:\r\n";
 		$message .= $ADK_USER->name."\r\n";
