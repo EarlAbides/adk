@@ -81,7 +81,7 @@
 						</thead>
 						<tbody>";
 			if(count($this->hikes) === 0){//If empty
-				$html .= '<tr><td style="width:100%;text-align:center;font-style:italic;">No hikes</td><td style="width:0;"></td><td style="width:0;"></td><td style="width:0;"></td></tr>';
+				$html .= '<tr><td style="width:100%;text-align:center;font-style:italic;">No hikes</td><td style="width:0;"></td><td style="width:0;"></td><td style="width:0;"></td><td style="width:0;"></td></tr>';
 			}
 			else{
 				foreach($this->hikes as $ADK_HIKE){
