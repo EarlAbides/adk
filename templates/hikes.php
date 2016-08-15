@@ -99,57 +99,6 @@
 					</div>
 				</div>
 							
-				<!--<div class="col-xs-12 col-sm-4">
-					<div class="div_tablewrapper">
-						<h4 class="content-header">Peaks</h4>
-						<table id="table_hikespeaks" class="selecttable">
-							<thead>
-								<tr>
-									<th class="pointer" style="width:63%;">Name</th>
-									<th class="pointer" style="width:18%;">Date</th>
-									<th class="pointer" style="width:29%;">Height <small><a id="a_heightFormat" class="pointer hoverbtn" onclick="convertFormat(this);">(ft)</a></small></th>
-								</tr>
-							</thead>
-							<tbody></tbody>
-						</table>
-					</div>
-				</div>
-							
-				<div class="col-xs-12 col-sm-8">
-					<div class="hidden-sm hidden-md hidden-lg" style="display:block;">&emsp;</div>
-					<div class="div_tablewrapper">
-						<h4 class="content-header">Attachments</h4>
-						<table id="table_hikeattachments" class="selecttable">
-							<thead>
-								<tr>
-									<th style="width:4%;"></th>
-									<th class="pointer" style="width:25%;">Name</th>
-									<th class="pointer" style="width:44%;">Description</th>
-									<th class="pointer" style="width:15%;">Type</th>
-									<th class="pointer" style="width:12%;">Size</th>
-								</tr>
-							</thead>
-							<tbody></tbody>
-						</table>
-					</div>
-				</div>
-														
-				<div class="col-xs-12">
-					<div style="display:block;">&emsp;</div>
-					<div class="div_tablewrapper">
-						<h4 class="content-header">
-							Notes
-							<a class="pointer hoverbtn" onclick="modal_hike();" data-toggle="modal" data-target="#div_modal_hike">
-								<span class="glyphicon glyphicon-fullscreen" title="Fullscreen" data-toggle="tooltip" data-placement="bottom" data-container="body"></span>
-							</a>
-							<a class="pointer hoverbtn" style="margin-right:25px;" onclick="printView();">
-								<span class="glyphicon glyphicon-print" title="Print" data-toggle="tooltip" data-placement="bottom" data-container="body"></span>
-							</a>
-						</h4>
-						<span id="span_hikenotes" class="lgtext"></span>
-					</div>
-				</div>-->
-							
 			</div>
 		</div>
 					
