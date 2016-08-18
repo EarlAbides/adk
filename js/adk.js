@@ -2,7 +2,7 @@
     
     //Anti-Bootstrap
     $('.dropdown-menu').click(function(e){//This will prevent the event from bubbling up and close the dropdown when you type/click on text boxes.
-        if(!$(e.target).data('data-wysihtml-command') === 'fontSize') e.stopPropagation();
+		if(!e.target.hasAttribute('data-wysihtml-command')) e.stopPropagation();
     });
     var img_adklogo = document.getElementById('img_adklogo');
     var img_adklogo_top = $(img_adklogo).position().top;

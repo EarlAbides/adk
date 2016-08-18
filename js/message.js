@@ -608,9 +608,9 @@ function destroyEditor(){
 
 var editor;
 function initEditor(){
-	editor = new wysihtml5.Editor('textbox_message', {
+	editor = new wysihtml.Editor('textbox_message', {
 		toolbar: 'wysihtml-toolbar'
-		,parserRules: wysihtml5ParserRules
-		,stylesheets: 'css/wysihtml.css'
+		, parserRules: wysihtmlParserRules
+		, stylesheets: 'css/wysihtml.css'
 	});
 }

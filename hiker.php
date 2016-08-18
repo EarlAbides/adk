@@ -18,9 +18,9 @@
 		$(document).ready(function(){
 			$('.date').datepicker({
 				changeMonth: true
-				,changeYear: true
-				,maxDate: '+2d'
-				,yearRange: '-100:+0'
+				, changeYear: true
+				, maxDate: '+2d'
+				, yearRange: '-100:+0'
 			});
 			$('#downloader').downloader({desc: true});
 			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
