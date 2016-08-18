@@ -606,9 +606,8 @@ function destroyEditor(){
 	}
 }
 
-var editor;
 function initEditor(){
-	editor = new wysihtml.Editor('textbox_message', {
+	window.editor = new wysihtml.Editor('textbox_message', {
 		toolbar: 'wysihtml-toolbar'
 		, parserRules: wysihtmlParserRules
 		, stylesheets: 'css/wysihtml.css'

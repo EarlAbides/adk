@@ -63,6 +63,10 @@ function $_GET(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
+function getWysiIframeBody(){
+	return window.editor.composer.editableArea.contentDocument.body;
+}
+
 function lsTest(){
     var test = 1;
     try{

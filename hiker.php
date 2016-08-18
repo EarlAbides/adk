@@ -25,7 +25,7 @@
 			$('#downloader').downloader({desc: true});
 			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
 			$('.selecttable').tablesorter();
-			var editor = new wysihtml.Editor('textbox_notes', {
+			window.editor = new wysihtml.Editor('textbox_notes', {
 				toolbar: 'wysihtml-toolbar'
 				, parserRules: wysihtmlParserRules
 				, stylesheets: 'css/wysihtml.css'

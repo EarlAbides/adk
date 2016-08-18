@@ -5,18 +5,18 @@
 		$sql_query = $con->prepare(
 			"UPDATE ADK_APPLICANT
 				SET ADK_APPLICANT_USERNAME = ?
-					,ADK_APPLICANT_NAME = ?
-					,ADK_APPLICANT_EMAIL = ?
-					,ADK_APPLICANT_PHONE = ?
-					,ADK_APPLICANT_AGE = ?
-					,ADK_APPLICANT_SEX = ?
-					,ADK_APPLICANT_ADDRESS1 = ?
-					,ADK_APPLICANT_ADDRESS2 = ?
-					,ADK_APPLICANT_CITY = ?
-					,ADK_APPLICANT_STATE = ?
-					,ADK_APPLICANT_ZIP = ?
-					,ADK_APPLICANT_COUNTRY = ?
-					,ADK_APPLICANT_PERSONALINFO = ?
+					, ADK_APPLICANT_NAME = ?
+					, ADK_APPLICANT_EMAIL = ?
+					, ADK_APPLICANT_PHONE = ?
+					, ADK_APPLICANT_AGE = ?
+					, ADK_APPLICANT_SEX = ?
+					, ADK_APPLICANT_ADDRESS1 = ?
+					, ADK_APPLICANT_ADDRESS2 = ?
+					, ADK_APPLICANT_CITY = ?
+					, ADK_APPLICANT_STATE = ?
+					, ADK_APPLICANT_ZIP = ?
+					, ADK_APPLICANT_COUNTRY = ?
+					, ADK_APPLICANT_PERSONALINFO = ?
 			WHERE ADK_APPLICANT_ID = ?;");
 				
 		$sql_query->bind_param('ssssissssssssi', $ADK_APPLICANT->username, $ADK_APPLICANT->name, $ADK_APPLICANT->email
@@ -58,8 +58,8 @@
 		$sql_query = $con->prepare(
 			"UPDATE ADK_HIKE
 				SET ADK_HIKE_NOTES = ?
-					,ADK_HIKE_DTE = ?
-					,ADK_HIKE_TS = CURRENT_TIMESTAMP
+					, ADK_HIKE_DTE = ?
+					, ADK_HIKE_TS = CURRENT_TIMESTAMP
 			WHERE ADK_HIKE_ID = ?;");
 		
 		if($ADK_HIKE->notes == '') $ADK_HIKE->notes = $null;
@@ -75,15 +75,15 @@
 		$sql_query = $con->prepare(
 			"UPDATE ADK_HIKER
 				SET ADK_HIKER_PHONE = ?
-					,ADK_HIKER_AGE = ?
-					,ADK_HIKER_SEX = ?
-					,ADK_HIKER_ADDRESS1 = ?
-					,ADK_HIKER_ADDRESS2 = ?
-					,ADK_HIKER_CITY = ?
-					,ADK_HIKER_STATE = ?
-					,ADK_HIKER_ZIP = ?
-					,ADK_HIKER_COUNTRY = ?
-					,ADK_HIKER_PERSONALINFO = ?
+					, ADK_HIKER_AGE = ?
+					, ADK_HIKER_SEX = ?
+					, ADK_HIKER_ADDRESS1 = ?
+					, ADK_HIKER_ADDRESS2 = ?
+					, ADK_HIKER_CITY = ?
+					, ADK_HIKER_STATE = ?
+					, ADK_HIKER_ZIP = ?
+					, ADK_HIKER_COUNTRY = ?
+					, ADK_HIKER_PERSONALINFO = ?
 			WHERE ADK_USER_ID = ?;");
 		
 		$sql_query->bind_param('sissssssssi', $ADK_HIKER->phone, $ADK_HIKER->age, $ADK_HIKER->sex, $ADK_HIKER->address1, $ADK_HIKER->address2,
@@ -145,11 +145,11 @@
 	function sql_sendDraft($con, $ADK_MESSAGE){
 		$sql_query = $con->prepare(
 			"UPDATE ADK_MESSAGE
-				SET ADK_MESSAGE_TITLE = ?,
-					ADK_MESSAGE_CONTENT = ?,
-					ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00'),
-					ADK_MESSAGE_READ = 0,
-					ADK_MESSAGE_DRAFT = 0
+				SET ADK_MESSAGE_TITLE = ?
+					, ADK_MESSAGE_CONTENT = ?
+					, ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00')
+					, ADK_MESSAGE_READ = 0
+					, ADK_MESSAGE_DRAFT = 0
 			WHERE ADK_MESSAGE_ID = ?;");
 		
 		$sql_query->bind_param('ssi', $ADK_MESSAGE['ADK_MESSAGE_TITLE'], $ADK_MESSAGE['ADK_MESSAGE_CONTENT'], $ADK_MESSAGE['ADK_MESSAGE_ID']);
@@ -161,9 +161,9 @@
 		$sql_query = $con->prepare(
 			"UPDATE ADK_MESSAGE
 				SET ADK_MESSAGE_TITLE = ?
-					,ADK_MESSAGE_CONTENT = ?
-					,ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00')
-					,ADK_MESSAGE_DRAFT = 1
+					, ADK_MESSAGE_CONTENT = ?
+					, ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00')
+					, ADK_MESSAGE_DRAFT = 1
 			WHERE ADK_MESSAGE_ID = ?;"
 		);
 		
@@ -176,8 +176,8 @@
 		$sql_query = $con->prepare(
 			"UPDATE ADK_MSG_TMPL
 				SET ADK_MSG_TMPL_NAME = ?
-					,ADK_MSG_TMPL_CONTENT = ?
-					,ADK_MSG_TMPL_DTE = SUBTIME(NOW(),'0 12:00:00.00')
+					, ADK_MSG_TMPL_CONTENT = ?
+					, ADK_MSG_TMPL_DTE = SUBTIME(NOW(),'0 12:00:00.00')
 			WHERE ADK_MSG_TMPL_ID = ?;"
 		);
 		
@@ -191,8 +191,8 @@
 		$sql_query = $con->prepare(
 			"UPDATE ADK_USER
 				SET ADK_USER_USERNAME = ?
-					,ADK_USER_NAME = ?
-					,ADK_USER_EMAIL = ?
+					, ADK_USER_NAME = ?
+					, ADK_USER_EMAIL = ?
 			WHERE ADK_USER_ID = ?;"
 		);
 		

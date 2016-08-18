@@ -6,6 +6,7 @@
 	require_once 'db/UPDATE.php';
 	require_once 'classes/Applicant.php';
 	require_once 'classes/User.php';
+	require_once 'classes/Peak.php';
 	
 	$con = connect_db();
 	
