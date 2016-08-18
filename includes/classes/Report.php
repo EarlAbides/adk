@@ -9,7 +9,7 @@
 		}
 
 
-		public static function wrapQuotes($str){
+		private static function wrapQuotes($str){
 			return '"'.$str.'"';
 		}
 
