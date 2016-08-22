@@ -144,6 +144,16 @@
 	        $sql_query->execute();
 	        $this->id = $sql_query->insert_id;
 	    }
+		
+		public function sendDraft($con){
+	        $sql_query = sql_sendDraft($con, $this);
+	        $sql_query->execute();
+	    }
+		
+		public function updateDraft($con){
+	        $sql_query = sql_updateDraft($con, $this);
+	        $sql_query->execute();
+	    }
 
 		public function addFiles($con, $fileIDs){
 	        $sql_query = sql_addMessageFileJcts($con);
@@ -216,6 +226,7 @@
 			$this->title = $_POST['subject'];
 			$this->content = $_POST['message'];
 			$this->isdraft = isset($_POST['draft']);
+			$this->wasdraft = isset($_POST['wasdraft']);
 		}
 		
 	}

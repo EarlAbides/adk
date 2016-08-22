@@ -152,7 +152,7 @@
 					, ADK_MESSAGE_DRAFT = 0
 			WHERE ADK_MESSAGE_ID = ?;");
 		
-		$sql_query->bind_param('ssi', $ADK_MESSAGE['ADK_MESSAGE_TITLE'], $ADK_MESSAGE['ADK_MESSAGE_CONTENT'], $ADK_MESSAGE['ADK_MESSAGE_ID']);
+		$sql_query->bind_param('ssi', $ADK_MESSAGE->title, $ADK_MESSAGE->content, $ADK_MESSAGE->id);
 		
 		return $sql_query;
 	}
@@ -167,7 +167,7 @@
 			WHERE ADK_MESSAGE_ID = ?;"
 		);
 		
-		$sql_query->bind_param('ssi', $ADK_MESSAGE['ADK_MESSAGE_TITLE'], $ADK_MESSAGE['ADK_MESSAGE_CONTENT'], $ADK_MESSAGE['ADK_MESSAGE_ID']);
+		$sql_query->bind_param('ssi', $ADK_MESSAGE->title, $ADK_MESSAGE->content, $ADK_MESSAGE->id);
 		
 		return $sql_query;
 	}

@@ -7,7 +7,7 @@
 <?php include 'templates/head.php'; ?>
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/wysihtml.js"></script>
-	<script src="js/message.min.js"></script>
+	<script src="js/message.js"></script>
 	<script src="js/jqul.min.js"></script>
 </head>
 
@@ -280,7 +280,6 @@
 				
 			</div>
 			
-			<!-- Hidden -->
 			<div style="display:none;">
 				<input type="hidden" id="hidden_viewmessageid" />
 				<input type="hidden" id="hidden_viewfromid" />
