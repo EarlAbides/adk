@@ -309,6 +309,7 @@ line-height:1;
 -moz-osx-font-smoothing:grayscale;
 }
 .message-folder-list li{margin-bottom:2px;border:1px;border-style:groove;border-top:none;border-left:none;}
+.message-folder-list li .dropdown li{border:none;}
 .message-folder-list a{display:block;}
 .message-folder-list a.active{background-color:#dce1f9;font-weight:bold;border:1px;border-style:groove;}
 .message-folder-list a:hover{font-weight:bold;}
