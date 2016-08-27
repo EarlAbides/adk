@@ -5,17 +5,18 @@
 	
 	function PHPMailer($toAddr, $subject, $htmlmessage, $message){
 		$mail = new PHPMailer();
+
+		$login = getLogin();
 		
 		$mail->isSMTP();
-		//$mail->Host = 'sites.nearlyfreespeech.net';
 		$mail->Host = 'smtp.gmail.com';
 		$mail->SMTPAuth = true;
-		$mail->Username = 'adk46ertrailswm@gmail.com';
-		$mail->Password = '123Abbey!';
+		$mail->Username = $login['un'];
+		$mail->Password = $login['pw'];
 		$mail->SMTPSecure = 'ssl';
 		$mail->Port = 465;
 		
-		$mail->From = 'noreply@adk.nfshost.com';
+		$mail->From = 'noreply@talk.adk46er.com';
 		$mail->FromName = 'ADK46er Correspondence Website';
 		$mail->addAddress($toAddr);
 		
@@ -26,6 +27,24 @@
 		$mail->AltBody = $message;
 		
 		$mail->send();
+	}
+
+	function getLogin(){
+		$env = isset($_SERVER['NFSN_SITE_ROOT']) ? 'PRD' : 'DEV';
+		$path = '.adk_api';
+		if($env === 'PRD') $path = '../protected/'.$path;
+		$path = '../'.$path;
+
+		$lines = [];
+        $handle = fopen($path, 'r');
+        if($handle){
+            while(($line = fgets($handle)) !== false) array_push($lines, rtrim($line));
+            fclose($handle);
+        }
+        else die('Unable to get api key');
+		
+		$login = ['un' => $lines[1], 'pw' => $lines[2]];
+		return $login;
 	}
 	
 	//Applicant
