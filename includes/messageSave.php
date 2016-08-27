@@ -31,7 +31,9 @@
 		exit;
 	}
 	$ADK_MESSAGE->sanitize();
-	$ADK_MESSAGE->save($con);
+	if($ADK_MESSAGE->wasdraft && !$ADK_MESSAGE->isdraft) $ADK_MESSAGE->sendDraft($con);
+	else if($ADK_MESSAGE->wasdraft && $ADK_MESSAGE->isdraft) $ADK_MESSAGE->updateDraft($con);
+	else $ADK_MESSAGE->save($con);
 	$ADK_MESSAGE->get($con);
 	
 	if(!$ADK_MESSAGE->isdraft){

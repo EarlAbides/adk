@@ -207,16 +207,6 @@
 	        else die('There was an error running the query ['.$con->error.']');
 	    }
 
-		public function updateDraft($con){
-	        $sql_query = sql_updateDraft($con, $this);
-	        $sql_query->execute();
-	    }
-
-		public function sendDraft($con){
-	        $sql_query = sql_sendDraft($con, $this);
-	        $sql_query->execute();
-	    }
-
 		function updateRead($con){
 			$sql_query = sql_updateMessageMarkRead($con, $this->id);
 			$sql_query->execute();
