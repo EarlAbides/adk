@@ -31,10 +31,12 @@
 		exit;
 	}
 	$ADK_MESSAGE->sanitize();
-	$ADK_MESSAGE->save($con);
+	if($ADK_MESSAGE->isdraft && $ADK_MESSAGE->wasdraft) $ADK_MESSAGE->updateDraft($con);
+	else if($ADK_MESSAGE->isdraft && !$ADK_MESSAGE->wasdraft) $ADK_MESSAGE->sendDraft($con);
+	else $ADK_MESSAGE->save($con);
 	$ADK_MESSAGE->get($con);
 	
-	if(!isset($_POST['draft'])){
+	if(!$ADK_MESSAGE->isdraft){
 		$notification = '?m=s';
 		$ADK_USER = new User();
 		$ADK_USER->id = $ADK_MESSAGE->toid;

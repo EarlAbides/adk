@@ -280,7 +280,6 @@
 				
 			</div>
 			
-			<!-- Hidden -->
 			<div style="display:none;">
 				<input type="hidden" id="hidden_viewmessageid" />
 				<input type="hidden" id="hidden_viewfromid" />

@@ -117,7 +117,7 @@
 	class Message{
 		
 	    public $err;
-	    public $id, $userid, $fromid, $fromusername, $toid, $tousername, $title, $content, $date, $time, $files, $isread, $hasfiles, $isfromhiker, $isdraff;
+	    public $id, $userid, $fromid, $fromusername, $toid, $tousername, $title, $content, $date, $time, $files, $isread, $hasfiles, $isfromhiker, $isdraff, $wasdraff;
 		
 	    public function __construct(){
 			$this->files = [];
@@ -197,6 +197,16 @@
 	        else die('There was an error running the query ['.$con->error.']');
 	    }
 
+		public function updateDraft($con){
+	        $sql_query = sql_updateDraft($con, $this);
+	        $sql_query->execute();
+	    }
+
+		public function sendDraft($con){
+	        $sql_query = sql_sendDraft($con, $this);
+	        $sql_query->execute();
+	    }
+
 		function updateRead($con){
 			$sql_query = sql_updateMessageMarkRead($con, $this->id);
 			$sql_query->execute();
@@ -216,6 +226,7 @@
 			$this->title = $_POST['subject'];
 			$this->content = $_POST['message'];
 			$this->isdraft = isset($_POST['draft']);
+			$this->wasdraft = isset($_POST['wasdraft']);
 		}
 		
 	}

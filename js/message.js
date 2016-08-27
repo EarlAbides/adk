@@ -160,13 +160,14 @@ function newMessage(){
 function reply(){
 	var fromID = document.getElementById('hidden_viewfromid').value;
     var fromName = document.getElementById('span_messagefromusername').innerHTML;
-    var toID = document.getElementById('hidden_viewfromid').value;
+    var toID = document.getElementById('hidden_viewtoid').value;
     var toName = document.getElementById('span_messagetousername').innerHTML;
     var subject = document.getElementById('span_messagesubject').innerHTML;
     var dte = document.getElementById('span_messagedte').innerHTML;
     var message = document.getElementById('span_messagecontent').innerHTML;
-    if(fromID == document.getElementById('hidden_userid').value){//Switch if sent
+    if(fromID != document.getElementById('hidden_userid').value){//Switch if sent
         var tmp = toID; toID = fromID; fromID = tmp;
+		tmp = toName; toName = fromName; fromName = tmp;
     }
     
     //var replyFiles = [];
@@ -194,7 +195,6 @@ function reply(){
         document.getElementById('textbox_to_username').value = toName;
     else{
         var select_to_username = document.getElementById('select_to_username');
-        select_to_username.disabled = true;
         select_to_username.value = toID;
         $(select_to_username).change(function(){document.getElementById('hidden_touserid').value = this.value;});
     }
@@ -412,8 +412,8 @@ function openDraft(ADK_MESSAGE_ID){
 
 			//Mark as draft
 			var hidden_wasDraft = document.createElement('input')
-				,form = document.getElementById('form_newMessage')
-				,hidden_messageid = document.createElement('input');
+				, form = document.getElementById('form_newMessage')
+				, hidden_messageid = document.createElement('input');
 
 			hidden_wasDraft.setAttribute('type', 'hidden');
 			hidden_wasDraft.setAttribute('name', 'wasdraft');
