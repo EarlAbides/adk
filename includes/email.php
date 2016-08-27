@@ -311,14 +311,14 @@
 		$htmlmessage = "One of your hikers just completed their 46!<br><br>";
 		$htmlmessage .= $ADK_HIKER->name."<br><br>";
 		
-		$htmlmessage .= "Hey I need text for this.<br>";
-		$htmlmessage .= "Click <a href=\"$url\">here</a> to see how to become a registered 46er.<br><br>";
+		$htmlmessage .= "Be sure to congratulate them on this achievement!";
+		$htmlmessage .= "They have been sent a link to <a href=\"$url\">here</a> to see how to become a registered 46er.<br><br>";
 		
 		$message = "One of your hikers just completed their 46!\r\n\r\n";
 		$message .= $ADK_HIKER->name."\r\n\r\n";
 		
-		$message .= "Hey I need text for this.\r\n";
-		$message .= "Visit $url to see how to become a registered 46er.\r\n\r\n";
+		$message .= "Be sure to congratulate them on this achievement!\r\n";
+		$message .= "They have been sent a link to $url to see how to become a registered 46er.\r\n\r\n";
 		
 		$toAddr = $ADK_CORRESPONDENT->email;
 		$subject = '46er Completion - '.$ADK_HIKER->username;
