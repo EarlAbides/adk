@@ -7,17 +7,18 @@
             $('.hometab').click(function(){
                 this.classList.add('hometab-disabled');
                 var seperator=document.querySelector('.hometab-section-seperator');
-                seperator.style.display='block';
+                seperator.style.display = 'block';
                 setTimeout(function(){seperator.style.display='none';},630);                
                 if(this.classList.contains('hometab-intro')){
                     document.querySelector('.hometab-about').classList.remove('hometab-disabled');
-                    var toMax = document.querySelector('#home_intro'),toMin=document.querySelector('#home_about');
+                    var toMax = document.querySelector('#home_intro'), toMin=document.querySelector('#home_about');
                 }
                 else{
                     document.querySelector('.hometab-intro').classList.remove('hometab-disabled');
-                    var toMax=document.querySelector('#home_about'),toMin=document.querySelector('#home_intro');
+                    var toMax = document.querySelector('#home_about'), toMin=document.querySelector('#home_intro');
                 }
-                $(toMin).animate({height:'0'},650);$(toMax).animate({height:'100%'},650);
+                $(toMin).animate({height: '0'}, 650);
+				$(toMax).animate({height: '100%'}, 650);
             });
         });
     </script>
@@ -64,7 +65,7 @@
 
                         <p>
                             Mark Simpson #6038<br />
-                            Site Administrator
+                            Head Correspondent
                         </p>
 
                     </div>
