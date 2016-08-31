@@ -206,8 +206,8 @@
 	
     function sendNewCorrEmail($ADK_USER, $randomPW){
 		$url1 = "https://pogoplug.com/s/0Crhw6PdEjs/";
-		$url2 = "http://adk.nfshost.com/signup";
-		$url3 = "http://adk.nfshost.com/";
+		$url2 = "http://talk.adk46er.org/signup";
+		$url3 = "http://talk.adk46er.org/";
 		
 		////////////////////////
 
