@@ -97,7 +97,7 @@
 							<td>".$ADK_CORRESPONDENT->name."</td>
 							<td>".$ADK_CORRESPONDENT->username."</td>
 							<td>".$ADK_CORRESPONDENT->email."</td>
-							<td>".(date('Y', strtotime($ADK_CORRESPONDENT->datetime)) === '1970'? '--': date('m/d/Y', strtotime($ADK_CORRESPONDENT->datetime)))."</td>
+							<td>".(date('Y', strtotime($ADK_CORRESPONDENT->datetime)) === '1969'? '--': date('m/d/Y', strtotime($ADK_CORRESPONDENT->datetime)))."</td>
 							<td>".$ADK_CORRESPONDENT->numhikers."</td>
 						</tr>";
 			}

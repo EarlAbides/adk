@@ -90,7 +90,7 @@
 		$sql_query = $con->prepare(
 			"INSERT INTO ADK_MESSAGE(ADK_MESSAGE_FROM_USER_ID, ADK_MESSAGE_TO_USER_ID, ADK_MESSAGE_TITLE, 
 				ADK_MESSAGE_CONTENT, ADK_MESSAGE_DTE, ADK_MESSAGE_DRAFT)
-			VALUES(?,?,?,?, SUBTIME(NOW(),'0 12:00:00.00'), ?);"
+			VALUES(?,?,?,?, NOW(), ?);"
 		);
 		
 		$sql_query->bind_param('iissi', $ADK_MESSAGE->fromid, $ADK_MESSAGE->toid, $ADK_MESSAGE->title, $ADK_MESSAGE->content, $ADK_MESSAGE->isdraft);

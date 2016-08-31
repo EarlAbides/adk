@@ -109,7 +109,7 @@
 	}
 	
 	function sql_updateLastActive($con, $ADK_USER_ID){
-		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_LASTACTIVE_DTE = SUBTIME(NOW(),'0 05:00:00.00') WHERE ADK_USER_ID = ?;");
+		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_LASTACTIVE_DTE = NOW() WHERE ADK_USER_ID = ?;");
 		
 		$sql_query->bind_param('i', $ADK_USER_ID);
 		
@@ -147,7 +147,7 @@
 			"UPDATE ADK_MESSAGE
 				SET ADK_MESSAGE_TITLE = ?
 					, ADK_MESSAGE_CONTENT = ?
-					, ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00')
+					, ADK_MESSAGE_DTE = NOW()
 					, ADK_MESSAGE_READ = 0
 					, ADK_MESSAGE_DRAFT = 0
 			WHERE ADK_MESSAGE_ID = ?;");
@@ -162,7 +162,7 @@
 			"UPDATE ADK_MESSAGE
 				SET ADK_MESSAGE_TITLE = ?
 					, ADK_MESSAGE_CONTENT = ?
-					, ADK_MESSAGE_DTE = SUBTIME(NOW(),'0 12:00:00.00')
+					, ADK_MESSAGE_DTE = NOW()
 					, ADK_MESSAGE_DRAFT = 1
 			WHERE ADK_MESSAGE_ID = ?;"
 		);
@@ -177,7 +177,7 @@
 			"UPDATE ADK_MSG_TMPL
 				SET ADK_MSG_TMPL_NAME = ?
 					, ADK_MSG_TMPL_CONTENT = ?
-					, ADK_MSG_TMPL_DTE = SUBTIME(NOW(),'0 12:00:00.00')
+					, ADK_MSG_TMPL_DTE = NOW()
 			WHERE ADK_MSG_TMPL_ID = ?;"
 		);
 		

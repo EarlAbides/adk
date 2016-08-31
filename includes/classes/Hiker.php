@@ -65,8 +65,8 @@
 								<td>".$ADK_HIKER->username."</td>
 								<td>".$ADK_HIKER->email."</td>
 								<td>".$ADK_HIKER->corrname."</td>
-								<td>".(date('Y', strtotime($ADK_HIKER->datetime)) === '1970'? '--': date('m/d/Y', strtotime($ADK_HIKER->datetime)))."</td>
-								<td>".$ADK_HIKER->lastactive."</td>
+								<td>".(date('Y', strtotime($ADK_HIKER->datetime)) === '1969'? '--': date('m/d/Y', strtotime($ADK_HIKER->datetime)))."</td>
+								<td>".(date('Y', strtotime($ADK_HIKER->lastactive)) === '1969'? '--': date('m/d/Y', strtotime($ADK_HIKER->lastactive)))."</td>
 								<td>".$ADK_HIKER->numpeaks."</td>
 							</tr>";
 				}
@@ -136,6 +136,7 @@
 					$this->numclimbed = intval($row['ADK_HIKER_NUMCLIMBED']);
 					$this->numpeaks = intval($row['ADK_HIKER_NUMPEAKS']);
 					$this->percent = round(($this->numpeaks / 46) * 100);
+					$this->lastactive = $row['ADK_HIKER_LASTACTIVE_DTE'];
 					$this->datetime = $row['ADK_HIKER_DTE'];
 				}
 			}

@@ -79,7 +79,7 @@
 
 
 	function hasNotNotifiedInLastDay($ADK_HIKE_ID, $ADK_HIKES){
-		$dawnOfTime = strtotime('1970-01-01');
+		$dawnOfTime = strtotime('1969-12-31');
 		$mostRecentTS = $dawnOfTime;
 		foreach($ADK_HIKES->hikes as $ADK_HIKE){
 			if($ADK_HIKE->ts !== '' && $ADK_HIKE_ID !== $ADK_HIKE->id){
