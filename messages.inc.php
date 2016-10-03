@@ -28,7 +28,6 @@
 	$ADK_MESSAGES->foldername = 'Inbox';
 	$ADK_MESSAGES->get($con);
 	
-	$disableMsgs = false;
 	switch($ADK_USERGROUP_CDE){
 		case 'ADM':
 			require_once 'includes/classes/Template.php';
@@ -52,7 +51,6 @@
 			$ADK_CORRESPONDENT = new Correspondent();
 			$ADK_CORRESPONDENT->id = $ADK_HIKER->corrid;
 			$ADK_CORRESPONDENT->get($con);
-			$disableMsgs = $ADK_HIKER->numpeaks >= 46? 'disabled="disabled"': false;
 			break;
 	}
 	

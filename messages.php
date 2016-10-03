@@ -141,7 +141,7 @@
 							<div class="form-group">
 								<div class="col-xs-12">
 									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-default" onclick="saveDraft();" <?php echo $disableMsgs; ?>><span class="glyphicon glyphicon-file"></span>&nbsp;Save as Draft</button>
+										<button type="button" class="btn btn-sm btn-default" onclick="saveDraft();"><span class="glyphicon glyphicon-file"></span>&nbsp;Save as Draft</button>
 									</div>
 									<div class="btn-group">	
 										<?php if($ADK_USERGROUP_CDE === 'COR' || $ADK_USERGROUP_CDE === 'ADM'){ ?>
@@ -168,7 +168,7 @@
 										<div class="hidden-md hidden-lg"><br /></div>
                                         <button type="button" class="btn btn-sm btn-default" onclick="cancelMessage();">Cancel</button>
 										<button type="reset" class="btn btn-sm btn-default">Clear</button>
-										<button type="submit" class="btn btn-sm btn-default" <?php echo $disableMsgs; ?>><span class="glyphicon glyphicon-envelope" style="left:-2px;"></span>&nbsp;Send</button>
+										<button type="submit" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-envelope" style="left:-2px;"></span>&nbsp;Send</button>
 									</div>
 								</div>
 							</div>
@@ -269,7 +269,7 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<?php if($ADK_USERGROUP_CDE == 'COR') echo '<a id="a_loghike" class="btn btn-sm btn-default">Log Hike</a>'; ?>
-								<button type="button" id="button_reply" class="btn btn-sm btn-default pull-right" onclick="reply();" <?php echo $disableMsgs; ?>>Reply</button>
+								<button type="button" id="button_reply" class="btn btn-sm btn-default pull-right" onclick="reply();">Reply</button>
 							</div>
 						</div>
 					</div>
