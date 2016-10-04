@@ -3,7 +3,7 @@
 		<div class="container-fluid">
 			<ul class="ul ul-left">
 				<li class="col-xs-12 col-sm-4 col-md-12">
-					<a class="hoverbtn pointer" style="font-size:1.2em;">
+					<a class="hoverbtn pointer" style="font-size:1.2em;" onclick="newMessage();">
 						<span class="glyphicon glyphicon-plus"></span>&nbsp;New
 					</a>
 				</li>
