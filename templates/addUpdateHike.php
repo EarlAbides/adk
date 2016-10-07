@@ -29,7 +29,7 @@
 								</div>
 								<div class="col-xs-1 form-group nopadding nomargin">
 									<br />
-									<span id="span_addPeak" class="input-group-addon btn-default pointer" onclick="addPeak(document.getElementById(select_addpeaks));">Add</span>
+									<span id="span_addPeak" class="input-group-addon btn-default pointer" onclick="addPeak(document.getElementById('select_addpeaks'));">Add</span>
 								</div>
 							</div>														
 						</div>
