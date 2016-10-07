@@ -69,7 +69,7 @@
 							</div>
 							<div class="col-xs-12 col-sm-6 text-right" style="display:inline;">
 								<label class="control-label control-label-sm">Last Active</label><br />
-								<span class="font-italic"><?php echo strpos(date("n/j/y g:ma", strtotime($ADK_HIKER->lastactive)), '1/1/70') === 0? '--': date("n/j/y g:ia", strtotime($ADK_HIKER->lastactive)); ?></span>
+								<span class="font-italic"><?php echo strpos(date("n/j/y g:ma", strtotime($ADK_HIKER->lastactive)), '12/31/69') === 0? '--': date("n/j/y g:ia", strtotime($ADK_HIKER->lastactive)); ?></span>
 							</div>
 						</div>
 					</div>
