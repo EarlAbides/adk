@@ -205,7 +205,7 @@
 	}
 	
     function sendNewCorrEmail($ADK_USER, $randomPW){
-		$url1 = "https://pogoplug.com/s/0Crhw6PdEjs/";
+		$url1 = "https://www.dropbox.com/sh/z5m0fzg9sxorbcp/AADsJw47pCFxSPZlrBet-Fila?dl=0";
 		$url2 = "http://talk.adk46er.org/signup";
 		$url3 = "http://talk.adk46er.org/";
 		
