@@ -46,7 +46,7 @@ function addUpdateHike(form){
 		return $('#ul_addpeaks li').get().map(function(li){
 			ADK_PEAK = {
 				ADK_PEAK_ID: $(li.children[0]).data('peakid')
-				,ADK_PEAK_DTE: li.children[1].innerHTML
+				, ADK_PEAK_DTE: li.children[1].innerHTML
 			};			
 			return ADK_PEAK;
 		});
@@ -455,6 +455,7 @@ function addPeak(select){
 	addPeakLi(ADK_PEAK);
     
 	tooltip();
+	enableDisable_addHike();
 }
 function addPeakLi(ADK_PEAK){
 	var ul_addpeaks = document.getElementById('ul_addpeaks');
