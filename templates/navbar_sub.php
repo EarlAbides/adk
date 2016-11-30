@@ -10,6 +10,8 @@
 			case 'hikers': $hikers = $class; break;
 			case 'guideCorr': $guideCorr = $class; break;
 			case 'guideHiker': $guideHiker = $class; break;
+			case 'trainCorr': $trainCorr = $class; break;
+			case 'trainHiker': $trainHiker = $class; break;
             case 'login': $login = $class; break;
             case 'messages': $messages = $class; break;
             case 'profile': $profile = $class; break;
@@ -42,6 +44,7 @@
 					<li<?php if(isset($hikers)) echo $hikers; ?>><a href="./hikers">Hikers</a></li>
 					<li<?php if(isset($gallery)) echo $gallery; ?>><a href="./gallery">Gallery</a></li>
 					<li<?php if(isset($guideCorr)) echo $guideCorr; ?>><a href="./guideCorr">Correspondent Guidelines</a></li>
+					<li<?php if(isset($trainCorr)) echo $trainCorr; ?>><a href="./trainCorr">Training Videos</a></li>
 					<li<?php if(isset($lnt)) echo $lnt; ?>><a href="./lnt">Leave No Trace</a></li>
 				<?php } ?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'ADM'))){ ?>
