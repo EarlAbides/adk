@@ -398,9 +398,11 @@
 		$url = 'http://adk46er.org/how-to-join.html';
 		$url2 = 'http://adk46er.org/trail-crew.html';
 		
+		$meetingYear = date('n') == 1 && date('j') <= 15 ? date('Y') : date('Y') + 1; 
+		
 		$htmlmessage = "Congratulations! Successfully ascending the high 46 is a wonderful life accomplishment.<br><br>";
 		
-		$htmlmessage .= "It's been wonderful to have you here. We hope that you have made a friend with your correspondent and can get to meet him/her at either graduation at the 2017 Spring Meeting in Lake Placid or on the trails.<br><br>";
+		$htmlmessage .= "It's been wonderful to have you here. We hope that you have made a friend with your correspondent and can get to meet him/her at either graduation at the ".$meetingYear." Spring Meeting in Lake Placid or on the trails.<br><br>";
 		
 		$htmlmessage .= "Your next step is to register formally.<br>";
 		$htmlmessage .= "Click <a href=\"$url\">here</a> to see how to become a registered 46er.<br><br>";
@@ -416,7 +418,7 @@
 
 		$message = "Congratulations! Successfully ascending the high 46 is a wonderful life accomplishment.\r\n\r\n";
 		
-		$message .= "It's been wonderful to have you here. We hope that you have made a friend with your correspondent and can get to meet him/her at either graduation at the 2017 Spring Meeting in Lake Placid or on the trails.\r\n\r\n";
+		$message .= "It's been wonderful to have you here. We hope that you have made a friend with your correspondent and can get to meet him/her at either graduation at the ".$meetingYear." Spring Meeting in Lake Placid or on the trails.\r\n\r\n";
 		
 		$message .= "Your next step is to register formally.\r\n";
 		$message .= "Go to $url to see how to become a registered 46er.\r\n\r\n";
