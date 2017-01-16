@@ -206,8 +206,8 @@
 	
     function sendNewCorrEmail($ADK_USER, $randomPW){
 		$url1 = "https://www.dropbox.com/sh/z5m0fzg9sxorbcp/AADsJw47pCFxSPZlrBet-Fila?dl=0";
-		$url2 = "http://talk.adk46er.org/signup";
-		$url3 = "http://talk.adk46er.org/";
+		$url2 = "http://kimmelservices.com/talk/signup";
+		$url3 = "http://kimmelservices.com/talk/";
 		
 		////////////////////////
 
