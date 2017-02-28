@@ -347,7 +347,7 @@
 	
 	//Hiker
 	function sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT){
-		$url = $GLOBALS['url'];
+		$url = $GLOBALS['url'].'hikerportal';
 
 		$htmlmessage = "Greetings Aspiring 46er,<br><br>";
 
