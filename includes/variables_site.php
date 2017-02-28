@@ -7,8 +7,8 @@
 	
 	$crlf = "\r\n";
 	$dcrlf = "\r\n\r\n";
-		
-	$url = "http://talk.adk46er.org/";
+	
+	$url = "http://kimmelservices.com/talk/";
 	$adminEmail = 'adk46ertrailswm@gmail.com';
 	
 ?>

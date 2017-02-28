@@ -347,22 +347,26 @@
 	
 	//Hiker
 	function sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT){
+		$url = $GLOBALS['url'];
+
 		$htmlmessage = "Greetings Aspiring 46er,<br><br>";
 
 		$htmlmessage .= "We welcome you to the Adirondack 46ers electronic correspondent program. We are excited you have chosen to take part in a 46er tradition that separates us from other hiking groups.  This historical convention was started by Grace Hudowalski 46er #9, first female 46er, and matriarch of our organization. We want to hear from you. We want to continue the traditions established by Grace. The 46ers are unique as the only mountain climbing organization that encourages its climbers to write about their hikes and accomplishments. Writing in your reports sets the 46ers apart.<br><br>";
 		$htmlmessage .= "You will be able to list your mountains, post your pictures and tell us about your journey. Grace once said \"I do not want just a list of mountains, that was boring and climbing the high peaks is not boring.\" Grace wanted to hear about what you saw, how you felt, and details of your trip. We ask you to report often and fully immerse yourself in this experience. We are unpaid volunteers and there will be times of the year that we are very busy with hikers. So please be patient we will respond as quickly as we can.<br><br><br>";
 		
+		$htmlmessage .= "This is how it works - Hiker messaging and logged hikes send an automated email to the Correspondent indicating the Hiker's post. This so the Correspondent can go online, see it, and message the Hiker. To avoid runaways or edits or multiple logging creating an email creation frenzy, we have a 24 hour timer so that another email will not be sent for 24 hours after the last logging or edit of a hike. Further, all logs and edits have a date stamp on the Hiker page. Conversely, when a Correspondent sends a message to a Hiker, they get an automated email indicating a message from their Correspondent has been posted. Post your picture once you log in so we can know what you look like! Also feel free to change your password under Edit Profile.<br><br>";
+		
+		$htmlmessage .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT->name.".<br>";
+        $htmlmessage .= "His/her username is ".$ADK_CORRESPONDENT->username.".<br><br>";
+
 		$htmlmessage .= "<b>Your login information</b><br><br>";
 
 		$htmlmessage .= "Username:<br>";
 		$htmlmessage .= "<b>".$ADK_USER->username."</b><br><br>";
 		$htmlmessage .= "Initial Password:<br>";
-		$htmlmessage .= "<b>".$ADK_USER->pw."</b><br><br><br><br>";
+		$htmlmessage .= "<b>".$ADK_USER->pw."</b><br><br>";
 
-		$htmlmessage .= "This is how it works - Hiker messaging and logged hikes send an automated email to the Correspondent indicating the Hiker's post. This so the Correspondent can go online, see it, and message the Hiker. To avoid runaways or edits or multiple logging creating an email creation frenzy, we have a 24 hour timer so that another email will not be sent for 24 hours after the last logging or edit of a hike. Further, all logs and edits have a date stamp on the Hiker page. Conversely, when a Correspondent sends a message to a Hiker, they get an automated email indicating a message from their Correspondent has been posted. Post your picture once you log in so we can know what you look like! Also feel free to change your password under Edit Profile.<br><br>";
-		
-		$htmlmessage .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT->name.".<br>";
-        $htmlmessage .= "His/her username is ".$ADK_CORRESPONDENT->username.".<br><br>";
+		$htmlmessage .= "<a href=\"$url\">Click here to log in!</a><br><br><br><br>";
 		
 		$htmlmessage .= "We look forward to hearing from you and hope that you join us at our spring, fall, and winter meetings and meet us in person. Please volunteer in one or more of our projects and enjoy the experience of giving back.<br><br>";
 		$htmlmessage .= "Our group of correspondents look forward to hearing from you and as Grace always said, \"We wish you good climbing\"<br>";
@@ -373,6 +377,11 @@
 		$message .= "We welcome you to the Adirondack 46ers electronic correspondent program. We are excited you have chosen to take part in a 46er tradition that separates us from other hiking groups.  This historical convention was started by Grace Hudowalski 46er #9, first female 46er, and matriarch of our organization. We want to hear from you. We want to continue the traditions established by Grace. The 46ers are unique as the only mountain climbing organization that encourages its climbers to write about their hikes and accomplishments. Writing in your reports sets the 46ers apart.\r\n\r\n";
 		$message .= "You will be able to list your mountains, post your pictures and tell us about your journey. Grace once said \"I do not want just a list of mountains, that was boring and climbing the high peaks is not boring.\" Grace wanted to hear about what you saw, how you felt, and details of your trip. We ask you to report often and fully immerse yourself in this experience. We are unpaid volunteers and there will be times of the year that we are very busy with hikers. So please be patient we will respond as quickly as we can.\r\n\r\n\r\n";
 		
+		$message .= "This is how it works - Hiker messaging and logged hikes send an automated email to the Correspondent indicating the Hiker's post. This so the Correspondent can go online, see it, and message the Hiker. To avoid runaways or edits or multiple logging creating an email creation frenzy, we have a 24 hour timer so that another email will not be sent for 24 hours after the last logging or edit of a hike. Further, all logs and edits have a date stamp on the Hiker page. Conversely, when a Correspondent sends a message to a Hiker, they get an automated email indicating a message from their Correspondent has been posted. Post your picture once you log in so we can know what you look like! Also feel free to change your password under Edit Profile.\r\n\r\n";
+		
+		$message .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT->name.".\r\n";
+        $message .= "His/her username is ".$ADK_CORRESPONDENT->username.".\r\n\r\n";
+
 		$message .= "Your login information\r\n\r\n";
 		
 		$message .= "Username:\r\n";
@@ -380,10 +389,7 @@
 		$message .= "Initial Password:\r\n";
 		$message .= $ADK_USER->pw."<br><br>\r\n\r\n";
 
-		$message .= "This is how it works - Hiker messaging and logged hikes send an automated email to the Correspondent indicating the Hiker's post. This so the Correspondent can go online, see it, and message the Hiker. To avoid runaways or edits or multiple logging creating an email creation frenzy, we have a 24 hour timer so that another email will not be sent for 24 hours after the last logging or edit of a hike. Further, all logs and edits have a date stamp on the Hiker page. Conversely, when a Correspondent sends a message to a Hiker, they get an automated email indicating a message from their Correspondent has been posted. Post your picture once you log in so we can know what you look like! Also feel free to change your password under Edit Profile.\r\n\r\n";
-		
-		$message .= "Your Staff Correspondent's name is ".$ADK_CORRESPONDENT->name.".\r\n";
-        $message .= "His/her username is ".$ADK_CORRESPONDENT->username.".\r\n\r\n";
+		$message .= "Go to $url to log in!\r\n\r\n\r\n\r\n";
 		
 		$message .= "We look forward to hearing from you and hope that you join us at our spring, fall, and winter meetings and meet us in person. Please volunteer in one or more of our projects and enjoy the experience of giving back.\r\n\r\n";
 		$message .= "Our group of correspondents look forward to hearing from you and as Grace always said, \"We wish you good climbing\"\r\n";
