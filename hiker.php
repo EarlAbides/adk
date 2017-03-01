@@ -8,7 +8,6 @@
 	<link type="text/css" href="css/wysihtml.css"  rel="stylesheet" media="screen" />
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
-	<script src="js/jquery.tablesorter.min.js"></script>
 	<script src="js/wysihtml.js"></script>
 	<script src="js/hike.min.js"></script>
 	<script src="js/jqul.min.js"></script>
@@ -23,8 +22,23 @@
 				, yearRange: '-100:+0'
 			});
 			$('#downloader').downloader({desc: true});
-			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
-			$('.selecttable').tablesorter();
+			$.extend(jQuery.fn.dataTableExt.oSort, {
+				'custom-date-asc': function(a, b) {
+					if(a === '--') return -1;
+					if(b === '--') return 1;
+					var x = new Date(a.replace(/(am|pm)/, '')), y = new Date(b.replace(/(am|pm)/, ''));
+					return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+				},
+				'custom-date-desc': function(a, b) {
+					if(a === '--') return 1;
+					if(b === '--') return -1;
+					var x = new Date(a.replace(/(am|pm)/, '')), y = new Date(b.replace(/(am|pm)/, ''));
+					return ((x > y) ? -1 : ((x < y) ?  1 : 0));
+				}
+			});
+			$('.dt').DataTable({pageLength: 20, lengthChange: false, order: [2, 'desc'],
+				columnDefs: [{targets: 0, searchable: false, sortable: false}, {targets: [2, 3], type: 'custom-date'}]
+			});
 			window.editor = new wysihtml.Editor('textbox_notes', {
 				toolbar: 'wysihtml-toolbar'
 				, parserRules: wysihtmlParserRules

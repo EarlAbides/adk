@@ -7,8 +7,24 @@
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script>
-		$(document).ready(function(){
-			$('.selecttable').DataTable({pageLength: 15, lengthChange: false, order: [1, 'asc'], columnDefs: [{targets: 0, searchable: false, sortable: false}]});
+		$(document).ready(function() {
+			$.extend(jQuery.fn.dataTableExt.oSort, {
+				'custom-date-asc': function(a, b) {
+					if(a === '--') return -1;
+					if(b === '--') return 1;
+					var x = new Date(a.replace(/(am|pm)/, '')), y = new Date(b.replace(/(am|pm)/, ''));
+					return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+				},
+				'custom-date-desc': function(a, b) {
+					if(a === '--') return 1;
+					if(b === '--') return -1;
+					var x = new Date(a.replace(/(am|pm)/, '')), y = new Date(b.replace(/(am|pm)/, ''));
+					return ((x > y) ? -1 : ((x < y) ?  1 : 0));
+				}
+			});
+			$('.selecttable').DataTable({pageLength: 15, lengthChange: false, order: [1, 'asc'],
+				columnDefs: [{targets: 0, searchable: false, sortable: false}, {targets: 6, type: 'custom-date'}]
+			});
 		});
 	</script>
 </head>
