@@ -50,11 +50,7 @@ div.tooltip{white-space:pre;}
 
 
 /*Site*/
-#home_intro, #home_about{overflow:hidden;}
-#home_intro{height:100%;}
-#home_about{height:0;}
-.hometab-disabled, .hometab-disabled:hover, .hometab-disabled:focus, .hometab-disabled:hover:active{color:inherit;cursor:default;text-decoration:none;pointer-events:none;}
-.hometab-section-seperator{display:none;border-bottom:2px solid;}
+.homepage h5{font-size:1.2em;margin:14px 0 16px;}
 #div_weather{display:none;margin-top:30px;}
 #div_weather table{width:100%;margin-bottom:8px;}
 #img_weatherIcon{max-width:20px;margin:0 15px;}

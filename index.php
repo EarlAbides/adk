@@ -2,26 +2,6 @@
 <?php $tmp = explode("\\", preg_replace('/\.php$/', '', __FILE__));$tmp = explode("/", array_pop($tmp));$GLOBALS['page'] = array_pop($tmp); ?>
 <?php include 'templates/head.php'; ?>
     <script src="js/weather.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.hometab').click(function(){
-                this.classList.add('hometab-disabled');
-                var seperator=document.querySelector('.hometab-section-seperator');
-                seperator.style.display = 'block';
-                setTimeout(function(){seperator.style.display='none';},630);                
-                if(this.classList.contains('hometab-intro')){
-                    document.querySelector('.hometab-about').classList.remove('hometab-disabled');
-                    var toMax = document.querySelector('#home_intro'), toMin=document.querySelector('#home_about');
-                }
-                else{
-                    document.querySelector('.hometab-intro').classList.remove('hometab-disabled');
-                    var toMax = document.querySelector('#home_about'), toMin=document.querySelector('#home_intro');
-                }
-                $(toMin).animate({height: '0'}, 650);
-				$(toMax).animate({height: '100%'}, 650);
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -33,7 +13,7 @@
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 col-sm-8">
-				<div class="container-fluid content content-max">
+				<div class="container-fluid content content-max homepage">
 					
 					<h4 class="content-header">
 						ADK 46er Correspondent Program
@@ -42,15 +22,9 @@
 						</a>
 					</h4>
 
-                    <span style="font-size:1.1em;">
-                        <a href="#intro" class="hometab hometab-intro hometab-disabled">Intro</a>
-                        <b>&nbsp;|&nbsp;</b>
-                        <a href="#about" class="hometab hometab-about">About</a>
-                    </span>
-					
-                    <div id="home_intro">
+                    <div>
 						
-                        <br />
+                        <h5>Introduction</h5>
 					    
                         <p>Welcome!</p>
 
@@ -61,22 +35,18 @@
                             assigned and personal 46er correspondent. I hope you will utilize this program to help inspire you.
 					    </p>
 
-                        <br/>
+                        <br />
 
                         <p>
                             Mark Simpson #6038<br />
                             Head Correspondent
                         </p>
 
-                    </div>
+						<div class="hr"></div>
 
-                    <div class="hometab-section-seperator"></div>
-
-                    <div id="home_about">
-                        
-                        <br />
-
-					    <p>
+						<h5>About</h5>
+					    
+                        <p>
 						    For years our "46er Correspondent Program" set the organization apart from all others.
 						    Hikers could request a correspondent through the Historian's Office. The hiker and correspondent
 						    could exchange stories of climbs and receive encouragement during their quest to finish the 46.
