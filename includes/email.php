@@ -1,9 +1,8 @@
 <?php
 
-	//Includes
 	require_once 'PHPMailer/PHPMailerAutoload.php';
 
-	function PHPMailer($toAddr, $subject, $htmlmessage, $message){
+	function PHPMailer($toAddr, $subject, $htmlmessage, $message) {
 		$mail = new PHPMailer();
 
 		$login = getLogin();
@@ -29,13 +28,13 @@
 		$mail->send();
 	}
 
-	function getLogin(){
+	function getLogin() {
 		$path = '.adk_api';
 		if(!file_exists($path)) $path = '../'.$path;
 
 		$lines = [];
         $handle = fopen($path, 'r');
-        if($handle){
+        if($handle) {
             while(($line = fgets($handle)) !== false) array_push($lines, rtrim($line));
             fclose($handle);
         }
@@ -45,8 +44,8 @@
 		return $login;
 	}
 
-	//Applicant
-	function sendNewApplicantEmail($ADK_APPLICANT){
+	// Applicant
+	function sendNewApplicantEmail($ADK_APPLICANT) {
 		$htmlmessage = "Username:<br>";
 		$htmlmessage .= $ADK_APPLICANT->username."<br><br>";
 		$htmlmessage .= "Name:<br>";
@@ -84,7 +83,7 @@
 		$message .= "Name:\r\n";
 		$message .= $ADK_APPLICANT->name."\r\n\r\n";
 		$message .= "Email:\r\n";
-		$message .= $ADK_APPLICAN->email."\r\n\r\n";
+		$message .= $ADK_APPLICANT->email."\r\n\r\n";
 		$message .= "Phone:\r\n";
 		$message .= $ADK_APPLICANT->phone."\r\n\r\n";
 		$message .= "Age:\r\n";
@@ -118,8 +117,8 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-	//Correspondent
-	function sendCorrNewHikerEmail($ADK_CORRESPONDENT_EMAIL, $ADK_USER, $ADK_HIKER, $ADK_APPLICANT){
+	// Correspondent
+	function sendCorrNewHikerEmail($ADK_CORRESPONDENT_EMAIL, $ADK_USER, $ADK_HIKER, $ADK_APPLICANT) {
 		$htmlmessage = "You have been assigned a new hiker!<br><br>";
 		
         $htmlmessage .= "Name:<br>";
@@ -152,7 +151,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-    function sendOldCorrReassignEmail($ADK_CORRESPONDENT, $ADK_HIKER){
+    function sendOldCorrReassignEmail($ADK_CORRESPONDENT, $ADK_HIKER) {
 		$htmlmessage = "One of your hikers has been reassigned to a new Staff Correspondent!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
@@ -177,7 +176,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-    function sendNewCorrReassignEmail($ADK_CORRESPONDENT, $ADK_HIKER){
+    function sendNewCorrReassignEmail($ADK_CORRESPONDENT, $ADK_HIKER) {
 		$htmlmessage = "A hiker has been reassigned to you!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
@@ -202,7 +201,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-    function sendNewCorrEmail($ADK_USER, $randomPW){
+    function sendNewCorrEmail($ADK_USER, $randomPW) {
 		$url1 = "https://www.dropbox.com/sh/z5m0fzg9sxorbcp/AADsJw47pCFxSPZlrBet-Fila?dl=0";
 		$url2 = "http://kimmelservices.com/talk/signup";
 		$url3 = "http://kimmelservices.com/talk/";
@@ -299,7 +298,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
     }
 	
-	function sendCorrHikeAddUpdateEmail($ADK_HIKER, $ADK_CORRESPONDENT, $ADK_HIKE, $isUpdate){
+	function sendCorrHikeAddUpdateEmail($ADK_HIKER, $ADK_CORRESPONDENT, $ADK_HIKE, $isUpdate) {
 	    $headerTxt = $isUpdate? 'One of your hikers has updated a hike log!': 'One of your hikers has added a hike log!';
 		
 		$htmlmessage = $headerTxt."<br><br>";
@@ -322,7 +321,7 @@
 	    PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-	function sendCorr46erCompletionEmail($ADK_HIKER, $ADK_CORRESPONDENT){
+	function sendCorr46erCompletionEmail($ADK_HIKER, $ADK_CORRESPONDENT) {
 		$url = 'http://adk46er.org/how-to-join.html';
 		
 		$htmlmessage = "One of your hikers just completed their 46!<br><br>";
@@ -343,8 +342,8 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-	//Hiker
-	function sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT){
+	// Hiker
+	function sendNewHikerEmail($ADK_USER, $ADK_CORRESPONDENT) {
 		$url = $GLOBALS['url'].'hikerportal';
 
 		$htmlmessage = "Greetings Aspiring 46er,<br><br>";
@@ -398,7 +397,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-	function send46erCompletionEmail($ADK_HIKER){
+	function send46erCompletionEmail($ADK_HIKER) {
 		$url = 'http://adk46er.org/how-to-join.html';
 		$url2 = 'http://adk46er.org/trail-crew.html';
 		
@@ -411,7 +410,7 @@
 		$htmlmessage .= "Your next step is to register formally.<br>";
 		$htmlmessage .= "Click <a href=\"$url\">here</a> to see how to become a registered 46er.<br><br>";
 
-		$htmlmessage .= "Now that you have finished, you will still be able to access your account on this the Correspondent Program for records. However, you will not be able to send messages to your staff correspondent.<br><br>";
+		$htmlmessage .= "You may still use this site to log any hikes, upload photos, or message your corresondent.<br><br>";
 		$htmlmessage .= "But the journey does not need to end here. Learn more about the 46er organization and get involved. We sponsor many conservation efforts and do our part to support initiatives to keep this one of a kind experience available for the next generations. Teach people 'Leave No Trace' and 'Walk Softly' and set an example as a 46er.<br><br>";
 		$htmlmessage .= "An easy and fun way to get involved is join a trail work session. The schedule is posted <a href=\"$url2\">here</a><br><br>";
 
@@ -427,7 +426,7 @@
 		$message .= "Your next step is to register formally.\r\n";
 		$message .= "Go to $url to see how to become a registered 46er.\r\n\r\n";
 
-		$message .= "Now that you have finished, you will still be able to access your account on this the Correspondent Program for records. However, you will not be able to send messages to your staff correspondent.\r\n\r\n";
+		$message .= "You may still use this site to log any hikes, upload photos, or message your corresondent.\r\n\r\n";
 		$message .= "But the journey does not need to end here. Learn more about the 46er organization and get involved. We sponsor many conservation efforts and do our part to support initiatives to keep this one of a kind experience available for the next generations. Teach people 'Leave No Trace' and 'Walk Softly' and set an example as a 46er.\r\n\r\n";
 		$message .= "An easy and fun way to get involved is join a trail work session. The schedule is posted at $url2\r\n\r\n";
 
@@ -441,7 +440,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 
-    function sendHikerCorrReassignEmail($ADK_HIKER, $ADK_CORRESPONDENT){
+    function sendHikerCorrReassignEmail($ADK_HIKER, $ADK_CORRESPONDENT) {
 		$htmlmessage = "You have been reassigned to a new Staff Correspondent!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
@@ -466,8 +465,8 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-	//Message
-	function sendPMNotifyEmail($ADK_MESSAGE, $ADK_USER){
+	// Message
+	function sendPMNotifyEmail($ADK_MESSAGE, $ADK_USER) {
         $url = $GLOBALS['url'].'messages';
         
 		$htmlmessage = "You have a Private Message waiting for you on the ADK 46er Correspondence Website from:<br>";
@@ -489,7 +488,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-	//User
+	// User
 	function sendPWResetLinkEmail($ADK_USER) {
 		$url = $GLOBALS['url']."forgot?_=".$ADK_USER->last8hash.$ADK_USER->id;
 		
@@ -508,7 +507,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 
-	//Batch
+	// Batch
 	function sendInactiveUserEmail($ADK_HIKER) {
 		$htmlmessage = $ADK_HIKER->name.",<br>";
 		$htmlmessage .= "You haven't been active in over 6 months!";
