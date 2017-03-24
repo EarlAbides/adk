@@ -43,12 +43,10 @@
 			//- # Peaks climbed
 			//- Hiker who logged the most peaks
 			//- Hiker who uploaded the most files
+			//- Any hiker names who've finished their 46th
 
 			//# Messages
-			//- #Messages sent to correspondents
-			//- #Messages sent to hikers
-			//- #Messages sent total (this is not counting system generated messages)
-			//- Corr who sent the most messages (and that number)
+			//- #Messages sent by hikers
 			//- Hiker who sent the most messages (and that number)
 		}
 
