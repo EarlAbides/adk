@@ -1,15 +1,15 @@
 <?php
 	
-	class Hikers{
+	class Hikers {
 		
 		public $hikers;
 		
-		public function __construct(){
+		public function __construct() {
 			$this->hikers = [];
 		}
 		
 
-		public function get($con, $ADK_HIKER_CORR_ID){
+		public function get($con, $ADK_HIKER_CORR_ID) {
 			$sql_query = sql_getHikers($con, $ADK_HIKER_CORR_ID);
 			if($sql_query->execute()){
 				$sql_query->store_result();
@@ -32,7 +32,7 @@
 			else die('There was an error running the query ['.$con->error.']');
 		}
 		
-		public function renderTable(){
+		public function renderTable() {
 		    $html = "<table class=\"selecttable\">
 						<thead>
 							<tr>
@@ -79,17 +79,17 @@
 		
 	}
 	
-	class Hiker{
+	class Hiker {
 		
 		public $err;
 		public $id, $corrid, $corrname, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $numpeaks, $numoverall, $hikes, $datetime, $lastactive;
 		
-		public function __construct(){
+		public function __construct() {
 			$this->hikes = [];
 		}
 
 				
-		public function isValid(){
+		public function isValid() {
 		    if(strlen($this->address1) === 0 || strlen($this->address1) > 40) $this->err .= 'a';
 		    if(strlen($this->city) === 0 || strlen($this->city) > 40) $this->err .= 'c';
 		    if(strlen($this->state) === 0 || strlen($this->state) > 2) $this->err .= 's';
@@ -100,17 +100,17 @@
 		    return true;
 		}
 		
-		public function sanitize(){
+		public function sanitize() {
 			$this->info = str_replace('<iframe', '</iframe', $this->info);
 			$this->info = str_replace('<script', '</script', $this->info);
 		}
 		
-		public function save($con){
+		public function save($con) {
 			$sql_query = sql_addHiker($con, $this);
 			$sql_query->execute();
 		}
 
-		public function get($con){
+		public function get($con) {
 			$sql_query = sql_getHiker($con, $this->id);
 			if($sql_query->execute()){
 				$sql_query->store_result();
@@ -143,34 +143,34 @@
 			else die('There was an error running the query ['.$con->error.']');
 		}
 		
-		public function update($con){
+		public function update($con) {
 		    $sql_query = sql_updateHiker($con, $this);
 		    $sql_query->execute();
 		}
 
-		public function updateCorr($con){
+		public function updateCorr($con) {
 		    $sql_query = sql_updateHikerCorr($con, $this->id, $this->corrid);
 		    $sql_query->execute();
 		}
 
-		public function updatePhotoID($con){
+		public function updatePhotoID($con) {
 		    $sql_query = sql_updateHikerPhotoID($con, $this);
 		    $sql_query->execute();
 		}
 		
-		public static function updateLastActive($con, $ADK_USER_ID){
+		public static function updateLastActive($con, $ADK_USER_ID) {
 			$sql_query = sql_updateLastActive($con, $ADK_USER_ID);
 			$sql_query->execute();
 		}
 
-		public function delete($con){
+		public function delete($con) {
 		    $sql_queries = sql_deleteHiker($con, $this->id);
 			foreach($sql_queries as $sql_query){
 				if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 			}
 		}
 
-		public function populateFromApplicant($ADK_USER_ID, $ADK_CORRESPONDENT_ID, $ADK_APPLICANT){
+		public function populateFromApplicant($ADK_USER_ID, $ADK_CORRESPONDENT_ID, $ADK_APPLICANT) {
 			$this->id = $ADK_USER_ID;
 			$this->corrid = $ADK_CORRESPONDENT_ID;
 			$this->phone = $ADK_APPLICANT->phone;
@@ -185,7 +185,7 @@
 			$this->info = $ADK_APPLICANT->info;
 		}
 
-		public function populateFromUpdateHiker(){
+		public function populateFromUpdateHiker() {
 			$this->id = intval($_POST['id']);
 			$this->phone = $_POST['phone'];
 			$this->age = $_POST['age'];

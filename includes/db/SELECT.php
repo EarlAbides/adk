@@ -1,7 +1,7 @@
 <?php
 	
-	//Applicant
-	function sql_checkApplicantAndUsernameNotExists($con, $ADK_APPLICANT_USERNAME, $exempt){
+	// Applicant
+	function sql_checkApplicantAndUsernameNotExists($con, $ADK_APPLICANT_USERNAME, $exempt) {
         $sql_query = $con->prepare(
             "SELECT
 				(SELECT COUNT(*) FROM ADK_USER WHERE ADK_USER_USERNAME = ? AND ADK_USER_USERNAME <> ?) +
@@ -14,7 +14,7 @@
         return $sql_query;
 	}
 	
-	function sql_getApplicants($con){
+	function sql_getApplicants($con) {
 		$sql_query = $con->prepare(
 			"SELECT ADK_APPLICANT_ID, ADK_APPLICANT_USERNAME, ADK_APPLICANT_NAME, ADK_APPLICANT_EMAIL, ADK_APPLICANT_PHONE
 				, ADK_APPLICANT_STATE, ADK_APPLICANT_DTE
@@ -24,7 +24,7 @@
 		return $sql_query;
 	}
 	
-	function sql_getApplicant($con, $ADK_APPLICANT_ID){
+	function sql_getApplicant($con, $ADK_APPLICANT_ID) {
 		$sql_query = $con->prepare(
 			"SELECT A.ADK_APPLICANT_ID, A.ADK_APPLICANT_USERNAME, A.ADK_APPLICANT_NAME, A.ADK_APPLICANT_EMAIL, A.ADK_APPLICANT_PHONE
 				, A.ADK_APPLICANT_AGE, A.ADK_APPLICANT_SEX, A.ADK_APPLICANT_ADDRESS1, A.ADK_APPLICANT_ADDRESS2
@@ -43,7 +43,7 @@
 		return $sql_query;
 	}
 	
-	function sql_getApplicantsPeaks($con, $ADK_APPLICANT_ID){
+	function sql_getApplicantsPeaks($con, $ADK_APPLICANT_ID) {
 		$sql_query = $con->prepare(
             "SELECT P.ADK_PEAK_ID, P.ADK_PEAK_NAME, P.ADK_PEAK_HEIGHT
 			FROM ADK_PEAK P
@@ -56,8 +56,8 @@
         return $sql_query;
 	}
 	
-	//Correspondent
-	function sql_getCorrespondents($con){
+	// Correspondent
+	function sql_getCorrespondents($con) {
 		$sql_query = $con->prepare(
             "SELECT A.ADK_USER_ID, B.ADK_USER_USERNAME, B.ADK_USER_NAME, B.ADK_USER_EMAIL, A.ADK_CORR_PHOTO_ID
 				, A.ADK_CORR_PERSONALINFO, ADK_CORR_DTE
@@ -69,7 +69,7 @@
         return $sql_query;
 	}
 	
-	function sql_getCorrespondent($con, $ADK_USER_ID){
+	function sql_getCorrespondent($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
             "SELECT A.ADK_USER_ID, B.ADK_USER_USERNAME, B.ADK_USER_NAME, B.ADK_USER_EMAIL, A.ADK_CORR_PHOTO_ID
 				, A.ADK_CORR_PERSONALINFO
@@ -84,7 +84,7 @@
         return $sql_query;
 	}
 	
-	function sql_getMatchingCorrespondents($con, $term){
+	function sql_getMatchingCorrespondents($con, $term) {
         $term = '%'.$term.'%';
         
 		$sql_query = $con->prepare(
@@ -100,8 +100,8 @@
         return $sql_query;
 	}
 	
-	//File
-    function sql_getFile($con, $ADK_FILE_ID){
+	// File
+    function sql_getFile($con, $ADK_FILE_ID) {
 		$sql_query = $con->prepare(
             "SELECT ADK_FILE_ID, ADK_FILE_NAME, ADK_FILE_SAVENAME, ADK_FILE_SIZE, ADK_FILE_TYPE
 			FROM ADK_FILE WHERE ADK_FILE_ID = ?;"
@@ -112,7 +112,7 @@
         return $sql_query;
 	}
 	
-	function sql_getFileGallery($con, $ADK_USER_ID, $ADK_CORR_ID){
+	function sql_getFileGallery($con, $ADK_USER_ID, $ADK_CORR_ID) {
         $sql_query = $con->prepare(
             "SELECT F.ADK_FILE_ID, F.ADK_FILE_NAME, F.ADK_FILE_SAVENAME, F.ADK_FILE_DESC, F.ADK_FILE_SIZE, F.ADK_FILE_TYPE, U.ADK_USER_USERNAME
                 , (SELECT GROUP_CONCAT(P.ADK_PEAK_NAME) FROM ADK_PEAK P
@@ -136,8 +136,8 @@
         return $sql_query;
     }
 	
-	//Hike
-	function sql_getHikes($con, $ADK_USER_ID){
+	// Hike
+	function sql_getHikes($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
             "SELECT A.ADK_HIKE_ID, A.ADK_HIKE_NOTES, A.ADK_HIKE_DTE, ADK_HIKE_TS
 				, (SELECT COUNT(*) FROM ADK_HIKE_PEAK_JCT B
@@ -150,7 +150,7 @@
 
         return $sql_query;
 	}
-	function sql_getHikesPeaks($con, $ADK_HIKE_ID){
+	function sql_getHikesPeaks($con, $ADK_HIKE_ID) {
 		$sql_query = $con->prepare(
             "SELECT P.ADK_PEAK_ID, P.ADK_PEAK_NAME, P.ADK_PEAK_HEIGHT, HP.ADK_PEAK_DTE
 			FROM ADK_PEAK P
@@ -162,7 +162,7 @@
 
         return $sql_query;
 	}
-	function sql_getHikesFiles($con, $ADK_HIKE_ID){
+	function sql_getHikesFiles($con, $ADK_HIKE_ID) {
 		$sql_query = $con->prepare(
             "SELECT F.ADK_FILE_ID, F.ADK_FILE_NAME, F.ADK_FILE_DESC, F.ADK_FILE_SIZE, F.ADK_FILE_TYPE
 			FROM ADK_FILE F
@@ -176,7 +176,7 @@
         return $sql_query;
 	}
 
-	function sql_getHikersPeaks($con, $ADK_USER_ID){
+	function sql_getHikersPeaks($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
             "SELECT P.ADK_PEAK_NAME, DATE_FORMAT(H.ADK_HIKE_DTE, '%m/%d/%Y') ADK_HIKE_DTE
 			FROM ADK_PEAK P
@@ -190,7 +190,7 @@
         return $sql_query;
 	}
 
-	function sql_checkHasClimbed($con, $ADK_USER_ID, $ADK_PEAK_IDS, $ADK_HIKE_ID){
+	function sql_checkHasClimbed($con, $ADK_USER_ID, $ADK_PEAK_IDS, $ADK_HIKE_ID) {
 		$sql_query = $con->prepare(
 			"SELECT COUNT(*) FROM ADK_HIKE_PEAK_JCT
 			WHERE ADK_PEAK_ID IN(?)
@@ -207,8 +207,8 @@
         return $sql_query;
 	}
 	
-	//Hiker
-	function sql_getHikers($con, $ADK_HIKER_CORR_ID){
+	// Hiker
+	function sql_getHikers($con, $ADK_HIKER_CORR_ID) {
 		$sql_query = $con->prepare(
             "SELECT H.ADK_USER_ID, U.ADK_USER_USERNAME, U.ADK_USER_NAME, U.ADK_USER_EMAIL, H.ADK_HIKER_CORR_ID, H.ADK_HIKER_LASTACTIVE_DTE, H.ADK_HIKER_DTE
 				, (SELECT CONCAT(U.ADK_USER_NAME, ' (', U.ADK_USER_USERNAME, ')') FROM ADK_USER U
@@ -226,7 +226,7 @@
         return $sql_query;
 	}
 	
-	function sql_getHiker($con, $ADK_USER_ID){
+	function sql_getHiker($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
             "SELECT H.ADK_USER_ID, H.ADK_HIKER_CORR_ID, H.ADK_HIKER_PHOTO_ID, U.ADK_USER_USERNAME, U.ADK_USER_NAME, U.ADK_USER_EMAIL, H.ADK_HIKER_PHONE
 				, H.ADK_HIKER_AGE, H.ADK_HIKER_SEX, H.ADK_HIKER_ADDRESS1, H.ADK_HIKER_ADDRESS2, H.ADK_HIKER_CITY, H.ADK_HIKER_STATE
@@ -248,8 +248,8 @@
         return $sql_query;
 	}
 	
-	//Login
-	function sql_login_check($con, $ADK_USER_USERNAME, $ADK_USER_PASSWORD){
+	// Login
+	function sql_login_check($con, $ADK_USER_USERNAME, $ADK_USER_PASSWORD) {
 		$sql_query = $con->prepare(
             "SELECT A.ADK_USER_ID, A.ADK_USER_USERNAME, A.ADK_USERGROUP_ID, A.ADK_USER_NAME, A.ADK_USER_EMAIL,
 				B.ADK_USERGROUP_CDE, B.ADK_USERGROUP_DESC
@@ -264,8 +264,8 @@
         return $sql_query;
 	}
 	
-	//Message
-	function sql_getMessage($con, $ADK_MESSAGE){
+	// Message
+	function sql_getMessage($con, $ADK_MESSAGE) {
 		$sql_query = $con->prepare(
             "SELECT M.ADK_MESSAGE_ID, M.ADK_MESSAGE_FROM_USER_ID, M.ADK_MESSAGE_TO_USER_ID
 				,M.ADK_MESSAGE_TITLE, M.ADK_MESSAGE_CONTENT, M.ADK_MESSAGE_DTE, M.ADK_MESSAGE_READ, M.ADK_MESSAGE_DRAFT
@@ -283,7 +283,7 @@
 
         return $sql_query;
 	}
-	function sql_getMessageFiles($con, $ADK_MESSAGE_ID){
+	function sql_getMessageFiles($con, $ADK_MESSAGE_ID) {
 		$sql_query = $con->prepare(
             "SELECT A.ADK_FILE_ID, A.ADK_FILE_NAME, A.ADK_FILE_DESC, A.ADK_FILE_SIZE
 			FROM ADK_FILE A LEFT JOIN ADK_MESSAGE_FILE_JCT B ON A.ADK_FILE_ID = B.ADK_FILE_ID
@@ -295,7 +295,7 @@
         return $sql_query;
 	}
 	
-	function sql_getMessagesInbox($con, $ADK_USER_ID){
+	function sql_getMessagesInbox($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
             "SELECT A.ADK_MESSAGE_ID, A.ADK_MESSAGE_FROM_USER_ID, A.ADK_MESSAGE_TO_USER_ID, A.ADK_MESSAGE_TITLE, A.ADK_MESSAGE_DTE, A.ADK_MESSAGE_READ
 				,(SELECT ADK_USER_USERNAME FROM ADK_USER B WHERE B.ADK_USER_ID = A.ADK_MESSAGE_FROM_USER_ID) AS ADK_MESSAGE_FROM_USERNAME
@@ -313,7 +313,7 @@
         return $sql_query;
 	}
 	
-	function sql_getMessagesSent($con, $ADK_USER_ID){
+	function sql_getMessagesSent($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
             "SELECT A.ADK_MESSAGE_ID, A.ADK_MESSAGE_FROM_USER_ID, A.ADK_MESSAGE_TO_USER_ID, A.ADK_MESSAGE_TITLE, A.ADK_MESSAGE_DTE, A.ADK_MESSAGE_READ
 				,(SELECT ADK_USER_USERNAME FROM ADK_USER B WHERE B.ADK_USER_ID = A.ADK_MESSAGE_FROM_USER_ID) AS ADK_MESSAGE_FROM_USERNAME
@@ -331,7 +331,7 @@
         return $sql_query;
 	}
 	
-	function sql_getMessagesDrafts($con, $ADK_USER_ID){
+	function sql_getMessagesDrafts($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
             "SELECT A.ADK_MESSAGE_ID, A.ADK_MESSAGE_FROM_USER_ID, A.ADK_MESSAGE_TO_USER_ID, A.ADK_MESSAGE_TITLE, A.ADK_MESSAGE_DTE, A.ADK_MESSAGE_READ
 				,(SELECT ADK_USER_USERNAME FROM ADK_USER B WHERE B.ADK_USER_ID = A.ADK_MESSAGE_FROM_USER_ID) AS ADK_MESSAGE_FROM_USERNAME
@@ -349,7 +349,7 @@
         return $sql_query;
 	}
 	
-	function sql_getNewMessageCount($con, $ADK_USER_ID){
+	function sql_getNewMessageCount($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_MESSAGE WHERE ADK_MESSAGE_TO_USER_ID = ? AND ADK_MESSAGE_READ = 0 AND ADK_MESSAGE_DRAFT = 0;");
 
         $sql_query->bind_param('i', $ADK_USER_ID);
@@ -357,7 +357,7 @@
         return $sql_query;
 	}
 
-	function sql_getTemplates($con, $ADK_USER_ID){
+	function sql_getTemplates($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
             "SELECT ADK_MSG_TMPL_ID, ADK_USER_ID, ADK_MSG_TMPL_NAME FROM ADK_MSG_TMPL
 			WHERE ADK_USER_ID = ? OR ADK_USER_ID IS NULL
@@ -369,7 +369,7 @@
         return $sql_query;
 	}
 
-	function sql_getTemplate($con, $ADK_MSG_TMPL_ID){
+	function sql_getTemplate($con, $ADK_MSG_TMPL_ID) {
 		$sql_query = $con->prepare(
             "SELECT ADK_USER_ID, ADK_MSG_TMPL_NAME, ADK_MSG_TMPL_CONTENT, ADK_MSG_TMPL_DTE
 			FROM ADK_MSG_TMPL WHERE ADK_MSG_TMPL_ID = ?;"
@@ -380,13 +380,13 @@
         return $sql_query;
 	}
 	
-	//Peak
-	function sql_getPeaks($con){
+	// Peak
+	function sql_getPeaks($con) {
 		$sql_query = $con->prepare("SELECT ADK_PEAK_ID, ADK_PEAK_NAME, ADK_PEAK_HEIGHT FROM ADK_PEAK");
         return $sql_query;
 	}
 
-	function sql_getRemainingPeaks($con, $ADK_USER_ID){
+	function sql_getRemainingPeaks($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
             "SELECT A.ADK_PEAK_ID, A.ADK_PEAK_NAME, A.ADK_PEAK_HEIGHT,
 				CASE WHEN A.ADK_PEAK_ID IN(
@@ -402,13 +402,13 @@
         return $sql_query;
 	}
 
-	function sql_getPeakNames($con, $ADK_PEAK_IDS){
+	function sql_getPeakNames($con, $ADK_PEAK_IDS) {
 		$sql_query = $con->prepare("SELECT GROUP_CONCAT(ADK_PEAK_NAME SEPARATOR ', ') FROM ADK_PEAK WHERE ADK_PEAK_ID IN($ADK_PEAK_IDS);");
 		return $sql_query;
 	}
 	
-	//User
-	function sql_getUser($con, $ADK_USER_ID){
+	// User
+	function sql_getUser($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare("SELECT ADK_USER_USERNAME, ADK_USER_NAME, ADK_USER_EMAIL FROM ADK_USER WHERE ADK_USER_ID = ?;");
 
         $sql_query->bind_param('i', $ADK_USER_ID);
@@ -416,7 +416,7 @@
         return $sql_query;
 	}
 
-	function sql_getUserEmail($con, $ADK_USER_ID){
+	function sql_getUserEmail($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare("SELECT ADK_USER_EMAIL FROM ADK_USER WHERE ADK_USER_ID = ?;");
 
         $sql_query->bind_param('i', $ADK_USER_ID);
@@ -424,7 +424,7 @@
         return $sql_query;
 	}
 	
-	function sql_checkUsernameNotExists($con, $ADK_USER_USERNAME){
+	function sql_checkUsernameNotExists($con, $ADK_USER_USERNAME) {
 		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_USER WHERE ADK_USER_USERNAME = ?;");
 
         $sql_query->bind_param('s', $ADK_USER_USERNAME);
@@ -432,7 +432,7 @@
         return $sql_query;
 	}
 	
-	function sql_checkUserOldPassword($con, $ADK_USER_ID, $ADK_USER_PASSWORD){
+	function sql_checkUserOldPassword($con, $ADK_USER_ID, $ADK_USER_PASSWORD) {
 		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_USER WHERE ADK_USER_ID = ? AND ADK_USER_PASSWORD = ?;");
 
 		$pw = md5($ADK_USER_PASSWORD);
@@ -442,7 +442,7 @@
         return $sql_query;
 	}
 	
-	function sql_isUser($con, $ADK_USER){
+	function sql_isUser($con, $ADK_USER) {
         $sql_query = $con->prepare(
             "SELECT ADK_USER_ID, ADK_USER_USERNAME, ADK_USER_NAME, ADK_USER_EMAIL,
 				RIGHT(ADK_USER_PASSWORD, 8) AS last8hash
@@ -455,7 +455,7 @@
         return $sql_query;
 	}
 	
-	function sql_checkValidHash($con, $ADK_USER_ID, $last8hash){
+	function sql_checkValidHash($con, $ADK_USER_ID, $last8hash) {
 		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_USER WHERE ADK_USER_ID = ? AND RIGHT(ADK_USER_PASSWORD, 8) = ?;");
 
         $sql_query->bind_param('is', $ADK_USER_ID, $last8hash);
@@ -463,7 +463,7 @@
         return $sql_query;
 	}
 
-	function sql_isUniqueUsername($con, $username, $exempt){
+	function sql_isUniqueUsername($con, $username, $exempt) {
 		$sql_query = $con->prepare(
 			"SELECT
 				(SELECT COUNT(*) FROM ADK_USER WHERE ADK_USER_USERNAME = ? AND ADK_USER_USERNAME <> ?) +
@@ -474,6 +474,23 @@
 		$sql_query->bind_param('ssss', $username, $exempt, $username, $exempt);
 				
 		return $sql_query;
+	}
+	
+	// Batch
+	function sql_batch_inactiveUsers($con) {
+		$sql_query = $con->prepare(
+            "SELECT H.ADK_USER_ID, U.ADK_USER_USERNAME, U.ADK_USER_NAME, U.ADK_USER_EMAIL, H.ADK_HIKER_CORR_ID, H.ADK_HIKER_LASTACTIVE_DTE, H.ADK_HIKER_DTE
+				, (SELECT CONCAT(U.ADK_USER_NAME, ' (', U.ADK_USER_USERNAME, ')') FROM ADK_USER U
+					WHERE H.ADK_HIKER_CORR_ID = U.ADK_USER_ID) ADK_HIKER_CORR_NAME
+				, (SELECT COUNT(DISTINCT ADK_PEAK_ID) FROM ADK_HIKE_PEAK_JCT HP
+					LEFT JOIN ADK_HIKE HI ON HP.ADK_HIKE_ID = HI.ADK_HIKE_ID
+				WHERE HI.ADK_USER_ID = H.ADK_USER_ID) ADK_HIKER_NUMPEAKS
+			FROM ADK_HIKER H
+				LEFT JOIN ADK_USER U ON H.ADK_USER_ID = U.ADK_USER_ID
+			WHERE ADK_HIKER_LASTACTIVE_DTE > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -6 MONTH);"
+        );
+
+        return $sql_query;
 	}
 	
 ?>

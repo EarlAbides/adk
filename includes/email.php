@@ -1,8 +1,8 @@
 <?php
-	
+
 	//Includes
 	require_once 'PHPMailer/PHPMailerAutoload.php';
-	
+
 	function PHPMailer($toAddr, $subject, $htmlmessage, $message){
 		$mail = new PHPMailer();
 
@@ -30,10 +30,8 @@
 	}
 
 	function getLogin(){
-		$env = isset($_SERVER['NFSN_SITE_ROOT']) ? 'PRD' : 'DEV';
 		$path = '.adk_api';
-		if($env === 'PRD') $path = '../protected/'.$path;
-		$path = '../'.$path;
+		if(!file_exists($path)) $path = '../'.$path;
 
 		$lines = [];
         $handle = fopen($path, 'r');
@@ -42,11 +40,11 @@
             fclose($handle);
         }
         else die('Unable to get api key');
-		
+
 		$login = ['un' => $lines[1], 'pw' => $lines[2]];
 		return $login;
 	}
-	
+
 	//Applicant
 	function sendNewApplicantEmail($ADK_APPLICANT){
 		$htmlmessage = "Username:<br>";
@@ -492,7 +490,7 @@
 	}
 	
 	//User
-	function sendPWResetLinkEmail($ADK_USER){
+	function sendPWResetLinkEmail($ADK_USER) {
 		$url = $GLOBALS['url']."forgot?_=".$ADK_USER->last8hash.$ADK_USER->id;
 		
 		$htmlmessage = $ADK_USER->name.",<br><br>";
@@ -508,6 +506,20 @@
 		$subject = 'Reset Your Password';
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
+	}
+
+	//Batch
+	function sendInactiveUserEmail($ADK_HIKER) {
+		$htmlmessage = $ADK_HIKER->name.",<br>";
+		$htmlmessage .= "You haven't been active in over 6 months!";
+
+		$message = $ADK_HIKER->name.",\r\n";
+		$message .= "You haven't been active in over 6 months!";
+
+		$toAddr = $ADK_HIKER->email;
+		$subject = "You haven't been active in over 6 months!";'Reset Your Password';
+		
+	    PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
 ?>
