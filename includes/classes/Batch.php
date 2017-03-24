@@ -29,7 +29,27 @@
 		}
 
 		public static function batch_quarterlyReport($con) {
+			
+		}
 
+		private static function buildQuarterlyReport() {
+			//Since <3 months ago>
+
+			//# Hikers
+			//- # New hikers
+
+			//# Hikers
+			//- # Hikes logged
+			//- # Peaks climbed
+			//- Hiker who logged the most peaks
+			//- Hiker who uploaded the most files
+
+			//# Messages
+			//- #Messages sent to correspondents
+			//- #Messages sent to hikers
+			//- #Messages sent total (this is not counting system generated messages)
+			//- Corr who sent the most messages (and that number)
+			//- Hiker who sent the most messages (and that number)
 		}
 
 	}
