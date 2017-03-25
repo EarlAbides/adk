@@ -17,9 +17,7 @@
 					$ADK_HIKER->username = $row["ADK_USER_USERNAME"];
 					$ADK_HIKER->name = $row["ADK_USER_NAME"];
 					$ADK_HIKER->email = $row["ADK_USER_EMAIL"];
-					$ADK_HIKER->numpeaks = $row["ADK_HIKER_NUMPEAKS"];
-					$ADK_HIKER->datetime = $row["ADK_HIKER_DTE"];
-					$ADK_HIKER->lastactive = $row["ADK_HIKER_LASTACTIVE_DTE"];
+
 					array_push($ADK_HIKERS, $ADK_HIKER);
 				}
 			}

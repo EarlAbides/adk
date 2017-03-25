@@ -409,6 +409,26 @@
 		return $sql_query;
 	}
 	
+	// Pref
+	function sql_getUsersPrefs($con, $ADK_USER_ID) {
+		$sql_query = $con->prepare(
+			"SELECT P.ADK_PREF_NAME
+				, CASE WHEN (SELECT COUNT(*) FROM ADK_USER_PREF UP
+						WHERE UP.ADK_PREF_NAME = P.ADK_PREF_NAME
+							AND UP.ADK_USER_ID = ?) = 1
+					THEN (SELECT UP.ADK_PREF_VAL FROM ADK_USER_PREF UP
+							WHERE UP.ADK_PREF_NAME = P.ADK_PREF_NAME
+								AND UP.ADK_USER_ID = ?)
+					ELSE P.ADK_PREF_DEFAULT        
+				END ADK_PREF_VAL
+			FROM ADK_PREF P;"
+		);
+
+        $sql_query->bind_param('i', $ADK_USER_ID);
+
+        return $sql_query;
+	}
+
 	// User
 	function sql_getUser($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare("SELECT ADK_USER_USERNAME, ADK_USER_NAME, ADK_USER_EMAIL FROM ADK_USER WHERE ADK_USER_ID = ?;");
@@ -481,14 +501,10 @@
 	// Batch
 	function sql_batch_inactiveUsers($con) {
 		$sql_query = $con->prepare(
-            "SELECT DISTINCT H.ADK_USER_ID, U.ADK_USER_USERNAME, U.ADK_USER_NAME, U.ADK_USER_EMAIL, H.ADK_HIKER_CORR_ID, H.ADK_HIKER_LASTACTIVE_DTE, H.ADK_HIKER_DTE
+            "SELECT DISTINCT H.ADK_USER_ID, U.ADK_USER_USERNAME, U.ADK_USER_NAME, U.ADK_USER_EMAIL, H.ADK_HIKER_CORR_ID
 				, (SELECT CONCAT(U.ADK_USER_NAME, ' (', U.ADK_USER_USERNAME, ')')
 					FROM ADK_USER U
 					WHERE H.ADK_HIKER_CORR_ID = U.ADK_USER_ID) ADK_HIKER_CORR_NAME
-				, (SELECT COUNT(DISTINCT ADK_PEAK_ID)
-					FROM ADK_HIKE_PEAK_JCT HP
-						LEFT JOIN ADK_HIKE HI ON HP.ADK_HIKE_ID = HI.ADK_HIKE_ID
-					WHERE HI.ADK_USER_ID = H.ADK_USER_ID) ADK_HIKER_NUMPEAKS
 			FROM ADK_HIKER H
 				LEFT JOIN ADK_USER U ON H.ADK_USER_ID = U.ADK_USER_ID
                 LEFT JOIN ADK_HIKE HI ON U.ADK_USER_ID = HI.ADK_USER_ID
@@ -496,7 +512,15 @@
 				AND (SELECT COUNT(DISTINCT ADK_PEAK_ID)
 					FROM ADK_HIKE_PEAK_JCT HP
 						LEFT JOIN ADK_HIKE HI ON HP.ADK_HIKE_ID = HI.ADK_HIKE_ID
-					WHERE HI.ADK_USER_ID = H.ADK_USER_ID) < 46;"
+					WHERE HI.ADK_USER_ID = H.ADK_USER_ID) < 46
+				AND CASE WHEN (SELECT COUNT(*) FROM ADK_USER_PREF UP
+						WHERE UP.ADK_PREF_NAME = 'hiker_receive-inactive-user-emails'
+							AND UP.ADK_USER_ID = H.ADK_USER_ID) = 1
+					THEN (SELECT UP.ADK_PREF_VAL FROM ADK_USER_PREF UP
+							WHERE UP.ADK_PREF_NAME = 'hiker_receive-inactive-user-emails'
+								AND UP.ADK_USER_ID = H.ADK_USER_ID)
+					ELSE 1
+				END = 1;"
         );
 
         return $sql_query;

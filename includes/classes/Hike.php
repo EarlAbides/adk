@@ -1,15 +1,15 @@
 <?php
 	
-	class Hikes{
+	class Hikes {
 		
 		public $hikes, $userid;
 
-		public function __construct(){
+		public function __construct() {
 			$this->hikes = [];
 		}
 
 
-		public function get($con){
+		public function get($con) {
 			$sql_query = sql_getHikes($con, $this->userid);
 			if($sql_query->execute()){
 				$sql_query->store_result();
@@ -67,7 +67,7 @@
 		}
 
 
-		public function renderTable($numPeaks, $numClimbed, $percent){
+		public function renderTable($numPeaks, $numClimbed, $percent) {
 			$peakIDs = [];
 			$html = "<table id=\"table_hikes\" class=\"selecttable dt\" data-numpeaks=".$numPeaks." data-numclimbed=".$numClimbed." data-percent=".$percent.">
 						<thead>
@@ -119,18 +119,18 @@
 		
 	}
 	
-	class Hike{
+	class Hike {
 		
 		public $err;
 		public $id, $userid, $notes, $datetime, $peaks, $files, $numpeaks, $label;
 		
-		public function __construct(){
+		public function __construct() {
 			$this->peaks = [];
 			$this->files = [];			
 		}
 
 
-		private function getEarliestDate(){
+		private function getEarliestDate() {
 			$earliest = '';
 			foreach($this->peaks as $ADK_PEAK){
 				if(!$earliest) $earliest = $ADK_PEAK->datetime;
@@ -156,24 +156,24 @@
 		    return true;
 		}
 
-		public function sanitize(){
+		public function sanitize() {
 			$this->notes = str_replace('<iframe', '</iframe', $this->notes);
 			$this->notes = str_replace('<script', '</script', $this->notes);
 		}
 		
 		
-		public function save($con){
+		public function save($con) {
 			$sql_query = sql_addHike($con, $this);
 			$sql_query->execute();
 			$this->id = $sql_query->insert_id;
 		}
 		
-		public function addPeak($con, $ADK_PEAK){
+		public function addPeak($con, $ADK_PEAK) {
 			$sql_query = sql_addHikesPeak($con, $this->id, $ADK_PEAK);
 			$sql_query->execute();
 		}
 		
-		public function addFiles($con, $fileIDs){
+		public function addFiles($con, $fileIDs) {
 	        $sql_query = sql_addHikeFileJcts($con);
 			$con->query("START TRANSACTION");
 			foreach($fileIDs as $fileID){
@@ -184,30 +184,30 @@
 			$con->query("COMMIT");
 	    }
 		
-		public function update($con){
+		public function update($con) {
 			$sql_query = sql_updateHike($con, $this);
 			$sql_query->execute();
 		}
 
-		public function delete($con){
+		public function delete($con) {
 			$sql_queries = sql_deleteHike($con, $this->id);
 			foreach($sql_queries as $sql_query){
 				if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 			}
 		}
 		
-		public function deletePeaks($con){
+		public function deletePeaks($con) {
 			$sql_query = sql_deleteHikePeakJcts($con, $this->id);
 			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 		}
 		
-		public function deleteFiles($con){
+		public function deleteFiles($con) {
 			$sql_query = sql_deleteHikeFileJcts($con, $this->id);
 			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 		}
 		
 		
-		public function populate(){
+		public function populate() {
 			if(isset($_POST['hikeid'])) $this->id = intval($_POST['hikeid']);
 			$this->userid = intval($_POST['id']);
 			$this->notes = $_POST['notes'];

@@ -82,7 +82,8 @@
 	class Hiker {
 		
 		public $err;
-		public $id, $corrid, $corrname, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country, $info, $numpeaks, $numoverall, $hikes, $datetime, $lastactive;
+		public $id, $corrid, $corrname, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country
+			, $info, $numpeaks, $numoverall, $hikes, $datetime, $lastactive, $prefs;
 		
 		public function __construct() {
 			$this->hikes = [];

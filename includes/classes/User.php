@@ -3,7 +3,7 @@
 	class User{
 		
 		public $err;
-		public $id, $usergroupid, $usergroupcde, $username, $name, $email, $pw, $last8hash;
+		public $id, $usergroupid, $usergroupcde, $username, $name, $email, $pw, $last8hash, $prefs;
 		
 		public function __construct(){
 			
