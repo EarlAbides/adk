@@ -1,17 +1,17 @@
 <?php
 	
 	//Imports
-	require_once 'session.php';
-	require_once 'db/db_conn.php';
-	require_once 'db/SELECT.php';
-	require_once 'db/UPDATE.php';
-	require_once 'classes/Correspondent.php';
-	require_once 'classes/User.php';
+	require_once "session.php";
+	require_once "db/db_conn.php";
+	require_once "db/SELECT.php";
+	require_once "db/UPDATE.php";
+	require_once "classes/Correspondent.php";
+	require_once "classes/User.php";
 	
 	$con = connect_db();
 
 	$old_ADK_USER = new User();
-	$old_ADK_USER->id = intval($_POST['id']);
+	$old_ADK_USER->id = intval($_POST["id"]);
 	$old_ADK_USER->get($con);
 
 	$ADK_USER = new User();
@@ -19,12 +19,12 @@
 
 	if(!$ADK_USER->isValid()){
 		$con->close();
-		header('Location: ../profile?_='.$ADK_USER->id.'&e='.$ADK_USER->err);
+		header("Location: ../profile?_=".$ADK_USER->id."&e=".$ADK_USER->err);
 		exit;
 	}
 	if(!User::isUniqueUsername($con, $ADK_USER->username, $old_ADK_USER->username)){
 		$con->close();
-		header('Location: ../profile?_='.$ADK_USER->id.'&e=q');
+		header("Location: ../profile?_=".$ADK_USER->id."&e=q");
 		exit;
 	}
 	
@@ -32,8 +32,8 @@
 	
 	$con->close();
 
-	$_SESSION['ADK_USER_USERNAME'] = $ADK_USER->username;
+	$_SESSION["ADK_USER_USERNAME"] = $ADK_USER->username;
 	
-	header('Location: ../');
+	header("Location: ../");
 	
 ?>

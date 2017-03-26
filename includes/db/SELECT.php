@@ -419,12 +419,20 @@
 					THEN (SELECT UP.ADK_PREF_VAL FROM ADK_USER_PREF UP
 							WHERE UP.ADK_PREF_NAME = P.ADK_PREF_NAME
 								AND UP.ADK_USER_ID = ?)
-					ELSE P.ADK_PREF_DEFAULT        
+					ELSE P.ADK_PREF_DEFAULT
 				END ADK_PREF_VAL
 			FROM ADK_PREF P;"
 		);
 
-        $sql_query->bind_param('i', $ADK_USER_ID);
+        $sql_query->bind_param('ii', $ADK_USER_ID, $ADK_USER_ID);
+
+        return $sql_query;
+	}
+
+	function sql_isPrefSet($con, $ADK_USER_ID, $ADK_PREF_NAME) {
+		$sql_query = $con->prepare("SELECT COUNT(*) COUNT FROM ADK_USER_PREF WHERE ADK_USER_ID = ? AND ADK_PREF_NAME = ?;");
+
+        $sql_query->bind_param('is', $ADK_USER_ID, $ADK_PREF_NAME);
 
         return $sql_query;
 	}

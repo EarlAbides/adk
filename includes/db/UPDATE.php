@@ -1,7 +1,7 @@
 <?php
 	
-	//Applicant
-	function sql_updateApplicant($con, $ADK_APPLICANT){
+	// Applicant
+	function sql_updateApplicant($con, $ADK_APPLICANT) {
 		$sql_query = $con->prepare(
 			"UPDATE ADK_APPLICANT
 				SET ADK_APPLICANT_USERNAME = ?
@@ -27,8 +27,8 @@
 		return $sql_query;
 	}
 	
-	//Correspondent
-	function sql_updateCorrespondent($con, $ADK_CORRESPONDENT){
+	// Correspondent
+	function sql_updateCorrespondent($con, $ADK_CORRESPONDENT) {
 		$sql_query = $con->prepare("UPDATE ADK_CORRESPONDENT SET ADK_CORR_PERSONALINFO = ? WHERE ADK_USER_ID = ?;");
 		
 		$sql_query->bind_param('si', $ADK_CORRESPONDENT->info, $ADK_CORRESPONDENT->id);
@@ -36,7 +36,7 @@
 		return $sql_query;
 	}
 	
-	function sql_updateCorrPhotoID($con, $ADK_CORRESPONDENT){
+	function sql_updateCorrPhotoID($con, $ADK_CORRESPONDENT) {
         $sql_query = $con->prepare("UPDATE ADK_CORRESPONDENT SET ADK_CORR_PHOTO_ID = ? WHERE ADK_USER_ID = ?;");
 		
 		$sql_query->bind_param('ii', $ADK_CORRESPONDENT->photoid, $ADK_CORRESPONDENT->id);
@@ -44,7 +44,7 @@
 		return $sql_query;
 	}
 	
-	function sql_updateReassignCorrsHikers($con, $ADK_USER_ID, $old_ADK_CORRESPONDENT_ID){
+	function sql_updateReassignCorrsHikers($con, $ADK_USER_ID, $old_ADK_CORRESPONDENT_ID) {
 		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_CORR_ID = ? WHERE ADK_HIKER_CORR_ID = ?;");
 		
 		$sql_query->bind_param('ii', $ADK_USER_ID, $old_ADK_CORRESPONDENT_ID);
@@ -52,7 +52,7 @@
 		return $sql_query;
 	}
 
-	//Hike
+	// Hike
 	function sql_updateHike($con, $ADK_HIKE){
 		$null = null;
 		$sql_query = $con->prepare(
@@ -70,8 +70,8 @@
 		return $sql_query;
 	}
 	
-	//Hiker
-	function sql_updateHiker($con, $ADK_HIKER){
+	// Hiker
+	function sql_updateHiker($con, $ADK_HIKER) {
 		$sql_query = $con->prepare(
 			"UPDATE ADK_HIKER
 				SET ADK_HIKER_PHONE = ?
@@ -92,7 +92,7 @@
 		return $sql_query;
 	}
 	
-	function sql_updateHikerCorr($con, $ADK_USER_ID, $ADK_CORR_ID){
+	function sql_updateHikerCorr($con, $ADK_USER_ID, $ADK_CORR_ID) {
 		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_CORR_ID = ? WHERE ADK_USER_ID = ?;");
 		
 		$sql_query->bind_param('ii', $ADK_CORR_ID, $ADK_USER_ID);
@@ -100,7 +100,7 @@
 		return $sql_query;
 	}
 
-	function sql_updateHikerPhotoID($con, $ADK_HIKER){
+	function sql_updateHikerPhotoID($con, $ADK_HIKER) {
         $sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_PHOTO_ID = ? WHERE ADK_USER_ID = ?;");
 		
 		$sql_query->bind_param('ii', $ADK_HIKER->photoid, $ADK_HIKER->id);
@@ -108,7 +108,7 @@
 		return $sql_query;
 	}
 	
-	function sql_updateLastActive($con, $ADK_USER_ID){
+	function sql_updateLastActive($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_LASTACTIVE_DTE = NOW() WHERE ADK_USER_ID = ?;");
 		
 		$sql_query->bind_param('i', $ADK_USER_ID);
@@ -116,8 +116,8 @@
 		return $sql_query;
 	}
 	
-	//Message
-	function sql_updateDeleteMessageTrash($con, $ADK_MESSAGE_ID){
+	// Message
+	function sql_updateDeleteMessageTrash($con, $ADK_MESSAGE_ID) {
 		$sql_query = $con->prepare("UPDATE ADK_MESSAGE SET ADK_MESSAGE_DELETED = '1' WHERE ADK_MESSAGE_ID = ?;");
 		
         $sql_query->bind_param('i', $ADK_MESSAGE_ID);
@@ -125,7 +125,7 @@
 		return $sql_query;
 	}
 	
-	function sql_updateMessageMarkRead($con, $ADK_MESSAGE_ID){
+	function sql_updateMessageMarkRead($con, $ADK_MESSAGE_ID) {
 		$sql_query = $con->prepare("UPDATE ADK_MESSAGE SET ADK_MESSAGE_READ = '1' WHERE ADK_MESSAGE_ID = ?;");
 
         $sql_query->bind_param('i', $ADK_MESSAGE_ID);
@@ -133,7 +133,7 @@
 		return $sql_query;
 	}
 	
-	function sql_updateMessageDelete($con, $ADK_MESSAGE_ID, $inboxSent){
+	function sql_updateMessageDelete($con, $ADK_MESSAGE_ID, $inboxSent) {
 		if($inboxSent === 'i') $sql_query = $con->prepare("UPDATE ADK_MESSAGE SET ADK_MESSAGE_TO_DELETED = '1' WHERE ADK_MESSAGE_ID = ?;");
 		else $sql_query = $con->prepare("UPDATE ADK_MESSAGE SET ADK_MESSAGE_FROM_DELETED = '1' WHERE ADK_MESSAGE_ID = ?;");
 
@@ -142,7 +142,7 @@
 		return $sql_query;
 	}
 
-	function sql_sendDraft($con, $ADK_MESSAGE){
+	function sql_sendDraft($con, $ADK_MESSAGE) {
 		$sql_query = $con->prepare(
 			"UPDATE ADK_MESSAGE
 				SET ADK_MESSAGE_TITLE = ?
@@ -157,7 +157,7 @@
 		return $sql_query;
 	}
 
-	function sql_updateDraft($con, $ADK_MESSAGE){
+	function sql_updateDraft($con, $ADK_MESSAGE) {
 		$sql_query = $con->prepare(
 			"UPDATE ADK_MESSAGE
 				SET ADK_MESSAGE_TITLE = ?
@@ -172,7 +172,7 @@
 		return $sql_query;
 	}
 
-	function sql_updateTemplate($con, $ADK_MSG_TMPL){
+	function sql_updateTemplate($con, $ADK_MSG_TMPL) {
 		$sql_query = $con->prepare(
 			"UPDATE ADK_MSG_TMPL
 				SET ADK_MSG_TMPL_NAME = ?
@@ -186,8 +186,20 @@
 		return $sql_query;
 	}
 	
-	//User
-	function sql_updateUser($con, $ADK_USER){
+	// Pref
+	function sql_updateUserPref($con, $ADK_USER_ID, $ADK_PREF_NAME, $ADK_PREF_VAL) {
+		$sql_query = $con->prepare(
+			"UPDATE ADK_USER_PREF SET ADK_PREF_VAL = ?
+			WHERE ADK_PREF_NAME = ? AND ADK_USER_ID = ?;"
+		);
+		
+		$sql_query->bind_param('isi', $ADK_PREF_VAL, $ADK_PREF_NAME, $ADK_USER_ID);
+		
+		return $sql_query;
+	}
+
+	// User
+	function sql_updateUser($con, $ADK_USER) {
 		$sql_query = $con->prepare(
 			"UPDATE ADK_USER
 				SET ADK_USER_USERNAME = ?
@@ -201,7 +213,7 @@
 		return $sql_query;
 	}
 	
-	function sql_updateUserPW($con, $ADK_USER){
+	function sql_updateUserPW($con, $ADK_USER) {
 		$sql_query = $con->prepare("UPDATE ADK_USER SET ADK_USER_PASSWORD = ? WHERE ADK_USER_ID = ?;");
 		
 		$pw = md5($ADK_USER->pw);

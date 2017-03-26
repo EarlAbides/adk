@@ -5,29 +5,7 @@
 <?php require_once 'profile.inc.php'; ?>
 
 <?php include 'templates/head.php'; ?>
-	<?php if($ADK_USERGROUP_CDE === 'HIK'){ ?>
-	<script>
-		$(document).ready(function(){
-			$('#select_country').change(function(){
-				var label_select_state = document.getElementById('label_select_state');
-				var select_state = document.getElementById('select_state');
-				switch(this.value){
-					case 'United States':
-						label_select_state.innerHTML = 'State*';
-						select_state.outerHTML = document.getElementById('template_state_us').innerHTML;
-						break;
-					case 'Canada':
-						label_select_state.innerHTML = 'Province*';
-						select_state.outerHTML = document.getElementById('template_state_ca').innerHTML;
-						break;
-					default:
-						label_select_state.innerHTML = 'State/Region*';
-						select_state.outerHTML = document.getElementById('template_stateregion').innerHTML;
-				}
-			});
-		});
-	</script>
-	<?php } ?>
+	<script src="js/profile.min.js"></script>
 </head>
 
 <body>
@@ -35,12 +13,12 @@
 	<?php include 'templates/logo.php'; ?>
 	
 	<div class="container-fluid">
-		<?php include 'templates/navbar_sub.php'; ?>
+		<?php include "templates/navbar_sub.php"; ?>
 		<div class="content-wrapper">
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
 				
-				<?php switch($ADK_USERGROUP_CDE){case 'ADM': case 'EDT':?>
+				<?php switch($ADK_USERGROUP_CDE){case "ADM": case "EDT": ?>
 				<form method="post" action="includes/userUpdate.php" data-toggle="validator" role="form" novalidate>
 					
 					<h4 class="content-header">
@@ -92,7 +70,7 @@
 					<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
 					
 				</form>
-				<?php break; case 'COR':?>
+				<?php break; case "COR":?>
 				
 				<h4 class="content-header">
 					<?php echo $ADK_CORRESPONDENT->username; ?>
@@ -170,7 +148,7 @@
 				</div>
 				
 				
-				<?php break; case 'HIK':?>
+				<?php break; case "HIK":?>
 				
 				<h4 class="content-header">
 					<?php echo $ADK_HIKER->username; ?>
@@ -230,8 +208,8 @@
 									<label for="select_sex" class="control-label control-label-sm">Sex</label><br />
 									<select id="select_sex" name=sex class="form-control form-control-sm" placeholder="Sex">
 										<option />
-										<option value="M"<?php if($ADK_HIKER->sex == 'M') echo ' selected="selected"'; ?>>M</option>
-										<option value="F"<?php if($ADK_HIKER->sex == 'F') echo ' selected="selected"'; ?>>F</option>
+										<option value="M"<?php if($ADK_HIKER->sex == "M") echo " selected=\"selected\""; ?>>M</option>
+										<option value="F"<?php if($ADK_HIKER->sex == "F") echo " selected=\"selected\""; ?>>F</option>
 									</select>
 									<span class="help-block with-errors"></span>
 								</div>
@@ -273,8 +251,8 @@
 									<label id="label_select_state" for="select_state" class="control-label control-label-sm">State*</label><br />
 									<?php
 										switch($ADK_HIKER->country){
-											case 'United States': echo select_state($ADK_HIKER->state); break;
-											case 'Canada': echo select_state_ca($ADK_HIKER->state); break;
+											case "United States": echo select_state($ADK_HIKER->state); break;
+											case "Canada": echo select_state_ca($ADK_HIKER->state); break;
 											default: echo textbox_stateregion($ADK_HIKER->state);
 										}
 									?>
@@ -317,7 +295,7 @@
 						
 					</form>
 				</div>
-				
+
 				<div class="container-fluid">
 					<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 						<form method="post" action="includes/hikerPhoto.php" data-toggle="validator" role="form" enctype="multipart/form-data" novalidate>
@@ -344,26 +322,73 @@
 				<div style="display:none;">
 					<template id="template_state_us">
 						<?php
-							$default = $ADK_HIKER->country === 'United States'? $ADK_HIKER->state: 'NY';
+							$default = $ADK_HIKER->country === "United States" ? $ADK_HIKER->state: "NY";
 							echo select_state($default);
 						?>
 					</template>
 					<template id="template_state_ca">
 						<?php
-							$default = $ADK_HIKER->country === 'Canada'? $ADK_HIKER->state: 'ON';
+							$default = $ADK_HIKER->country === "Canada" ? $ADK_HIKER->state: "ON";
 							echo select_state_ca($default);
 						?>
 					</template>
 					<template id="template_stateregion">
 						<?php
-							$default = ($ADK_HIKER->country !== 'United States' && $ADK_HIKER->country !== 'Canada')? $ADK_HIKER->state: '';
+							$default = ($ADK_HIKER->country !== "United States" && $ADK_HIKER->country !== "Canada")? $ADK_HIKER->state: "";
 							echo textbox_stateregion($default);
 						?>
 					</template>
 				</div>
 				
-				<?php break;} ?>
+				<?php break; } ?>
 			</div>
+
+			<?php if($ADK_USERGROUP_CDE === "HIK" || $ADK_USERGROUP_CDE === "COR"){ ?>
+				<div id="div_preferences" class="col-xs-12 content content-max" style="margin-bottom:15px;">
+					<form method="post" action="includes/userUpdatePrefs.php" data-toggle="validator" role="form" novalidate>
+						<h4 class="content-header">
+							Preferences
+							<a href="#" class="hoverbtn" onclick="showHide_content(this.children[0], this.parentNode.parentNode);">
+								<span class="glyphicon glyphicon-chevron-down"></span>
+							</a>
+						</h4>
+
+						<div class="col-xs-12">
+							<h4>Communications</h4>
+							<?php if($ADK_USERGROUP_CDE === "HIK"){ ?>
+								<div class="form-group">
+									<div class="col-xs-12">
+										<div class="col-sm-5">
+											<label for="hiker_receive-inactive-user-emails" class="control-label control-label-sm">Reminder if you're inactive for over six months</label><br />
+											<input type="checkbox" id="hiker_receive-inactive-user-emails" name="hiker_receive-inactive-user-emails" value="true" <?php echo ($ADK_PREFS->get("hiker_receive-inactive-user-emails") ? "checked" : ""); ?> />
+											<span class="help-block with-errors"></span>
+										</div>
+									</div>
+								</div>
+							<?php } ?>
+							<div class="form-group">
+								<div class="col-xs-12">
+									<div class="col-sm-5">
+										<label for="user_receive-newsletter" class="control-label control-label-sm">Quarterly newsletter</label><br />
+										<input type="checkbox" id="user_receive-newsletter" name="user_receive-newsletter" value="true" <?php echo $ADK_PREFS->get("user_receive-newsletter") ? "checked" : ""; ?> />
+										<span class="help-block with-errors"></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-12">
+									<br />
+									<button type="submit" class="btn btn-sm btn-default pull-right">Submit</button>
+									<br /><br />
+								</div>
+							</div>
+						</div>
+					
+						<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
+					
+					</form>
+				</div>
+			<?php } ?>
 			
 			<div class="col-xs-12 content content-max" style="margin-bottom:15px;">
 				<form method="post" action="includes/userUpdatePW.php" data-toggle="validator" role="form" novalidate>

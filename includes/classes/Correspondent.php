@@ -1,14 +1,14 @@
 <?php
 	
-	class Correspondents{
+	class Correspondents {
 		
 		public $correspondents;
 		
-		public function __construct(){
+		public function __construct() {
 		    $this->correspondents = [];
 		}
 		
-		public function get($con){
+		public function get($con) {
 		    $sql_query = sql_getCorrespondents($con);
 		    if($sql_query->execute()){
 		        $sql_query->store_result();
@@ -30,7 +30,7 @@
 		    else die('There was an error running the query ['.$con->error.']');
 		}
 		
-		public function getMatchingNames($con, $term){
+		public function getMatchingNames($con, $term) {
 		    $ADK_CORRESPONDENT_NAMES = [];
 			$sql_query = sql_getMatchingCorrespondents($con, $term);
 		    if($sql_query->execute()){
@@ -45,7 +45,7 @@
 		}
 		
 
-		public function renderSelectTable(){
+		public function renderSelectTable() {
 			$html = "<table id=\"table_assignCorr\" class=\"selecttable\">
 						<thead>
 							<tr>
@@ -73,7 +73,7 @@
 			echo $html;
 		}
 
-		public function renderViewTable(){
+		public function renderViewTable() {
 			$html = "<table class=\"selecttable\">
 						<thead>
 							<tr>
@@ -109,27 +109,27 @@
 				
 	}
 	
-	class Correspondent{
+	class Correspondent {
 		
 		public $err;
-		public $id, $photoid, $username, $name, $email, $info, $numhikers, $datetime;
+		public $id, $photoid, $username, $name, $email, $info, $numhikers, $datetime, $prefs;
 		
-		public function __construct(){
+		public function __construct() {
 			
 		}
 
-		public function sanitize(){
+		public function sanitize() {
 			$this->info = str_replace('<iframe', '</iframe', $this->info);
 			$this->info = str_replace('<script', '</script', $this->info);
 		}
 		
-		public function save($con){
+		public function save($con) {
 			$sql_query = sql_addCorrespondent($con, $this);
 			$sql_query->execute();
 			$this->id = $sql_query->insert_id;
 		}
 		
-		public function get($con){
+		public function get($con) {
 			$sql_query = sql_getCorrespondent($con, $this->id);
 			if($sql_query->execute()){
 				$sql_query->store_result();
@@ -148,22 +148,22 @@
 			else die('There was an error running the query ['.$con->error.']');
 		}
 		
-		public function update($con){
+		public function update($con) {
 			$sql_query = sql_updateCorrespondent($con, $this);
 			$sql_query->execute();
 		}
 
-		public function updatePhotoID($con){
+		public function updatePhotoID($con) {
 		    $sql_query = sql_updateCorrPhotoID($con, $this);
 		    $sql_query->execute();
 		}
 				
-		public function reassignHikers($con, $old_ADK_CORRESPONDENT_ID){
+		public function reassignHikers($con, $old_ADK_CORRESPONDENT_ID) {
 			$sql_query = sql_updateReassignCorrsHikers($con, $this->id, $old_ADK_CORRESPONDENT_ID);
 			$sql_query->execute();
 		}
 
-		public function delete($con){
+		public function delete($con) {
 			$sql_query = sql_deleteCorrespondent($con, $this->id);
 			if(!$sql_query->execute()) die('There was an error running the query ['.$con->error.']');
 		}
