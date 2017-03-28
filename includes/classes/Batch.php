@@ -29,6 +29,7 @@
 
 		public static function batch_quarterlyReport($con) {
 			$data = Batch::getQuarterlyReportData($con);
+			Batch::buildQuarterlyReport($data);
 		}
 
 		private static function getQuarterlyReportData($con) {
@@ -150,23 +151,27 @@
 			return $data;
 		}
 
-		private static function buildQuarterlyReport() {
-			//Since <3 months ago>
+		private static function buildQuarterlyReport($data) {
 
-			//# Hikers
-			//- # New hikers
+			$report = "Since ".date("n/j/Y", strtotime("-3 Months"))."\n\n\n";
 
-			//# Hikers
-			//- # Hikes logged
-			//- # Peaks climbed
-			//- List of peaks most climbed
-			//- Hiker who logged the most peaks
-			//- Hiker who uploaded the most files
-			//- Any hiker names who've finished their 46th
+			$report .= "Hikers\n";
+			$report .= "# New Hikers - ".$data["numNewHikers"]."\n";
+
+			$report .= "Hiker\n";
+			$report .= "# Hikes logged - ".$data["numNewHikes"]."\n";
+			$report .= "# Peaks climbed - ".$data["numNewPeaks"]."\n";
+			$report .= "Peaks most climbed\n";
+			foreach($data["peaksMostClimbed"] as $peak) $report .= "\t".$peak["ADK_PEAK_NAME"]."\t\t".$peak["PEAKCOUNT"]."\n";
+			$report .= "Hiker who climbed the most peaks - ".$data["hikerWithMostPeaks"]." (".$data["hikerWithMostPeaksCount"].")\n";
+			$report .= "Hikers who finishedtheir 46th -";
+			foreach($data["peaksMostClimbed"] as $peak) $report .= "\t".$peak["ADK_PEAK_NAME"]."\t\t".$peak["PEAKCOUNT"]."\n"; 
+			
 
 			//# Messages
 			//- #Messages sent by hikers
 			//- Hiker who sent the most messages (and that number)
+			echo $report;
 		}
 
 	}
