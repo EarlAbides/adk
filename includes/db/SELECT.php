@@ -214,8 +214,8 @@
 				, (SELECT CONCAT(U.ADK_USER_NAME, ' (', U.ADK_USER_USERNAME, ')') FROM ADK_USER U
 					WHERE H.ADK_HIKER_CORR_ID = U.ADK_USER_ID) ADK_HIKER_CORR_NAME
 				, (SELECT COUNT(DISTINCT ADK_PEAK_ID) FROM ADK_HIKE_PEAK_JCT HP
-					LEFT JOIN ADK_HIKE HI ON HP.ADK_HIKE_ID = HI.ADK_HIKE_ID
-				WHERE HI.ADK_USER_ID = H.ADK_USER_ID) ADK_HIKER_NUMPEAKS
+						LEFT JOIN ADK_HIKE HI ON HP.ADK_HIKE_ID = HI.ADK_HIKE_ID
+					WHERE HI.ADK_USER_ID = H.ADK_USER_ID) ADK_HIKER_NUMPEAKS
 			FROM ADK_HIKER H
 				LEFT JOIN ADK_USER U ON H.ADK_USER_ID = U.ADK_USER_ID
 			WHERE H.ADK_HIKER_CORR_ID LIKE ?;"
@@ -534,4 +534,109 @@
         return $sql_query;
 	}
 	
+	function sql_batch_getNumNewHikers($con) {
+		$sql_query = $con->prepare("SELECT COUNT(*) FROM ADK_HIKER WHERE ADK_HIKER_DTE > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH);");
+
+        return $sql_query;
+	}
+
+	function sql_batch_getNumNewHikes($con) {
+		$sql_query = $con->prepare("SELECT COUNT(*) FROM adk.ADK_HIKE WHERE ADK_HIKE_TS > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH);");
+
+        return $sql_query;
+	}
+
+	function sql_batch_getPeaksMostClimbed($con) {
+		$sql_query = $con->prepare(
+			"SELECT DISTINCT P.ADK_PEAK_NAME
+				, (SELECT COUNT(*) FROM ADK_HIKE_PEAK_JCT HP
+					WHERE HP.ADK_PEAK_ID = P.ADK_PEAK_ID
+						AND HP.ADK_PEAK_DTE > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH)) PEAKCOUNT
+			FROM ADK_PEAK P
+				LEFT JOIN ADK_HIKE_PEAK_JCT HP ON HP.ADK_PEAK_ID = P.ADK_PEAK_ID
+				LEFT JOIN ADK_HIKE H ON H.ADK_HIKE_ID = HP.ADK_HIKE_ID
+			WHERE H.ADK_USER_ID IN(SELECT ADK_USER_ID FROM ADK_HIKER)
+				AND HP.ADK_PEAK_DTE > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH)
+			ORDER BY PEAKCOUNT DESC LIMIT 5;"
+		);
+
+        return $sql_query;
+	}
+
+	function sql_batch_getNumNewPeaksClimbed($con) {
+		$sql_query = $con->prepare(
+			"SELECT COUNT(*) FROM ADK_HIKE_PEAK_JCT
+			WHERE ADK_HIKE_ID IN(SELECT ADK_HIKE_ID FROM adk.ADK_HIKE WHERE ADK_HIKE_TS > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH));"
+		);
+
+        return $sql_query;
+	}
+
+	function sql_batch_getHikerWithMostPeaks($con) {
+		$sql_query = $con->prepare(
+			"SELECT U.ADK_USER_NAME
+				, (SELECT COUNT(HP.ADK_PEAK_ID) FROM ADK_HIKE_PEAK_JCT HP
+						LEFT JOIN ADK_HIKE HI ON HP.ADK_HIKE_ID = HI.ADK_HIKE_ID
+					WHERE HI.ADK_USER_ID = H.ADK_USER_ID
+						AND HI.ADK_HIKE_TS > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH)) NUMPEAKS
+			FROM ADK_USER U
+				LEFT JOIN ADK_HIKER H ON H.ADK_USER_ID = U.ADK_USER_ID
+			ORDER BY NUMPEAKS DESC LIMIT 1;"
+		);
+
+        return $sql_query;
+	}
+
+	function sql_batch_getHikerWithMostUploads($con) {
+		$sql_query = $con->prepare(
+			"SELECT U.ADK_USER_NAME
+				, (SELECT COUNT(HF.ADK_FILE_ID) FROM ADK_HIKE_FILE_JCT HF
+						LEFT JOIN ADK_HIKE HI ON HI.ADK_HIKE_ID = HF.ADK_HIKE_ID
+					WHERE HI.ADK_USER_ID = H.ADK_USER_ID
+						AND HI.ADK_HIKE_TS > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH)) NUMFILES
+			FROM ADK_USER U
+				LEFT JOIN ADK_HIKER H ON H.ADK_USER_ID = U.ADK_USER_ID
+			ORDER BY NUMFILES DESC LIMIT 1;"
+		);
+
+        return $sql_query;
+	}
+
+	function sql_batch_getNewHikersWhoFinished46($con) {
+		$sql_query = $con->prepare(
+			"SELECT U.ADK_USER_NAME
+			FROM ADK_USER U
+			WHERE (SELECT COUNT(DISTINCT ADK_PEAK_ID)
+					FROM ADK_HIKE_PEAK_JCT HP
+						LEFT JOIN ADK_HIKE HI ON HP.ADK_HIKE_ID = HI.ADK_HIKE_ID
+					WHERE HI.ADK_USER_ID = U.ADK_USER_ID) >= 46
+				AND (SELECT COUNT(*)
+					FROM ADK_HIKE HI
+						LEFT JOIN ADK_HIKE_PEAK_JCT HP ON HP.ADK_HIKE_ID = HI.ADK_HIKE_ID
+					WHERE HP.ADK_PEAK_DTE > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH)) > 0;"
+		);
+
+        return $sql_query;
+	}
+
+	function sql_batch_getNumMessagesSentByHikers($con) {
+		$sql_query = $con->prepare("SELECT COUNT(*) FROM ADK_MESSAGE WHERE ADK_MESSAGE_FROM_USER_ID IN (SELECT ADK_USER_ID FROM ADK_HIKER);");
+
+        return $sql_query;
+	}
+
+	function sql_batch_getHikerWhoSentMostMessages($con) {
+	    $sql_query = $con->prepare(
+	        "SELECT U.ADK_USER_NAME
+				, (SELECT COUNT(M.ADK_MESSAGE_ID) FROM ADK_MESSAGE M
+					WHERE M.ADK_MESSAGE_FROM_USER_ID = H.ADK_USER_ID
+						AND M.ADK_MESSAGE_DTE > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH)) NUMMESSAGES
+			FROM ADK_HIKER H
+				LEFT JOIN ADK_USER U ON U.ADK_USER_ID = H.ADK_USER_ID
+			ORDER BY NUMMESSAGES DESC LIMIT 1;"
+	    );
+
+	    return $sql_query;
+	}
+
 ?>
