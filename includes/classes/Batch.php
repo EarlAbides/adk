@@ -1,7 +1,7 @@
 <?php
 
 	class Batch {
-		
+
 		public static function inactiveUsers($con) {			
 			$ADK_HIKERS = [];
 			$sql_query = sql_batch_inactiveUsers($con);
@@ -29,8 +29,8 @@
 
 		public static function batch_quarterlyReport($con) {
 			$data = Batch::getQuarterlyReportData($con);
-			Batch::buildQuarterlyReport($data);
-
+			$report = Batch::buildQuarterlyReport($data);
+			Batch::saveQuarterlyReport($report);
 		}
 
 		private static function getQuarterlyReportData($con) {
@@ -152,8 +152,7 @@
 			return $data;
 		}
 
-		private static function buildQuarterlyReport($data) {
-			
+		private static function buildQuarterlyReport($data) {			
 			$report = "Since ".date("n/j/Y", strtotime("-3 Months"))."\n\n\n";
 
 			$report .= "Hikers\n";
@@ -172,7 +171,14 @@
 			$report .= "# messages sent by hikers - ".$data["numMessagesSentByHikers"]."\n";
 			$report .= "Hiker who sent the most messages - ".$data["hikerWhoSentMostMessages"]." (".$data["hikerWhoSentMostMessagesCount"].")\n";
 
-			echo $report;
+			return $report;
+		}
+
+		private static function saveQuarterlyReport($report) {
+			$filename = date("Ymd")."-quarterlyNewsletter.txt";
+			$file = "data/reports/".$filename;
+
+			file_put_contents($file, $report);
 		}
 
 	}
