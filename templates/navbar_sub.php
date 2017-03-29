@@ -17,6 +17,7 @@
 			case 'gallery': $gallery = $class; break;
 			case 'lnt': $lnt = $class; break;
 			case 'news': $news = $class; break;
+			case 'newsletter': $news = $class; break;
 		}
 	}
 ?>
@@ -53,6 +54,7 @@
 					<li<?php if(isset($correspondents)) echo $correspondents; ?>><a href="./correspondents">Correspondents</a></li>
 					<li<?php if(isset($gallery)) echo $gallery; ?>><a href="./gallery">Gallery</a></li>
 					<li<?php if(isset($lnt)) echo $lnt; ?>><a href="./lnt">Leave No Trace</a></li>
+					<li<?php if(isset($newsletter)) echo $newsletter; ?>><a href="./newsletter">Newsletter</a></li>
 				<?php } ?>
 				<?php if((isset($_SESSION['ADK_USERGROUP_CDE']) && ($_SESSION['ADK_USERGROUP_CDE'] === 'HIK'))){ ?>
 					<li<?php if(isset($hikerportal)) echo $hikerportal; ?>><a href="./hikerportal">Hiker Portal</a></li>
