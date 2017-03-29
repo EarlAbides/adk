@@ -30,6 +30,7 @@
 		public static function batch_quarterlyReport($con) {
 			$data = Batch::getQuarterlyReportData($con);
 			Batch::buildQuarterlyReport($data);
+
 		}
 
 		private static function getQuarterlyReportData($con) {
@@ -85,7 +86,7 @@
 			if($sql_query->execute()){
 				$sql_query->store_result();
 				$result = sql_get_assoc($sql_query);
-				foreach($result as $row) array_push($data["peaksMostClimbed"], [ $row["ADK_PEAK_NAME"] => $row["PEAKCOUNT"] ]);
+				foreach($result as $row) $data["peaksMostClimbed"][$row["ADK_PEAK_NAME"]] = $row["PEAKCOUNT"];
 			}
 			else die('There was an error running the query ['.$con->error.']');
 			
@@ -152,25 +153,25 @@
 		}
 
 		private static function buildQuarterlyReport($data) {
-
+			
 			$report = "Since ".date("n/j/Y", strtotime("-3 Months"))."\n\n\n";
 
 			$report .= "Hikers\n";
-			$report .= "# New Hikers - ".$data["numNewHikers"]."\n";
+			$report .= "# New Hikers - ".$data["numNewHikers"]."\n\n\n";
 
 			$report .= "Hiker\n";
 			$report .= "# Hikes logged - ".$data["numNewHikes"]."\n";
 			$report .= "# Peaks climbed - ".$data["numNewPeaks"]."\n";
-			$report .= "Peaks most climbed\n";
-			foreach($data["peaksMostClimbed"] as $peak) $report .= "\t".$peak["ADK_PEAK_NAME"]."\t\t".$peak["PEAKCOUNT"]."\n";
 			$report .= "Hiker who climbed the most peaks - ".$data["hikerWithMostPeaks"]." (".$data["hikerWithMostPeaksCount"].")\n";
-			$report .= "Hikers who finishedtheir 46th -";
-			foreach($data["peaksMostClimbed"] as $peak) $report .= "\t".$peak["ADK_PEAK_NAME"]."\t\t".$peak["PEAKCOUNT"]."\n"; 
+			$report .= "Peaks most climbed\n";
+			foreach($data["peaksMostClimbed"] as $peak => $peakCount) $report .= "\t$peak ($peakCount)\n";
+			$report .= "Hikers who finished their 46th:\n";
+			foreach($data["hikersWhoFinished46"] as $hiker) $report .= "\t$hiker\n"; 
 			
+			$report .= "\n\nMessages\n";
+			$report .= "# messages sent by hikers - ".$data["numMessagesSentByHikers"]."\n";
+			$report .= "Hiker who sent the most messages - ".$data["hikerWhoSentMostMessages"]." (".$data["hikerWhoSentMostMessagesCount"].")\n";
 
-			//# Messages
-			//- #Messages sent by hikers
-			//- Hiker who sent the most messages (and that number)
 			echo $report;
 		}
 
