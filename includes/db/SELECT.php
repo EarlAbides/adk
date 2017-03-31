@@ -620,7 +620,7 @@
 	}
 
 	function sql_batch_getNumMessagesSentByHikers($con) {
-		$sql_query = $con->prepare("SELECT COUNT(*) FROM ADK_MESSAGE WHERE ADK_MESSAGE_FROM_USER_ID IN (SELECT ADK_USER_ID FROM ADK_HIKER);");
+		$sql_query = $con->prepare("SELECT COUNT(*) FROM ADK_MESSAGE WHERE ADK_MESSAGE_FROM_USER_ID IN(SELECT ADK_USER_ID FROM ADK_HIKER);");
 
         return $sql_query;
 	}
