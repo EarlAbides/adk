@@ -2,7 +2,7 @@
 const webpack = require("webpack");
 
 module.exports = {
-	entry: "./build/messages.ts",
+	entry: "./build/js/messages.js",
 	output: {
 		path: path.resolve(__dirname, "./js"),
 		publicPath: "/js/",
@@ -13,41 +13,44 @@ module.exports = {
 			{
 				test: /\.vue$/,
 				loader: "vue-loader"
+			},
+			{
+				test: /.js?$/,
+				loader: 'babel-loader',
+				exclude: /node_modules/,
+				query: {
+					presets: ['es2015']
+				}
 			}
 		]
 	},
 	vue: {
-		// vue-loader options go here
 		esModule: true
 	},
 	resolve: {
 		//alias: {
 		//	"vue$": "vue/dist/vue.common.js"
 		//},
-		extensions: ["", ".js", ".vue"]
-	},
-	devServer: {
-		historyApiFallback: true,
-		noInfo: true
+		extensions: ["", ".js"]
 	},
 	target: "web",
-	devtool: "#eval-source-map"
+	devtool: "#eval"
 }
 
-if (process.env.NODE_ENV === "production") {
-	module.exports.devtool = "#source-map";
-	// http://vue-loader.vuejs.org/en/workflow/production.html
-	// module.exports.plugins = (module.exports.plugins || []).concat([
-	// 	new webpack.DefinePlugin({
-	// 		"process.env": {
-	// 			NODE_ENV: ""production""
-	// 		}
-	// 	}),
-	// 	new webpack.optimize.UglifyJsPlugin({
-	// 		sourceMap: true,
-	// 		compress: {
-	// 			warnings: false
-	// 		}
-	// 	})
-	// ]);
-}
+//if (process.env.NODE_ENV === "production") {
+//	module.exports.devtool = "#source-map";
+//	// http://vue-loader.vuejs.org/en/workflow/production.html
+//	// module.exports.plugins = (module.exports.plugins || []).concat([
+//	// 	new webpack.DefinePlugin({
+//	// 		"process.env": {
+//	// 			NODE_ENV: ""production""
+//	// 		}
+//	// 	}),
+//	// 	new webpack.optimize.UglifyJsPlugin({
+//	// 		sourceMap: true,
+//	// 		compress: {
+//	// 			warnings: false
+//	// 		}
+//	// 	})
+//	// ]);
+//}

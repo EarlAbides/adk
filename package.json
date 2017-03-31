@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.php",
+  "scripts": {
+    "build:wp": "webpack --progress --display-error-details"
+  },
   "directories": {
     "doc": "docs"
   },
@@ -16,8 +19,11 @@
     "vue": "^2.2.6"
   },
   "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.3.2",
     "vue-loader": "^11.3.4",
     "vue-template-compiler": "^2.2.6",
-    "webpack": "^2.3.2"
+    "webpack": "^1.14.0"
   }
 }
