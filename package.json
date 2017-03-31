@@ -6,17 +6,18 @@
   "directories": {
     "doc": "docs"
   },
-  "scripts": {
-    "copywww": "copyfiles ./* /var/www/adk"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/neilsimp1/adk.git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/neilsimp1/adk/issues"
+  "dependencies": {
+    "vue": "^2.2.6"
   },
-  "homepage": "https://github.com/neilsimp1/adk#readme"
+  "devDependencies": {
+    "vue-loader": "^11.3.4",
+    "vue-template-compiler": "^2.2.6",
+    "webpack": "^2.3.2"
+  }
 }
