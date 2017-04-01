@@ -2,7 +2,7 @@
 const webpack = require("webpack");
 
 module.exports = {
-	entry: "./build/js/messages.js",
+	entry: "./src/js/messages.js",
 	output: {
 		path: path.resolve(__dirname, "./js"),
 		publicPath: "/js/",
