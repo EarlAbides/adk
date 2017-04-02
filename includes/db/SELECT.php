@@ -541,7 +541,7 @@
 	}
 
 	function sql_batch_getNumNewHikes($con) {
-		$sql_query = $con->prepare("SELECT COUNT(*) FROM adk.ADK_HIKE WHERE ADK_HIKE_TS > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH);");
+		$sql_query = $con->prepare("SELECT COUNT(*) FROM ADK_HIKE WHERE ADK_HIKE_TS > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH);");
 
         return $sql_query;
 	}
@@ -566,7 +566,7 @@
 	function sql_batch_getNumNewPeaksClimbed($con) {
 		$sql_query = $con->prepare(
 			"SELECT COUNT(*) FROM ADK_HIKE_PEAK_JCT
-			WHERE ADK_HIKE_ID IN(SELECT ADK_HIKE_ID FROM adk.ADK_HIKE WHERE ADK_HIKE_TS > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH));"
+			WHERE ADK_HIKE_ID IN(SELECT ADK_HIKE_ID FROM ADK_HIKE WHERE ADK_HIKE_TS > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH));"
 		);
 
         return $sql_query;
