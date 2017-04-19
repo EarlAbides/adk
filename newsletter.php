@@ -26,18 +26,30 @@
 				</h3>
 					
 				<div class="container-fluid">
-					<div class="col-xs-12">
-						<form>
-							<div class="form-group">
-								<textarea id="textbox_report" name="report" class="form-control form-control-sm" style="min-height:400px" required><?php echo $report; ?></textarea>
-							</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<form>
+								<div class="form-group">
+									<textarea id="textbox_report" name="report" class="form-control form-control-sm" style="min-height:400px" required><?php echo $report; ?></textarea>
+								</div>
 
-							<div class="form-group">
-								<br />
-								<button type="submit" class="btn btn-default pull-right">Send</button>
-								<br /><br />
-							</div>
-						</form>
+								<?php //<div class="form-group">
+									//<br />
+									//<button type="submit" class="btn btn-default pull-right">Send</button>
+									//<br /><br />
+								//</div> ?>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<h4>Correspondents</h4>
+							<textarea class="form-control form-control-sm" style="min-height:200px"><?php echo implode("; ", $_corrEmails); ?></textarea>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<h4>Hikers</h4>
+							<textarea class="form-control form-control-sm" style="min-height:200px"><?php echo implode("; ", $_hikerEmails); ?></textarea>
+						</div>
 					</div>
 				</div>
 				

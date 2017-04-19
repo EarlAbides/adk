@@ -639,4 +639,23 @@
 	    return $sql_query;
 	}
 
+	function sql_batch_getQuarterlyReportUsers($con) {
+		$sql_query = $con->prepare(
+            "SELECT U.ADK_USER_ID, U.ADK_USERGROUP_ID, U.ADK_USER_USERNAME, U.ADK_USER_NAME, U.ADK_USER_EMAIL
+			FROM ADK_USER U
+			WHERE U.ADK_USERGROUP_ID <> 1
+				AND U.ADK_USERGROUP_ID <> 4
+				AND CASE WHEN (SELECT COUNT(*) FROM ADK_USER_PREF UP
+						WHERE UP.ADK_PREF_NAME = 'user_receive-newsletter'
+							AND UP.ADK_USER_ID = U.ADK_USER_ID) = 1
+					THEN (SELECT UP.ADK_PREF_VAL FROM ADK_USER_PREF UP
+							WHERE UP.ADK_PREF_NAME = 'user_receive-newsletter'
+								AND UP.ADK_USER_ID = U.ADK_USER_ID)
+					ELSE 1
+				END = 1;"
+        );
+
+        return $sql_query;
+	}
+
 ?>

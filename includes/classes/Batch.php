@@ -26,6 +26,29 @@
 			foreach($ADK_HIKERS as $ADK_HIKER) sendInactiveUserEmail($ADK_HIKER);
 		}
 
+		public static function getQuarterlyReportUsers($con) {			
+			$ADK_USERS = [];
+			$sql_query = sql_batch_getQuarterlyReportUsers($con);
+			if($sql_query->execute()){
+				$sql_query->store_result();
+				$result = sql_get_assoc($sql_query);
+
+				foreach($result as $row){
+					$ADK_USER = new User();
+					$ADK_USER->id = $row["ADK_USER_ID"];
+					$ADK_USER->usergroupid = $row["ADK_USERGROUP_ID"];
+					$ADK_USER->username = $row["ADK_USER_USERNAME"];
+					$ADK_USER->name = $row["ADK_USER_NAME"];
+					$ADK_USER->email = $row["ADK_USER_EMAIL"];
+
+					array_push($ADK_USERS, $ADK_USER);
+				}
+			}
+			else die("There was an error running the query [".$con->error."]");
+
+			return $ADK_USERS;
+		}
+
 
 		public static function batch_quarterlyReport($con) {
 			$data = Batch::getQuarterlyReportData($con);

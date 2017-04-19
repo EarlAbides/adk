@@ -1,12 +1,11 @@
 <?php
 	
-	//Imports	
-	require_once 'includes/session.php';
-	require_once 'includes/db/db_conn.php';
-	require_once 'includes/db/SELECT.php';
-	require_once 'includes/classes/User.php';
-	require_once 'includes/classes/Hiker.php';
-	require_once 'includes/classes/Message.php';
+	require_once "includes/session.php";
+	require_once "includes/db/db_conn.php";
+	require_once "includes/db/SELECT.php";
+	require_once "includes/classes/User.php";
+	require_once "includes/classes/Hiker.php";
+	require_once "includes/classes/Message.php";
 	
 	if(!isset($_SESSION['ADK_USER_ID']) || !is_numeric($_SESSION['ADK_USER_ID'])){header("Location: ./"); exit;}
 	$ADK_USERGROUP_CDE = $_SESSION['ADK_USERGROUP_CDE'];
