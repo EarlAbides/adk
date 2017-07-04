@@ -408,7 +408,7 @@
 		$sql_query = $con->prepare("SELECT GROUP_CONCAT(ADK_PEAK_NAME SEPARATOR ', ') FROM ADK_PEAK WHERE ADK_PEAK_ID IN($ADK_PEAK_IDS);");
 		return $sql_query;
 	}
-	
+
 	// Pref
 	function sql_getUsersPrefs($con, $ADK_USER_ID) {
 		$sql_query = $con->prepare(
@@ -453,7 +453,7 @@
 
         return $sql_query;
 	}
-	
+
 	function sql_checkUsernameNotExists($con, $ADK_USER_USERNAME) {
 		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_USER WHERE ADK_USER_USERNAME = ?;");
 
@@ -461,7 +461,7 @@
 
         return $sql_query;
 	}
-	
+
 	function sql_checkUserOldPassword($con, $ADK_USER_ID, $ADK_USER_PASSWORD) {
 		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_USER WHERE ADK_USER_ID = ? AND ADK_USER_PASSWORD = ?;");
 
@@ -471,7 +471,7 @@
 
         return $sql_query;
 	}
-	
+
 	function sql_isUser($con, $ADK_USER) {
         $sql_query = $con->prepare(
             "SELECT ADK_USER_ID, ADK_USER_USERNAME, ADK_USER_NAME, ADK_USER_EMAIL,
@@ -484,7 +484,7 @@
 
         return $sql_query;
 	}
-	
+
 	function sql_checkValidHash($con, $ADK_USER_ID, $last8hash) {
 		$sql_query = $con->prepare("SELECT COUNT(*) AS COUNT FROM ADK_USER WHERE ADK_USER_ID = ? AND RIGHT(ADK_USER_PASSWORD, 8) = ?;");
 
@@ -505,7 +505,7 @@
 				
 		return $sql_query;
 	}
-	
+
 	// Batch
 	function sql_batch_inactiveUsers($con) {
 		$sql_query = $con->prepare(
@@ -533,7 +533,7 @@
 
         return $sql_query;
 	}
-	
+
 	function sql_batch_getNumNewHikers($con) {
 		$sql_query = $con->prepare("SELECT COUNT(*) FROM ADK_HIKER WHERE ADK_HIKER_DTE > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 MONTH);");
 
@@ -643,14 +643,19 @@
 		$sql_query = $con->prepare(
             "SELECT U.ADK_USER_ID, U.ADK_USERGROUP_ID, U.ADK_USER_USERNAME, U.ADK_USER_NAME, U.ADK_USER_EMAIL
 			FROM ADK_USER U
-			WHERE U.ADK_USERGROUP_ID <> 1
-				AND U.ADK_USERGROUP_ID <> 4
+			WHERE (U.ADK_USERGROUP_ID <> 1 AND U.ADK_USERGROUP_ID <> 4)
 				AND CASE WHEN (SELECT COUNT(*) FROM ADK_USER_PREF UP
 						WHERE UP.ADK_PREF_NAME = 'user_receive-newsletter'
 							AND UP.ADK_USER_ID = U.ADK_USER_ID) = 1
 					THEN (SELECT UP.ADK_PREF_VAL FROM ADK_USER_PREF UP
 							WHERE UP.ADK_PREF_NAME = 'user_receive-newsletter'
 								AND UP.ADK_USER_ID = U.ADK_USER_ID)
+					ELSE 1
+				END = 1
+				AND CASE WHEN U.ADK_USERGROUP_ID = 3
+					THEN ((SELECT COUNT(DISTINCT HP.ADK_PEAK_ID) FROM ADK_HIKE_PEAK_JCT HP
+							LEFT JOIN ADK_HIKE HI ON HP.ADK_HIKE_ID = HI.ADK_HIKE_ID
+						WHERE HI.ADK_USER_ID = U.ADK_USER_ID) < 46)
 					ELSE 1
 				END = 1;"
         );

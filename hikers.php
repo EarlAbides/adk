@@ -17,8 +17,8 @@
 					return ((x < y) ? -1 : ((x > y) ?  1 : 0));
 				},
 				"custom-date-desc": function(a, b) {
-					if(a === '--') return 1;
-					if(b === '--') return -1;
+					if(a === "--") return 1;
+					if(b === "--") return -1;
 					var x = new Date(a), y = new Date(b);
 					return ((x > y) ? -1 : ((x < y) ?  1 : 0));
 				}
@@ -30,8 +30,8 @@
 			$(".selecttable").DataTable({
 				pageLength: 15,
 				lengthChange: false,
-				order: [1, 'asc'],
-				columnDefs: [{targets: 0, searchable: false, sortable: false}, {targets: [5, 6], type: 'custom-date'}],		
+				order: [1, "asc"],
+				columnDefs: [{ targets: 0, searchable: false, sortable: false }, { targets: [5, 6], type: "custom-date" }],		
 				initComplete: function() {
 					var $checkbox = $('<input type="checkbox">');
 					$checkbox.prop("checked", show46ers);
@@ -41,7 +41,6 @@
 						show46ers = this.checked;
 						$(".selecttable").DataTable().draw();
 					});
-			
 					$(".dataTables_filter").append("<br />").append($46erfilter);
 				}
 			});
