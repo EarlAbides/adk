@@ -158,7 +158,8 @@ function newMessage(){
 }
 
 function reply(){
-	var fromID = document.getElementById('hidden_viewfromid').value;
+	var fromID = document.getElementById("hidden_viewfromid").value;
+	var fromMessageID = document.getElementById("hidden_viewmessageid").value;
     var fromName = document.getElementById('span_messagefromusername').innerHTML;
     var toID = document.getElementById('hidden_viewtoid').value;
     var toName = document.getElementById('span_messagetousername').innerHTML;
@@ -199,9 +200,9 @@ function reply(){
         $(select_to_username).change(function(){document.getElementById('hidden_touserid').value = this.value;});
     }
 
-    document.getElementById('legend_newMessageReply').innerHTML = 'Reply';
-    document.getElementById('textbox_subject').value = 'RE: ' + subject;
-    document.getElementById('textbox_message').value = replyText;
+    document.getElementById("legend_newMessageReply").innerHTML = "Reply";
+    document.getElementById("textbox_subject").value = "RE: " + subject;
+    document.getElementById("textbox_message").value = replyText;
     //if(replyFiles.length !== 0){
     //    var ul_messageattachments = document.getElementById('ul_messageattachments');
     //    var replyfileids = [];
@@ -212,12 +213,13 @@ function reply(){
     //    document.getElementById('hidden_replyfileids').value = replyfileids.join(',');
     //}
     
-    document.getElementById('hidden_touserid').value = toID;
+    document.getElementById("hidden_touserid").value = toID;
+	document.getElementById("hidden_replymessageid").value = fromMessageID;
 
 	initEditor();
 }
 
-function cancelMessage(){document.getElementById('div_messages_main').innerHTML = '';destroyEditor();}
+function cancelMessage(){document.getElementById("div_messages_main").innerHTML = "";destroyEditor();}
 
 function message_markRead(ADK_MESSAGE_ID, span, tr){
     if(document.getElementById('h4_folderName').innerHTML.indexOf('Inbox') !== -1){
@@ -244,7 +246,7 @@ function viewMessage(ADK_MESSAGE_ID){
 
             var ADK_MESSAGE = JSON.parse(ret);
             
-            //Message
+            // Message
             document.getElementById('span_messagefromusername').innerHTML = ADK_MESSAGE.fromname + ' (' + ADK_MESSAGE.fromusername + ')';
             document.getElementById('span_messagetousername').innerHTML = ADK_MESSAGE.toname + ' (' + ADK_MESSAGE.tousername + ')';
             document.getElementById('span_messagesubject').innerHTML = ADK_MESSAGE.title;
@@ -254,11 +256,11 @@ function viewMessage(ADK_MESSAGE_ID){
             document.getElementById('hidden_viewfromid').value = ADK_MESSAGE.fromid;
             document.getElementById('hidden_viewtoid').value = ADK_MESSAGE.toid;
 
-            //Reply button
+            // Reply button
             if(ADK_MESSAGE.fromid === 1) document.getElementById('button_reply').style.display = 'none';
 			else document.getElementById('button_reply').style.display = '';
 
-            //Attachments
+            // Attachments
             var ul_messageattachments = document.getElementById('ul_messageattachments');
             if(ADK_MESSAGE.files !== ''){
                 var html = '', files = ADK_MESSAGE.files;
@@ -271,7 +273,7 @@ function viewMessage(ADK_MESSAGE_ID){
             }
             else ul_messageattachments.innerHTML = '<li style="font-style:italic;">none</li>';
 
-            //Correspondent Log Hike
+            // Correspondent Log Hike
             var a_loghike = document.getElementById('a_loghike');
             if(a_loghike){
                 if(!ADK_MESSAGE.isfromhiker) a_loghike.style.display = 'none';

@@ -66,6 +66,13 @@
 			else die('There was an error running the query ['.$con->error.']');		
 		}
 
+		public function getLastHike() {
+			foreach($this->hikes as $ADK_HIKE){
+				if(!isset($last)) $last = $ADK_HIKE;
+				if($last->datetime < $ADK_HIKE->datetime) $last = $ADK_HIKE;
+			}
+			return $last;
+		}
 
 		public function renderTable($numPeaks, $numClimbed, $percent) {
 			$peakIDs = [];
@@ -138,6 +145,15 @@
 			}
 
 			return $earliest;
+		}
+		public function getLatestDate() {
+			$latest = '';
+			foreach($this->peaks as $ADK_PEAK){
+				if(!$latest) $latest = $ADK_PEAK->datetime;
+				else if(strtotime($ADK_PEAK->datetime) >= strtotime($latest)) $latest = $ADK_PEAK->datetime;
+			}
+
+			return $latest;
 		}
 		
 		public function isValid(){

@@ -181,6 +181,7 @@
 				<div style="display:none;">
 					<input type="hidden" name="id" value="<?php echo $ADK_USER_ID; ?>" />
 					<input type="hidden" id="hidden_replyfileids" name="replyfileids" />
+					<input type="hidden" id="hidden_replymessageid" name="replymessageid" />
 					<?php
 						if(isset($ADK_TO_USER) && $ADK_TO_USER->name != ''){
 							$toID = $ADK_TO_USER->id; $toUsername = $ADK_TO_USER->username;

@@ -83,7 +83,7 @@
 		
 		public $err;
 		public $id, $corrid, $corrname, $photoid, $username, $name, $email, $phone, $age, $sex, $address1, $address2, $city, $state, $zip, $country
-			, $info, $numpeaks, $numoverall, $hikes, $datetime, $lastactive, $prefs;
+			, $info, $numpeaks, $numoverall, $hikes, $datetime, $lastactive, $completedate, $prefs;
 		
 		public function __construct() {
 			$this->hikes = [];
@@ -108,6 +108,11 @@
 		
 		public function save($con) {
 			$sql_query = sql_addHiker($con, $this);
+			$sql_query->execute();
+		}
+
+		public function saveCompleteDate($con) {
+			$sql_query = sql_updateCompleteDate($con, $this);
 			$sql_query->execute();
 		}
 
@@ -139,11 +144,12 @@
 					$this->percent = round(($this->numpeaks / 46) * 100);
 					$this->lastactive = $row['ADK_HIKER_LASTACTIVE_DTE'];
 					$this->datetime = $row['ADK_HIKER_DTE'];
+					$this->completedate = $row['ADK_HIKER_COMPLETE_DTE'];
 				}
 			}
 			else die('There was an error running the query ['.$con->error.']');
 		}
-		
+
 		public function update($con) {
 		    $sql_query = sql_updateHiker($con, $this);
 		    $sql_query->execute();
@@ -158,7 +164,7 @@
 		    $sql_query = sql_updateHikerPhotoID($con, $this);
 		    $sql_query->execute();
 		}
-		
+
 		public static function updateLastActive($con, $ADK_USER_ID) {
 			$sql_query = sql_updateLastActive($con, $ADK_USER_ID);
 			$sql_query->execute();
@@ -199,7 +205,7 @@
 			$this->country = $_POST['country'];
 			$this->info = $_POST['personalinfo'];
 		}
-		
+
 	}
-	
+
 ?>

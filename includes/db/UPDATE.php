@@ -84,7 +84,8 @@
 					, ADK_HIKER_ZIP = ?
 					, ADK_HIKER_COUNTRY = ?
 					, ADK_HIKER_PERSONALINFO = ?
-			WHERE ADK_USER_ID = ?;");
+			WHERE ADK_USER_ID = ?;"
+		);
 		
 		$sql_query->bind_param('sissssssssi', $ADK_HIKER->phone, $ADK_HIKER->age, $ADK_HIKER->sex, $ADK_HIKER->address1, $ADK_HIKER->address2,
 					$ADK_HIKER->city, $ADK_HIKER->state, $ADK_HIKER->zip, $ADK_HIKER->country, $ADK_HIKER->info, $ADK_HIKER->id);
@@ -92,6 +93,16 @@
 		return $sql_query;
 	}
 	
+	function sql_updateCompleteDate($con, $ADK_HIKER) {
+		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_COMPLETE_DTE = ? WHERE ADK_USER_ID = ?;");
+
+		$dt = date('Y-m-d', strtotime($ADK_HIKER->completedate));
+
+		$sql_query->bind_param('si', $dt, $ADK_HIKER->id);
+		
+		return $sql_query;
+	}
+
 	function sql_updateHikerCorr($con, $ADK_USER_ID, $ADK_CORR_ID) {
 		$sql_query = $con->prepare("UPDATE ADK_HIKER SET ADK_HIKER_CORR_ID = ? WHERE ADK_USER_ID = ?;");
 		

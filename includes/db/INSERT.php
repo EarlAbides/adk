@@ -88,13 +88,13 @@
 	// Message
 	function sql_addMessage($con, $ADK_MESSAGE) {
 		$sql_query = $con->prepare(
-			"INSERT INTO ADK_MESSAGE(ADK_MESSAGE_FROM_USER_ID, ADK_MESSAGE_TO_USER_ID, ADK_MESSAGE_TITLE, 
+			"INSERT INTO ADK_MESSAGE(ADK_MESSAGE_FROM_USER_ID, ADK_MESSAGE_TO_USER_ID, ADK_MESSAGE_RESPOND_ID, ADK_MESSAGE_TITLE,
 				ADK_MESSAGE_CONTENT, ADK_MESSAGE_DTE, ADK_MESSAGE_DRAFT)
-			VALUES(?,?,?,?, NOW(), ?);"
+			VALUES(?,?,?,?,?, NOW(), ?);"
 		);
-		
-		$sql_query->bind_param('iissi', $ADK_MESSAGE->fromid, $ADK_MESSAGE->toid, $ADK_MESSAGE->title, $ADK_MESSAGE->content, $ADK_MESSAGE->isdraft);
-		
+
+		$sql_query->bind_param('iiissi', $ADK_MESSAGE->fromid, $ADK_MESSAGE->toid, $ADK_MESSAGE->replymessageid, $ADK_MESSAGE->title, $ADK_MESSAGE->content, $ADK_MESSAGE->isdraft);
+
 		return $sql_query;
 	}
 

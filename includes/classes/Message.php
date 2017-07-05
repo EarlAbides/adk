@@ -117,7 +117,7 @@
 	class Message{
 		
 	    public $err;
-	    public $id, $userid, $fromid, $fromusername, $toid, $tousername, $title, $content, $date, $time, $files, $isread, $hasfiles, $isfromhiker, $isdraff, $wasdraff;
+	    public $id, $userid, $fromid, $fromusername, $toid, $tousername, $title, $content, $date, $time, $files, $isread, $hasfiles, $isfromhiker, $isdraff, $wasdraff, $replymessageid;
 		
 	    public function __construct(){
 			$this->files = [];
@@ -207,7 +207,7 @@
 	        else die('There was an error running the query ['.$con->error.']');
 	    }
 
-		function updateRead($con){
+		public function updateRead($con){
 			$sql_query = sql_updateMessageMarkRead($con, $this->id);
 			$sql_query->execute();
 		}
@@ -217,8 +217,7 @@
 			$sql_query->execute();
 		}
 
-
-		function populate(){
+		public function populate(){
 			$this->id = isset($_POST['messageid'])? intval($_POST['messageid']): null;
 			$this->userid = intval($_SESSION['ADK_USER_ID']);
 			$this->fromid = intval($_POST['id']);
@@ -227,6 +226,7 @@
 			$this->content = $_POST['message'];
 			$this->isdraft = isset($_POST['draft']);
 			$this->wasdraft = isset($_POST['wasdraft']);
+			$this->replymessageid = isset($_POST['replymessageid'])? intval($_POST['replymessageid']): null;
 		}
 		
 	}
