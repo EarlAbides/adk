@@ -93,7 +93,7 @@
 			VALUES(?,?,?,?,?, NOW(), ?);"
 		);
 
-		$sql_query->bind_param('iiissi', $ADK_MESSAGE->fromid, $ADK_MESSAGE->toid, $ADK_MESSAGE->replymessageid, $ADK_MESSAGE->title, $ADK_MESSAGE->content, $ADK_MESSAGE->isdraft);
+		$sql_query->bind_param('iiissi', $ADK_MESSAGE->fromid, $ADK_MESSAGE->toid, ($ADK_MESSAGE->replymessageid ? $ADK_MESSAGE->replymessageid : null), $ADK_MESSAGE->title, $ADK_MESSAGE->content, $ADK_MESSAGE->isdraft);
 
 		return $sql_query;
 	}
