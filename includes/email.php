@@ -397,7 +397,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-	function send46erCompletionEmail($ADK_HIKER) {
+	function send46erCompletionEmail($ADK_HIKER, $ADK_CORRESPONDENT, $correspondenceHistory) {
 		$url = 'http://adk46er.org/how-to-join.html';
 		$url2 = 'http://adk46er.org/trail-crew.html';
 		

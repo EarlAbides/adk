@@ -67,14 +67,20 @@
 	}
 
 	if($ADK_HIKER->numpeaks == 46 && !$ADK_HIKER->completedate){ // completion
+		require "classes/Batch.php";
+		require_once "classes/Correspondent.php";
+
 		$lastHike = $ADK_HIKES->getLastHike();
 		$ADK_HIKER->completedate = $lastHike->getLatestDate();
 		$ADK_HIKER->saveCompleteDate($con);
-		require_once "classes/Correspondent.php";
+
 		$ADK_CORRESPONDENT = new Correspondent();
 		$ADK_CORRESPONDENT->id = $ADK_HIKER->corrid;
 		$ADK_CORRESPONDENT->get($con);
-		send46erCompletionEmail($ADK_HIKER, $ADK_CORRESPONDENT);
+
+		$correspondenceHistory = Batch::batch_hikersCorrespondenceHistory($con, $ADK_HIKER->id);
+
+		send46erCompletionEmail($ADK_HIKER, $ADK_CORRESPONDENT, $correspondenceHistory);
 		sendCorr46erCompletionEmail($ADK_HIKER, $ADK_CORRESPONDENT);
 	}
 
