@@ -209,7 +209,7 @@
 			$ADK_MESSAGES = Batch::getHikersCorrespondenceHistory($con, $ADK_USER_ID);
 			$ADK_MESSAGES = Batch::condenseMessageReplies($ADK_MESSAGES);
 			$messages = Batch::formatMessages($ADK_USER_ID, $ADK_MESSAGES);
-
+			
 			return $messages;
 		}
 

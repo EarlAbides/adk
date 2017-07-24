@@ -21,7 +21,8 @@
 		$path = '.adk_db';
 		if($env === 'PRD') $path = '../protected/'.$path;
 		if(strpos(getcwd(), 'includes')) $path = '../'.$path;
-
+		if(strpos(getcwd(), 'admin')) $path = '../'.$path;
+		
 		$db_conf = [];
         $handle = fopen($path, 'r');;
         if($handle){
