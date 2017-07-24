@@ -117,7 +117,7 @@
 	class Message{
 		
 	    public $err;
-	    public $id, $userid, $fromid, $fromusername, $toid, $tousername, $title, $content, $date, $time, $files, $isread, $hasfiles, $isfromhiker, $isdraff, $wasdraff, $replymessageid;
+	    public $id, $userid, $respondid, $fromid, $fromusername, $toid, $tousername, $title, $content, $date, $time, $files, $isread, $hasfiles, $isfromhiker, $isdraff, $wasdraff, $replymessageid;
 		
 	    public function __construct(){
 			$this->files = [];

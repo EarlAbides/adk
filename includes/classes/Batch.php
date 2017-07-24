@@ -204,6 +204,86 @@
 			file_put_contents($file, $report);
 		}
 
+
+		public static function batch_hikersCorrespondenceHistory($con, $ADK_USER_ID) {
+			$ADK_MESSAGES = Batch::getHikersCorrespondenceHistory($con, $ADK_USER_ID);
+			$ADK_MESSAGES = Batch::condenseMessageReplies($ADK_MESSAGES);
+			$messages = Batch::formatMessages($ADK_USER_ID, $ADK_MESSAGES);
+
+			return $messages;
+		}
+
+		public static function getHikersCorrespondenceHistory($con, $ADK_USER_ID) {
+			$ADK_MESSAGES = [];
+			$sql_query = sql_batch_getHikersCorrespondenceHistory($con, $ADK_USER_ID);
+			if($sql_query->execute()){
+				$sql_query->store_result();
+				$result = sql_get_assoc($sql_query);
+
+				foreach($result as $row){
+					$ADK_MESSAGE = new Message();
+					$ADK_MESSAGE->id = $row["ADK_MESSAGE_ID"];
+					$ADK_MESSAGE->fromid = $row["ADK_MESSAGE_FROM_USER_ID"];
+					$ADK_MESSAGE->fromname = $row["ADK_MESSAGE_FROM_NAME"];
+					$ADK_MESSAGE->fromusername = $row["ADK_MESSAGE_FROM_USERNAME"];
+					$ADK_MESSAGE->toid = $row["ADK_MESSAGE_TO_USER_ID"];
+					$ADK_MESSAGE->toname = $row["ADK_MESSAGE_TO_NAME"];
+					$ADK_MESSAGE->tousername = $row["ADK_MESSAGE_TO_USERNAME"];
+					$ADK_MESSAGE->respondid = $row["ADK_MESSAGE_RESPOND_ID"];
+					$ADK_MESSAGE->title = $row["ADK_MESSAGE_TITLE"];
+					$ADK_MESSAGE->content = $row["ADK_MESSAGE_CONTENT"];
+					$ADK_MESSAGE->date = strtotime($row["ADK_MESSAGE_DTE"]);
+
+					array_push($ADK_MESSAGES, $ADK_MESSAGE);
+				}
+			}
+			else die("There was an error running the query [".$con->error."]");
+
+			return $ADK_MESSAGES;
+		}
+
+		private static function condenseMessageReplies($ADK_MESSAGES) {
+			$toKill = [];
+
+			for($i = 0; $i < count($ADK_MESSAGES); $i++){
+				if($ADK_MESSAGES[$i]->respondid){
+					for($j = 0; $j < count($ADK_MESSAGES); $j++){
+						if(Batch::isProperResponse($ADK_MESSAGES[$j], $ADK_MESSAGES[$i])){
+							array_push($toKill, $j);
+						}
+					}
+				}
+			}
+			
+			for($i = count($toKill) - 1; $i >= 0; $i--) unset($ADK_MESSAGES[$toKill[$i]]);
+
+			return $ADK_MESSAGES;
+		}
+
+		private static function isProperResponse($orig, $reply) {
+			if($reply->respondid !== $orig->id) return false;
+			if(strpos($orig->content, $reply->content)) return false;
+			return true;
+		}
+
+		private static function formatMessages($ADK_USER_ID, $ADK_MESSAGES) {
+			$messages = "";
+			$le = "<br>";
+
+			foreach($ADK_MESSAGES as $ADK_MESSAGE){
+				if($ADK_USER_ID === $ADK_MESSAGE->toid) $messages .= "From: ".$ADK_MESSAGE->fromname." (".$ADK_MESSAGE->fromusername.")$le";
+				else $messages .= "To: ".$ADK_MESSAGE->toname." (".$ADK_MESSAGE->tousername.")$le";
+
+				$messages .= "Date: ".date('d/m/Y g:i', $ADK_MESSAGE->date).$le;
+				$messages .= "Subject: ".$ADK_MESSAGE->title.$le.$le.$le;
+				$messages .= $ADK_MESSAGE->content.$le.$le.$le;
+
+				$messages .= "<hr>";
+			}
+			
+			return $messages;
+		}
+
 	}
 
 ?>

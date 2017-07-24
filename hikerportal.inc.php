@@ -14,7 +14,7 @@
 	$ADK_USER_ID = intval($_SESSION['ADK_USER_ID']);
 	
 	$con = connect_db();
-	
+
 	$ADK_HIKER = new Hiker();
 	$ADK_HIKER->id = $ADK_USER_ID;
 	$ADK_HIKER->get($con);
