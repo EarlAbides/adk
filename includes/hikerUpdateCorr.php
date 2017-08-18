@@ -1,19 +1,21 @@
 <?php
 	
 	//Imports
-    require_once 'variables_site.php';
-	require_once 'db/db_conn.php';
-    require_once 'db/SELECT.php';
-	require_once 'db/UPDATE.php';
-    require_once 'email.php';
-    require_once 'classes/Correspondent.php';
-	require_once 'classes/Hiker.php';
+    require_once "variables_site.php";
+	require_once "db/db_conn.php";
+    require_once "db/SELECT.php";
+	require_once "db/UPDATE.php";
+    require_once "email.php";
+    require_once "classes/Correspondent.php";
+	require_once "classes/Hiker.php";
+	require_once "classes/Message.php";
+	require_once "classes/Batch.php";
 	
-	if(!isset($_POST['id']) || !is_numeric($_POST['id'])){header('Location: ../applicants?_e=i'); exit;}
-	if(!isset($_POST['corrid']) || !is_numeric($_POST['corrid'])){header('Location: ../applicant?_='.$_POST['id'].'&e=c'); exit;}
+	if(!isset($_POST["id"]) || !is_numeric($_POST["id"])){header("Location: ../applicants?_e=i"); exit;}
+	if(!isset($_POST["corrid"]) || !is_numeric($_POST["corrid"])){header("Location: ../applicant?_=".$_POST["id"]."&e=c"); exit;}
 	
-	$ADK_USER_ID = intval($_POST['id']);
-	$ADK_CORRESPONDENT_ID = intval($_POST['corrid']);
+	$ADK_USER_ID = intval($_POST["id"]);
+	$ADK_CORRESPONDENT_ID = intval($_POST["corrid"]);
 	
 	$con = connect_db();
 
@@ -31,13 +33,15 @@
 
 	$ADK_HIKER->corrid = $ADK_CORRESPONDENT_ID;
 	$ADK_HIKER->updateCorr($con);
+
+	$correspondenceHistory = Batch::batch_hikersCorrespondenceHistory($con, $ADK_HIKER->id);
 	
 	$con->close();
 
     sendHikerCorrReassignEmail($ADK_HIKER, $ADK_CORRESPONDENT);
 	sendOldCorrReassignEmail($old_ADK_CORRESPONDENT, $ADK_HIKER);
-    sendNewCorrReassignEmail($ADK_CORRESPONDENT, $ADK_HIKER);
+    sendNewCorrReassignEmail($ADK_CORRESPONDENT, $ADK_HIKER, $correspondenceHistory);
 	
-	header('Location: ../hiker?_='.$ADK_USER_ID);
+	header("Location: ../hiker?_=$ADK_USER_ID");
 	
 ?>

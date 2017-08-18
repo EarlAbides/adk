@@ -176,7 +176,7 @@
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
 	
-    function sendNewCorrReassignEmail($ADK_CORRESPONDENT, $ADK_HIKER) {
+    function sendNewCorrReassignEmail($ADK_CORRESPONDENT, $ADK_HIKER, $correspondenceHistory) {
 		$htmlmessage = "A hiker has been reassigned to you!<br><br>";
 		
 		$htmlmessage .= "Username:<br>";
@@ -184,7 +184,12 @@
 		$htmlmessage .= "Name:<br>";
 		$htmlmessage .= $ADK_HIKER->name."<br><br>";
 		
-        $htmlmessage .= "If you believe that this was done in error, please contact the site administrator at <a href=\"mailto:".$GLOBALS['adminEmail']."\">".$GLOBALS['adminEmail']."</a>.<br><br>";	
+        $htmlmessage .= "If you believe that this was done in error, please contact the site administrator at <a href=\"mailto:".$GLOBALS['adminEmail']."\">".$GLOBALS['adminEmail']."</a>.<br><br>";
+
+		$htmlmessage .= "<br><br><br><br>";
+		$htmlmessage .= "<hr>";
+		$htmlmessage .= "<h3>".$ADK_HIKER->name."'s Correspondence History</h3><br>";
+		$htmlmessage .= $correspondenceHistory;
 	
         $message = "A hiker has been reassigned to you!\r\n\r\n";
 		
@@ -194,9 +199,14 @@
         $message .= $ADK_HIKER->name."\r\n\r\n";
 		
         $message .= "If you believe that this was done in error, please contact the site administrator at ".$GLOBALS['adminEmail'].".<br><br>";
+
+		$message .= "\r\n\r\n\r\n\r\n";
+		$message .= "----------------------";
+		$message .= $ADK_HIKER->name."'s Correspondence History";
+		$message .= str_replace("<br>", "\r\n", $correspondenceHistory);
 		
 		$toAddr = $ADK_CORRESPONDENT->email;
-		$subject = 'Hiker Reassignment - '.$ADK_HIKER->username;
+		$subject = "Hiker Reassignment - ".$ADK_HIKER->username;
 		
 		PHPMailer($toAddr, $subject, $htmlmessage, $message);
 	}
@@ -420,7 +430,7 @@
 
 		$htmlmessage .= "<br><br><br><br>";
 		$htmlmessage .= "<hr>";
-		$htmlmessage .= "<h3>Correspondence History</h3>";
+		$htmlmessage .= "<h3>Correspondence History</h3><br>";
 		$htmlmessage .= $correspondenceHistory;
 
 
@@ -439,9 +449,9 @@
 
 		$message .= "Forward we go!\r\n";
 
-		$message .= "<br><br><br><br>";
-		$message .= "<hr>";
-		$message .= "<h3>Correspondence History</h3>";
+		$message .= "\r\n\r\n\r\n\r\n";
+		$message .= "----------------------";
+		$message .= "Correspondence History";
 		$message .= str_replace("<br>", "\r\n", $correspondenceHistory);
 		
 		$toAddr = $ADK_HIKER->email;
