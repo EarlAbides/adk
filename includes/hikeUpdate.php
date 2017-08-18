@@ -66,7 +66,7 @@
 		Hiker::updateLastActive($con, intval($_SESSION["ADK_USER_ID"]));
 	}
 
-	if($ADK_HIKER->numpeaks == 46 && !$ADK_HIKER->completedate){ // completion
+	if($ADK_HIKER->numpeaks >= 46 && !$ADK_HIKER->completedate){ // completion
 		require "classes/Batch.php";
 		require_once "classes/Correspondent.php";
 

@@ -325,13 +325,13 @@
 		$url = 'http://adk46er.org/how-to-join.html';
 		
 		$htmlmessage = "One of your hikers just completed their 46!<br><br>";
-		$htmlmessage .= $ADK_HIKER->name."<br><br>";
+		$htmlmessage .= $ADK_HIKER->name." (".$ADK_HIKER->username.")<br><br>";
 		
-		$htmlmessage .= "Be sure to congratulate them on this achievement!";
+		$htmlmessage .= "Be sure to congratulate them on this achievement!<br>";
 		$htmlmessage .= "They have been sent a link to <a href=\"$url\">here</a> to see how to become a registered 46er.<br><br>";
 		
 		$message = "One of your hikers just completed their 46!\r\n\r\n";
-		$message .= $ADK_HIKER->name."\r\n\r\n";
+		$message .= $ADK_HIKER->name." (".$ADK_HIKER->username.")\r\n\r\n";
 		
 		$message .= "Be sure to congratulate them on this achievement!\r\n";
 		$message .= "They have been sent a link to $url to see how to become a registered 46er.\r\n\r\n";
@@ -418,6 +418,11 @@
 
 		$htmlmessage .= "Forward we go!<br>";
 
+		$htmlmessage .= "<br><br><br><br>";
+		$htmlmessage .= "<hr>";
+		$htmlmessage .= "<h3>Correspondence History</h3>";
+		$htmlmessage .= $correspondenceHistory;
+
 
 		$message = "Congratulations! Successfully ascending the high 46 is a wonderful life accomplishment.\r\n\r\n";
 		
@@ -433,6 +438,11 @@
 		$message .= "Another alternative to getting involved is becoming a correspondent within this program. This is a great way to make more friends and swap stories with the aspiring 46ers as you teach them the ways to walk softly and leave no trace. If interested please send an email to this website administrator.\r\n\r\n\r\n";
 
 		$message .= "Forward we go!\r\n";
+
+		$message .= "<br><br><br><br>";
+		$message .= "<hr>";
+		$message .= "<h3>Correspondence History</h3>";
+		$message .= str_replace("<br>", "\r\n", $correspondenceHistory);
 		
 		$toAddr = $ADK_HIKER->email;
 		$subject = 'Congratulations - '.$ADK_HIKER->name;
