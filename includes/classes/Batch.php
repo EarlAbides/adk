@@ -284,6 +284,31 @@
 			return $messages;
 		}
 
+
+		public static function batch_hikersHikeData($con, $ADK_USER_ID) {
+			$ADK_HIKER = new Hiker();
+			$ADK_HIKER->id = $ADK_USER_ID;
+			$ADK_HIKER->get($con);
+	
+			$ADK_HIKES = new Hikes();
+			$ADK_HIKES->userid = $ADK_USER_ID;
+			$ADK_HIKES->get($con);
+	
+			$ADK_PEAKS = new Peaks();
+			$ADK_PEAKS->get($con);
+	
+			$ADK_CORRESPONDENT = new Correspondent();
+			$ADK_CORRESPONDENT->id = $ADK_HIKER->corrid;
+			$ADK_CORRESPONDENT->get($con);
+
+			return [
+				"ADK_HIKER" => $ADK_HIKER,
+				"ADK_HIKES" => $ADK_HIKES,
+				"ADK_PEAKS" => $ADK_PEAKS,
+				"ADK_CORRESPONDENT" => $ADK_CORRESPONDENT
+			];
+		}
+
 	}
 
 ?>

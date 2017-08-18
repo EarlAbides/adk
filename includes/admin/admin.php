@@ -20,8 +20,12 @@
 	$con = connect_db();
 
 	// batch_hikersCorrespondenceHistory
-	$correspondenceHistory = Batch::batch_hikersCorrespondenceHistory($con, 253);
-	echo $correspondenceHistory;
+	//$correspondenceHistory = Batch::batch_hikersCorrespondenceHistory($con, 253);
+	//echo $correspondenceHistory;
+
+	// batch_hikersHikeData
+	$hikersHikeData = Batch::batch_hikersHikeData($con, 85);
+	var_dump($hikersHikeData);
 
 	$con->close();
 
