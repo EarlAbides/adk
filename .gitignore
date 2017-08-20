@@ -219,6 +219,7 @@ ModelManifest.xml
 .htaccess
 robots.txt
 uploads/
+vendor/
 img/bg/
 includes/PHPMailer/
 /data/
