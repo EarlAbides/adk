@@ -209,7 +209,7 @@
 			$ADK_MESSAGES = Batch::getHikersCorrespondenceHistory($con, $ADK_USER_ID);
 			$ADK_MESSAGES = Batch::condenseMessageReplies($ADK_MESSAGES);
 			$messages = Batch::formatMessages($ADK_USER_ID, $ADK_MESSAGES);
-			
+
 			return $messages;
 		}
 
@@ -286,17 +286,23 @@
 
 
 		public static function batch_hikersHikeData($con, $ADK_USER_ID) {
+			$hikerData = gethikersHikeData($con, $ADK_USER_ID);
+
+			return $hikerData;
+		}
+
+		private static function gethikersHikeData($con, $ADK_USER_ID) {
 			$ADK_HIKER = new Hiker();
 			$ADK_HIKER->id = $ADK_USER_ID;
 			$ADK_HIKER->get($con);
-	
+
 			$ADK_HIKES = new Hikes();
 			$ADK_HIKES->userid = $ADK_USER_ID;
 			$ADK_HIKES->get($con);
-	
+
 			$ADK_PEAKS = new Peaks();
 			$ADK_PEAKS->get($con);
-	
+
 			$ADK_CORRESPONDENT = new Correspondent();
 			$ADK_CORRESPONDENT->id = $ADK_HIKER->corrid;
 			$ADK_CORRESPONDENT->get($con);
