@@ -24,7 +24,7 @@
 	//echo $correspondenceHistory;
 
 	// batch_hikersHikeData
-	$hikersHikeData = Batch::batch_hikersHikeData($con, 85);
+	$hikersHikeData = Batch::batch_hikersHikeData($con, 35);
 	var_dump($hikersHikeData);
 
 	$con->close();

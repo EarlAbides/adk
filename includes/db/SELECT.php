@@ -190,6 +190,22 @@
         return $sql_query;
 	}
 
+	function sql_getHikersFirstPeaks($con, $ADK_USER_ID) {
+		$sql_query = $con->prepare(
+            "SELECT P.ADK_PEAK_ID, P.ADK_PEAK_NAME, DATE_FORMAT(H.ADK_HIKE_DTE, '%m/%d/%Y') ADK_PEAK_DTE
+			FROM ADK_PEAK P
+				LEFT JOIN ADK_HIKE_PEAK_JCT HP ON P.ADK_PEAK_ID = HP.ADK_PEAK_ID
+				LEFT JOIN ADK_HIKE H ON HP.ADK_HIKE_ID = H.ADK_HIKE_ID
+			WHERE H.ADK_USER_ID = ?
+			GROUP BY P.ADK_PEAK_NAME
+			ORDER BY H.ADK_HIKE_DTE ASC;"
+        );
+
+        $sql_query->bind_param('i', $ADK_USER_ID);
+
+        return $sql_query;
+	}
+
 	function sql_checkHasClimbed($con, $ADK_USER_ID, $ADK_PEAK_IDS, $ADK_HIKE_ID) {
 		$sql_query = $con->prepare(
 			"SELECT COUNT(*) FROM ADK_HIKE_PEAK_JCT
