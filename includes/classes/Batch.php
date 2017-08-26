@@ -418,7 +418,7 @@
 			}
 			else{ // *nix
 				$pdf = new mikehaertl\pdftk\Pdf("../../docs/46er-finisher-form_BLANK.pdf", [
-					"command" => "../../bin/linux-debian//pdftk"
+					"command" => "../../bin/linux-debian/pdftk"
 				]);
 			}
 
