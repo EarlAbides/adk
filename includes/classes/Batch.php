@@ -287,9 +287,8 @@
 
 		public static function batch_hikersHikeData($con, $ADK_USER_ID) {
 			$hikerData = Batch::getHikersHikeData($con, $ADK_USER_ID);
-			Batch::fillHikerPdfForm($hikerData);
-
-			return $hikerData;
+			$result = Batch::fillHikerPdfForm($hikerData);
+            //echo $result;
 		}
 
 		private static function getHikersHikeData($con, $ADK_USER_ID) {
@@ -319,6 +318,7 @@
 
 			$formArray = [
 				"hikerName" => $hikerData["ADK_HIKER"]->name,
+				"hikerName2" => $hikerData["ADK_HIKER"]->name,
 				"hikerAddress" => $hikerData["ADK_HIKER"]->address1.($hikerData["ADK_HIKER"]->address2 ? $hikerData["ADK_HIKER"]->address2 : " ".$hikerData["ADK_HIKER"]->address1),
 				"hikerCity" => $hikerData["ADK_HIKER"]->city,
 				"hikerState" => $hikerData["ADK_HIKER"]->state,
@@ -331,66 +331,66 @@
 				"hikerFemale" => $hikerData["ADK_HIKER"]->sex === "F" ? "X" : ""
 			];
 
-			if(count($peakDates) > 0){
-				$formArray["hikerFirstPeak"] = $hikerData["ADK_HIKERS_PEAKS"]->hikerspeaks[0]->peakname;
-				$formArray["hikerFirstPeakDate"] = $hikerData["ADK_HIKERS_PEAKS"]->hikerspeaks[0]->datetime;
-			}
-			if(count($peakDates) === 46){
-				$formArray["hikerLastPeak"] = $hikerData["ADK_HIKERS_PEAKS"]->hikerspeaks[45]->peakname;
-				$formArray["hikerLastPeakDate"] = $hikerData["ADK_HIKERS_PEAKS"]->hikerspeaks[45]->datetime;
-			}
+            if(count($peakDates) > 0){
+                $formArray["hikerFirstPeak"] = $hikerData["ADK_HIKERS_PEAKS"]->hikerspeaks[0]->peakname;
+                $formArray["hikerFirstPeakDate"] = $hikerData["ADK_HIKERS_PEAKS"]->hikerspeaks[0]->datetime;
+            }
+            if(count($peakDates) === 46){
+                $formArray["hikerLastPeak"] = $hikerData["ADK_HIKERS_PEAKS"]->hikerspeaks[45]->peakname;
+                $formArray["hikerLastPeakDate"] = $hikerData["ADK_HIKERS_PEAKS"]->hikerspeaks[45]->datetime;
+            }
 
-			if(isset($peakDates["Algonquin"])) $formArray["peakDate_algonquin"] = $peakDates["Algonquin"];
-			if(isset($peakDates["Allen"])) $formArray["peakDate_allen"] = $peakDates["Allen"];
-			if(isset($peakDates["Armstrong"])) $formArray["peakDate_armstrong"] = $peakDates["Armstrong"];
-			if(isset($peakDates["Basin"])) $formArray["peakDate_basin"] = $peakDates["Basin"];
-			if(isset($peakDates["Big Slide"])) $formArray["peakDate_bigSlide"] = $peakDates["Big Slide"];
-			if(isset($peakDates["Blake Peak"])) $formArray["peakDate_blake"] = $peakDates["Blake Peak"];
-			if(isset($peakDates["South Dix"])) $formArray["peakDate_carson"] = $peakDates["South Dix"];
-			if(isset($peakDates["Cascade"])) $formArray["peakDate_cascade"] = $peakDates["Cascade"];
-			if(isset($peakDates["Cliff"])) $formArray["peakDate_cliff"] = $peakDates["Cliff"];
-			if(isset($peakDates["Colden"])) $formArray["peakDate_colden"] = $peakDates["Colden"];
-			if(isset($peakDates["Colvin"])) $formArray["peakDate_colvin"] = $peakDates["Colvin"];
-			if(isset($peakDates["Couchsachraga"])) $formArray["peakDate_couchsachraga"] = $peakDates["Couchsachraga"];
-			if(isset($peakDates["Dial"])) $formArray["peakDate_dial"] = $peakDates["Dial"];
-			if(isset($peakDates["Dix"])) $formArray["peakDate_dix"] = $peakDates["Dix"];
-			if(isset($peakDates["Donaldson"])) $formArray["peakDate_donaldson"] = $peakDates["Donaldson"];
-			if(isset($peakDates["Emmons"])) $formArray["peakDate_emmons"] = $peakDates["Emmons"];
-			if(isset($peakDates["Esther"])) $formArray["peakDate_esther"] = $peakDates["Esther"];
-			if(isset($peakDates["Giant"])) $formArray["peakDate_giant"] = $peakDates["Giant"];
-			if(isset($peakDates["Gothics"])) $formArray["peakDate_gothics"] = $peakDates["Gothics"];
-			if(isset($peakDates["Grace Peak"])) $formArray["peakDate_grace"] = $peakDates["Grace Peak"];
-			if(isset($peakDates["Gray"])) $formArray["peakDate_gray"] = $peakDates["Gray"];		
-			if(isset($peakDates["Haystack"])) $formArray["peakDate_haystack"] = $peakDates["Haystack"];																																	
-			if(isset($peakDates["Hough"])) $formArray["peakDate_hough"] = $peakDates["Hough"];
-			if(isset($peakDates["Iroquois Peak"])) $formArray["peakDate_iroquis"] = $peakDates["Iroquois Peak"];
-			if(isset($peakDates["Lower Wolf Jaw"])) $formArray["peakDate_lowerWolfJaw"] = $peakDates["Lower Wolf Jaw"];
-			if(isset($peakDates["Macomb"])) $formArray["peakDate_macomb"] = $peakDates["Macomb"];
-			if(isset($peakDates["Marcy"])) $formArray["peakDate_marcy"] = $peakDates["Marcy"];
-			if(isset($peakDates["Marshall"])) $formArray["peakDate_marshall"] = $peakDates["Marshall"];
-			if(isset($peakDates["Nippletop"])) $formArray["peakDate_nippletop"] = $peakDates["Nippletop"];
-			if(isset($peakDates["Nye"])) $formArray["peakDate_nye"] = $peakDates["Nye"];
-			if(isset($peakDates["Panther"])) $formArray["peakDate_panther"] = $peakDates["Panther"];
-			if(isset($peakDates["Phelps"])) $formArray["peakDate_phelps"] = $peakDates["Phelps"];
-			if(isset($peakDates["Porter"])) $formArray["peakDate_porter"] = $peakDates["Porter"];
-			if(isset($peakDates["Redfield"])) $formArray["peakDate_redfield"] = $peakDates["Redfield"];
-			if(isset($peakDates["Rocky Peak"])) $formArray["peakDate_rockyPeakRidge"] = $peakDates["Rocky Peak"];
-			if(isset($peakDates["Saddleback"])) $formArray["peakDate_saddleback"] = $peakDates["Saddleback"];
-			if(isset($peakDates["Santanoni"])) $formArray["peakDate_santanoni"] = $peakDates["Santanoni"];
-			if(isset($peakDates["Sawteeth"])) $formArray["peakDate_sawteeth"] = $peakDates["Sawteeth"];
-			if(isset($peakDates["Seward"])) $formArray["peakDate_seward"] = $peakDates["Seward"];
-			if(isset($peakDates["Seymour"])) $formArray["peakDate_seymour"] = $peakDates["Seymour"];
-			if(isset($peakDates["Skylight"])) $formArray["peakDate_skylight"] = $peakDates["Skylight"];
-			if(isset($peakDates["Street"])) $formArray["peakDate_street"] = $peakDates["Street"];
-			if(isset($peakDates["TableTop"])) $formArray["peakDate_tableTop"] = $peakDates["TableTop"];
-			if(isset($peakDates["Upper Wolf Jaw"])) $formArray["peakDate_upperWolfJaw"] = $peakDates["Upper Wolf Jaw"];
-			if(isset($peakDates["Whiteface"])) $formArray["peakDate_whiteface"] = $peakDates["Whiteface"];
-			if(isset($peakDates["Wright Peak"])) $formArray["peakDate_wright"] = $peakDates["Wright Peak"];
+            if(isset($peakDates["Algonquin"])) $formArray["peakDate_algonquin"] = $peakDates["Algonquin"];
+            if(isset($peakDates["Allen"])) $formArray["peakDate_allen"] = $peakDates["Allen"];
+            if(isset($peakDates["Armstrong"])) $formArray["peakDate_armstrong"] = $peakDates["Armstrong"];
+            if(isset($peakDates["Basin"])) $formArray["peakDate_basin"] = $peakDates["Basin"];
+            if(isset($peakDates["Big Slide"])) $formArray["peakDate_bigSlide"] = $peakDates["Big Slide"];
+            if(isset($peakDates["Blake Peak"])) $formArray["peakDate_blake"] = $peakDates["Blake Peak"];
+            if(isset($peakDates["South Dix"])) $formArray["peakDate_carson"] = $peakDates["South Dix"];
+            if(isset($peakDates["Cascade"])) $formArray["peakDate_cascade"] = $peakDates["Cascade"];
+            if(isset($peakDates["Cliff"])) $formArray["peakDate_cliff"] = $peakDates["Cliff"];
+            if(isset($peakDates["Colden"])) $formArray["peakDate_colden"] = $peakDates["Colden"];
+            if(isset($peakDates["Colvin"])) $formArray["peakDate_colvin"] = $peakDates["Colvin"];
+            if(isset($peakDates["Couchsachraga"])) $formArray["peakDate_couchsachraga"] = $peakDates["Couchsachraga"];
+            if(isset($peakDates["Dial"])) $formArray["peakDate_dial"] = $peakDates["Dial"];
+            if(isset($peakDates["Dix"])) $formArray["peakDate_dix"] = $peakDates["Dix"];
+            if(isset($peakDates["Donaldson"])) $formArray["peakDate_donaldson"] = $peakDates["Donaldson"];
+            if(isset($peakDates["Emmons"])) $formArray["peakDate_emmons"] = $peakDates["Emmons"];
+            if(isset($peakDates["Esther"])) $formArray["peakDate_esther"] = $peakDates["Esther"];
+            if(isset($peakDates["Giant"])) $formArray["peakDate_giant"] = $peakDates["Giant"];
+            if(isset($peakDates["Gothics"])) $formArray["peakDate_gothics"] = $peakDates["Gothics"];
+            if(isset($peakDates["Grace Peak"])) $formArray["peakDate_grace"] = $peakDates["Grace Peak"];
+            if(isset($peakDates["Gray"])) $formArray["peakDate_gray"] = $peakDates["Gray"];		
+            if(isset($peakDates["Haystack"])) $formArray["peakDate_haystack"] = $peakDates["Haystack"];																																	
+            if(isset($peakDates["Hough"])) $formArray["peakDate_hough"] = $peakDates["Hough"];
+            if(isset($peakDates["Iroquois Peak"])) $formArray["peakDate_iroquis"] = $peakDates["Iroquois Peak"];
+            if(isset($peakDates["Lower Wolf Jaw"])) $formArray["peakDate_lowerWolfJaw"] = $peakDates["Lower Wolf Jaw"];
+            if(isset($peakDates["Macomb"])) $formArray["peakDate_macomb"] = $peakDates["Macomb"];
+            if(isset($peakDates["Marcy"])) $formArray["peakDate_marcy"] = $peakDates["Marcy"];
+            if(isset($peakDates["Marshall"])) $formArray["peakDate_marshall"] = $peakDates["Marshall"];
+            if(isset($peakDates["Nippletop"])) $formArray["peakDate_nippletop"] = $peakDates["Nippletop"];
+            if(isset($peakDates["Nye"])) $formArray["peakDate_nye"] = $peakDates["Nye"];
+            if(isset($peakDates["Panther"])) $formArray["peakDate_panther"] = $peakDates["Panther"];
+            if(isset($peakDates["Phelps"])) $formArray["peakDate_phelps"] = $peakDates["Phelps"];
+            if(isset($peakDates["Porter"])) $formArray["peakDate_porter"] = $peakDates["Porter"];
+            if(isset($peakDates["Redfield"])) $formArray["peakDate_redfield"] = $peakDates["Redfield"];
+            if(isset($peakDates["Rocky Peak"])) $formArray["peakDate_rockyPeakRidge"] = $peakDates["Rocky Peak"];
+            if(isset($peakDates["Saddleback"])) $formArray["peakDate_saddleback"] = $peakDates["Saddleback"];
+            if(isset($peakDates["Santanoni"])) $formArray["peakDate_santanoni"] = $peakDates["Santanoni"];
+            if(isset($peakDates["Sawteeth"])) $formArray["peakDate_sawteeth"] = $peakDates["Sawteeth"];
+            if(isset($peakDates["Seward"])) $formArray["peakDate_seward"] = $peakDates["Seward"];
+            if(isset($peakDates["Seymour"])) $formArray["peakDate_seymour"] = $peakDates["Seymour"];
+            if(isset($peakDates["Skylight"])) $formArray["peakDate_skylight"] = $peakDates["Skylight"];
+            if(isset($peakDates["Street"])) $formArray["peakDate_street"] = $peakDates["Street"];
+            if(isset($peakDates["TableTop"])) $formArray["peakDate_tableTop"] = $peakDates["TableTop"];
+            if(isset($peakDates["Upper Wolf Jaw"])) $formArray["peakDate_upperWolfJaw"] = $peakDates["Upper Wolf Jaw"];
+            if(isset($peakDates["Whiteface"])) $formArray["peakDate_whiteface"] = $peakDates["Whiteface"];
+            if(isset($peakDates["Wright Peak"])) $formArray["peakDate_wright"] = $peakDates["Wright Peak"];
 
 			$pdf;
 			if(DIRECTORY_SEPARATOR === "\\"){ // Windows
-				$pdf = new mikehaertl\pdftk\Pdf("../../docs/46er-finisher-form_BLANK.pdf", [
-					"command" => "C:\\Users\\Neil\\projects\\adk\\vendor\\mikehaertl\\php-shellcommand\\src\\Command.php",
+				$pdf = new mikehaertl\pdftk\Pdf("C:\\Users\\Neil\\projects\\adk\\docs\\46er-finisher-form_BLANK.pdf", [
+					"command" => "C:\\Users\\Neil\\projects\\adk\\bin\\win32\\pdftk.exe",
 					"useExec" => true
 				]);
 			}
@@ -398,16 +398,14 @@
 				$pdf = new mikehaertl\pdftk\Pdf("../../docs/46er-finisher-form_BLANK.pdf");
 			}
 
-			$pdf->fillForm($formArray)->needAppearances();
-
-			if(!$pdf->saveAs("../../docs/46er-finisher-form_".$hikerData["ADK_HIKER"]->name.".pdf")){
+			if(!$pdf->fillForm($formArray)->needAppearances()->saveAs("../../data/finisher-reports/46er-finisher-form_".$hikerData["ADK_HIKER"]->name.".pdf")){
 				$error = $pdf->getError();
-				echo $error;
-				exit;
+				// echo $error;
+                // exit;
+                return -1;
 			}
-            else{
-                $asd = 123;
-            }
+            
+            return 0;
 		}
 
 		private static function getPeakDates($ADK_HIKERS_PEAKS) {

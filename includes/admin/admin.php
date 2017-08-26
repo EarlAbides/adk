@@ -1,5 +1,8 @@
 <?php
 
+    error_reporting(E_ERROR|E_WARNING);
+    if(!isset($_GET["_"]) && $_GET["_"] !== "123") exit;
+
 	require "../db/db_conn.php";
 	require "../db/SELECT.php";
 	require "../classes/Applicant.php";
@@ -25,7 +28,7 @@
 
 	// batch_hikersHikeData
 	$hikersHikeData = Batch::batch_hikersHikeData($con, 35);
-	var_dump($hikersHikeData);
+	//var_dump($hikersHikeData);
 
 	$con->close();
 
