@@ -387,16 +387,7 @@
             if(isset($peakDates["Whiteface"])) $formArray["peakDate_whiteface"] = $peakDates["Whiteface"];
             if(isset($peakDates["Wright Peak"])) $formArray["peakDate_wright"] = $peakDates["Wright Peak"];
 
-			$pdf;
-			if(DIRECTORY_SEPARATOR === "\\"){ // Windows
-				$pdf = new mikehaertl\pdftk\Pdf("C:\\Users\\Neil\\projects\\adk\\docs\\46er-finisher-form_BLANK.pdf", [
-					"command" => "C:\\Users\\Neil\\projects\\adk\\bin\\win32\\pdftk.exe",
-					"useExec" => true
-				]);
-			}
-			else{ // *nix
-				$pdf = new mikehaertl\pdftk\Pdf("../../docs/46er-finisher-form_BLANK.pdf");
-			}
+			$pdf = Batch::getPdftk();
 
 			if(!$pdf->fillForm($formArray)->needAppearances()->saveAs("../../data/finisher-reports/46er-finisher-form_".$hikerData["ADK_HIKER"]->name.".pdf")){
 				$error = $pdf->getError();
@@ -416,6 +407,22 @@
 			}
 
 			return $peakDates;
+		}
+
+		private static function getPdftk() {
+			if(DIRECTORY_SEPARATOR === "\\"){ // Windows
+				$pdf = new mikehaertl\pdftk\Pdf("C:\\Users\\Neil\\projects\\adk\\docs\\46er-finisher-form_BLANK.pdf", [
+					"command" => "C:\\Users\\Neil\\projects\\adk\\bin\\win32\\pdftk.exe",
+					"useExec" => true
+				]);
+			}
+			else{ // *nix
+				$pdf = new mikehaertl\pdftk\Pdf("../../docs/46er-finisher-form_BLANK.pdf", [
+					"command" => "../../bin/linux-debian//pdftk"
+				]);
+			}
+
+			return $pdf;
 		}
 
 	}
